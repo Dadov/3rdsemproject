@@ -1,0 +1,39 @@
+<?xml version="1.0" encoding="utf-8"?>
+<edmx:Edmx Version="3.0" xmlns:edmx="http://schemas.microsoft.com/ado/2009/11/edmx">
+ <!-- EF Designer content (DO NOT EDIT MANUALLY BELOW HERE) -->
+  <edmx:Designer xmlns="http://schemas.microsoft.com/ado/2009/11/edmx">
+    <!-- Diagram content (shape and connector positions) -->
+    <edmx:Diagrams>
+      <Diagram DiagramId="ee7b0151246c4c18bbca638b4c2d6a8d" Name="Diagram1" ZoomLevel="64">
+        <EntityTypeShape EntityType="ElectricCarModel.Battery" Width="1.5" PointX="7.5" PointY="3.375" IsExpanded="true" />
+        <EntityTypeShape EntityType="ElectricCarModel.BatteryStorage" Width="1.5" PointX="9.75" PointY="10.125" IsExpanded="true" />
+        <EntityTypeShape EntityType="ElectricCarModel.BatteryType" Width="1.5" PointX="5.25" PointY="2.875" IsExpanded="true" />
+        <EntityTypeShape EntityType="ElectricCarModel.Booking" Width="1.5" PointX="5.25" PointY="6.875" IsExpanded="true" />
+        <EntityTypeShape EntityType="ElectricCarModel.BookingLine" Width="1.5" PointX="7.5" PointY="6.125" IsExpanded="true" />
+        <EntityTypeShape EntityType="ElectricCarModel.Connection" Width="1.5" PointX="9.75" PointY="13" IsExpanded="true" />
+        <EntityTypeShape EntityType="ElectricCarModel.Customer" Width="1.5" PointX="3" PointY="7.25" IsExpanded="true" />
+        <EntityTypeShape EntityType="ElectricCarModel.DiscoutGroup" Width="1.5" PointX="0.75" PointY="3.375" IsExpanded="true" />
+        <EntityTypeShape EntityType="ElectricCarModel.Employee" Width="1.5" PointX="9.75" PointY="6.625" IsExpanded="true" />
+        <EntityTypeShape EntityType="ElectricCarModel.LoginInfo" Width="1.5" PointX="3" PointY="11" IsExpanded="true" />
+        <EntityTypeShape EntityType="ElectricCarModel.Period" Width="1.5" PointX="12" PointY="10.125" IsExpanded="true" />
+        <EntityTypeShape EntityType="ElectricCarModel.Person" Width="1.5" PointX="0.75" PointY="6.625" IsExpanded="true" />
+        <EntityTypeShape EntityType="ElectricCarModel.Station" Width="1.5" PointX="7.5" PointY="9.75" IsExpanded="true" />
+        <AssociationConnector Association="ElectricCarModel.FK_Battery_ToTable" ManuallyRouted="false" />
+        <AssociationConnector Association="ElectricCarModel.FK_BatteryStorage_ToTable" ManuallyRouted="false" />
+        <AssociationConnector Association="ElectricCarModel.FK_BatteryStorage_ToTable_1" ManuallyRouted="false" />
+        <AssociationConnector Association="ElectricCarModel.FK_Period_ToTable" ManuallyRouted="false" />
+        <AssociationConnector Association="ElectricCarModel.FK_BookingLine_ToTable_1" ManuallyRouted="false" />
+        <AssociationConnector Association="ElectricCarModel.FK_Booking_ToTable" ManuallyRouted="false" />
+        <AssociationConnector Association="ElectricCarModel.FK_BookingLine_ToTable" ManuallyRouted="false" />
+        <AssociationConnector Association="ElectricCarModel.FK_Connection_ToTable" ManuallyRouted="false" />
+        <AssociationConnector Association="ElectricCarModel.FK_Connection_ToTable_1" ManuallyRouted="false" />
+        <AssociationConnector Association="ElectricCarModel.FK_Customer_ToPerson" ManuallyRouted="false" />
+        <AssociationConnector Association="ElectricCarModel.FK_Table_ToTable" ManuallyRouted="false" />
+        <AssociationConnector Association="ElectricCarModel.FK_Employee_ToPeron" ManuallyRouted="false" />
+        <AssociationConnector Association="ElectricCarModel.FK_Employee_ToTable" ManuallyRouted="false" />
+        <AssociationConnector Association="ElectricCarModel.FK_LoginInfo_ToTable" ManuallyRouted="false" />
+        <AssociationConnector Association="ElectricCarModel.Booking_Station" ManuallyRouted="false" />
+      </Diagram>
+    </edmx:Diagrams>
+  </edmx:Designer>
+</edmx:Edmx>
