@@ -13,7 +13,7 @@ namespace ElectricCarDB
     using System.Data.Entity;
     using System.Data.Entity.Infrastructure;
     
-    public partial class ElectricCarEntities : DbContext
+    public partial class ElectricCarEntities : DbContext, IDisposable
     {
         public ElectricCarEntities()
             : base("name=ElectricCarEntities")
