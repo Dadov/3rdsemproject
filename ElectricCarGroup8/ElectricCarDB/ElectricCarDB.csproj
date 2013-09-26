@@ -30,8 +30,15 @@
     <WarningLevel>4</WarningLevel>
   </PropertyGroup>
   <ItemGroup>
+    <Reference Include="EntityFramework">
+      <HintPath>..\packages\EntityFramework.5.0.0\lib\net45\EntityFramework.dll</HintPath>
+    </Reference>
     <Reference Include="System" />
+    <Reference Include="System.ComponentModel.DataAnnotations" />
     <Reference Include="System.Core" />
+    <Reference Include="System.Data.Entity" />
+    <Reference Include="System.Runtime.Serialization" />
+    <Reference Include="System.Security" />
     <Reference Include="System.Xml.Linq" />
     <Reference Include="System.Data.DataSetExtensions" />
     <Reference Include="Microsoft.CSharp" />
@@ -39,7 +46,87 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="Battery.cs">
+      <DependentUpon>ElectricCarModel.tt</DependentUpon>
+    </Compile>
+    <Compile Include="BatteryStorage.cs">
+      <DependentUpon>ElectricCarModel.tt</DependentUpon>
+    </Compile>
+    <Compile Include="BatteryType.cs">
+      <DependentUpon>ElectricCarModel.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Booking.cs">
+      <DependentUpon>ElectricCarModel.tt</DependentUpon>
+    </Compile>
+    <Compile Include="BookingLine.cs">
+      <DependentUpon>ElectricCarModel.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Connection.cs">
+      <DependentUpon>ElectricCarModel.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Customer.cs">
+      <DependentUpon>ElectricCarModel.tt</DependentUpon>
+    </Compile>
+    <Compile Include="DiscoutGroup.cs">
+      <DependentUpon>ElectricCarModel.tt</DependentUpon>
+    </Compile>
+    <Compile Include="ElectricCarModel.Context.cs">
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+      <DependentUpon>ElectricCarModel.Context.tt</DependentUpon>
+    </Compile>
+    <Compile Include="ElectricCarModel.cs">
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+      <DependentUpon>ElectricCarModel.tt</DependentUpon>
+    </Compile>
+    <Compile Include="ElectricCarModel.Designer.cs">
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+      <DependentUpon>ElectricCarModel.edmx</DependentUpon>
+    </Compile>
+    <Compile Include="Employee.cs">
+      <DependentUpon>ElectricCarModel.tt</DependentUpon>
+    </Compile>
+    <Compile Include="LoginInfo.cs">
+      <DependentUpon>ElectricCarModel.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Period.cs">
+      <DependentUpon>ElectricCarModel.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Person.cs">
+      <DependentUpon>ElectricCarModel.tt</DependentUpon>
+    </Compile>
     <Compile Include="Properties\AssemblyInfo.cs" />
+    <Compile Include="Station.cs">
+      <DependentUpon>ElectricCarModel.tt</DependentUpon>
+    </Compile>
+  </ItemGroup>
+  <ItemGroup>
+    <EntityDeploy Include="ElectricCarModel.edmx">
+      <Generator>EntityModelCodeGenerator</Generator>
+      <LastGenOutput>ElectricCarModel.Designer.cs</LastGenOutput>
+    </EntityDeploy>
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="App.Config" />
+    <None Include="ElectricCarModel.Context.tt">
+      <Generator>TextTemplatingFileGenerator</Generator>
+      <DependentUpon>ElectricCarModel.edmx</DependentUpon>
+      <LastGenOutput>ElectricCarModel.Context.cs</LastGenOutput>
+    </None>
+    <None Include="ElectricCarModel.edmx.diagram">
+      <DependentUpon>ElectricCarModel.edmx</DependentUpon>
+    </None>
+    <None Include="ElectricCarModel.tt">
+      <Generator>TextTemplatingFileGenerator</Generator>
+      <DependentUpon>ElectricCarModel.edmx</DependentUpon>
+      <LastGenOutput>ElectricCarModel.cs</LastGenOutput>
+    </None>
+    <None Include="packages.config" />
+  </ItemGroup>
+  <ItemGroup>
+    <Service Include="{508349B6-6B84-4DF5-91F0-309BEEBAD82D}" />
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
   <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 

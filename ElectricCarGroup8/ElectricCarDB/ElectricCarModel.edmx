@@ -1,0 +1,988 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<edmx:Edmx Version="3.0" xmlns:edmx="http://schemas.microsoft.com/ado/2009/11/edmx">
+  <!-- EF Runtime content -->
+  <edmx:Runtime>
+    <!-- SSDL content -->
+    <edmx:StorageModels>
+      <Schema Namespace="ElectricCarModel.Store" Alias="Self" Provider="System.Data.SqlClient" ProviderManifestToken="2008" xmlns:store="http://schemas.microsoft.com/ado/2007/12/edm/EntityStoreSchemaGenerator" xmlns="http://schemas.microsoft.com/ado/2009/11/edm/ssdl">
+        <EntityContainer Name="ElectricCarModelStoreContainer">
+          <EntitySet Name="Battery" EntityType="ElectricCarModel.Store.Battery" store:Type="Tables" Schema="dbo" />
+          <EntitySet Name="BatteryStorage" EntityType="ElectricCarModel.Store.BatteryStorage" store:Type="Tables" Schema="dbo" />
+          <EntitySet Name="BatteryType" EntityType="ElectricCarModel.Store.BatteryType" store:Type="Tables" Schema="dbo" />
+          <EntitySet Name="Booking" EntityType="ElectricCarModel.Store.Booking" store:Type="Tables" Schema="dbo" />
+          <EntitySet Name="Booking_Station" EntityType="ElectricCarModel.Store.Booking_Station" store:Type="Tables" Schema="dbo" />
+          <EntitySet Name="BookingLine" EntityType="ElectricCarModel.Store.BookingLine" store:Type="Tables" Schema="dbo" />
+          <EntitySet Name="Connection" EntityType="ElectricCarModel.Store.Connection" store:Type="Tables" Schema="dbo" />
+          <EntitySet Name="Customer" EntityType="ElectricCarModel.Store.Customer" store:Type="Tables" Schema="dbo" />
+          <EntitySet Name="DiscoutGroup" EntityType="ElectricCarModel.Store.DiscoutGroup" store:Type="Tables" Schema="dbo" />
+          <EntitySet Name="Employee" EntityType="ElectricCarModel.Store.Employee" store:Type="Tables" Schema="dbo" />
+          <EntitySet Name="LoginInfo" EntityType="ElectricCarModel.Store.LoginInfo" store:Type="Tables" Schema="dbo" />
+          <EntitySet Name="Period" EntityType="ElectricCarModel.Store.Period" store:Type="Tables" Schema="dbo" />
+          <EntitySet Name="Person" EntityType="ElectricCarModel.Store.Person" store:Type="Tables" Schema="dbo" />
+          <EntitySet Name="Station" EntityType="ElectricCarModel.Store.Station" store:Type="Tables" Schema="dbo" />
+          <AssociationSet Name="FK_Battery_ToTable" Association="ElectricCarModel.Store.FK_Battery_ToTable">
+            <End Role="BatteryType" EntitySet="BatteryType" />
+            <End Role="Battery" EntitySet="Battery" />
+          </AssociationSet>
+          <AssociationSet Name="FK_BatteryStorage_ToTable" Association="ElectricCarModel.Store.FK_BatteryStorage_ToTable">
+            <End Role="BatteryType" EntitySet="BatteryType" />
+            <End Role="BatteryStorage" EntitySet="BatteryStorage" />
+          </AssociationSet>
+          <AssociationSet Name="FK_BatteryStorage_ToTable_1" Association="ElectricCarModel.Store.FK_BatteryStorage_ToTable_1">
+            <End Role="Station" EntitySet="Station" />
+            <End Role="BatteryStorage" EntitySet="BatteryStorage" />
+          </AssociationSet>
+          <AssociationSet Name="FK_Booking_Station_ToTable" Association="ElectricCarModel.Store.FK_Booking_Station_ToTable">
+            <End Role="Booking" EntitySet="Booking" />
+            <End Role="Booking_Station" EntitySet="Booking_Station" />
+          </AssociationSet>
+          <AssociationSet Name="FK_Booking_Station_ToTable_1" Association="ElectricCarModel.Store.FK_Booking_Station_ToTable_1">
+            <End Role="Station" EntitySet="Station" />
+            <End Role="Booking_Station" EntitySet="Booking_Station" />
+          </AssociationSet>
+          <AssociationSet Name="FK_Booking_ToTable" Association="ElectricCarModel.Store.FK_Booking_ToTable">
+            <End Role="Customer" EntitySet="Customer" />
+            <End Role="Booking" EntitySet="Booking" />
+          </AssociationSet>
+          <AssociationSet Name="FK_BookingLine_ToTable" Association="ElectricCarModel.Store.FK_BookingLine_ToTable">
+            <End Role="Booking" EntitySet="Booking" />
+            <End Role="BookingLine" EntitySet="BookingLine" />
+          </AssociationSet>
+          <AssociationSet Name="FK_BookingLine_ToTable_1" Association="ElectricCarModel.Store.FK_BookingLine_ToTable_1">
+            <End Role="BatteryType" EntitySet="BatteryType" />
+            <End Role="BookingLine" EntitySet="BookingLine" />
+          </AssociationSet>
+          <AssociationSet Name="FK_Connection_ToTable" Association="ElectricCarModel.Store.FK_Connection_ToTable">
+            <End Role="Station" EntitySet="Station" />
+            <End Role="Connection" EntitySet="Connection" />
+          </AssociationSet>
+          <AssociationSet Name="FK_Connection_ToTable_1" Association="ElectricCarModel.Store.FK_Connection_ToTable_1">
+            <End Role="Station" EntitySet="Station" />
+            <End Role="Connection" EntitySet="Connection" />
+          </AssociationSet>
+          <AssociationSet Name="FK_Customer_ToPerson" Association="ElectricCarModel.Store.FK_Customer_ToPerson">
+            <End Role="Person" EntitySet="Person" />
+            <End Role="Customer" EntitySet="Customer" />
+          </AssociationSet>
+          <AssociationSet Name="FK_Employee_ToPeron" Association="ElectricCarModel.Store.FK_Employee_ToPeron">
+            <End Role="Person" EntitySet="Person" />
+            <End Role="Employee" EntitySet="Employee" />
+          </AssociationSet>
+          <AssociationSet Name="FK_Employee_ToTable" Association="ElectricCarModel.Store.FK_Employee_ToTable">
+            <End Role="Station" EntitySet="Station" />
+            <End Role="Employee" EntitySet="Employee" />
+          </AssociationSet>
+          <AssociationSet Name="FK_LoginInfo_ToTable" Association="ElectricCarModel.Store.FK_LoginInfo_ToTable">
+            <End Role="Person" EntitySet="Person" />
+            <End Role="LoginInfo" EntitySet="LoginInfo" />
+          </AssociationSet>
+          <AssociationSet Name="FK_Period_ToTable" Association="ElectricCarModel.Store.FK_Period_ToTable">
+            <End Role="BatteryStorage" EntitySet="BatteryStorage" />
+            <End Role="Period" EntitySet="Period" />
+          </AssociationSet>
+          <AssociationSet Name="FK_Table_ToTable" Association="ElectricCarModel.Store.FK_Table_ToTable">
+            <End Role="DiscoutGroup" EntitySet="DiscoutGroup" />
+            <End Role="Customer" EntitySet="Customer" />
+          </AssociationSet>
+        </EntityContainer>
+        <EntityType Name="Battery">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="int" Nullable="false" />
+          <Property Name="btId" Type="int" />
+          <Property Name="state" Type="varchar" MaxLength="50" />
+        </EntityType>
+        <EntityType Name="BatteryStorage">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="int" Nullable="false" />
+          <Property Name="btId" Type="int" />
+          <Property Name="sId" Type="int" />
+        </EntityType>
+        <EntityType Name="BatteryType">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="int" Nullable="false" />
+          <Property Name="name" Type="varchar" MaxLength="50" />
+          <Property Name="producer" Type="varchar" MaxLength="50" />
+          <Property Name="capacity" Type="decimal" />
+          <Property Name="exchangeCost" Type="decimal" />
+          <Property Name="storageNumber" Type="int" />
+        </EntityType>
+        <EntityType Name="Booking">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="int" Nullable="false" />
+          <Property Name="cId" Type="int" />
+          <Property Name="totalPrice" Type="decimal" />
+          <Property Name="createDate" Type="datetime" />
+          <Property Name="tripStart" Type="datetime" />
+          <Property Name="creaditCard" Type="varchar" MaxLength="50" />
+        </EntityType>
+        <EntityType Name="Booking_Station">
+          <Key>
+            <PropertyRef Name="bId" />
+            <PropertyRef Name="sId" />
+          </Key>
+          <Property Name="bId" Type="int" Nullable="false" />
+          <Property Name="sId" Type="int" Nullable="false" />
+        </EntityType>
+        <EntityType Name="BookingLine">
+          <Key>
+            <PropertyRef Name="bId" />
+            <PropertyRef Name="btId" />
+          </Key>
+          <Property Name="bId" Type="int" Nullable="false" />
+          <Property Name="btId" Type="int" Nullable="false" />
+          <Property Name="quantity" Type="int" />
+          <Property Name="price" Type="decimal" />
+        </EntityType>
+        <EntityType Name="Connection">
+          <Key>
+            <PropertyRef Name="sId1" />
+            <PropertyRef Name="sId2" />
+          </Key>
+          <Property Name="sId1" Type="int" Nullable="false" />
+          <Property Name="sId2" Type="int" Nullable="false" />
+          <Property Name="distance" Type="decimal" />
+          <Property Name="driveHour" Type="decimal" />
+        </EntityType>
+        <EntityType Name="Customer">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="int" Nullable="false" />
+          <Property Name="dgId" Type="int" />
+        </EntityType>
+        <EntityType Name="DiscoutGroup">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="int" Nullable="false" />
+          <Property Name="name" Type="varchar" MaxLength="50" />
+          <Property Name="dgRate" Type="decimal" />
+        </EntityType>
+        <EntityType Name="Employee">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="int" Nullable="false" />
+          <Property Name="position" Type="varchar" MaxLength="50" />
+          <Property Name="sId" Type="int" />
+        </EntityType>
+        <EntityType Name="LoginInfo">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="int" Nullable="false" />
+          <Property Name="name" Type="varchar" MaxLength="50" />
+          <Property Name="password" Type="varchar(max)" />
+          <Property Name="pId" Type="int" />
+        </EntityType>
+        <EntityType Name="Period">
+          <Key>
+            <PropertyRef Name="bsId" />
+            <PropertyRef Name="time" />
+          </Key>
+          <Property Name="bsId" Type="int" Nullable="false" />
+          <Property Name="time" Type="datetime" Nullable="false" />
+          <Property Name="avaiNumber" Type="int" />
+          <Property Name="custBookNumber" Type="int" />
+          <Property Name="futureBookNumber" Type="int" />
+        </EntityType>
+        <EntityType Name="Person">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="int" Nullable="false" />
+          <Property Name="fName" Type="varchar" MaxLength="50" />
+          <Property Name="lname" Type="varchar" MaxLength="50" />
+          <Property Name="address" Type="varchar" MaxLength="50" />
+          <Property Name="country" Type="varchar" MaxLength="50" />
+          <Property Name="phone" Type="varchar" MaxLength="50" />
+          <Property Name="email" Type="varchar" MaxLength="50" />
+          <Property Name="pType" Type="varchar" MaxLength="50" />
+        </EntityType>
+        <EntityType Name="Station">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="int" Nullable="false" />
+          <Property Name="name" Type="varchar" MaxLength="50" />
+          <Property Name="address" Type="varchar" MaxLength="50" />
+          <Property Name="country" Type="varchar" MaxLength="50" />
+          <Property Name="state" Type="varchar" MaxLength="50" />
+        </EntityType>
+        <Association Name="FK_Battery_ToTable">
+          <End Role="BatteryType" Type="ElectricCarModel.Store.BatteryType" Multiplicity="0..1" />
+          <End Role="Battery" Type="ElectricCarModel.Store.Battery" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="BatteryType">
+              <PropertyRef Name="Id" />
+            </Principal>
+            <Dependent Role="Battery">
+              <PropertyRef Name="btId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_BatteryStorage_ToTable">
+          <End Role="BatteryType" Type="ElectricCarModel.Store.BatteryType" Multiplicity="0..1" />
+          <End Role="BatteryStorage" Type="ElectricCarModel.Store.BatteryStorage" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="BatteryType">
+              <PropertyRef Name="Id" />
+            </Principal>
+            <Dependent Role="BatteryStorage">
+              <PropertyRef Name="btId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_BatteryStorage_ToTable_1">
+          <End Role="Station" Type="ElectricCarModel.Store.Station" Multiplicity="0..1" />
+          <End Role="BatteryStorage" Type="ElectricCarModel.Store.BatteryStorage" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Station">
+              <PropertyRef Name="Id" />
+            </Principal>
+            <Dependent Role="BatteryStorage">
+              <PropertyRef Name="sId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_Booking_Station_ToTable">
+          <End Role="Booking" Type="ElectricCarModel.Store.Booking" Multiplicity="1" />
+          <End Role="Booking_Station" Type="ElectricCarModel.Store.Booking_Station" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Booking">
+              <PropertyRef Name="Id" />
+            </Principal>
+            <Dependent Role="Booking_Station">
+              <PropertyRef Name="bId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_Booking_Station_ToTable_1">
+          <End Role="Station" Type="ElectricCarModel.Store.Station" Multiplicity="1" />
+          <End Role="Booking_Station" Type="ElectricCarModel.Store.Booking_Station" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Station">
+              <PropertyRef Name="Id" />
+            </Principal>
+            <Dependent Role="Booking_Station">
+              <PropertyRef Name="sId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_Booking_ToTable">
+          <End Role="Customer" Type="ElectricCarModel.Store.Customer" Multiplicity="0..1" />
+          <End Role="Booking" Type="ElectricCarModel.Store.Booking" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Customer">
+              <PropertyRef Name="Id" />
+            </Principal>
+            <Dependent Role="Booking">
+              <PropertyRef Name="cId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_BookingLine_ToTable">
+          <End Role="Booking" Type="ElectricCarModel.Store.Booking" Multiplicity="1" />
+          <End Role="BookingLine" Type="ElectricCarModel.Store.BookingLine" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Booking">
+              <PropertyRef Name="Id" />
+            </Principal>
+            <Dependent Role="BookingLine">
+              <PropertyRef Name="bId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_BookingLine_ToTable_1">
+          <End Role="BatteryType" Type="ElectricCarModel.Store.BatteryType" Multiplicity="1" />
+          <End Role="BookingLine" Type="ElectricCarModel.Store.BookingLine" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="BatteryType">
+              <PropertyRef Name="Id" />
+            </Principal>
+            <Dependent Role="BookingLine">
+              <PropertyRef Name="btId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_Connection_ToTable">
+          <End Role="Station" Type="ElectricCarModel.Store.Station" Multiplicity="1" />
+          <End Role="Connection" Type="ElectricCarModel.Store.Connection" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Station">
+              <PropertyRef Name="Id" />
+            </Principal>
+            <Dependent Role="Connection">
+              <PropertyRef Name="sId1" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_Connection_ToTable_1">
+          <End Role="Station" Type="ElectricCarModel.Store.Station" Multiplicity="1" />
+          <End Role="Connection" Type="ElectricCarModel.Store.Connection" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Station">
+              <PropertyRef Name="Id" />
+            </Principal>
+            <Dependent Role="Connection">
+              <PropertyRef Name="sId2" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_Customer_ToPerson">
+          <End Role="Person" Type="ElectricCarModel.Store.Person" Multiplicity="1" />
+          <End Role="Customer" Type="ElectricCarModel.Store.Customer" Multiplicity="0..1" />
+          <ReferentialConstraint>
+            <Principal Role="Person">
+              <PropertyRef Name="Id" />
+            </Principal>
+            <Dependent Role="Customer">
+              <PropertyRef Name="Id" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_Employee_ToPeron">
+          <End Role="Person" Type="ElectricCarModel.Store.Person" Multiplicity="1" />
+          <End Role="Employee" Type="ElectricCarModel.Store.Employee" Multiplicity="0..1" />
+          <ReferentialConstraint>
+            <Principal Role="Person">
+              <PropertyRef Name="Id" />
+            </Principal>
+            <Dependent Role="Employee">
+              <PropertyRef Name="Id" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_Employee_ToTable">
+          <End Role="Station" Type="ElectricCarModel.Store.Station" Multiplicity="0..1" />
+          <End Role="Employee" Type="ElectricCarModel.Store.Employee" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Station">
+              <PropertyRef Name="Id" />
+            </Principal>
+            <Dependent Role="Employee">
+              <PropertyRef Name="sId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_LoginInfo_ToTable">
+          <End Role="Person" Type="ElectricCarModel.Store.Person" Multiplicity="0..1" />
+          <End Role="LoginInfo" Type="ElectricCarModel.Store.LoginInfo" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Person">
+              <PropertyRef Name="Id" />
+            </Principal>
+            <Dependent Role="LoginInfo">
+              <PropertyRef Name="pId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_Period_ToTable">
+          <End Role="BatteryStorage" Type="ElectricCarModel.Store.BatteryStorage" Multiplicity="1" />
+          <End Role="Period" Type="ElectricCarModel.Store.Period" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="BatteryStorage">
+              <PropertyRef Name="Id" />
+            </Principal>
+            <Dependent Role="Period">
+              <PropertyRef Name="bsId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_Table_ToTable">
+          <End Role="DiscoutGroup" Type="ElectricCarModel.Store.DiscoutGroup" Multiplicity="0..1" />
+          <End Role="Customer" Type="ElectricCarModel.Store.Customer" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="DiscoutGroup">
+              <PropertyRef Name="Id" />
+            </Principal>
+            <Dependent Role="Customer">
+              <PropertyRef Name="dgId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+      </Schema>
+    </edmx:StorageModels>
+    <!-- CSDL content -->
+    <edmx:ConceptualModels>
+      <Schema Namespace="ElectricCarModel" Alias="Self" p1:UseStrongSpatialTypes="false" xmlns:annotation="http://schemas.microsoft.com/ado/2009/02/edm/annotation" xmlns:p1="http://schemas.microsoft.com/ado/2009/02/edm/annotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm">
+        <EntityContainer Name="ElectricCarEntities" p1:LazyLoadingEnabled="true">
+          <EntitySet Name="Battery" EntityType="ElectricCarModel.Battery" />
+          <EntitySet Name="BatteryStorage" EntityType="ElectricCarModel.BatteryStorage" />
+          <EntitySet Name="BatteryType" EntityType="ElectricCarModel.BatteryType" />
+          <EntitySet Name="Booking" EntityType="ElectricCarModel.Booking" />
+          <EntitySet Name="BookingLine" EntityType="ElectricCarModel.BookingLine" />
+          <EntitySet Name="Connection" EntityType="ElectricCarModel.Connection" />
+          <EntitySet Name="Customer" EntityType="ElectricCarModel.Customer" />
+          <EntitySet Name="DiscoutGroup" EntityType="ElectricCarModel.DiscoutGroup" />
+          <EntitySet Name="Employee" EntityType="ElectricCarModel.Employee" />
+          <EntitySet Name="LoginInfo" EntityType="ElectricCarModel.LoginInfo" />
+          <EntitySet Name="Period" EntityType="ElectricCarModel.Period" />
+          <EntitySet Name="Person" EntityType="ElectricCarModel.Person" />
+          <EntitySet Name="Station" EntityType="ElectricCarModel.Station" />
+          <AssociationSet Name="FK_Battery_ToTable" Association="ElectricCarModel.FK_Battery_ToTable">
+            <End Role="BatteryType" EntitySet="BatteryType" />
+            <End Role="Battery" EntitySet="Battery" />
+          </AssociationSet>
+          <AssociationSet Name="FK_BatteryStorage_ToTable" Association="ElectricCarModel.FK_BatteryStorage_ToTable">
+            <End Role="BatteryType" EntitySet="BatteryType" />
+            <End Role="BatteryStorage" EntitySet="BatteryStorage" />
+          </AssociationSet>
+          <AssociationSet Name="FK_BatteryStorage_ToTable_1" Association="ElectricCarModel.FK_BatteryStorage_ToTable_1">
+            <End Role="Station" EntitySet="Station" />
+            <End Role="BatteryStorage" EntitySet="BatteryStorage" />
+          </AssociationSet>
+          <AssociationSet Name="FK_Period_ToTable" Association="ElectricCarModel.FK_Period_ToTable">
+            <End Role="BatteryStorage" EntitySet="BatteryStorage" />
+            <End Role="Period" EntitySet="Period" />
+          </AssociationSet>
+          <AssociationSet Name="FK_BookingLine_ToTable_1" Association="ElectricCarModel.FK_BookingLine_ToTable_1">
+            <End Role="BatteryType" EntitySet="BatteryType" />
+            <End Role="BookingLine" EntitySet="BookingLine" />
+          </AssociationSet>
+          <AssociationSet Name="FK_Booking_ToTable" Association="ElectricCarModel.FK_Booking_ToTable">
+            <End Role="Customer" EntitySet="Customer" />
+            <End Role="Booking" EntitySet="Booking" />
+          </AssociationSet>
+          <AssociationSet Name="FK_BookingLine_ToTable" Association="ElectricCarModel.FK_BookingLine_ToTable">
+            <End Role="Booking" EntitySet="Booking" />
+            <End Role="BookingLine" EntitySet="BookingLine" />
+          </AssociationSet>
+          <AssociationSet Name="FK_Connection_ToTable" Association="ElectricCarModel.FK_Connection_ToTable">
+            <End Role="Station" EntitySet="Station" />
+            <End Role="Connection" EntitySet="Connection" />
+          </AssociationSet>
+          <AssociationSet Name="FK_Connection_ToTable_1" Association="ElectricCarModel.FK_Connection_ToTable_1">
+            <End Role="Station" EntitySet="Station" />
+            <End Role="Connection" EntitySet="Connection" />
+          </AssociationSet>
+          <AssociationSet Name="FK_Customer_ToPerson" Association="ElectricCarModel.FK_Customer_ToPerson">
+            <End Role="Person" EntitySet="Person" />
+            <End Role="Customer" EntitySet="Customer" />
+          </AssociationSet>
+          <AssociationSet Name="FK_Table_ToTable" Association="ElectricCarModel.FK_Table_ToTable">
+            <End Role="DiscoutGroup" EntitySet="DiscoutGroup" />
+            <End Role="Customer" EntitySet="Customer" />
+          </AssociationSet>
+          <AssociationSet Name="FK_Employee_ToPeron" Association="ElectricCarModel.FK_Employee_ToPeron">
+            <End Role="Person" EntitySet="Person" />
+            <End Role="Employee" EntitySet="Employee" />
+          </AssociationSet>
+          <AssociationSet Name="FK_Employee_ToTable" Association="ElectricCarModel.FK_Employee_ToTable">
+            <End Role="Station" EntitySet="Station" />
+            <End Role="Employee" EntitySet="Employee" />
+          </AssociationSet>
+          <AssociationSet Name="FK_LoginInfo_ToTable" Association="ElectricCarModel.FK_LoginInfo_ToTable">
+            <End Role="Person" EntitySet="Person" />
+            <End Role="LoginInfo" EntitySet="LoginInfo" />
+          </AssociationSet>
+          <AssociationSet Name="Booking_Station" Association="ElectricCarModel.Booking_Station">
+            <End Role="Booking" EntitySet="Booking" />
+            <End Role="Station" EntitySet="Station" />
+          </AssociationSet>
+        </EntityContainer>
+        <EntityType Name="Battery">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="Int32" Nullable="false" />
+          <Property Name="btId" Type="Int32" />
+          <Property Name="state" Type="String" MaxLength="50" Unicode="false" FixedLength="false" />
+          <NavigationProperty Name="BatteryType" Relationship="ElectricCarModel.FK_Battery_ToTable" FromRole="Battery" ToRole="BatteryType" />
+        </EntityType>
+        <EntityType Name="BatteryStorage">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="Int32" Nullable="false" />
+          <Property Name="btId" Type="Int32" />
+          <Property Name="sId" Type="Int32" />
+          <NavigationProperty Name="BatteryType" Relationship="ElectricCarModel.FK_BatteryStorage_ToTable" FromRole="BatteryStorage" ToRole="BatteryType" />
+          <NavigationProperty Name="Station" Relationship="ElectricCarModel.FK_BatteryStorage_ToTable_1" FromRole="BatteryStorage" ToRole="Station" />
+          <NavigationProperty Name="Period" Relationship="ElectricCarModel.FK_Period_ToTable" FromRole="BatteryStorage" ToRole="Period" />
+        </EntityType>
+        <EntityType Name="BatteryType">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="Int32" Nullable="false" />
+          <Property Name="name" Type="String" MaxLength="50" Unicode="false" FixedLength="false" />
+          <Property Name="producer" Type="String" MaxLength="50" Unicode="false" FixedLength="false" />
+          <Property Name="capacity" Type="Decimal" Precision="18" Scale="0" />
+          <Property Name="exchangeCost" Type="Decimal" Precision="18" Scale="0" />
+          <Property Name="storageNumber" Type="Int32" />
+          <NavigationProperty Name="Battery" Relationship="ElectricCarModel.FK_Battery_ToTable" FromRole="BatteryType" ToRole="Battery" />
+          <NavigationProperty Name="BatteryStorage" Relationship="ElectricCarModel.FK_BatteryStorage_ToTable" FromRole="BatteryType" ToRole="BatteryStorage" />
+          <NavigationProperty Name="BookingLine" Relationship="ElectricCarModel.FK_BookingLine_ToTable_1" FromRole="BatteryType" ToRole="BookingLine" />
+        </EntityType>
+        <EntityType Name="Booking">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="Int32" Nullable="false" />
+          <Property Name="cId" Type="Int32" />
+          <Property Name="totalPrice" Type="Decimal" Precision="18" Scale="0" />
+          <Property Name="createDate" Type="DateTime" Precision="3" />
+          <Property Name="tripStart" Type="DateTime" Precision="3" />
+          <Property Name="creaditCard" Type="String" MaxLength="50" Unicode="false" FixedLength="false" />
+          <NavigationProperty Name="Customer" Relationship="ElectricCarModel.FK_Booking_ToTable" FromRole="Booking" ToRole="Customer" />
+          <NavigationProperty Name="BookingLine" Relationship="ElectricCarModel.FK_BookingLine_ToTable" FromRole="Booking" ToRole="BookingLine" />
+          <NavigationProperty Name="Station" Relationship="ElectricCarModel.Booking_Station" FromRole="Booking" ToRole="Station" />
+        </EntityType>
+        <EntityType Name="BookingLine">
+          <Key>
+            <PropertyRef Name="bId" />
+            <PropertyRef Name="btId" />
+          </Key>
+          <Property Name="bId" Type="Int32" Nullable="false" />
+          <Property Name="btId" Type="Int32" Nullable="false" />
+          <Property Name="quantity" Type="Int32" />
+          <Property Name="price" Type="Decimal" Precision="18" Scale="0" />
+          <NavigationProperty Name="BatteryType" Relationship="ElectricCarModel.FK_BookingLine_ToTable_1" FromRole="BookingLine" ToRole="BatteryType" />
+          <NavigationProperty Name="Booking" Relationship="ElectricCarModel.FK_BookingLine_ToTable" FromRole="BookingLine" ToRole="Booking" />
+        </EntityType>
+        <EntityType Name="Connection">
+          <Key>
+            <PropertyRef Name="sId1" />
+            <PropertyRef Name="sId2" />
+          </Key>
+          <Property Name="sId1" Type="Int32" Nullable="false" />
+          <Property Name="sId2" Type="Int32" Nullable="false" />
+          <Property Name="distance" Type="Decimal" Precision="18" Scale="0" />
+          <Property Name="driveHour" Type="Decimal" Precision="18" Scale="0" />
+          <NavigationProperty Name="Station" Relationship="ElectricCarModel.FK_Connection_ToTable" FromRole="Connection" ToRole="Station" />
+          <NavigationProperty Name="Station1" Relationship="ElectricCarModel.FK_Connection_ToTable_1" FromRole="Connection" ToRole="Station" />
+        </EntityType>
+        <EntityType Name="Customer">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="Int32" Nullable="false" />
+          <Property Name="dgId" Type="Int32" />
+          <NavigationProperty Name="Booking" Relationship="ElectricCarModel.FK_Booking_ToTable" FromRole="Customer" ToRole="Booking" />
+          <NavigationProperty Name="Person" Relationship="ElectricCarModel.FK_Customer_ToPerson" FromRole="Customer" ToRole="Person" />
+          <NavigationProperty Name="DiscoutGroup" Relationship="ElectricCarModel.FK_Table_ToTable" FromRole="Customer" ToRole="DiscoutGroup" />
+        </EntityType>
+        <EntityType Name="DiscoutGroup">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="Int32" Nullable="false" />
+          <Property Name="name" Type="String" MaxLength="50" Unicode="false" FixedLength="false" />
+          <Property Name="dgRate" Type="Decimal" Precision="18" Scale="0" />
+          <NavigationProperty Name="Customer" Relationship="ElectricCarModel.FK_Table_ToTable" FromRole="DiscoutGroup" ToRole="Customer" />
+        </EntityType>
+        <EntityType Name="Employee">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="Int32" Nullable="false" />
+          <Property Name="position" Type="String" MaxLength="50" Unicode="false" FixedLength="false" />
+          <Property Name="sId" Type="Int32" />
+          <NavigationProperty Name="Person" Relationship="ElectricCarModel.FK_Employee_ToPeron" FromRole="Employee" ToRole="Person" />
+          <NavigationProperty Name="Station" Relationship="ElectricCarModel.FK_Employee_ToTable" FromRole="Employee" ToRole="Station" />
+        </EntityType>
+        <EntityType Name="LoginInfo">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="Int32" Nullable="false" />
+          <Property Name="name" Type="String" MaxLength="50" Unicode="false" FixedLength="false" />
+          <Property Name="password" Type="String" MaxLength="Max" Unicode="false" FixedLength="false" />
+          <Property Name="pId" Type="Int32" />
+          <NavigationProperty Name="Person" Relationship="ElectricCarModel.FK_LoginInfo_ToTable" FromRole="LoginInfo" ToRole="Person" />
+        </EntityType>
+        <EntityType Name="Period">
+          <Key>
+            <PropertyRef Name="bsId" />
+            <PropertyRef Name="time" />
+          </Key>
+          <Property Name="bsId" Type="Int32" Nullable="false" />
+          <Property Name="time" Type="DateTime" Nullable="false" Precision="3" />
+          <Property Name="avaiNumber" Type="Int32" />
+          <Property Name="custBookNumber" Type="Int32" />
+          <Property Name="futureBookNumber" Type="Int32" />
+          <NavigationProperty Name="BatteryStorage" Relationship="ElectricCarModel.FK_Period_ToTable" FromRole="Period" ToRole="BatteryStorage" />
+        </EntityType>
+        <EntityType Name="Person">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="Int32" Nullable="false" />
+          <Property Name="fName" Type="String" MaxLength="50" Unicode="false" FixedLength="false" />
+          <Property Name="lname" Type="String" MaxLength="50" Unicode="false" FixedLength="false" />
+          <Property Name="address" Type="String" MaxLength="50" Unicode="false" FixedLength="false" />
+          <Property Name="country" Type="String" MaxLength="50" Unicode="false" FixedLength="false" />
+          <Property Name="phone" Type="String" MaxLength="50" Unicode="false" FixedLength="false" />
+          <Property Name="email" Type="String" MaxLength="50" Unicode="false" FixedLength="false" />
+          <Property Name="pType" Type="String" MaxLength="50" Unicode="false" FixedLength="false" />
+          <NavigationProperty Name="Customer" Relationship="ElectricCarModel.FK_Customer_ToPerson" FromRole="Person" ToRole="Customer" />
+          <NavigationProperty Name="Employee" Relationship="ElectricCarModel.FK_Employee_ToPeron" FromRole="Person" ToRole="Employee" />
+          <NavigationProperty Name="LoginInfo" Relationship="ElectricCarModel.FK_LoginInfo_ToTable" FromRole="Person" ToRole="LoginInfo" />
+        </EntityType>
+        <EntityType Name="Station">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="Int32" Nullable="false" />
+          <Property Name="name" Type="String" MaxLength="50" Unicode="false" FixedLength="false" />
+          <Property Name="address" Type="String" MaxLength="50" Unicode="false" FixedLength="false" />
+          <Property Name="country" Type="String" MaxLength="50" Unicode="false" FixedLength="false" />
+          <Property Name="state" Type="String" MaxLength="50" Unicode="false" FixedLength="false" />
+          <NavigationProperty Name="BatteryStorage" Relationship="ElectricCarModel.FK_BatteryStorage_ToTable_1" FromRole="Station" ToRole="BatteryStorage" />
+          <NavigationProperty Name="Connection" Relationship="ElectricCarModel.FK_Connection_ToTable" FromRole="Station" ToRole="Connection" />
+          <NavigationProperty Name="Connection1" Relationship="ElectricCarModel.FK_Connection_ToTable_1" FromRole="Station" ToRole="Connection" />
+          <NavigationProperty Name="Employee" Relationship="ElectricCarModel.FK_Employee_ToTable" FromRole="Station" ToRole="Employee" />
+          <NavigationProperty Name="Booking" Relationship="ElectricCarModel.Booking_Station" FromRole="Station" ToRole="Booking" />
+        </EntityType>
+        <Association Name="FK_Battery_ToTable">
+          <End Role="BatteryType" Type="ElectricCarModel.BatteryType" Multiplicity="0..1" />
+          <End Role="Battery" Type="ElectricCarModel.Battery" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="BatteryType">
+              <PropertyRef Name="Id" />
+            </Principal>
+            <Dependent Role="Battery">
+              <PropertyRef Name="btId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_BatteryStorage_ToTable">
+          <End Role="BatteryType" Type="ElectricCarModel.BatteryType" Multiplicity="0..1" />
+          <End Role="BatteryStorage" Type="ElectricCarModel.BatteryStorage" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="BatteryType">
+              <PropertyRef Name="Id" />
+            </Principal>
+            <Dependent Role="BatteryStorage">
+              <PropertyRef Name="btId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_BatteryStorage_ToTable_1">
+          <End Role="Station" Type="ElectricCarModel.Station" Multiplicity="0..1" />
+          <End Role="BatteryStorage" Type="ElectricCarModel.BatteryStorage" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Station">
+              <PropertyRef Name="Id" />
+            </Principal>
+            <Dependent Role="BatteryStorage">
+              <PropertyRef Name="sId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_Period_ToTable">
+          <End Role="BatteryStorage" Type="ElectricCarModel.BatteryStorage" Multiplicity="1" />
+          <End Role="Period" Type="ElectricCarModel.Period" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="BatteryStorage">
+              <PropertyRef Name="Id" />
+            </Principal>
+            <Dependent Role="Period">
+              <PropertyRef Name="bsId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_BookingLine_ToTable_1">
+          <End Role="BatteryType" Type="ElectricCarModel.BatteryType" Multiplicity="1" />
+          <End Role="BookingLine" Type="ElectricCarModel.BookingLine" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="BatteryType">
+              <PropertyRef Name="Id" />
+            </Principal>
+            <Dependent Role="BookingLine">
+              <PropertyRef Name="btId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_Booking_ToTable">
+          <End Role="Customer" Type="ElectricCarModel.Customer" Multiplicity="0..1" />
+          <End Role="Booking" Type="ElectricCarModel.Booking" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Customer">
+              <PropertyRef Name="Id" />
+            </Principal>
+            <Dependent Role="Booking">
+              <PropertyRef Name="cId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_BookingLine_ToTable">
+          <End Role="Booking" Type="ElectricCarModel.Booking" Multiplicity="1" />
+          <End Role="BookingLine" Type="ElectricCarModel.BookingLine" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Booking">
+              <PropertyRef Name="Id" />
+            </Principal>
+            <Dependent Role="BookingLine">
+              <PropertyRef Name="bId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_Connection_ToTable">
+          <End Role="Station" Type="ElectricCarModel.Station" Multiplicity="1" />
+          <End Role="Connection" Type="ElectricCarModel.Connection" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Station">
+              <PropertyRef Name="Id" />
+            </Principal>
+            <Dependent Role="Connection">
+              <PropertyRef Name="sId1" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_Connection_ToTable_1">
+          <End Role="Station" Type="ElectricCarModel.Station" Multiplicity="1" />
+          <End Role="Connection" Type="ElectricCarModel.Connection" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Station">
+              <PropertyRef Name="Id" />
+            </Principal>
+            <Dependent Role="Connection">
+              <PropertyRef Name="sId2" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_Customer_ToPerson">
+          <End Role="Person" Type="ElectricCarModel.Person" Multiplicity="1" />
+          <End Role="Customer" Type="ElectricCarModel.Customer" Multiplicity="0..1" />
+          <ReferentialConstraint>
+            <Principal Role="Person">
+              <PropertyRef Name="Id" />
+            </Principal>
+            <Dependent Role="Customer">
+              <PropertyRef Name="Id" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_Table_ToTable">
+          <End Role="DiscoutGroup" Type="ElectricCarModel.DiscoutGroup" Multiplicity="0..1" />
+          <End Role="Customer" Type="ElectricCarModel.Customer" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="DiscoutGroup">
+              <PropertyRef Name="Id" />
+            </Principal>
+            <Dependent Role="Customer">
+              <PropertyRef Name="dgId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_Employee_ToPeron">
+          <End Role="Person" Type="ElectricCarModel.Person" Multiplicity="1" />
+          <End Role="Employee" Type="ElectricCarModel.Employee" Multiplicity="0..1" />
+          <ReferentialConstraint>
+            <Principal Role="Person">
+              <PropertyRef Name="Id" />
+            </Principal>
+            <Dependent Role="Employee">
+              <PropertyRef Name="Id" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_Employee_ToTable">
+          <End Role="Station" Type="ElectricCarModel.Station" Multiplicity="0..1" />
+          <End Role="Employee" Type="ElectricCarModel.Employee" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Station">
+              <PropertyRef Name="Id" />
+            </Principal>
+            <Dependent Role="Employee">
+              <PropertyRef Name="sId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_LoginInfo_ToTable">
+          <End Role="Person" Type="ElectricCarModel.Person" Multiplicity="0..1" />
+          <End Role="LoginInfo" Type="ElectricCarModel.LoginInfo" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Person">
+              <PropertyRef Name="Id" />
+            </Principal>
+            <Dependent Role="LoginInfo">
+              <PropertyRef Name="pId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="Booking_Station">
+          <End Role="Booking" Type="ElectricCarModel.Booking" Multiplicity="*" />
+          <End Role="Station" Type="ElectricCarModel.Station" Multiplicity="*" />
+        </Association>
+      </Schema>
+    </edmx:ConceptualModels>
+    <!-- C-S mapping content -->
+    <edmx:Mappings>
+      <Mapping Space="C-S" xmlns="http://schemas.microsoft.com/ado/2009/11/mapping/cs">
+        <EntityContainerMapping StorageEntityContainer="ElectricCarModelStoreContainer" CdmEntityContainer="ElectricCarEntities">
+          <EntitySetMapping Name="Battery">
+            <EntityTypeMapping TypeName="ElectricCarModel.Battery">
+              <MappingFragment StoreEntitySet="Battery">
+                <ScalarProperty Name="Id" ColumnName="Id" />
+                <ScalarProperty Name="btId" ColumnName="btId" />
+                <ScalarProperty Name="state" ColumnName="state" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="BatteryStorage">
+            <EntityTypeMapping TypeName="ElectricCarModel.BatteryStorage">
+              <MappingFragment StoreEntitySet="BatteryStorage">
+                <ScalarProperty Name="Id" ColumnName="Id" />
+                <ScalarProperty Name="btId" ColumnName="btId" />
+                <ScalarProperty Name="sId" ColumnName="sId" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="BatteryType">
+            <EntityTypeMapping TypeName="ElectricCarModel.BatteryType">
+              <MappingFragment StoreEntitySet="BatteryType">
+                <ScalarProperty Name="Id" ColumnName="Id" />
+                <ScalarProperty Name="name" ColumnName="name" />
+                <ScalarProperty Name="producer" ColumnName="producer" />
+                <ScalarProperty Name="capacity" ColumnName="capacity" />
+                <ScalarProperty Name="exchangeCost" ColumnName="exchangeCost" />
+                <ScalarProperty Name="storageNumber" ColumnName="storageNumber" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="Booking">
+            <EntityTypeMapping TypeName="ElectricCarModel.Booking">
+              <MappingFragment StoreEntitySet="Booking">
+                <ScalarProperty Name="Id" ColumnName="Id" />
+                <ScalarProperty Name="cId" ColumnName="cId" />
+                <ScalarProperty Name="totalPrice" ColumnName="totalPrice" />
+                <ScalarProperty Name="createDate" ColumnName="createDate" />
+                <ScalarProperty Name="tripStart" ColumnName="tripStart" />
+                <ScalarProperty Name="creaditCard" ColumnName="creaditCard" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="BookingLine">
+            <EntityTypeMapping TypeName="ElectricCarModel.BookingLine">
+              <MappingFragment StoreEntitySet="BookingLine">
+                <ScalarProperty Name="bId" ColumnName="bId" />
+                <ScalarProperty Name="btId" ColumnName="btId" />
+                <ScalarProperty Name="quantity" ColumnName="quantity" />
+                <ScalarProperty Name="price" ColumnName="price" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="Connection">
+            <EntityTypeMapping TypeName="ElectricCarModel.Connection">
+              <MappingFragment StoreEntitySet="Connection">
+                <ScalarProperty Name="sId1" ColumnName="sId1" />
+                <ScalarProperty Name="sId2" ColumnName="sId2" />
+                <ScalarProperty Name="distance" ColumnName="distance" />
+                <ScalarProperty Name="driveHour" ColumnName="driveHour" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="Customer">
+            <EntityTypeMapping TypeName="ElectricCarModel.Customer">
+              <MappingFragment StoreEntitySet="Customer">
+                <ScalarProperty Name="Id" ColumnName="Id" />
+                <ScalarProperty Name="dgId" ColumnName="dgId" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="DiscoutGroup">
+            <EntityTypeMapping TypeName="ElectricCarModel.DiscoutGroup">
+              <MappingFragment StoreEntitySet="DiscoutGroup">
+                <ScalarProperty Name="Id" ColumnName="Id" />
+                <ScalarProperty Name="name" ColumnName="name" />
+                <ScalarProperty Name="dgRate" ColumnName="dgRate" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="Employee">
+            <EntityTypeMapping TypeName="ElectricCarModel.Employee">
+              <MappingFragment StoreEntitySet="Employee">
+                <ScalarProperty Name="Id" ColumnName="Id" />
+                <ScalarProperty Name="position" ColumnName="position" />
+                <ScalarProperty Name="sId" ColumnName="sId" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="LoginInfo">
+            <EntityTypeMapping TypeName="ElectricCarModel.LoginInfo">
+              <MappingFragment StoreEntitySet="LoginInfo">
+                <ScalarProperty Name="Id" ColumnName="Id" />
+                <ScalarProperty Name="name" ColumnName="name" />
+                <ScalarProperty Name="password" ColumnName="password" />
+                <ScalarProperty Name="pId" ColumnName="pId" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="Period">
+            <EntityTypeMapping TypeName="ElectricCarModel.Period">
+              <MappingFragment StoreEntitySet="Period">
+                <ScalarProperty Name="bsId" ColumnName="bsId" />
+                <ScalarProperty Name="time" ColumnName="time" />
+                <ScalarProperty Name="avaiNumber" ColumnName="avaiNumber" />
+                <ScalarProperty Name="custBookNumber" ColumnName="custBookNumber" />
+                <ScalarProperty Name="futureBookNumber" ColumnName="futureBookNumber" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="Person">
+            <EntityTypeMapping TypeName="ElectricCarModel.Person">
+              <MappingFragment StoreEntitySet="Person">
+                <ScalarProperty Name="Id" ColumnName="Id" />
+                <ScalarProperty Name="fName" ColumnName="fName" />
+                <ScalarProperty Name="lname" ColumnName="lname" />
+                <ScalarProperty Name="address" ColumnName="address" />
+                <ScalarProperty Name="country" ColumnName="country" />
+                <ScalarProperty Name="phone" ColumnName="phone" />
+                <ScalarProperty Name="email" ColumnName="email" />
+                <ScalarProperty Name="pType" ColumnName="pType" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="Station">
+            <EntityTypeMapping TypeName="ElectricCarModel.Station">
+              <MappingFragment StoreEntitySet="Station">
+                <ScalarProperty Name="Id" ColumnName="Id" />
+                <ScalarProperty Name="name" ColumnName="name" />
+                <ScalarProperty Name="address" ColumnName="address" />
+                <ScalarProperty Name="country" ColumnName="country" />
+                <ScalarProperty Name="state" ColumnName="state" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <AssociationSetMapping Name="Booking_Station" TypeName="ElectricCarModel.Booking_Station" StoreEntitySet="Booking_Station">
+            <EndProperty Name="Booking">
+              <ScalarProperty Name="Id" ColumnName="bId" />
+            </EndProperty>
+            <EndProperty Name="Station">
+              <ScalarProperty Name="Id" ColumnName="sId" />
+            </EndProperty>
+          </AssociationSetMapping>
+        </EntityContainerMapping>
+      </Mapping>
+    </edmx:Mappings>
+  </edmx:Runtime>
+  <!-- EF Designer content (DO NOT EDIT MANUALLY BELOW HERE) -->
+  <Designer xmlns="http://schemas.microsoft.com/ado/2009/11/edmx">
+    <Connection>
+      <DesignerInfoPropertySet>
+        <DesignerProperty Name="MetadataArtifactProcessing" Value="EmbedInOutputAssembly" />
+      </DesignerInfoPropertySet>
+    </Connection>
+    <Options>
+      <DesignerInfoPropertySet>
+        <DesignerProperty Name="ValidateOnBuild" Value="true" />
+        <DesignerProperty Name="EnablePluralization" Value="False" />
+        <DesignerProperty Name="IncludeForeignKeysInModel" Value="True" />
+        <DesignerProperty Name="CodeGenerationStrategy" Value="None" />
+      </DesignerInfoPropertySet>
+    </Options>
+    <!-- Diagram content (shape and connector positions) -->
+    <Diagrams></Diagrams>
+  </Designer>
+</edmx:Edmx>
