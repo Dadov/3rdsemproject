@@ -61,6 +61,7 @@
     <Compile Include="BookingLine.cs">
       <DependentUpon>ElectricCarModel.tt</DependentUpon>
     </Compile>
+    <Compile Include="ConncectionModel.cs" />
     <Compile Include="Connection.cs">
       <DependentUpon>ElectricCarModel.tt</DependentUpon>
     </Compile>
@@ -101,6 +102,7 @@
     <Compile Include="Station.cs">
       <DependentUpon>ElectricCarModel.tt</DependentUpon>
     </Compile>
+    <Compile Include="StationModel.cs" />
   </ItemGroup>
   <ItemGroup>
     <EntityDeploy Include="ElectricCarModel.edmx">
