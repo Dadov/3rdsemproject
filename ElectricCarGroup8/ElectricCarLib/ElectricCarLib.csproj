@@ -49,10 +49,16 @@
   </ItemGroup>
   <ItemGroup>
     <Compile Include="ConnectionCtr.cs" />
+    <Compile Include="DBBattery.cs" />
+    <Compile Include="DBBatteryType.cs" />
     <Compile Include="DBConnection.cs" />
     <Compile Include="DBStation.cs" />
+    <Compile Include="IDBBattery.cs" />
+    <Compile Include="IDBBatteryType.cs" />
     <Compile Include="IDBConnection.cs" />
     <Compile Include="IDBStation.cs" />
+    <Compile Include="MBattery.cs" />
+    <Compile Include="MBatteryType.cs" />
     <Compile Include="MConnection.cs" />
     <Compile Include="MStation.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
