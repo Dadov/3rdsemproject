@@ -89,25 +89,19 @@ namespace ElectricCarLib
         {
             using (ElectricCarEntities context = new ElectricCarEntities())
             {
-                try
+                Station staUpToDate = context.Station.Find(id);
+                if (staUpToDate != null)
                 {
-                    Station s = context.Station.Find(id);
-                    context.Station.Add(new Station()
-                    {
-                        name = Name,
-                        address = Address,
-                        country = Country,
-                        state = State
-                    });
+                    staUpToDate.name = Name;
+                    staUpToDate.address = Address;
+                    staUpToDate.country = Country;
+                    staUpToDate.state = State;
                     context.SaveChanges();
                 }
-                catch (Exception)
+                else
                 {
-
                     throw new System.NullReferenceException("Can not find nabor station");
                 }
-
-
             }
         }
 
@@ -136,7 +130,9 @@ namespace ElectricCarLib
                 name = s.name,
                 address = s.address,
                 country = s.country,
-                state = s.state
+                state = (State)Enum.Parse(typeof(State), s.state)
+
+                
             };
             return station;
         }

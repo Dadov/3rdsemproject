@@ -18,7 +18,7 @@ namespace ElectricCarLib
         public string name { get; set; }
         public string address { get; set; }
         public string country { get; set; }
-        public string state { get; set; }
+        public State state { get; set; }
     
 
         public virtual ICollection<MConnection> Connection { get; set; }

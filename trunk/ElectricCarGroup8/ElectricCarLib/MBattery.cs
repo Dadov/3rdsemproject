@@ -20,5 +20,5 @@ namespace ElectricCarLib
                 " battery typee ID: " + Convert.ToString(batteryType.id);
         }
     }
-    }
+    
 }
