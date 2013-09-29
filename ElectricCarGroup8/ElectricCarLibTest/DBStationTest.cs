@@ -68,19 +68,20 @@ namespace ElectricCarLibTest
             Assert.AreEqual("BoholmStation", station.name);
             Assert.AreEqual("Boholm", station.address);
             Assert.AreEqual("Denmark", station.country);
-            Assert.AreEqual("Open", station.state);
+            Assert.AreEqual("Open", station.state.ToString());
             dbStation.deleteRecord(id);
         }
 
+        [TestMethod]
         public void updateRecord()
         {
             int id = dbStation.addNewRecord("BoholmStation", "Boholm", "Denmark", "Open");
-            dbStation.updateRecord(id, "Update", "Update", "Update", "Update");
+            dbStation.updateRecord(id, "Update", "Update", "Update", "Close");
             MStation station = dbStation.getRecord(id, false);
             Assert.AreEqual("Update", station.name);
             Assert.AreEqual("Update", station.address);
             Assert.AreEqual("Update", station.country);
-            Assert.AreEqual("Update", station.state);
+            Assert.AreEqual("Close", station.state.ToString());
             dbStation.deleteRecord(id);
         }
     }
