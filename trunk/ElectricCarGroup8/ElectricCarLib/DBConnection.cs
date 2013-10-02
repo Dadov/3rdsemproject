@@ -11,7 +11,7 @@ using System.Data.Entity;
 
 namespace ElectricCarLib
 {
-    class DBConnection: IDBConnection
+    public class DBConnection: IDBConnection
     {
         public void addNewRecord(int id1, int id2, decimal dist, decimal time)
         {
