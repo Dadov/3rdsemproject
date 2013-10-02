@@ -41,7 +41,7 @@ namespace ElectricCarLib
             }
         }
 
-        public MStation getRecord(int id, Boolean getAssocitation)
+        public MStation getRecord(int id, bool getAssocitation)
         {
             using (ElectricCarEntities context = new ElectricCarEntities())
             {
@@ -122,6 +122,33 @@ namespace ElectricCarLib
             }
             return stations;
         }
+
+        public LinkedList<MStation> getNaborStations(int id)
+        {
+            LinkedList<MStation> nStations = new LinkedList<MStation>();
+            nStations.AddFirst(getRecord(id, false));
+            using (ElectricCarEntities context = new ElectricCarEntities())
+            {
+                var connections = from c in context.Connection where c.sId1 == id || c.sId2 == id select c;
+                foreach (var c in connections)
+                {
+                    MStation sToAdd = new MStation();
+                    
+                    if (c.sId1 == id)
+                    {
+                        sToAdd = getRecord(c.sId2, false);
+                    }
+                    else
+                    {
+                        sToAdd = getRecord(c.sId1, false);
+                    }
+                    nStations.AddLast(sToAdd);
+                }
+                
+            } 
+            return nStations;
+        }
+
         public MStation buildStation(Station s)
         {
             MStation station = new MStation()

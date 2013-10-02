@@ -11,7 +11,7 @@ namespace ElectricCarLib
     {
         public MStation()
         {
-            this.Connection = new HashSet<MConnection>();
+            this.Connection = new LinkedList<MStation>();
         }
     
         public int Id { get; set; }
@@ -19,9 +19,9 @@ namespace ElectricCarLib
         public string address { get; set; }
         public string country { get; set; }
         public State state { get; set; }
-    
 
-        public virtual ICollection<MConnection> Connection { get; set; }
+
+        public LinkedList<MStation> Connection { get; set; }
         
     }
 }

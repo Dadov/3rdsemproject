@@ -13,6 +13,7 @@ namespace ElectricCarLibTest
     public class DBStationTest
     {
         private DBStation dbStation = new DBStation();
+        private IDBConnection dbConnection = new DBConnection();
         public DBStationTest()
         {
             //
@@ -64,25 +65,106 @@ namespace ElectricCarLibTest
         public void addGetDeleteNewRecord()
         {
             int id = dbStation.addNewRecord("BoholmStation", "Boholm", "Denmark", "Open");
-            MStation station = dbStation.getRecord(id, false);
-            Assert.AreEqual("BoholmStation", station.name);
-            Assert.AreEqual("Boholm", station.address);
-            Assert.AreEqual("Denmark", station.country);
-            Assert.AreEqual("Open", station.state.ToString());
-            dbStation.deleteRecord(id);
+            try
+            {
+                MStation station = dbStation.getRecord(id, false);
+                Assert.AreEqual("BoholmStation", station.name);
+                Assert.AreEqual("Boholm", station.address);
+                Assert.AreEqual("Denmark", station.country);
+                Assert.AreEqual("Open", station.state.ToString());
+            }
+            catch
+            {
+            }
+            finally
+            {
+                dbStation.deleteRecord(id);
+            }
         }
 
         [TestMethod]
         public void updateRecord()
         {
             int id = dbStation.addNewRecord("BoholmStation", "Boholm", "Denmark", "Open");
-            dbStation.updateRecord(id, "Update", "Update", "Update", "Close");
-            MStation station = dbStation.getRecord(id, false);
-            Assert.AreEqual("Update", station.name);
-            Assert.AreEqual("Update", station.address);
-            Assert.AreEqual("Update", station.country);
-            Assert.AreEqual("Close", station.state.ToString());
-            dbStation.deleteRecord(id);
+            try
+            {
+                dbStation.updateRecord(id, "Update", "Update", "Update", "Close");
+                MStation station = dbStation.getRecord(id, false);
+                Assert.AreEqual("Update", station.name);
+                Assert.AreEqual("Update", station.address);
+                Assert.AreEqual("Update", station.country);
+                Assert.AreEqual("Close", station.state.ToString());
+            }
+            catch
+            {
+
+            }
+            finally
+            {
+                dbStation.deleteRecord(id);
+            }
         }
+
+        [TestMethod]
+        public void getNaborStations()
+        {
+            int id1 = dbStation.addNewRecord("BoholmStation", "Boholm", "Denmark", "Open");
+            int id2 = dbStation.addNewRecord("nabor1", "Aarhus", "Denmark", "Close");
+            int id3 = dbStation.addNewRecord("nabor2", "Aalborg", "Denmark", "Open");
+            dbConnection.addNewRecord(id1, id2, 200, 2);
+            dbConnection.addNewRecord(id1, id3, 300, 3);
+            try
+            {
+                LinkedList<MStation> stations = dbStation.getNaborStations(id1);
+                Assert.AreEqual(3, stations.Count);
+                MStation startStation = new MStation();
+                MStation naborStationId2 = new MStation();
+                MStation naborStationId3 = new MStation();
+                foreach (MStation c in stations)
+                {
+                    if (c.Id == id1)
+                    {
+                        startStation = c;
+                    }
+                    else if (c.Id == id2)
+                    {
+                        naborStationId2 = c;
+                    }
+                    else if (true)
+                    {
+                        naborStationId3 = c;
+                    }
+                }
+                Assert.AreEqual(id1, startStation.Id);
+
+                Assert.AreEqual(id2, naborStationId2.Id);
+                Assert.AreEqual("nabor1", naborStationId2.name);
+                Assert.AreEqual("Aarhus", naborStationId2.address);
+                Assert.AreEqual("Denmark", naborStationId2.country);
+                Assert.AreEqual("Close", naborStationId2.state.ToString());
+
+                Assert.AreEqual(id3, naborStationId3.Id);
+                Assert.AreEqual("nabor2", naborStationId2.name);
+                Assert.AreEqual("Aalborg", naborStationId2.address);
+                Assert.AreEqual("Denmark", naborStationId2.country);
+                Assert.AreEqual("Open", naborStationId2.state.ToString());
+            }
+            catch
+            {
+
+            }
+            finally
+            {
+
+                dbConnection.deleteRecord(id1, id2);
+                dbConnection.deleteRecord(id1, id3);
+                dbStation.deleteRecord(id1);
+                dbStation.deleteRecord(id2);
+                dbStation.deleteRecord(id3);
+            }
+        
+        }
+    
+            
     }
 }
