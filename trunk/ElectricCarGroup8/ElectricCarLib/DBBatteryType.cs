@@ -11,17 +11,18 @@ using System.Data.Entity;
 
 namespace ElectricCarLib
 {
-    class DBBatteryType : IDBBatteryType
+    public class DBBatteryType : IDBBatteryType
     {
-        public void addNewRecord(int id, string name, string producer, decimal capacity, decimal exchangeCost, int storageNumber)
+        public int addNewRecord(string name, string producer, decimal capacity, decimal exchangeCost, int storageNumber)
         {
             using (ElectricCarEntities context = new ElectricCarEntities())
             {
                 try
                 {
+                    int newid = context.BatteryType.Count() + 1;
                     context.BatteryType.Add(new BatteryType()
                     {
-                        Id = id,
+                        Id = newid,
                         name = name,
                         producer = producer,
                         capacity = capacity,
@@ -29,13 +30,13 @@ namespace ElectricCarLib
                         storageNumber = storageNumber
                     });
                     context.SaveChanges();
+                    return newid;
                 }
                 catch (Exception)
                 {
                     throw new SystemException("Can not add battery type");
                 }
-
-            }
+             }
         }
 
         public MBatteryType getRecord(int id, bool getAssociation)

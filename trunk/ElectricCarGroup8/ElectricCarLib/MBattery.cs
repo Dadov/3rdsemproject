@@ -6,7 +6,7 @@ using System.Threading.Tasks;
 
 namespace ElectricCarLib
 {
-    class MBattery
+    public class MBattery
     {
         public int id { get; set; }
         public string state { get; set; }

@@ -11,21 +11,23 @@ using System.Data.Entity;
 
 namespace ElectricCarLib
 {
-    class DBBattery:IDBBattery
+    public class DBBattery:IDBBattery
     {
-        public void addNewRecord(int id, string state, int btid)
+        public int addNewRecord(string state, int btid)
         {
             using (ElectricCarEntities context = new ElectricCarEntities())
             {
                 try
                 {
+                    int newid = context.Battery.Count() + 1;
                     context.Battery.Add(new Battery()
                     {
-                        Id = id,
+                        Id = newid,
                         state = state,
                         btId = btid
                     });
                     context.SaveChanges();
+                    return newid;
                 }
                 catch (Exception)
                 {
