@@ -6,9 +6,9 @@ using System.Threading.Tasks;
 
 namespace ElectricCarLib
 {
-    interface IDBBatteryType
+    public interface IDBBatteryType
     {
-        void addNewRecord(int id, string name, string producer, decimal capacity, decimal exchangeCost, int storageNumber);
+        int addNewRecord(string name, string producer, decimal capacity, decimal exchangeCost, int storageNumber);
         MBatteryType getRecord(int id, Boolean getAssociation);
         void deleteRecord(int id);
         void updateRecord(int id, string name, string producer, decimal capacity, decimal exchangeCost, int storageNumber);

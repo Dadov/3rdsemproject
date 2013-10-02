@@ -8,7 +8,7 @@ namespace ElectricCarLib
 {
     interface IDBBattery
     {
-        void addNewRecord(int id, string state, int btid);
+        int addNewRecord(string state, int btid);
         MBattery getRecord(int id, Boolean getAssociation);
         void deleteRecord(int id);
         void updateRecord(int id, string state, int btid);
