@@ -68,7 +68,7 @@ namespace ElectricCarLib
                 numOfStops = leastStopsPath.Count; //including start station and end station
             }    
             
-            return leastStopsPath;
+            return leastStopsPath;//include start and end stations
         }
 
         public static int breathFirstSearch(Dictionary<MStation, LinkedList<MStation>> adjList, MStation start, MStation destination)
