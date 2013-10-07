@@ -11,7 +11,7 @@ namespace ElectricCarLib
     {
         public MStation()
         {
-            this.Connection = new LinkedList<MStation>();
+            this.naboStations = new LinkedList<MStation>();
         }
     
         public int Id { get; set; }
@@ -21,7 +21,7 @@ namespace ElectricCarLib
         public State state { get; set; }
 
 
-        public LinkedList<MStation> Connection { get; set; }
+        public LinkedList<MStation> naboStations { get; set; }
         
     }
 }
