@@ -3,15 +3,15 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
-using ElectricCarDB;
+using ElectricCarModelLayer;
 using System.Transactions;
 using System.Data;
 using System.Data.Objects;
 using System.Data.Entity;
 
-namespace ElectricCarLib
+namespace ElectricCarDB
 {
-    public class DBBooking: IDBBooking
+    public class DBooking : IDBooking
     {
         public int addRecord(int CId, decimal TotalPrice, DateTime CreateDate, DateTime TripStart, string CreditCard)
         {
@@ -20,7 +20,7 @@ namespace ElectricCarLib
                 try
                 {
                     int newid = context.Booking.Count() + 1;
-                    context.Booking.Add(new Booking() 
+                    context.Booking.Add(new Booking()
                     {
                         Id = newid,
                         cId = CId,

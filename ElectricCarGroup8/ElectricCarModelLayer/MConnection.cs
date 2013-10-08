@@ -4,11 +4,11 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace ElectricCarLib
+namespace ElectricCarModelLayer
 {
     public class MConnection
     {
-        
+
         public Nullable<decimal> distance { get; set; }
         public Nullable<decimal> driveHour { get; set; }
 

@@ -3,10 +3,11 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
+using ElectricCarModelLayer;
 
-namespace ElectricCarLib
+namespace ElectricCarDB
 {
-    public interface IDBBooking
+    public interface IDBooking
     {
         int addRecord(int cId, decimal totalPrice, DateTime createDate, DateTime tripStart, string creditCard);
         MBooking getRecord(int id, bool getAssociation);

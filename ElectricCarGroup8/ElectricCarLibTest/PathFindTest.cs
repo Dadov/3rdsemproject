@@ -3,6 +3,7 @@ using Microsoft.VisualStudio.TestTools.UnitTesting;
 using ElectricCarLib;
 using System.Collections;
 using System.Collections.Generic;
+using ElectricCarModelLayer;
 
 namespace ElectricCarLibTest
 {

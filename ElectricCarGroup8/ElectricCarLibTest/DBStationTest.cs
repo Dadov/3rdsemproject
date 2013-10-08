@@ -2,7 +2,9 @@
 using System.Text;
 using System.Collections.Generic;
 using Microsoft.VisualStudio.TestTools.UnitTesting;
-using ElectricCarLib;
+
+using ElectricCarModelLayer;
+using ElectricCarDB;
 
 namespace ElectricCarLibTest
 {
@@ -12,8 +14,8 @@ namespace ElectricCarLibTest
     [TestClass]
     public class DBStationTest
     {
-        private DBStation dbStation = new DBStation();
-        private IDBConnection dbConnection = new DBConnection();
+        private DStation dbStation = new DStation();
+        private IDConnection dbConnection = new DConnection();
         public DBStationTest()
         {
             //
@@ -62,7 +64,7 @@ namespace ElectricCarLibTest
         #endregion
 
         [TestMethod]
-        public void addGetDeleteNewRecord()
+        public void addGetDeleteStation()
         {
             int id = dbStation.addNewRecord("BoholmStation", "Boholm", "Denmark", "Open");
             try
@@ -83,7 +85,7 @@ namespace ElectricCarLibTest
         }
 
         [TestMethod]
-        public void updateRecord()
+        public void updateStation()
         {
             int id = dbStation.addNewRecord("BoholmStation", "Boholm", "Denmark", "Open");
             try

@@ -3,11 +3,11 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
-using ElectricCarLib;
+using ElectricCarModelLayer;
 
-namespace ElectricCarLib
+namespace ElectricCarDB
 {
-    public interface IDBStation
+    public interface IDStation
     {
         int addNewRecord(string name, string address, string country, string state);
         MStation getRecord(int id, bool getAssociation);

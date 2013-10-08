@@ -2,7 +2,9 @@
 using System.Text;
 using System.Collections.Generic;
 using Microsoft.VisualStudio.TestTools.UnitTesting;
-using ElectricCarLib;
+
+using ElectricCarModelLayer;
+using ElectricCarDB;
 
 namespace ElectricCarLibTest
 {
@@ -59,7 +61,7 @@ namespace ElectricCarLibTest
         //
         #endregion
 
-        private DBBooking dbBooking = new DBBooking();
+        private IDBooking dbBooking = new DBooking();
         [TestMethod]
         public void AddGetDeleteBooking()
         {

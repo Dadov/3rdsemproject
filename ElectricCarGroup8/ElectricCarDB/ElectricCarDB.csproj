@@ -39,6 +39,7 @@
     <Reference Include="System.Data.Entity" />
     <Reference Include="System.Runtime.Serialization" />
     <Reference Include="System.Security" />
+    <Reference Include="System.Transactions" />
     <Reference Include="System.Xml.Linq" />
     <Reference Include="System.Data.DataSetExtensions" />
     <Reference Include="Microsoft.CSharp" />
@@ -61,6 +62,7 @@
     <Compile Include="BookingLine.cs">
       <DependentUpon>ElectricCarModel.tt</DependentUpon>
     </Compile>
+    <Compile Include="BookingModel.cs" />
     <Compile Include="ConncectionModel.cs" />
     <Compile Include="Connection.cs">
       <DependentUpon>ElectricCarModel.tt</DependentUpon>
@@ -68,9 +70,12 @@
     <Compile Include="Customer.cs">
       <DependentUpon>ElectricCarModel.tt</DependentUpon>
     </Compile>
+    <Compile Include="DBooking.cs" />
+    <Compile Include="DConnection.cs" />
     <Compile Include="DiscoutGroup.cs">
       <DependentUpon>ElectricCarModel.tt</DependentUpon>
     </Compile>
+    <Compile Include="DStation.cs" />
     <Compile Include="ElectricCarModel.Context.cs">
       <AutoGen>True</AutoGen>
       <DesignTime>True</DesignTime>
@@ -89,6 +94,9 @@
     <Compile Include="Employee.cs">
       <DependentUpon>ElectricCarModel.tt</DependentUpon>
     </Compile>
+    <Compile Include="IDBooking.cs" />
+    <Compile Include="IDConnection.cs" />
+    <Compile Include="IDStation.cs" />
     <Compile Include="LoginInfo.cs">
       <DependentUpon>ElectricCarModel.tt</DependentUpon>
     </Compile>
@@ -131,6 +139,12 @@
   </ItemGroup>
   <ItemGroup>
     <Service Include="{508349B6-6B84-4DF5-91F0-309BEEBAD82D}" />
+  </ItemGroup>
+  <ItemGroup>
+    <ProjectReference Include="..\ElectricCarModelLayer\ElectricCarModelLayer.csproj">
+      <Project>{00cbf9d5-e24a-4172-a982-2a4f8b2d4620}</Project>
+      <Name>ElectricCarModelLayer</Name>
+    </ProjectReference>
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
   <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 
