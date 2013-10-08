@@ -50,19 +50,25 @@
   <ItemGroup>
     <Compile Include="ConnectionCtr.cs" />
     <Compile Include="DBBattery.cs" />
+    <Compile Include="DBBatteryStorage.cs" />
     <Compile Include="DBBatteryType.cs" />
     <Compile Include="DBBooking.cs" />
     <Compile Include="DBConnection.cs" />
+    <Compile Include="DBPeriod.cs" />
     <Compile Include="DBStation.cs" />
     <Compile Include="IDBBattery.cs" />
     <Compile Include="IDBBatteryType.cs" />
     <Compile Include="IDBBooking.cs" />
     <Compile Include="IDBConnection.cs" />
+    <Compile Include="IDBPeriod.cs" />
     <Compile Include="IDBStation.cs" />
+    <Compile Include="IDBBatteryStorage.cs" />
     <Compile Include="MBattery.cs" />
+    <Compile Include="MBatteryStorage.cs" />
     <Compile Include="MBatteryType.cs" />
     <Compile Include="MBooking.cs" />
     <Compile Include="MConnection.cs" />
+    <Compile Include="MPeriod.cs" />
     <Compile Include="MStation.cs" />
     <Compile Include="PathFind.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
