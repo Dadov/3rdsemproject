@@ -13,6 +13,8 @@ namespace ElectricCarLib
 {
     public class DBStation: IDBStation
     {
+        private DBBatteryStorage dbStorage = new DBBatteryStorage();
+
         public int addNewRecord(string Name, string Address, string Country, string State)
         {
             using (ElectricCarEntities context = new ElectricCarEntities())
@@ -157,8 +159,8 @@ namespace ElectricCarLib
                 name = s.name,
                 address = s.address,
                 country = s.country,
-                state = (State)Enum.Parse(typeof(State), s.state)
-
+                state = (State)Enum.Parse(typeof(State), s.state),
+                storages = dbStorage.getStationStorages(s.Id)
                 
             };
             return station;

@@ -19,7 +19,7 @@ namespace ElectricCarLib
         public string address { get; set; }
         public string country { get; set; }
         public State state { get; set; }
-
+        public List<MBatteryStorage> storages { get; set; }
 
         public LinkedList<MStation> naboStations { get; set; }
         
