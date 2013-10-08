@@ -3,17 +3,17 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
-using ElectricCarDB;
+using ElectricCarModelLayer;
 using System.Transactions;
 using System.Data;
 using System.Data.Objects;
 using System.Data.Entity;
 
-namespace ElectricCarLib
+namespace ElectricCarDB
 {
-    public class DBStation: IDBStation
+    public class DStation : IDStation
     {
-        private DBBatteryStorage dbStorage = new DBBatteryStorage();
+        //private DBBatteryStorage dbStorage = new DBBatteryStorage();
 
         public int addNewRecord(string Name, string Address, string Country, string State)
         {
@@ -38,7 +38,7 @@ namespace ElectricCarLib
 
                     throw new SystemException("Can not add association between two stations");
                 }
-                
+
 
             }
         }
@@ -61,7 +61,7 @@ namespace ElectricCarLib
                 {
                     throw new System.NullReferenceException("Can not find nabor station");
                 }
-                
+
 
             }
         }
@@ -83,11 +83,11 @@ namespace ElectricCarLib
                 {
                     throw new System.NullReferenceException("Can not find nabor station");
                 }
-                
+
             }
         }
 
-        public void updateRecord(int id, string Name, string Address, string Country, string State) 
+        public void updateRecord(int id, string Name, string Address, string Country, string State)
         {
             using (ElectricCarEntities context = new ElectricCarEntities())
             {
@@ -135,7 +135,7 @@ namespace ElectricCarLib
                 foreach (var c in connections)
                 {
                     MStation sToAdd = new MStation();
-                    
+
                     if (c.sId1 == id)
                     {
                         sToAdd = getRecord(c.sId2, false);
@@ -146,8 +146,8 @@ namespace ElectricCarLib
                     }
                     nStations.AddLast(sToAdd);
                 }
-                
-            } 
+
+            }
             return nStations;
         }
 
@@ -159,9 +159,10 @@ namespace ElectricCarLib
                 name = s.name,
                 address = s.address,
                 country = s.country,
+                //TODO
                 state = (State)Enum.Parse(typeof(State), s.state),
-                storages = dbStorage.getStationStorages(s.Id)
-                
+                //storages = dbStorage.getStationStorages(s.Id)
+
             };
             return station;
         }

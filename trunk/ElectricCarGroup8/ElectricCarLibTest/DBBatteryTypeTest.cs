@@ -56,7 +56,7 @@ namespace ElectricCarLibTest
         #endregion
 
         [TestMethod]
-        public void addGetDeleteNewRecord()
+        public void addGetDeleteBatteryType()
         {
             int id = dbType.addNewRecord("newName", "newProducer", 10, 100, 20);
             try
@@ -78,7 +78,7 @@ namespace ElectricCarLibTest
         }
 
         [TestMethod]
-        public void updateRecord()
+        public void updateBatteryType()
         {
             int id = dbType.addNewRecord("newName", "newProducer", 10, 100, 20);
             try

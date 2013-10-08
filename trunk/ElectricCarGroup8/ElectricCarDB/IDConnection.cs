@@ -3,10 +3,10 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
-
-namespace ElectricCarLib
+using ElectricCarModelLayer;
+namespace ElectricCarDB
 {
-    public interface IDBConnection
+    public interface IDConnection
     {
         void addNewRecord(int id1, int id2, decimal dist, decimal time);
         MConnection getRecord(int id1, int id2, Boolean getAssociation);

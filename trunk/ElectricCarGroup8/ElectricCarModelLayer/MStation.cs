@@ -4,7 +4,7 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace ElectricCarLib
+namespace ElectricCarModelLayer
 {
     //TODO complete the class
     public class MStation
@@ -13,7 +13,7 @@ namespace ElectricCarLib
         {
             this.naboStations = new LinkedList<MStation>();
         }
-    
+
         public int Id { get; set; }
         public string name { get; set; }
         public string address { get; set; }
@@ -22,6 +22,6 @@ namespace ElectricCarLib
         public List<MBatteryStorage> storages { get; set; }
 
         public LinkedList<MStation> naboStations { get; set; }
-        
+
     }
 }

@@ -3,15 +3,15 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
-using ElectricCarDB;
+using ElectricCarModelLayer;
 using System.Transactions;
 using System.Data;
 using System.Data.Objects;
 using System.Data.Entity;
 
-namespace ElectricCarLib
+namespace ElectricCarDB
 {
-    public class DBConnection: IDBConnection
+    public class DConnection: IDConnection
     {
         public void addNewRecord(int id1, int id2, decimal dist, decimal time)
         {
@@ -32,7 +32,7 @@ namespace ElectricCarLib
                 {
                     throw new SystemException("Can not add association between two stations");
                 }
-                
+
             }
         }
 

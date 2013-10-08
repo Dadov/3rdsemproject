@@ -12,7 +12,7 @@ namespace ElectricCarLib
 
         public double driveHourForDistance(double distance) 
         {
-            double driveHour = distance/70;
+            double driveHour = distance /carAveSpeed;
             return Convert.ToDouble(driveHour.ToString("C2"));
         }
 

@@ -2,6 +2,7 @@
 using Microsoft.VisualStudio.TestTools.UnitTesting;
 using ElectricCarLib;
 
+
 namespace ElectricCarLibTest
 {
     class DBBatteryTest
@@ -56,7 +57,7 @@ namespace ElectricCarLibTest
         #endregion
 
         [TestMethod]
-        public void addGetDeleteNewRecord()
+        public void addGetDeleteBattery()
         {
             int btId = dbType.addNewRecord("newName", "newProducer", 10, 100, 20);
             int id = dbBattery.addNewRecord("newState", btId);
@@ -76,7 +77,7 @@ namespace ElectricCarLibTest
         }
 
         [TestMethod]
-        public void updateRecord()
+        public void updateBattery()
         {
             int btId = dbType.addNewRecord("newName", "newProducer", 10, 100, 20);
             int btId2 = dbType.addNewRecord("Update", "Update", 20, 200, 40);
