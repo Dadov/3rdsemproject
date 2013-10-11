@@ -60,7 +60,7 @@ namespace ElectricCarLib
             if (reachedStations.Contains(destination))
             {
                 MStation parent = destination;
-                while (parent != null)
+                while (parent != null)//could be a bug
                 {
                     leastStopsPath.Add(parent);
                     parent = station_parent[parent];
