@@ -39,6 +39,7 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="MBattery.cs" />
     <Compile Include="MBatteryStorage.cs" />
     <Compile Include="MBatteryType.cs" />
     <Compile Include="MBooking.cs" />

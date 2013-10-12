@@ -8,46 +8,47 @@ using System.Transactions;
 using System.Data;
 using System.Data.Objects;
 using System.Data.Entity;
+using ElectricCarModelLayer;
 
 namespace ElectricCarLib
 {
     class BatteryTypeCtr:IDisposable
     {
 
-        public void addNewRecord(int id, string name, string producer, decimal capacity, decimal exchangeCost, int storageNumber)
+        public int addNewRecord(string name, string producer, decimal capacity, decimal exchangeCost, int storageNumber)
         {
-            IDBBatteryType dbBatteryType = new DBBatteryType();
-            dbBatteryType.addNewRecord(id, name, producer, capacity, exchangeCost, storageNumber);
+            IDBatteryType dbBatteryType = new DBatteryType();
+            return dbBatteryType.addNewRecord(name, producer, capacity, exchangeCost, storageNumber);
 
         }
 
         public MBatteryType getRecord(int id, Boolean getAssociation)
         {
-            IDBBatteryType dbBatteryType = new DBBatteryType();
+            IDBatteryType dbBatteryType = new DBatteryType();
             return dbBatteryType.getRecord(id, true);
         }
 
         public void deleteRecord(int id)
         {
-            IDBBatteryType dbBatteryType = new DBBatteryType();
+            IDBatteryType dbBatteryType = new DBatteryType();
             dbBatteryType.deleteRecord(id);
         }
 
         public void updateRecord(int id, string name, string producer, decimal capacity, decimal exchangeCost, int storageNumber)
         {
-            IDBBatteryType dbBatteryType = new DBBatteryType();
+            IDBatteryType dbBatteryType = new DBatteryType();
             dbBatteryType.updateRecord(id, name, producer, capacity, exchangeCost, storageNumber);
         }
 
         public List<MBatteryType> getAllRecord(Boolean getAssociation)
         {
-            IDBBatteryType dbBatteryType = new DBBatteryType();
+            IDBatteryType dbBatteryType = new DBatteryType();
             return dbBatteryType.getAllRecord(true); 
         }
 
         public List<string> getAllInfo()
         {
-            IDBBatteryType dbBatteryType = new DBBatteryType();
+            IDBatteryType dbBatteryType = new DBatteryType();
             return dbBatteryType.getAllInfo();
         }
 

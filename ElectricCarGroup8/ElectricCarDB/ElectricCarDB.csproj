@@ -70,7 +70,11 @@
     <Compile Include="Customer.cs">
       <DependentUpon>ElectricCarModel.tt</DependentUpon>
     </Compile>
+    <Compile Include="DBattery.cs" />
+    <Compile Include="DBatteryStorage.cs" />
+    <Compile Include="DBatteryType.cs" />
     <Compile Include="DBooking.cs" />
+    <Compile Include="DPeriod.cs" />
     <Compile Include="DConnection.cs" />
     <Compile Include="DiscoutGroup.cs">
       <DependentUpon>ElectricCarModel.tt</DependentUpon>
@@ -94,12 +98,20 @@
     <Compile Include="Employee.cs">
       <DependentUpon>ElectricCarModel.tt</DependentUpon>
     </Compile>
+    <Compile Include="IDBattery.cs" />
+    <Compile Include="IDBatteryStorage.cs" />
+    <Compile Include="IDBatteryType.cs" />
     <Compile Include="IDBooking.cs" />
+    <Compile Include="IDPeriod.cs" />
     <Compile Include="IDConnection.cs" />
     <Compile Include="IDStation.cs" />
     <Compile Include="LoginInfo.cs">
       <DependentUpon>ElectricCarModel.tt</DependentUpon>
     </Compile>
+    <Compile Include="BatteryModel.cs" />
+    <Compile Include="BatteryStorageModel.cs" />
+    <Compile Include="BatteryTypeModel.cs" />
+    <Compile Include="PeriodModel.cs" />
     <Compile Include="Period.cs">
       <DependentUpon>ElectricCarModel.tt</DependentUpon>
     </Compile>

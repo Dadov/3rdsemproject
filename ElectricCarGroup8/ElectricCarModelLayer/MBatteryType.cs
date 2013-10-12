@@ -15,14 +15,6 @@ namespace ElectricCarModelLayer
         public Nullable<decimal> exchangeCost { get; set; }
         public int storageNumber { get; set; }
 
-        public override string ToString()
-        {
-            return "id: " + Convert.ToString(id) +
-                " name: " + name +
-                " producer: " + producer +
-                " capacity:" + Convert.ToString(capacity) +
-                " exchnage cost: " + Convert.ToString(exchangeCost) +
-                " storage number: " + Convert.ToString(storageNumber);
-        }
+      
     }
 }
