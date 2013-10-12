@@ -1,14 +1,15 @@
 ﻿using System;
 using Microsoft.VisualStudio.TestTools.UnitTesting;
-using ElectricCarLib;
+using ElectricCarDB;
+using ElectricCarModelLayer;
 
 
 namespace ElectricCarLibTest
 {
     class DBBatteryTest
     {
-        private DBBattery dbBattery = new DBBattery();
-        private IDBBatteryType dbType = new DBBatteryType();
+        private IDBattery dbBattery = new DBattery();
+        private IDBatteryType dbType = new DBatteryType();
         public DBBatteryTest()
         {
             //
@@ -65,7 +66,7 @@ namespace ElectricCarLibTest
             {
                 MBattery battery = dbBattery.getRecord(id, false);
                 Assert.AreEqual("newState",battery.state);
-                Assert.AreEqual(btId, battery.batteryType.id);
+                Assert.AreEqual(btId, battery.type.id);
             }
             catch
             {
@@ -87,7 +88,7 @@ namespace ElectricCarLibTest
                 dbBattery.updateRecord(id, "Update", btId2);
                 MBattery battery = dbBattery.getRecord(id, false);
                 Assert.AreEqual("Update", battery.state);
-                Assert.AreEqual(btId2, battery.batteryType.id);
+                Assert.AreEqual(btId2, battery.type.id);
             }
             catch
             {

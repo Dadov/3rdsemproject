@@ -1,13 +1,15 @@
 ﻿using System;
 using Microsoft.VisualStudio.TestTools.UnitTesting;
 using ElectricCarLib;
+using ElectricCarDB;
+using ElectricCarModelLayer;
 
 namespace ElectricCarLibTest
 {
     [TestClass]
     public class DBBatteryTypeTest
     {
-        private IDBBatteryType dbType = new DBBatteryType();
+        private IDBatteryType dbType = new DBatteryType();
         public DBBatteryTypeTest()
         {
             //

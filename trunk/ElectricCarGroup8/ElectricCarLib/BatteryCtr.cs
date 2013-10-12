@@ -8,46 +8,47 @@ using System.Transactions;
 using System.Data;
 using System.Data.Objects;
 using System.Data.Entity;
+using ElectricCarModelLayer; 
 
 namespace ElectricCarLib
 {
-    class BatteryCtr : IDisposable
+    public class BatteryCtr : IDisposable
     {
 
-        public void addNewRecord(int id, string state, int btid)
+        public int addNewRecord(string state, int btid)
         {
-            IDBBattery dbBattery = new DBBattery();
-            dbBattery.addNewRecord(id, state, btid);
-
+            IDBattery dbBattery = new DBattery();
+            int id = dbBattery.addNewRecord(state, btid);
+            return id;
         }
 
         public MBattery getRecord(int id, Boolean getAssociation)
         {
-            IDBBattery dbBattery = new DBBattery();
+            IDBattery dbBattery = new DBattery();
             return dbBattery.getRecord(id, true);
         }
 
         public void deleteRecord(int id)
         {
-            IDBBattery dbBattery = new DBBattery();
+            IDBattery dbBattery = new DBattery();
             dbBattery.deleteRecord(id);
         }
 
         public void updateRecord(int id, string state, int btid)
         {
-            IDBBattery dbBattery = new DBBattery();
+            IDBattery dbBattery = new DBattery();
             dbBattery.updateRecord(id, state, btid);
         }
 
         public List<MBattery> getAllRecord(Boolean getAssociation)
         {
-            IDBBattery dbBattery = new DBBattery();
+            IDBattery dbBattery = new DBattery();
             return dbBattery.getAllRecord(true);
         }
 
         public List<string> getAllInfo()
         {
-            IDBBattery dbBattery = new DBBattery();
+            IDBattery dbBattery = new DBattery();
             return dbBattery.getAllInfo();
         }
 
