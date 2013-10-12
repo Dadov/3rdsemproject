@@ -13,6 +13,7 @@ namespace ElectricCarDB
 {
     public class DBattery:IDBattery
     {
+        private IDBatteryType dbType = new DBatteryType();
         public int addNewRecord(string state, int btid)
         {
             using (ElectricCarEntities context = new ElectricCarEntities())
@@ -47,7 +48,7 @@ namespace ElectricCarDB
                     MBattery battery = buildBattery(b);
                     if (getAssociation)
                     {
-                        //TODO get stationCtr to retreive station info
+                        battery.type = dbType.getRecord(battery.type.id, true);
                     }
 
                     return battery;
@@ -107,7 +108,7 @@ namespace ElectricCarDB
                     MBattery battery = buildBattery(b);
                     if (getAssociation)
                     {
-                        //TODO
+                        battery.type = dbType.getRecord(battery.type.id, true);
                     }
                     batteries.Add(battery);
                 }
