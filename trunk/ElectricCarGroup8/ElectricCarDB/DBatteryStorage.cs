@@ -110,6 +110,7 @@ namespace ElectricCarDB
                     if (bs.sId == sID)
                     {
                         MBatteryStorage storage = buildStorage(bs);
+                        storage.type = dbType.getRecord(storage.type.id, true);
                         storages.Add(storage);
                     }
                 }
@@ -127,7 +128,7 @@ namespace ElectricCarDB
                     MBatteryStorage storage = buildStorage(bs);
                     if (getAssociation)
                     {
-                        //TODO
+                        storage.type = dbType.getRecord(storage.type.id, true);
                     }
                     storages.Add(storage);
                 }
