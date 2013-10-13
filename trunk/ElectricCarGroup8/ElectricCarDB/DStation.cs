@@ -17,12 +17,12 @@ namespace ElectricCarDB
 
         public int addNewRecord(string Name, string Address, string Country, string State)
         {
-            using (ElectricCarEntities context = new ElectricCarEntities())
+            using (ElectricCarEntities2 context = new ElectricCarEntities2())
             {
                 try
                 {
-                    int newid = context.Station.Count() + 1;
-                    context.Station.Add(new Station()
+                    int newid = context.Stations.Count() + 1;
+                    context.Stations.Add(new Station()
                     {
                         Id = newid,
                         name = Name,
@@ -45,11 +45,11 @@ namespace ElectricCarDB
 
         public MStation getRecord(int id, bool getAssocitation)
         {
-            using (ElectricCarEntities context = new ElectricCarEntities())
+            using (ElectricCarEntities2 context = new ElectricCarEntities2())
             {
                 try
                 {
-                    Station s = context.Station.Find(id);
+                    Station s = context.Stations.Find(id);
                     MStation station = buildStation(s);
                     if (getAssocitation)
                     {
@@ -68,11 +68,11 @@ namespace ElectricCarDB
 
         public void deleteRecord(int id)
         {
-            using (ElectricCarEntities context = new ElectricCarEntities())
+            using (ElectricCarEntities2 context = new ElectricCarEntities2())
             {
                 try
                 {
-                    Station staToDelete = context.Station.Find(id);
+                    Station staToDelete = context.Stations.Find(id);
                     if (staToDelete != null)
                     {
                         context.Entry(staToDelete).State = EntityState.Deleted;
@@ -89,9 +89,9 @@ namespace ElectricCarDB
 
         public void updateRecord(int id, string Name, string Address, string Country, string State)
         {
-            using (ElectricCarEntities context = new ElectricCarEntities())
+            using (ElectricCarEntities2 context = new ElectricCarEntities2())
             {
-                Station staUpToDate = context.Station.Find(id);
+                Station staUpToDate = context.Stations.Find(id);
                 if (staUpToDate != null)
                 {
                     staUpToDate.name = Name;
@@ -110,9 +110,9 @@ namespace ElectricCarDB
         public List<MStation> getAllRecord(bool getAssociation)
         {
             List<MStation> stations = new List<MStation>();
-            using (ElectricCarEntities context = new ElectricCarEntities())
+            using (ElectricCarEntities2 context = new ElectricCarEntities2())
             {
-                foreach (Station s in context.Station)
+                foreach (Station s in context.Stations)
                 {
                     MStation station = buildStation(s);
                     if (getAssociation)
@@ -129,9 +129,9 @@ namespace ElectricCarDB
         {
             LinkedList<MStation> nStations = new LinkedList<MStation>();
             nStations.AddFirst(getRecord(id, false));
-            using (ElectricCarEntities context = new ElectricCarEntities())
+            using (ElectricCarEntities2 context = new ElectricCarEntities2())
             {
-                var connections = from c in context.Connection where c.sId1 == id || c.sId2 == id select c;
+                var connections = from c in context.Connections where c.sId1 == id || c.sId2 == id select c;
                 foreach (var c in connections)
                 {
                     MStation sToAdd = new MStation();

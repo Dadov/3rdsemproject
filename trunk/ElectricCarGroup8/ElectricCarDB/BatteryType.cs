@@ -16,9 +16,9 @@ namespace ElectricCarDB
     {
         public BatteryType()
         {
-            this.Battery = new HashSet<Battery>();
-            this.BatteryStorage = new HashSet<BatteryStorage>();
-            this.BookingLine = new HashSet<BookingLine>();
+            this.Batteries = new HashSet<Battery>();
+            this.BatteryStorages = new HashSet<BatteryStorage>();
+            this.BookingLines = new HashSet<BookingLine>();
         }
     
         public int Id { get; set; }
@@ -28,8 +28,8 @@ namespace ElectricCarDB
         public Nullable<decimal> exchangeCost { get; set; }
         public Nullable<int> storageNumber { get; set; }
     
-        public virtual ICollection<Battery> Battery { get; set; }
-        public virtual ICollection<BatteryStorage> BatteryStorage { get; set; }
-        public virtual ICollection<BookingLine> BookingLine { get; set; }
+        public virtual ICollection<Battery> Batteries { get; set; }
+        public virtual ICollection<BatteryStorage> BatteryStorages { get; set; }
+        public virtual ICollection<BookingLine> BookingLines { get; set; }
     }
 }

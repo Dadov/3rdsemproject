@@ -12,18 +12,13 @@ namespace ElectricCarDB
     using System;
     using System.Collections.Generic;
     
-    public partial class Customer
+    public partial class Booking_Station
     {
-        public Customer()
-        {
-            this.Bookings = new HashSet<Booking>();
-        }
+        public int bId { get; set; }
+        public int sId { get; set; }
+        public Nullable<System.DateTime> bookedTime { get; set; }
     
-        public int Id { get; set; }
-        public Nullable<int> dgId { get; set; }
-    
-        public virtual ICollection<Booking> Bookings { get; set; }
-        public virtual Person Person { get; set; }
-        public virtual DiscoutGroup DiscoutGroup { get; set; }
+        public virtual Booking Booking { get; set; }
+        public virtual Station Station { get; set; }
     }
 }

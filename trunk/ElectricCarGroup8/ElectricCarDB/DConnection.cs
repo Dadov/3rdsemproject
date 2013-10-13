@@ -15,11 +15,11 @@ namespace ElectricCarDB
     {
         public void addNewRecord(int id1, int id2, decimal dist, decimal time)
         {
-            using (ElectricCarEntities context = new ElectricCarEntities())
+            using (ElectricCarEntities2 context = new ElectricCarEntities2())
             {
                 try
                 {
-                    context.Connection.Add(new Connection()
+                    context.Connections.Add(new Connection()
                     {
                         sId1 = id1,
                         sId2 = id2,
@@ -38,11 +38,11 @@ namespace ElectricCarDB
 
         public MConnection getRecord(int id1, int id2, bool getAssociation)
         {
-            using (ElectricCarEntities context = new ElectricCarEntities())
+            using (ElectricCarEntities2 context = new ElectricCarEntities2())
             {
                 try
                 {
-                    Connection c = context.Connection.Find(id1, id2);
+                    Connection c = context.Connections.Find(id1, id2);
                     MConnection connection = buildConnection(c);
                     if (getAssociation)
                     {
@@ -61,9 +61,9 @@ namespace ElectricCarDB
 
         public void deleteRecord(int id1, int id2)
         {
-            using (ElectricCarEntities context = new ElectricCarEntities())
+            using (ElectricCarEntities2 context = new ElectricCarEntities2())
             {
-                Connection conToDelete = context.Connection.Find(id1, id2);
+                Connection conToDelete = context.Connections.Find(id1, id2);
                 if (conToDelete != null)
                 {
                     context.Entry(conToDelete).State = EntityState.Deleted;
@@ -79,9 +79,9 @@ namespace ElectricCarDB
 
         public void updateRecord(int id1, int id2, decimal dist, decimal time)
         {
-            using (ElectricCarEntities context = new ElectricCarEntities())
+            using (ElectricCarEntities2 context = new ElectricCarEntities2())
             {
-                Connection conToUpdate = context.Connection.Find(id1, id2);
+                Connection conToUpdate = context.Connections.Find(id1, id2);
                 if (conToUpdate != null)
                 {
                     conToUpdate.distance = dist;
@@ -99,9 +99,9 @@ namespace ElectricCarDB
         public List<MConnection> getAllRecord(bool getAssociation)
         {
             List<MConnection> connections = new List<MConnection>();
-            using (ElectricCarEntities context = new ElectricCarEntities())
+            using (ElectricCarEntities2 context = new ElectricCarEntities2())
             {
-                foreach (Connection c in context.Connection)
+                foreach (Connection c in context.Connections)
                 {
                     MConnection connection = buildConnection(c);
                     if (getAssociation)
@@ -129,9 +129,9 @@ namespace ElectricCarDB
         public List<string> getAllInfo()
         {
             List<string> info = new List<string>();
-            using (ElectricCarEntities context = new ElectricCarEntities())
+            using (ElectricCarEntities2 context = new ElectricCarEntities2())
             {
-                foreach (Connection c in context.Connection)
+                foreach (Connection c in context.Connections)
                 {
                     info.Add(c.ToString());
                 }

@@ -16,13 +16,13 @@ namespace ElectricCarDB
     {
         public DiscoutGroup()
         {
-            this.Customer = new HashSet<Customer>();
+            this.Customers = new HashSet<Customer>();
         }
     
         public int Id { get; set; }
         public string name { get; set; }
         public Nullable<decimal> dgRate { get; set; }
     
-        public virtual ICollection<Customer> Customer { get; set; }
+        public virtual ICollection<Customer> Customers { get; set; }
     }
 }

@@ -15,12 +15,12 @@ namespace ElectricCarDB
     {
         public int addNewRecord(string name, string producer, decimal capacity, decimal exchangeCost, int storageNumber)
         {
-            using (ElectricCarEntities context = new ElectricCarEntities())
+            using (ElectricCarEntities2 context = new ElectricCarEntities2())
             {
                 try
                 {
-                    int newid = context.BatteryType.Count() + 1;
-                    context.BatteryType.Add(new BatteryType()
+                    int newid = context.BatteryTypes.Count() + 1;
+                    context.BatteryTypes.Add(new BatteryType()
                     {
                         Id = newid,
                         name = name,
@@ -41,11 +41,11 @@ namespace ElectricCarDB
 
         public MBatteryType getRecord(int id, bool getAssociation)
         {
-            using (ElectricCarEntities context = new ElectricCarEntities())
+            using (ElectricCarEntities2 context = new ElectricCarEntities2())
             {
                 try
                 {
-                    BatteryType bt = context.BatteryType.Find(id);
+                    BatteryType bt = context.BatteryTypes.Find(id);
                     MBatteryType batteryType = buildBatteryType(bt);
                     if (getAssociation)
                     {
@@ -64,9 +64,9 @@ namespace ElectricCarDB
 
         public void deleteRecord(int id)
         {
-            using (ElectricCarEntities context = new ElectricCarEntities())
+            using (ElectricCarEntities2 context = new ElectricCarEntities2())
             {
-                BatteryType btToDelete = context.BatteryType.Find(id);
+                BatteryType btToDelete = context.BatteryTypes.Find(id);
                 if (btToDelete != null)
                 {
                     context.Entry(btToDelete).State = EntityState.Deleted;
@@ -82,9 +82,9 @@ namespace ElectricCarDB
 
         public void updateRecord(int id, string name, string producer, decimal capacity, decimal exchangeCost, int storageNumber)
         {
-            using (ElectricCarEntities context = new ElectricCarEntities())
+            using (ElectricCarEntities2 context = new ElectricCarEntities2())
             {
-                BatteryType btToUpdate = context.BatteryType.Find(id);
+                BatteryType btToUpdate = context.BatteryTypes.Find(id);
                 if (btToUpdate != null)
                 {
                     btToUpdate.name = name;
@@ -105,9 +105,9 @@ namespace ElectricCarDB
         public List<MBatteryType> getAllRecord(bool getAssociation)
         {
             List<MBatteryType> types = new List<MBatteryType>();
-            using (ElectricCarEntities context = new ElectricCarEntities())
+            using (ElectricCarEntities2 context = new ElectricCarEntities2())
             {
-                foreach (BatteryType bt in context.BatteryType)
+                foreach (BatteryType bt in context.BatteryTypes)
                 {
                     MBatteryType batteryType = buildBatteryType(bt);
                     if (getAssociation)
@@ -123,9 +123,9 @@ namespace ElectricCarDB
         public List<string> getAllInfo()
         {
             List<string> info = new List<string>();
-            using (ElectricCarEntities context = new ElectricCarEntities())
+            using (ElectricCarEntities2 context = new ElectricCarEntities2())
             {
-                foreach (BatteryType bt in context.BatteryType)
+                foreach (BatteryType bt in context.BatteryTypes)
                 {
                     info.Add(bt.ToString());
                 }

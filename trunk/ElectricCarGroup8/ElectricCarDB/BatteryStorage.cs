@@ -16,7 +16,7 @@ namespace ElectricCarDB
     {
         public BatteryStorage()
         {
-            this.Period = new HashSet<Period>();
+            this.Periods = new HashSet<Period>();
         }
     
         public int Id { get; set; }
@@ -25,6 +25,6 @@ namespace ElectricCarDB
     
         public virtual BatteryType BatteryType { get; set; }
         public virtual Station Station { get; set; }
-        public virtual ICollection<Period> Period { get; set; }
+        public virtual ICollection<Period> Periods { get; set; }
     }
 }
