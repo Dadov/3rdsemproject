@@ -15,12 +15,12 @@ namespace ElectricCarDB
     {
         public int addRecord(int CId, decimal TotalPrice, DateTime CreateDate, DateTime TripStart, string CreditCard)
         {
-            using (ElectricCarEntities context = new ElectricCarEntities())
+            using (ElectricCarEntities2 context = new ElectricCarEntities2())
             {
                 try
                 {
-                    int newid = context.Booking.Count() + 1;
-                    context.Booking.Add(new Booking()
+                    int newid = context.Bookings.Count() + 1;
+                    context.Bookings.Add(new Booking()
                     {
                         Id = newid,
                         cId = CId,
@@ -43,11 +43,11 @@ namespace ElectricCarDB
 
         public MBooking getRecord(int id, bool getAssociation)
         {
-            using (ElectricCarEntities context = new ElectricCarEntities())
+            using (ElectricCarEntities2 context = new ElectricCarEntities2())
             {
                 try
                 {
-                    Booking b = context.Booking.Find(id);
+                    Booking b = context.Bookings.Find(id);
                     MBooking booking = buildBooking(b);
                     if (getAssociation)
                     {
@@ -65,9 +65,9 @@ namespace ElectricCarDB
 
         public void updateRecord(int id, int cId, decimal totalPrice, DateTime createDate, DateTime tripStart, string creditCard)
         {
-            using (ElectricCarEntities context = new ElectricCarEntities())
+            using (ElectricCarEntities2 context = new ElectricCarEntities2())
             {
-                Booking booUpToDate = context.Booking.Find(id);
+                Booking booUpToDate = context.Bookings.Find(id);
                 if (booUpToDate != null)
                 {
                     booUpToDate.cId = cId;
@@ -86,11 +86,11 @@ namespace ElectricCarDB
 
         public void deleteRecord(int id)
         {
-            using (ElectricCarEntities context = new ElectricCarEntities())
+            using (ElectricCarEntities2 context = new ElectricCarEntities2())
             {
                 try
                 {
-                    Booking booToDelete = context.Booking.Find(id);
+                    Booking booToDelete = context.Bookings.Find(id);
                     if (booToDelete != null)
                     {
                         context.Entry(booToDelete).State = EntityState.Deleted;
@@ -109,9 +109,9 @@ namespace ElectricCarDB
         public List<MBooking> getAllRecord(bool getAssociation)
         {
             List<MBooking> bookings = new List<MBooking>();
-            using (ElectricCarEntities context = new ElectricCarEntities())
+            using (ElectricCarEntities2 context = new ElectricCarEntities2())
             {
-                foreach (Booking b in context.Booking)
+                foreach (Booking b in context.Bookings)
                 {
                     MBooking booking = buildBooking(b);
                     if (getAssociation)

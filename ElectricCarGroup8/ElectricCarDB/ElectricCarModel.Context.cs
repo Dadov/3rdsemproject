@@ -13,10 +13,10 @@ namespace ElectricCarDB
     using System.Data.Entity;
     using System.Data.Entity.Infrastructure;
     
-    public partial class ElectricCarEntities : DbContext, IDisposable
+    public partial class ElectricCarEntities2 : DbContext
     {
-        public ElectricCarEntities()
-            : base("name=ElectricCarEntities")
+        public ElectricCarEntities2()
+            : base("name=ElectricCarEntities2")
         {
         }
     
@@ -25,18 +25,19 @@ namespace ElectricCarDB
             throw new UnintentionalCodeFirstException();
         }
     
-        public DbSet<Battery> Battery { get; set; }
-        public DbSet<BatteryStorage> BatteryStorage { get; set; }
-        public DbSet<BatteryType> BatteryType { get; set; }
-        public DbSet<Booking> Booking { get; set; }
-        public DbSet<BookingLine> BookingLine { get; set; }
-        public DbSet<Connection> Connection { get; set; }
-        public DbSet<Customer> Customer { get; set; }
-        public DbSet<DiscoutGroup> DiscoutGroup { get; set; }
-        public DbSet<Employee> Employee { get; set; }
-        public DbSet<LoginInfo> LoginInfo { get; set; }
-        public DbSet<Period> Period { get; set; }
-        public DbSet<Person> Person { get; set; }
-        public DbSet<Station> Station { get; set; }
+        public DbSet<Battery> Batteries { get; set; }
+        public DbSet<BatteryStorage> BatteryStorages { get; set; }
+        public DbSet<BatteryType> BatteryTypes { get; set; }
+        public DbSet<Booking> Bookings { get; set; }
+        public DbSet<Booking_Station> Booking_Station { get; set; }
+        public DbSet<BookingLine> BookingLines { get; set; }
+        public DbSet<Connection> Connections { get; set; }
+        public DbSet<Customer> Customers { get; set; }
+        public DbSet<DiscoutGroup> DiscoutGroups { get; set; }
+        public DbSet<Employee> Employees { get; set; }
+        public DbSet<LoginInfo> LoginInfoes { get; set; }
+        public DbSet<Period> Periods { get; set; }
+        public DbSet<Person> People { get; set; }
+        public DbSet<Station> Stations { get; set; }
     }
 }

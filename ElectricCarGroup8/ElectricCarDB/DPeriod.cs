@@ -15,11 +15,11 @@ namespace ElectricCarDB
     {
         public int addNewRecord(int bsID, DateTime time, int init, int cust, int future)
         {
-            using (ElectricCarEntities context = new ElectricCarEntities())
+            using (ElectricCarEntities2 context = new ElectricCarEntities2())
             {
                 try
                 {
-                    context.Period.Add(new Period()
+                    context.Periods.Add(new Period()
                     {
                         bsId = bsID,
                         time = time,
@@ -40,12 +40,12 @@ namespace ElectricCarDB
 
         public MPeriod getRecord(int bsID,DateTime time, bool getAssociation)
         {
-            using (ElectricCarEntities context = new ElectricCarEntities())
+            using (ElectricCarEntities2 context = new ElectricCarEntities2())
             {
                 try
                 {
                     Object[] key = {bsID, time};
-                    Period p = context.Period.Find(key);
+                    Period p = context.Periods.Find(key);
                     MPeriod period = buildPeriod(p);
                     if (getAssociation)
                     {
@@ -64,10 +64,10 @@ namespace ElectricCarDB
 
         public void deleteRecord(int bsID, DateTime time)
         {
-            using (ElectricCarEntities context = new ElectricCarEntities())
+            using (ElectricCarEntities2 context = new ElectricCarEntities2())
             {
                 Object[] key = { bsID, time };
-                Period perToDelete = context.Period.Find(key);
+                Period perToDelete = context.Periods.Find(key);
                 if (perToDelete != null)
                 {
                     context.Entry(perToDelete).State = EntityState.Deleted;
@@ -83,10 +83,10 @@ namespace ElectricCarDB
 
         public void updateRecord(int bsID, DateTime time, int init, int cust, int future)
         {
-            using (ElectricCarEntities context = new ElectricCarEntities())
+            using (ElectricCarEntities2 context = new ElectricCarEntities2())
             {
                 Object[] key = { bsID, time };
-                Period perToUpdate = context.Period.Find(key);
+                Period perToUpdate = context.Periods.Find(key);
                 if (perToUpdate != null)
                 {
                     perToUpdate.time = time;
@@ -106,9 +106,9 @@ namespace ElectricCarDB
         public List<MPeriod> getAllRecord(bool getAssociation)
         {
             List<MPeriod> periods = new List<MPeriod>();
-            using (ElectricCarEntities context = new ElectricCarEntities())
+            using (ElectricCarEntities2 context = new ElectricCarEntities2())
             {
-                foreach (Period p in context.Period)
+                foreach (Period p in context.Periods)
                 {
                     MPeriod period = buildPeriod(p);
                     if (getAssociation)
@@ -123,9 +123,9 @@ namespace ElectricCarDB
         public List<MPeriod> getStoragePeriods(int bsID)
         {
             List<MPeriod> periods = new List<MPeriod>();
-            using (ElectricCarEntities context = new ElectricCarEntities())
+            using (ElectricCarEntities2 context = new ElectricCarEntities2())
             {
-                foreach (Period p in context.Period)
+                foreach (Period p in context.Periods)
                 {
                     if (p.bsId == bsID)
                     {
@@ -140,9 +140,9 @@ namespace ElectricCarDB
         public List<string> getAllInfo()
         {
             List<string> info = new List<string>();
-            using (ElectricCarEntities context = new ElectricCarEntities())
+            using (ElectricCarEntities2 context = new ElectricCarEntities2())
             {
-                foreach (Period p in context.Period)
+                foreach (Period p in context.Periods)
                 {
                     info.Add(p.ToString());
                 }

@@ -16,12 +16,12 @@ namespace ElectricCarDB
         private IDBatteryType dbType = new DBatteryType();
         public int addNewRecord(string state, int btid)
         {
-            using (ElectricCarEntities context = new ElectricCarEntities())
+            using (ElectricCarEntities2 context = new ElectricCarEntities2())
             {
                 try
                 {
-                    int newid = context.Battery.Count() + 1;
-                    context.Battery.Add(new Battery()
+                    int newid = context.Batteries.Count() + 1;
+                    context.Batteries.Add(new Battery()
                     {
                         Id = newid,
                         state = state,
@@ -40,11 +40,11 @@ namespace ElectricCarDB
 
         public MBattery getRecord(int id, bool getAssociation)
         {
-            using (ElectricCarEntities context = new ElectricCarEntities())
+            using (ElectricCarEntities2 context = new ElectricCarEntities2())
             {
                 try
                 {
-                    Battery b = context.Battery.Find(id);
+                    Battery b = context.Batteries.Find(id);
                     MBattery battery = buildBattery(b);
                     if (getAssociation)
                     {
@@ -63,9 +63,9 @@ namespace ElectricCarDB
 
         public void deleteRecord(int id)
         {
-            using (ElectricCarEntities context = new ElectricCarEntities())
+            using (ElectricCarEntities2 context = new ElectricCarEntities2())
             {
-                Battery batToDelete = context.Battery.Find(id);
+                Battery batToDelete = context.Batteries.Find(id);
                 if (batToDelete != null)
                 {
                     context.Entry(batToDelete).State = EntityState.Deleted;
@@ -81,9 +81,9 @@ namespace ElectricCarDB
 
         public void updateRecord(int id, string state, int btid)
         {
-            using (ElectricCarEntities context = new ElectricCarEntities())
+            using (ElectricCarEntities2 context = new ElectricCarEntities2())
             {
-                Battery batToUpdate = context.Battery.Find(id);
+                Battery batToUpdate = context.Batteries.Find(id);
                 if (batToUpdate != null)
                 {
                     batToUpdate.state = state;
@@ -101,9 +101,9 @@ namespace ElectricCarDB
         public List<MBattery> getAllRecord(bool getAssociation)
         {
             List<MBattery> batteries = new List<MBattery>();
-            using (ElectricCarEntities context = new ElectricCarEntities())
+            using (ElectricCarEntities2 context = new ElectricCarEntities2())
             {
-                foreach (Battery b in context.Battery)
+                foreach (Battery b in context.Batteries)
                 {
                     MBattery battery = buildBattery(b);
                     if (getAssociation)
@@ -119,9 +119,9 @@ namespace ElectricCarDB
         public List<string> getAllInfo()
         {
             List<string> info = new List<string>();
-            using (ElectricCarEntities context = new ElectricCarEntities())
+            using (ElectricCarEntities2 context = new ElectricCarEntities2())
             {
-                foreach (Battery b in context.Battery)
+                foreach (Battery b in context.Batteries)
                 {
                     info.Add(b.ToString());
                 }

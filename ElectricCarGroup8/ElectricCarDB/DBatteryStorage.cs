@@ -18,12 +18,12 @@ namespace ElectricCarDB
 
         public int addNewRecord(int btID, int sID)
         {
-            using (ElectricCarEntities context = new ElectricCarEntities())
+            using (ElectricCarEntities2 context = new ElectricCarEntities2())
             {
                 try
                 {
-                    int newid = context.BatteryStorage.Count() + 1;
-                    context.BatteryStorage.Add(new BatteryStorage()
+                    int newid = context.BatteryStorages.Count() + 1;
+                    context.BatteryStorages.Add(new BatteryStorage()
                     {
                         Id = newid,
                         sId = sID,
@@ -42,11 +42,11 @@ namespace ElectricCarDB
 
         public MBatteryStorage getRecord(int id, bool getAssociation)
         {
-            using (ElectricCarEntities context = new ElectricCarEntities())
+            using (ElectricCarEntities2 context = new ElectricCarEntities2())
             {
                 try
                 {
-                    BatteryStorage bs = context.BatteryStorage.Find(id);
+                    BatteryStorage bs = context.BatteryStorages.Find(id);
                     MBatteryStorage storage = buildStorage(bs);
                     if (getAssociation)
                     {
@@ -65,9 +65,9 @@ namespace ElectricCarDB
 
         public void deleteRecord(int id)
         {
-            using (ElectricCarEntities context = new ElectricCarEntities())
+            using (ElectricCarEntities2 context = new ElectricCarEntities2())
             {
-                BatteryStorage storToDelete = context.BatteryStorage.Find(id);
+                BatteryStorage storToDelete = context.BatteryStorages.Find(id);
                 if (storToDelete != null)
                 {
                     context.Entry(storToDelete).State = EntityState.Deleted;
@@ -83,9 +83,9 @@ namespace ElectricCarDB
 
         public void updateRecord(int id, int btID, int sID)
         {
-            using (ElectricCarEntities context = new ElectricCarEntities())
+            using (ElectricCarEntities2 context = new ElectricCarEntities2())
             {
-                BatteryStorage storToUpdate = context.BatteryStorage.Find(id);
+                BatteryStorage storToUpdate = context.BatteryStorages.Find(id);
                 if (storToUpdate != null)
                 {
                     storToUpdate.btId = btID;
@@ -103,9 +103,9 @@ namespace ElectricCarDB
         public List<MBatteryStorage> getStationStorages(int sID)
         {
             List<MBatteryStorage> storages = new List<MBatteryStorage>();
-            using (ElectricCarEntities context = new ElectricCarEntities())
+            using (ElectricCarEntities2 context = new ElectricCarEntities2())
             {
-                foreach (BatteryStorage bs in context.BatteryStorage)
+                foreach (BatteryStorage bs in context.BatteryStorages)
                 {
                     if (bs.sId == sID)
                     {
@@ -121,9 +121,9 @@ namespace ElectricCarDB
         public List<MBatteryStorage> getAllRecord(bool getAssociation)
         {
             List<MBatteryStorage> storages = new List<MBatteryStorage>();
-            using (ElectricCarEntities context = new ElectricCarEntities())
+            using (ElectricCarEntities2 context = new ElectricCarEntities2())
             {
-                foreach (BatteryStorage bs in context.BatteryStorage)
+                foreach (BatteryStorage bs in context.BatteryStorages)
                 {
                     MBatteryStorage storage = buildStorage(bs);
                     if (getAssociation)
@@ -139,9 +139,9 @@ namespace ElectricCarDB
         public List<string> getAllInfo()
         {
             List<string> info = new List<string>();
-            using (ElectricCarEntities context = new ElectricCarEntities())
+            using (ElectricCarEntities2 context = new ElectricCarEntities2())
             {
-                foreach (BatteryStorage bs in context.BatteryStorage)
+                foreach (BatteryStorage bs in context.BatteryStorages)
                 {
                     info.Add(bs.ToString());
                 }

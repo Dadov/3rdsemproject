@@ -16,7 +16,7 @@ namespace ElectricCarDB
     {
         public Person()
         {
-            this.LoginInfo = new HashSet<LoginInfo>();
+            this.LoginInfoes = new HashSet<LoginInfo>();
         }
     
         public int Id { get; set; }
@@ -30,6 +30,6 @@ namespace ElectricCarDB
     
         public virtual Customer Customer { get; set; }
         public virtual Employee Employee { get; set; }
-        public virtual ICollection<LoginInfo> LoginInfo { get; set; }
+        public virtual ICollection<LoginInfo> LoginInfoes { get; set; }
     }
 }

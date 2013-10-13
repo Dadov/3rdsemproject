@@ -8,6 +8,6 @@ namespace ElectricCarDB
 {
     public partial class Booking
     {
-        public virtual IDictionary<Station, DateTime> schedule { get; set; }
+        //public virtual IDictionary<Station, DateTime> schedule { get; set; }
     }
 }
