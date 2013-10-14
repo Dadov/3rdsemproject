@@ -7,13 +7,15 @@ using ElectricCarModelLayer;
 
 namespace ElectricCarDB
 {
-    interface IDDiscountGroup
+    public interface IDDiscountGroup
     {
-        int addNewRecord(string name, int discount);
+        int addNewRecord(string name, Nullable<decimal> discount);
         MDiscountGroup getRecord(int id, bool retrieveAssociation);
         void deleteRecord(int id, bool retrieveAssociation);
-        void updateRecord(int id, string name, int discount);
+        void updateRecord(int id, string name, Nullable<decimal> discount);
         List<MDiscountGroup> getAllRecord();
         List<string> getAllInfo();
+        // private methods are forbidden
+        // private MDiscountGroup buildMDiscountGroup(DiscoutGroup discountGroup);
     }
 }

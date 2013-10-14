@@ -7,7 +7,7 @@ using ElectricCarModelLayer;
 
 namespace ElectricCarDB
 {
-    interface IDCustomer
+    public interface IDCustomer
     {
         int addNewRecord(MDiscountGroup discountGroup, string fName, string lName,
             string address, string country, string phone, string email, MLogInfo logInfo,
@@ -19,5 +19,7 @@ namespace ElectricCarDB
             string payStatus);
         List<MCustomer> getAllRecord();
         List<string> getAllInfo();
+        // privte methods are forbidden in an interface
+        // private MCustomer buildMCustomer(Customer customer);
     }
 }

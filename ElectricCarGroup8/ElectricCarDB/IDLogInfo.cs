@@ -7,7 +7,7 @@ using ElectricCarModelLayer;
 
 namespace ElectricCarDB
 {
-    interface IDLogInfo
+    public interface IDLogInfo
     {
         int addNewRecord(string loginName, string password);
         MLogInfo getRecord(int id, bool retrieveAssociation);
@@ -15,5 +15,7 @@ namespace ElectricCarDB
         void updateRecord(int id, string loginName, string password);
         List<MLogInfo> getAllRecord();
         List<string> getAllInfo();
+        // privte methods are forbidden in an interface
+        // private MLogInfo buildMLogInfo(LoginInfo logInfo);
     }
 }

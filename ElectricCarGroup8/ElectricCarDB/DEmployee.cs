@@ -3,17 +3,18 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
+using ElectricCarModelLayer;
 
 namespace ElectricCarDB
 {
-    class DEmployee : IDEmployee
+    public class DEmployee : IDEmployee
     {
-        public int addNewRecord(ElectricCarModelLayer.EmployeePosition position, string fName, string lName, string address, string country, string phone, string email, ElectricCarModelLayer.MLogInfo logInfo, string payStatus)
+        public int addNewRecord(EmployeePosition position, string fName, string lName, string address, string country, string phone, string email, MLogInfo logInfo, string payStatus)
         {
             throw new NotImplementedException();
         }
 
-        public ElectricCarModelLayer.MEmployee getRecord(int id, bool retrieveAssociation)
+        public MEmployee getRecord(int id, bool retrieveAssociation)
         {
             throw new NotImplementedException();
         }
@@ -23,17 +24,22 @@ namespace ElectricCarDB
             throw new NotImplementedException();
         }
 
-        public void updateRecord(int id, ElectricCarModelLayer.EmployeePosition position, string fName, string lName, string address, string country, string phone, string email, ElectricCarModelLayer.MLogInfo logInfo, string payStatus)
+        public void updateRecord(int id, EmployeePosition position, string fName, string lName, string address, string country, string phone, string email, MLogInfo logInfo, string payStatus)
         {
             throw new NotImplementedException();
         }
 
-        public List<ElectricCarModelLayer.MEmployee> getAllRecord()
+        public List<MEmployee> getAllRecord()
         {
             throw new NotImplementedException();
         }
 
         public List<string> getAllInfo()
+        {
+            throw new NotImplementedException();
+        }
+
+        private MEmployee buildMEmployee(Employee employee)
         {
             throw new NotImplementedException();
         }
