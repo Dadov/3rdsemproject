@@ -77,6 +77,8 @@
     <Compile Include="DBatteryStorage.cs" />
     <Compile Include="DBatteryType.cs" />
     <Compile Include="DBooking.cs" />
+    <Compile Include="DBookingLine.cs" />
+    <Compile Include="DBookingStation.cs" />
     <Compile Include="DiscoutGroup.cs">
       <DependentUpon>ElectricCarModel.tt</DependentUpon>
     </Compile>
@@ -105,6 +107,8 @@
     <Compile Include="IDBatteryStorage.cs" />
     <Compile Include="IDBatteryType.cs" />
     <Compile Include="IDBooking.cs" />
+    <Compile Include="IDBookingLine.cs" />
+    <Compile Include="IDBookingStation.cs" />
     <Compile Include="IDPeriod.cs" />
     <Compile Include="IDConnection.cs" />
     <Compile Include="IDStation.cs" />

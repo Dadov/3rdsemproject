@@ -60,14 +60,14 @@ namespace ElectricCarLibTest
             int stops7 = 0;
             int stops8 = 0;
 
-            PathFind.leastStopsPath(adjList, s, r, out stops1);
-            PathFind.leastStopsPath(adjList, s, v, out stops2);
-            PathFind.leastStopsPath(adjList, s, w, out stops3);
-            PathFind.leastStopsPath(adjList, s, t, out stops4);
-            PathFind.leastStopsPath(adjList, s, x, out stops5);
-            PathFind.leastStopsPath(adjList, s, y, out stops6);
-            PathFind.leastStopsPath(adjList, s, u, out stops7);
-            PathFind.leastStopsPath(adjList, w, y, out stops8);
+            List<MStation> path1 = PathFind.leastStopsPath(adjList, s, r, out stops1);
+            List<MStation> path2 = PathFind.leastStopsPath(adjList, s, v, out stops2);
+            List<MStation> path3 = PathFind.leastStopsPath(adjList, s, w, out stops3);
+            List<MStation> path4 = PathFind.leastStopsPath(adjList, s, t, out stops4);
+            List<MStation> path5 = PathFind.leastStopsPath(adjList, s, x, out stops5);
+            List<MStation> path6 = PathFind.leastStopsPath(adjList, s, y, out stops6);
+            List<MStation> path7 = PathFind.leastStopsPath(adjList, s, u, out stops7);
+            List<MStation> path8 = PathFind.leastStopsPath(adjList, w, y, out stops8);
 
             Assert.AreEqual(PathFind.breathFirstSearch(adjList, s, r), stops1 - 1);
             Assert.AreEqual(PathFind.breathFirstSearch(adjList, s, v), stops2 - 1);
@@ -77,6 +77,54 @@ namespace ElectricCarLibTest
             Assert.AreEqual(PathFind.breathFirstSearch(adjList, s, y), stops6 - 1);
             Assert.AreEqual(PathFind.breathFirstSearch(adjList, s, u), stops7 - 1);
             Assert.AreEqual(PathFind.breathFirstSearch(adjList, w, y), stops8 - 1);
+
+            Assert.AreEqual(1, path1[0].Id);
+            Assert.AreEqual(2, path1[1].Id);
+
+            Assert.AreEqual(1, path2[0].Id);
+            Assert.AreEqual(2, path2[1].Id);
+            Assert.AreEqual(3, path2[2].Id);
+
+            Assert.AreEqual(1, path3[0].Id);
+            Assert.AreEqual(2, path3[1].Id);
+            Assert.AreEqual(3, path3[2].Id);
+            Assert.AreEqual(4, path3[3].Id);
+
+            Assert.AreEqual(1, path4[0].Id);
+            Assert.AreEqual(2, path4[1].Id);
+            Assert.AreEqual(3, path4[2].Id);
+            Assert.AreEqual(4, path4[3].Id);
+            Assert.AreEqual(5, path4[4].Id);
+
+            Assert.AreEqual(1, path5[0].Id);
+            Assert.AreEqual(2, path5[1].Id);
+            Assert.AreEqual(3, path5[2].Id);
+            Assert.AreEqual(4, path5[3].Id);
+            Assert.AreEqual(5, path5[4].Id);
+            Assert.AreEqual(6, path5[5].Id);
+
+            Assert.AreEqual(1, path6[0].Id);
+            Assert.AreEqual(2, path6[1].Id);
+            Assert.AreEqual(3, path6[2].Id);
+            Assert.AreEqual(4, path6[3].Id);
+            Assert.AreEqual(5, path6[4].Id);
+            Assert.AreEqual(6, path6[5].Id);
+            Assert.AreEqual(7, path6[6].Id);
+
+            Assert.AreEqual(1, path7[0].Id);
+            Assert.AreEqual(2, path7[1].Id);
+            Assert.AreEqual(3, path7[2].Id);
+            Assert.AreEqual(4, path7[3].Id);
+            Assert.AreEqual(5, path7[4].Id);
+            Assert.AreEqual(6, path7[5].Id);
+            Assert.AreEqual(7, path7[6].Id);
+            Assert.AreEqual(8, path7[7].Id);
+
+            Assert.AreEqual(4, path8[0].Id);
+            Assert.AreEqual(5, path8[1].Id);
+            Assert.AreEqual(6, path8[2].Id);
+            Assert.AreEqual(7, path8[3].Id);
+           
         }
 
         [TestMethod]
@@ -131,19 +179,41 @@ namespace ElectricCarLibTest
             int stops5 = 0;
             int stops6 = 0;
 
-            PathFind.leastStopsPath(adjList, s, r, out stops1);
-            PathFind.leastStopsPath(adjList, s, w, out stops2);
-            PathFind.leastStopsPath(adjList, s, u, out stops3);
-            PathFind.leastStopsPath(adjList, s, x, out stops4);
-            PathFind.leastStopsPath(adjList, x, y, out stops5);
-            PathFind.leastStopsPath(adjList, y, s, out stops6);
+            List<MStation> path1 = PathFind.leastStopsPath(adjList, s, r, out stops1);
+            List<MStation> path2 = PathFind.leastStopsPath(adjList, s, w, out stops2);
+            List<MStation> path3 = PathFind.leastStopsPath(adjList, s, u, out stops3);
+            List<MStation> path4 = PathFind.leastStopsPath(adjList, s, x, out stops4);
+            List<MStation> path5 = PathFind.leastStopsPath(adjList, x, y, out stops5);
+            List<MStation> path6 = PathFind.leastStopsPath(adjList, y, s, out stops6);
 
             Assert.AreEqual(stops1 - 1, PathFind.breathFirstSearch(adjList, s, r));
+            Assert.AreEqual(1, path1[0].Id);
+            Assert.AreEqual(2, path1[1].Id);
+
             Assert.AreEqual(stops2 - 1, PathFind.breathFirstSearch(adjList, s, w));
+            Assert.AreEqual(1, path2[0].Id);
+            Assert.AreEqual(2, path2[1].Id);
+            Assert.AreEqual(4, path2[2].Id);
+           
             Assert.AreEqual(stops3 - 1, PathFind.breathFirstSearch(adjList, s, u));
+            Assert.AreEqual(1, path3[0].Id);
+            Assert.AreEqual(2, path3[1].Id);
+            Assert.AreEqual(5, path3[2].Id);
+            Assert.AreEqual(8, path3[3].Id);
+
             Assert.AreEqual(stops4 - 1, PathFind.breathFirstSearch(adjList, s, x));
+            Assert.AreEqual(1, path4[0].Id);
+            Assert.AreEqual(3, path4[1].Id);
+            Assert.AreEqual(6, path4[2].Id);
+            
             Assert.AreEqual(stops5, PathFind.breathFirstSearch(adjList, x, y));
+            Assert.AreEqual(0, path5.Count);
+
             Assert.AreEqual(stops6 - 1, PathFind.breathFirstSearch(adjList, y, s));
+            Assert.AreEqual(7, path6[0].Id);
+            Assert.AreEqual(3, path6[1].Id);
+            Assert.AreEqual(1, path6[2].Id);
+
         }
 
         [TestMethod]
@@ -214,25 +284,63 @@ namespace ElectricCarLibTest
             int stops8 = 0;
             int stops9 = 0;
 
-            PathFind.leastStopsPath(adjList, s, r, out stops1);
-            PathFind.leastStopsPath(adjList, s, v, out stops2);
-            PathFind.leastStopsPath(adjList, s, w, out stops3);
-            PathFind.leastStopsPath(adjList, s, t, out stops4);
-            PathFind.leastStopsPath(adjList, s, x, out stops5);
-            PathFind.leastStopsPath(adjList, s, u, out stops6);
-            PathFind.leastStopsPath(adjList, s, y, out stops7);
-            PathFind.leastStopsPath(adjList, u, v, out stops8);
-            PathFind.leastStopsPath(adjList, w, y, out stops9);
+            List<MStation> path1 = PathFind.leastStopsPath(adjList, s, r, out stops1);
+            List<MStation> path2 = PathFind.leastStopsPath(adjList, s, v, out stops2);
+            List<MStation> path3 = PathFind.leastStopsPath(adjList, s, w, out stops3);
+            List<MStation> path4 = PathFind.leastStopsPath(adjList, s, t, out stops4);
+            List<MStation> path5 = PathFind.leastStopsPath(adjList, s, x, out stops5);
+            List<MStation> path6 = PathFind.leastStopsPath(adjList, s, u, out stops6);
+            List<MStation> path7 = PathFind.leastStopsPath(adjList, s, y, out stops7);
+            List<MStation> path8 = PathFind.leastStopsPath(adjList, u, v, out stops8);
+            List<MStation> path9 = PathFind.leastStopsPath(adjList, w, y, out stops9);
 
             Assert.AreEqual(1, PathFind.breathFirstSearch(adjList, s, r));
+            Assert.AreEqual(1, path1[0].Id);
+            Assert.AreEqual(2, path1[1].Id);
+
             Assert.AreEqual(2, PathFind.breathFirstSearch(adjList, s, v));
+            Assert.AreEqual(1, path2[0].Id);
+            Assert.AreEqual(2, path2[1].Id);
+            Assert.AreEqual(3, path2[2].Id);
+
             Assert.AreEqual(1, PathFind.breathFirstSearch(adjList, s, w));
+            Assert.AreEqual(1, path3[0].Id);
+            Assert.AreEqual(4, path3[1].Id);
+            
             Assert.AreEqual(2, PathFind.breathFirstSearch(adjList, s, t));
+            Assert.AreEqual(1, path4[0].Id);
+            Assert.AreEqual(4, path4[1].Id);
+            Assert.AreEqual(5, path4[2].Id);
+
             Assert.AreEqual(2, PathFind.breathFirstSearch(adjList, s, x));
+            Assert.AreEqual(1, path5[0].Id);
+            Assert.AreEqual(4, path5[1].Id);
+            Assert.AreEqual(6, path5[2].Id);
+
             Assert.AreEqual(3, PathFind.breathFirstSearch(adjList, s, u));
+            Assert.AreEqual(1, path6[0].Id);
+            Assert.AreEqual(4, path6[1].Id);
+            Assert.AreEqual(5, path6[2].Id);
+            Assert.AreEqual(8, path6[3].Id);
+
             Assert.AreEqual(3, PathFind.breathFirstSearch(adjList, s, y));
+            Assert.AreEqual(1, path7[0].Id);
+            Assert.AreEqual(4, path7[1].Id);
+            Assert.AreEqual(6, path7[2].Id);
+            Assert.AreEqual(7, path7[3].Id);
+
             Assert.AreEqual(5, PathFind.breathFirstSearch(adjList, u, v));
+            Assert.AreEqual(8, path8[0].Id);
+            Assert.AreEqual(5, path8[1].Id);
+            Assert.AreEqual(4, path8[2].Id);
+            Assert.AreEqual(1, path8[3].Id);
+            Assert.AreEqual(2, path8[4].Id);
+            Assert.AreEqual(3, path8[5].Id);
+
             Assert.AreEqual(2, PathFind.breathFirstSearch(adjList, w, y));
+            Assert.AreEqual(4, path9[0].Id);
+            Assert.AreEqual(6, path9[1].Id);
+            Assert.AreEqual(7, path9[2].Id);
         }
 
         [TestMethod]

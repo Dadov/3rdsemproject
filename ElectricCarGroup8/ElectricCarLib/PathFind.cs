@@ -57,6 +57,8 @@ namespace ElectricCarLib
 
             List<MStation> leastStopsPath = new List<MStation>();
             numOfStops = 0;
+
+            //return the least stops path
             if (reachedStations.Contains(destination))
             {
                 MStation parent = destination;
