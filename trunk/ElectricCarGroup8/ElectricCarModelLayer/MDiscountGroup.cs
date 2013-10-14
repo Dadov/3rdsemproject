@@ -8,7 +8,7 @@ namespace ElectricCarModelLayer
 {
     public class MDiscountGroup
     {
-        public MDiscountGroup(int id, string name, int discount) 
+        public MDiscountGroup(int id, string name, Nullable<decimal> discount) 
         {
             ID = id;
             Name = name;
@@ -17,7 +17,6 @@ namespace ElectricCarModelLayer
 
         public int ID { get; set; }
         public string Name { get; set; }
-        // TODO: consider data type
-        public int Discount { get; set; }
+        public Nullable<decimal> Discount { get; set; }
     }
 }

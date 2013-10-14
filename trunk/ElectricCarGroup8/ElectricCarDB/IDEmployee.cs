@@ -7,7 +7,8 @@ using ElectricCarModelLayer;
 
 namespace ElectricCarDB
 {
-    interface IDEmployee
+    // interfaces is implicitly public and can only contain public methods
+    public interface IDEmployee
     {
         int addNewRecord(EmployeePosition position, string fName, string lName,
             string address, string country, string phone, string email, MLogInfo logInfo,
@@ -19,5 +20,7 @@ namespace ElectricCarDB
             string payStatus);
         List<MEmployee> getAllRecord();
         List<string> getAllInfo();
+        // private methods are forbidden in an interface
+        // private MEmployee buildMEmployee(Employee employee);
     }
 }
