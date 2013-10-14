@@ -43,7 +43,7 @@ namespace ElectricCarDB
             }
         }
 
-        public MStation getRecord(int id, bool getAssocitation)
+        public MStation getRecord(int id, bool getAssociation)
         {
             using (ElectricCarEntities2 context = new ElectricCarEntities2())
             {
@@ -51,7 +51,7 @@ namespace ElectricCarDB
                 {
                     Station s = context.Stations.Find(id);
                     MStation station = buildStation(s);
-                    if (getAssocitation)
+                    if (getAssociation)
                     {
                         //TODO get association
                     }

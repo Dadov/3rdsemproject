@@ -43,6 +43,8 @@
     <Compile Include="MBatteryStorage.cs" />
     <Compile Include="MBatteryType.cs" />
     <Compile Include="MBooking.cs" />
+    <Compile Include="MBookingLine.cs" />
+    <Compile Include="MBookingStation.cs" />
     <Compile Include="MConnection.cs" />
     <Compile Include="MPeriod.cs" />
     <Compile Include="MStation.cs" />

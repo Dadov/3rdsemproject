@@ -13,6 +13,8 @@ namespace ElectricCarModelLayer
             //this.BookingLine = new HashSet<BookingLine>();
             //this.Station = new HashSet<Station>();
         }
+
+        
         public int Id { get; set; }
         public Nullable<int> cId { get; set; }
         public Nullable<decimal> totalPrice { get; set; }
