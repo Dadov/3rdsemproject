@@ -79,9 +79,13 @@
     <Compile Include="DBooking.cs" />
     <Compile Include="DBookingLine.cs" />
     <Compile Include="DBookingStation.cs" />
+    <Compile Include="DCustomer.cs" />
+    <Compile Include="DDiscountGroup.cs" />
+    <Compile Include="DEmployee.cs" />
     <Compile Include="DiscoutGroup.cs">
       <DependentUpon>ElectricCarModel.tt</DependentUpon>
     </Compile>
+    <Compile Include="DLogInfo.cs" />
     <Compile Include="DPeriod.cs" />
     <Compile Include="DConnection.cs" />
     <Compile Include="DStation.cs" />
@@ -109,6 +113,10 @@
     <Compile Include="IDBooking.cs" />
     <Compile Include="IDBookingLine.cs" />
     <Compile Include="IDBookingStation.cs" />
+    <Compile Include="IDCustomer.cs" />
+    <Compile Include="IDDiscountGroup.cs" />
+    <Compile Include="IDEmployee.cs" />
+    <Compile Include="IDLogInfo.cs" />
     <Compile Include="IDPeriod.cs" />
     <Compile Include="IDConnection.cs" />
     <Compile Include="IDStation.cs" />
