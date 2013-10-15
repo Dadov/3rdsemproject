@@ -86,9 +86,14 @@ namespace ElectricCarLibTest
             finally
             {
                 dbPeriod.deleteRecord(bsID, DateTime.Today);
+                dbPeriod.deleteRecord(bsID, DateTime.Today.AddHours(10));
+                dbPeriod.deleteRecord(bsID, DateTime.Today.AddHours(20));
                 dbStorage.deleteRecord(bsID);
                 dbStation.deleteRecord(sID);
                 dbType.deleteRecord(btId);
+                
+                
+               
             }
         }
     }
