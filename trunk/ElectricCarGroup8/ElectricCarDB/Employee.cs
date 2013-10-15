@@ -18,7 +18,6 @@ namespace ElectricCarDB
         public string position { get; set; }
         public Nullable<int> sId { get; set; }
     
-        public virtual Person Person { get; set; }
         public virtual Station Station { get; set; }
     }
 }

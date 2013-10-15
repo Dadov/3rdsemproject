@@ -15,24 +15,24 @@ namespace ElectricCarLib
     class BookingLineCtr
     {
         private DBookingLine dbBL = new DBookingLine();
-        public void addBookingLine(int bId, int btId, int quantity, decimal price)
+        public void addBookingLine(int bId, int btId, int sId, int quantity, decimal price, DateTime time)
         {
-            dbBL.addRecord(bId, btId, quantity, price);
+            dbBL.addRecord(bId, btId, sId, quantity, price, time);
         }
 
-        public void deleteBookingLine(int bId, int btId)
+        public void deleteBookingLine(int bId, int btId, int sId)
         {
-            dbBL.deleteRecord(bId, btId);
+            dbBL.deleteRecord(bId, btId, sId);
         }
 
-        public void updateBookingLine(int bId, int btId, int quantity, decimal price)
+        public void updateBookingLine(int bId, int btId, int sId, int quantity, decimal price, DateTime time)
         {
-            dbBL.updateRecord(bId, btId, quantity, price);
+            dbBL.updateRecord(bId, btId, sId, quantity, price, time);
         }
 
-        public MBookingLine getBookingLine(int bId, int btId, bool getAssociation)
+        public MBookingLine getBookingLine(int bId, int btId, int sId, bool getAssociation)
         {
-            return dbBL.getRecord(bId, btId, getAssociation);
+            return dbBL.getRecord(bId, btId, sId, getAssociation);
         }
 
         public List<MBookingLine> getAllBLForBooking(int bId, bool getAssociation)

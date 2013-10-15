@@ -17,7 +17,7 @@ namespace ElectricCarDB
         public Station()
         {
             this.BatteryStorages = new HashSet<BatteryStorage>();
-            this.Booking_Station = new HashSet<Booking_Station>();
+            this.BookingLines = new HashSet<BookingLine>();
             this.Connections = new HashSet<Connection>();
             this.Connections1 = new HashSet<Connection>();
             this.Employees = new HashSet<Employee>();
@@ -30,7 +30,7 @@ namespace ElectricCarDB
         public string state { get; set; }
     
         public virtual ICollection<BatteryStorage> BatteryStorages { get; set; }
-        public virtual ICollection<Booking_Station> Booking_Station { get; set; }
+        public virtual ICollection<BookingLine> BookingLines { get; set; }
         public virtual ICollection<Connection> Connections { get; set; }
         public virtual ICollection<Connection> Connections1 { get; set; }
         public virtual ICollection<Employee> Employees { get; set; }

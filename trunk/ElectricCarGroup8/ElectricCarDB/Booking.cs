@@ -16,7 +16,6 @@ namespace ElectricCarDB
     {
         public Booking()
         {
-            this.Booking_Station = new HashSet<Booking_Station>();
             this.BookingLines = new HashSet<BookingLine>();
         }
     
@@ -27,7 +26,6 @@ namespace ElectricCarDB
         public Nullable<System.DateTime> tripStart { get; set; }
         public string creaditCard { get; set; }
     
-        public virtual ICollection<Booking_Station> Booking_Station { get; set; }
         public virtual Customer Customer { get; set; }
         public virtual ICollection<BookingLine> BookingLines { get; set; }
     }

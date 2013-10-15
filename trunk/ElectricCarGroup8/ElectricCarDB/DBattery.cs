@@ -16,7 +16,7 @@ namespace ElectricCarDB
         private IDBatteryType dbType = new DBatteryType();
         public int addNewRecord(string state, int btid)
         {
-            using (ElectricCarEntities2 context = new ElectricCarEntities2())
+            using (ElectricCarEntities context = new ElectricCarEntities())
             {
                 try
                 {
@@ -40,7 +40,7 @@ namespace ElectricCarDB
 
         public MBattery getRecord(int id, bool getAssociation)
         {
-            using (ElectricCarEntities2 context = new ElectricCarEntities2())
+            using (ElectricCarEntities context = new ElectricCarEntities())
             {
                 try
                 {
@@ -63,7 +63,7 @@ namespace ElectricCarDB
 
         public void deleteRecord(int id)
         {
-            using (ElectricCarEntities2 context = new ElectricCarEntities2())
+            using (ElectricCarEntities context = new ElectricCarEntities())
             {
                 Battery batToDelete = context.Batteries.Find(id);
                 if (batToDelete != null)
@@ -81,7 +81,7 @@ namespace ElectricCarDB
 
         public void updateRecord(int id, string state, int btid)
         {
-            using (ElectricCarEntities2 context = new ElectricCarEntities2())
+            using (ElectricCarEntities context = new ElectricCarEntities())
             {
                 Battery batToUpdate = context.Batteries.Find(id);
                 if (batToUpdate != null)
@@ -101,7 +101,7 @@ namespace ElectricCarDB
         public List<MBattery> getAllRecord(bool getAssociation)
         {
             List<MBattery> batteries = new List<MBattery>();
-            using (ElectricCarEntities2 context = new ElectricCarEntities2())
+            using (ElectricCarEntities context = new ElectricCarEntities())
             {
                 foreach (Battery b in context.Batteries)
                 {
@@ -119,7 +119,7 @@ namespace ElectricCarDB
         public List<string> getAllInfo()
         {
             List<string> info = new List<string>();
-            using (ElectricCarEntities2 context = new ElectricCarEntities2())
+            using (ElectricCarEntities context = new ElectricCarEntities())
             {
                 foreach (Battery b in context.Batteries)
                 {

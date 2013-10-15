@@ -11,8 +11,10 @@ namespace ElectricCarModelLayer
         
         public Nullable<int> quantity { get; set; }
         public Nullable<decimal> price { get; set; }
+        public Nullable<DateTime> time { get; set; }
 
         public MBatteryType BatteryType { get; set; }
         public MBooking Booking { get; set; }
+        public MStation Station { get; set; }
     }
 }

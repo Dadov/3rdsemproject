@@ -16,7 +16,7 @@ namespace ElectricCarDB
 
         public MDiscountGroup getRecord(int id, bool retrieveAssociation)
         {
-            using (ElectricCarEntities2 context = new ElectricCarEntities2())
+            using (ElectricCarEntities context = new ElectricCarEntities())
             {
                 try
                 {

@@ -28,8 +28,6 @@ namespace ElectricCarDB
         public string email { get; set; }
         public string pType { get; set; }
     
-        public virtual Customer Customer { get; set; }
-        public virtual Employee Employee { get; set; }
         public virtual ICollection<LoginInfo> LoginInfoes { get; set; }
     }
 }

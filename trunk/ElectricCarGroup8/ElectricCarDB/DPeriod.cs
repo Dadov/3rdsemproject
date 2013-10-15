@@ -15,7 +15,7 @@ namespace ElectricCarDB
     {
         public int addNewRecord(int bsID, DateTime time, int init, int cust, int future)
         {
-            using (ElectricCarEntities2 context = new ElectricCarEntities2())
+            using (ElectricCarEntities context = new ElectricCarEntities())
             {
                 try
                 {
@@ -40,7 +40,7 @@ namespace ElectricCarDB
 
         public MPeriod getRecord(int bsID,DateTime time, bool getAssociation)
         {
-            using (ElectricCarEntities2 context = new ElectricCarEntities2())
+            using (ElectricCarEntities context = new ElectricCarEntities())
             {
                 try
                 {
@@ -64,7 +64,7 @@ namespace ElectricCarDB
 
         public void deleteRecord(int bsID, DateTime time)
         {
-            using (ElectricCarEntities2 context = new ElectricCarEntities2())
+            using (ElectricCarEntities context = new ElectricCarEntities())
             {
                 Object[] key = { bsID, time };
                 Period perToDelete = context.Periods.Find(key);
@@ -83,7 +83,7 @@ namespace ElectricCarDB
 
         public void updateRecord(int bsID, DateTime time, int init, int cust, int future)
         {
-            using (ElectricCarEntities2 context = new ElectricCarEntities2())
+            using (ElectricCarEntities context = new ElectricCarEntities())
             {
                 Object[] key = { bsID, time };
                 Period perToUpdate = context.Periods.Find(key);
@@ -106,7 +106,7 @@ namespace ElectricCarDB
         public List<MPeriod> getAllRecord(bool getAssociation)
         {
             List<MPeriod> periods = new List<MPeriod>();
-            using (ElectricCarEntities2 context = new ElectricCarEntities2())
+            using (ElectricCarEntities context = new ElectricCarEntities())
             {
                 foreach (Period p in context.Periods)
                 {
@@ -123,7 +123,7 @@ namespace ElectricCarDB
         public List<MPeriod> getStoragePeriods(int bsID)
         {
             List<MPeriod> periods = new List<MPeriod>();
-            using (ElectricCarEntities2 context = new ElectricCarEntities2())
+            using (ElectricCarEntities context = new ElectricCarEntities())
             {
                 foreach (Period p in context.Periods)
                 {
@@ -140,7 +140,7 @@ namespace ElectricCarDB
         public List<string> getAllInfo()
         {
             List<string> info = new List<string>();
-            using (ElectricCarEntities2 context = new ElectricCarEntities2())
+            using (ElectricCarEntities context = new ElectricCarEntities())
             {
                 foreach (Period p in context.Periods)
                 {

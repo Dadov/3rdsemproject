@@ -15,7 +15,7 @@ namespace ElectricCarDB
     {
         public int addNewRecord(string name, string producer, decimal capacity, decimal exchangeCost, int storageNumber)
         {
-            using (ElectricCarEntities2 context = new ElectricCarEntities2())
+            using (ElectricCarEntities context = new ElectricCarEntities())
             {
                 try
                 {
@@ -41,7 +41,7 @@ namespace ElectricCarDB
 
         public MBatteryType getRecord(int id, bool getAssociation)
         {
-            using (ElectricCarEntities2 context = new ElectricCarEntities2())
+            using (ElectricCarEntities context = new ElectricCarEntities())
             {
                 try
                 {
@@ -64,7 +64,7 @@ namespace ElectricCarDB
 
         public void deleteRecord(int id)
         {
-            using (ElectricCarEntities2 context = new ElectricCarEntities2())
+            using (ElectricCarEntities context = new ElectricCarEntities())
             {
                 BatteryType btToDelete = context.BatteryTypes.Find(id);
                 if (btToDelete != null)
@@ -82,7 +82,7 @@ namespace ElectricCarDB
 
         public void updateRecord(int id, string name, string producer, decimal capacity, decimal exchangeCost, int storageNumber)
         {
-            using (ElectricCarEntities2 context = new ElectricCarEntities2())
+            using (ElectricCarEntities context = new ElectricCarEntities())
             {
                 BatteryType btToUpdate = context.BatteryTypes.Find(id);
                 if (btToUpdate != null)
@@ -105,7 +105,7 @@ namespace ElectricCarDB
         public List<MBatteryType> getAllRecord(bool getAssociation)
         {
             List<MBatteryType> types = new List<MBatteryType>();
-            using (ElectricCarEntities2 context = new ElectricCarEntities2())
+            using (ElectricCarEntities context = new ElectricCarEntities())
             {
                 foreach (BatteryType bt in context.BatteryTypes)
                 {
@@ -123,7 +123,7 @@ namespace ElectricCarDB
         public List<string> getAllInfo()
         {
             List<string> info = new List<string>();
-            using (ElectricCarEntities2 context = new ElectricCarEntities2())
+            using (ElectricCarEntities context = new ElectricCarEntities())
             {
                 foreach (BatteryType bt in context.BatteryTypes)
                 {
