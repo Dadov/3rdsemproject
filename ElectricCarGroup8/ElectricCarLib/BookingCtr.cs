@@ -12,7 +12,6 @@ namespace ElectricCarLib
     class BookingCtr
     {
         private DBooking dbBooking = new DBooking();
-        private BookingStationCtr bsCtr = new BookingStationCtr();
         private BookingLineCtr blCtr = new BookingLineCtr();
         public void addBooking(MBooking booking) 
         {
@@ -22,9 +21,12 @@ namespace ElectricCarLib
 
                 int bId = addBookingRecord(booking.cId.Value, booking.totalPrice.Value, booking.createDate.Value, booking.tripStart.Value, booking.creaditCard);
                 blCtr.insertAllBLForBooking(booking.bookinglines);
-                bsCtr.insertAllBSForBooking(bId, booking.bookingstations);
+                //decrease the number in Period
+
+                
             }
         }
+
 
         public MBooking getBooking(int id)
         {
@@ -35,7 +37,6 @@ namespace ElectricCarLib
         public void deleteBooking(int id)
         {
             blCtr.deleteAllBLForBooking(id);
-            bsCtr.deleteAllBSForBooking(id);
             dbBooking.deleteRecord(id);
         }
 
@@ -47,7 +48,7 @@ namespace ElectricCarLib
 
                 updateBookingRecord(booking.Id, booking.cId.Value, booking.totalPrice.Value, booking.createDate.Value, booking.tripStart.Value, booking.creaditCard);
                 blCtr.updateAllBLForBooking(booking.Id, booking.bookinglines);
-                bsCtr.updateAllBSForBooking(booking.Id, booking.bookingstations);
+                
             }
         }
 

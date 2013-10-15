@@ -9,10 +9,10 @@ namespace ElectricCarDB
 {
     public interface IDBookingLine
     {
-        void addRecord(int bId, int btId, int quantity, decimal price);
-        void updateRecord(int bId, int btId, int quantity, decimal price);
-        void deleteRecord(int bId, int btId);
-        MBookingLine getRecord(int bId, int btId, bool getAssociation);
+        void addRecord(int bId, int btId, int sId, int quantity, decimal price, DateTime time);
+        void updateRecord(int bId, int btId, int sId, int quantity, decimal price, DateTime time);
+        void deleteRecord(int bId, int btId, int sId);
+        MBookingLine getRecord(int bId, int btId, int sId, bool getAssociation);
         List<MBookingLine> getBookingLinesForBooking(int bookingid, bool getAssociation);
         void deleteAllBookingLineForBooking(int bookingid);
         void updateAllBookingLineForBooking(int bookingid, List<MBookingLine> bls);

@@ -23,7 +23,6 @@ namespace ElectricCarDB
         public Nullable<int> dgId { get; set; }
     
         public virtual ICollection<Booking> Bookings { get; set; }
-        public virtual Person Person { get; set; }
         public virtual DiscoutGroup DiscoutGroup { get; set; }
     }
 }

@@ -17,7 +17,7 @@ namespace ElectricCarDB
 
         public int addNewRecord(string Name, string Address, string Country, string State)
         {
-            using (ElectricCarEntities2 context = new ElectricCarEntities2())
+            using (ElectricCarEntities context = new ElectricCarEntities())
             {
                 try
                 {
@@ -45,7 +45,7 @@ namespace ElectricCarDB
 
         public MStation getRecord(int id, bool getAssociation)
         {
-            using (ElectricCarEntities2 context = new ElectricCarEntities2())
+            using (ElectricCarEntities context = new ElectricCarEntities())
             {
                 try
                 {
@@ -68,7 +68,7 @@ namespace ElectricCarDB
 
         public void deleteRecord(int id)
         {
-            using (ElectricCarEntities2 context = new ElectricCarEntities2())
+            using (ElectricCarEntities context = new ElectricCarEntities())
             {
                 try
                 {
@@ -89,7 +89,7 @@ namespace ElectricCarDB
 
         public void updateRecord(int id, string Name, string Address, string Country, string State)
         {
-            using (ElectricCarEntities2 context = new ElectricCarEntities2())
+            using (ElectricCarEntities context = new ElectricCarEntities())
             {
                 Station staUpToDate = context.Stations.Find(id);
                 if (staUpToDate != null)
@@ -110,7 +110,7 @@ namespace ElectricCarDB
         public List<MStation> getAllRecord(bool getAssociation)
         {
             List<MStation> stations = new List<MStation>();
-            using (ElectricCarEntities2 context = new ElectricCarEntities2())
+            using (ElectricCarEntities context = new ElectricCarEntities())
             {
                 foreach (Station s in context.Stations)
                 {
@@ -129,7 +129,7 @@ namespace ElectricCarDB
         {
             LinkedList<MStation> nStations = new LinkedList<MStation>();
             nStations.AddFirst(getRecord(id, false));
-            using (ElectricCarEntities2 context = new ElectricCarEntities2())
+            using (ElectricCarEntities context = new ElectricCarEntities())
             {
                 var connections = from c in context.Connections where c.sId1 == id || c.sId2 == id select c;
                 foreach (var c in connections)

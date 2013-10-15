@@ -13,10 +13,10 @@ namespace ElectricCarDB
     using System.Data.Entity;
     using System.Data.Entity.Infrastructure;
     
-    public partial class ElectricCarEntities2 : DbContext
+    public partial class ElectricCarEntities : DbContext
     {
-        public ElectricCarEntities2()
-            : base("name=ElectricCarEntities2")
+        public ElectricCarEntities()
+            : base("name=ElectricCarEntities")
         {
         }
     
@@ -29,7 +29,6 @@ namespace ElectricCarDB
         public DbSet<BatteryStorage> BatteryStorages { get; set; }
         public DbSet<BatteryType> BatteryTypes { get; set; }
         public DbSet<Booking> Bookings { get; set; }
-        public DbSet<Booking_Station> Booking_Station { get; set; }
         public DbSet<BookingLine> BookingLines { get; set; }
         public DbSet<Connection> Connections { get; set; }
         public DbSet<Customer> Customers { get; set; }

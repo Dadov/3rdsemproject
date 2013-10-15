@@ -14,30 +14,33 @@ namespace ElectricCarDB
 {
     public class DBookingLine: IDBookingLine
     {
-        public void addRecord(int BId, int BtId, int Quantity, decimal Price)
+        public void addRecord(int BId, int BtId, int SId, int Quantity, decimal Price, DateTime Time)
         {
-            using (ElectricCarEntities2 context = new ElectricCarEntities2())
+            using (ElectricCarEntities context = new ElectricCarEntities())
             {
                 context.BookingLines.Add(new BookingLine()
                 {
                     bId = BId,
                     btId = BtId,
+                    sId = SId,
                     quantity = Quantity,
-                    price = Price
+                    price = Price,
+                    time = Time
                 });
                 context.SaveChanges();
             }
         }
 
-        public void updateRecord(int bId, int btId, int quantity, decimal price)
+        public void updateRecord(int bId, int btId, int sId, int quantity, decimal price, DateTime time)
         {
-            using (ElectricCarEntities2 context = new ElectricCarEntities2())
+            using (ElectricCarEntities context = new ElectricCarEntities())
             {
-                BookingLine blToDate = context.BookingLines.Find(bId, btId);
+                BookingLine blToDate = context.BookingLines.Find(bId, btId, sId);
                 if (blToDate != null)
                 {
                     blToDate.quantity = quantity;
                     blToDate.price = price;
+                    blToDate.time = time;
                     context.SaveChanges();
                 }
                 else
@@ -47,13 +50,13 @@ namespace ElectricCarDB
             }
         }
 
-        public void deleteRecord(int bId, int btId)
+        public void deleteRecord(int bId, int btId, int sId)
         {
-            using (ElectricCarEntities2 context = new ElectricCarEntities2())
+            using (ElectricCarEntities context = new ElectricCarEntities())
             {
                 try 
 	            {
-                    BookingLine blToDelete = context.BookingLines.Find(bId, btId);
+                    BookingLine blToDelete = context.BookingLines.Find(bId, btId, sId);
                     if (blToDelete != null)
                     {
                         context.Entry(blToDelete).State = EntityState.Deleted;
@@ -68,13 +71,13 @@ namespace ElectricCarDB
             }
         }
 
-        public MBookingLine getRecord(int bId, int btId, bool getAssociation)
+        public MBookingLine getRecord(int bId, int btId, int sId, bool getAssociation)
         {
-            using (ElectricCarEntities2 context = new ElectricCarEntities2())
+            using (ElectricCarEntities context = new ElectricCarEntities())
             {
                 try
                 {
-                    BookingLine b = context.BookingLines.Find(bId, btId);
+                    BookingLine b = context.BookingLines.Find(bId, btId, sId);
                     MBookingLine bl = buildBookingLine(b);
                     if (getAssociation)
                     {
@@ -96,15 +99,17 @@ namespace ElectricCarDB
             {
                 Booking = new MBooking() {Id = bl.bId },
                 BatteryType = new MBatteryType { id = bl.btId },
+                Station = new MStation() { Id = bl.sId },
                 quantity = bl.quantity,
                 price = bl.price,
+                time = bl.time
             };
             return b;
         }
 
         public List<MBookingLine> getBookingLinesForBooking(int bookingid, bool getAssociation)
         {
-            using (ElectricCarEntities2 context = new ElectricCarEntities2())
+            using (ElectricCarEntities context = new ElectricCarEntities())
             {
                 List<MBookingLine> blForBooking = new List<MBookingLine>();
                 BookingLine[] bls;
@@ -127,7 +132,7 @@ namespace ElectricCarDB
 
         public void deleteAllBookingLineForBooking(int bookingid)
         {
-            using (ElectricCarEntities2 context = new ElectricCarEntities2())
+            using (ElectricCarEntities context = new ElectricCarEntities())
             {
                 try
                 {
@@ -155,7 +160,7 @@ namespace ElectricCarDB
 
         public void updateAllBookingLineForBooking(int bookingid, List<MBookingLine> bls)
         {
-            using (ElectricCarEntities2 context = new ElectricCarEntities2())
+            using (ElectricCarEntities context = new ElectricCarEntities())
             {
                 try
                 {
@@ -167,7 +172,7 @@ namespace ElectricCarDB
                             deleteAllBookingLineForBooking(bookingid);
                             foreach (MBookingLine bl in bls)
                             {
-                                updateRecord(bl.Booking.Id, bl.BatteryType.id, bl.quantity.Value, bl.price.Value);
+                                updateRecord(bl.Station.Id, bl.BatteryType.id, bl.Station.Id, bl.quantity.Value, bl.price.Value, bl.time.Value);
                             }
                             transaction.Complete();
                             success = true;
@@ -204,7 +209,7 @@ namespace ElectricCarDB
         {
             foreach (MBookingLine bl in bls)
             {
-                addRecord(bl.Booking.Id, bl.BatteryType.id, bl.quantity.Value, bl.price.Value);
+                addRecord(bl.Station.Id, bl.BatteryType.id, bl.Station.Id, bl.quantity.Value, bl.price.Value, bl.time.Value);
             }
         }
     }

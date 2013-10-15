@@ -15,7 +15,7 @@ namespace ElectricCarDB
     {
         public void addNewRecord(int id1, int id2, decimal dist, decimal time)
         {
-            using (ElectricCarEntities2 context = new ElectricCarEntities2())
+            using (ElectricCarEntities context = new ElectricCarEntities())
             {
                 try
                 {
@@ -38,7 +38,7 @@ namespace ElectricCarDB
 
         public MConnection getRecord(int id1, int id2, bool getAssociation)
         {
-            using (ElectricCarEntities2 context = new ElectricCarEntities2())
+            using (ElectricCarEntities context = new ElectricCarEntities())
             {
                 try
                 {
@@ -61,7 +61,7 @@ namespace ElectricCarDB
 
         public void deleteRecord(int id1, int id2)
         {
-            using (ElectricCarEntities2 context = new ElectricCarEntities2())
+            using (ElectricCarEntities context = new ElectricCarEntities())
             {
                 Connection conToDelete = context.Connections.Find(id1, id2);
                 if (conToDelete != null)
@@ -79,7 +79,7 @@ namespace ElectricCarDB
 
         public void updateRecord(int id1, int id2, decimal dist, decimal time)
         {
-            using (ElectricCarEntities2 context = new ElectricCarEntities2())
+            using (ElectricCarEntities context = new ElectricCarEntities())
             {
                 Connection conToUpdate = context.Connections.Find(id1, id2);
                 if (conToUpdate != null)
@@ -99,7 +99,7 @@ namespace ElectricCarDB
         public List<MConnection> getAllRecord(bool getAssociation)
         {
             List<MConnection> connections = new List<MConnection>();
-            using (ElectricCarEntities2 context = new ElectricCarEntities2())
+            using (ElectricCarEntities context = new ElectricCarEntities())
             {
                 foreach (Connection c in context.Connections)
                 {
@@ -129,7 +129,7 @@ namespace ElectricCarDB
         public List<string> getAllInfo()
         {
             List<string> info = new List<string>();
-            using (ElectricCarEntities2 context = new ElectricCarEntities2())
+            using (ElectricCarEntities context = new ElectricCarEntities())
             {
                 foreach (Connection c in context.Connections)
                 {

@@ -12,6 +12,7 @@ namespace ElectricCarModelLayer
         {
             bookinglines = new List<MBookingLine>();
             bookingstations = new List<MBookingStation>();
+            route = new Dictionary<MStation, DateTime>();
         }
 
         
@@ -23,6 +24,7 @@ namespace ElectricCarModelLayer
         public string creaditCard { get; set; }
         public List<MBookingLine> bookinglines { get; set; }
         public List<MBookingStation> bookingstations { get; set; }
+        public Dictionary<MStation, DateTime> route { get; set; }
 
         //public virtual Customer Customer { get; set; }
         //public virtual ICollection<BookingLine> BookingLine { get; set; }

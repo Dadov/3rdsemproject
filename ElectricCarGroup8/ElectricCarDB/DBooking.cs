@@ -15,7 +15,7 @@ namespace ElectricCarDB
     {
         public int addRecord(int CId, decimal TotalPrice, DateTime CreateDate, DateTime TripStart, string CreditCard)
         {
-            using (ElectricCarEntities2 context = new ElectricCarEntities2())
+            using (ElectricCarEntities context = new ElectricCarEntities())
             {
                 try
                 {
@@ -43,7 +43,7 @@ namespace ElectricCarDB
 
         public MBooking getRecord(int id, bool getAssociation)
         {
-            using (ElectricCarEntities2 context = new ElectricCarEntities2())
+            using (ElectricCarEntities context = new ElectricCarEntities())
             {
                 try
                 {
@@ -65,7 +65,7 @@ namespace ElectricCarDB
 
         public void updateRecord(int id, int cId, decimal totalPrice, DateTime createDate, DateTime tripStart, string creditCard)
         {
-            using (ElectricCarEntities2 context = new ElectricCarEntities2())
+            using (ElectricCarEntities context = new ElectricCarEntities())
             {
                 Booking booUpToDate = context.Bookings.Find(id);
                 if (booUpToDate != null)
@@ -86,7 +86,7 @@ namespace ElectricCarDB
 
         public void deleteRecord(int id)
         {
-            using (ElectricCarEntities2 context = new ElectricCarEntities2())
+            using (ElectricCarEntities context = new ElectricCarEntities())
             {
                 try
                 {
@@ -109,7 +109,7 @@ namespace ElectricCarDB
         public List<MBooking> getAllRecord(bool getAssociation)
         {
             List<MBooking> bookings = new List<MBooking>();
-            using (ElectricCarEntities2 context = new ElectricCarEntities2())
+            using (ElectricCarEntities context = new ElectricCarEntities())
             {
                 foreach (Booking b in context.Bookings)
                 {

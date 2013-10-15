@@ -48,71 +48,66 @@
   </ItemGroup>
   <ItemGroup>
     <Compile Include="Battery.cs">
-      <DependentUpon>ElectricCarModel.tt</DependentUpon>
+      <DependentUpon>ElectricCar.tt</DependentUpon>
     </Compile>
     <Compile Include="BatteryStorage.cs">
-      <DependentUpon>ElectricCarModel.tt</DependentUpon>
+      <DependentUpon>ElectricCar.tt</DependentUpon>
     </Compile>
     <Compile Include="BatteryType.cs">
-      <DependentUpon>ElectricCarModel.tt</DependentUpon>
+      <DependentUpon>ElectricCar.tt</DependentUpon>
     </Compile>
     <Compile Include="Booking.cs">
-      <DependentUpon>ElectricCarModel.tt</DependentUpon>
+      <DependentUpon>ElectricCar.tt</DependentUpon>
     </Compile>
     <Compile Include="BookingLine.cs">
-      <DependentUpon>ElectricCarModel.tt</DependentUpon>
+      <DependentUpon>ElectricCar.tt</DependentUpon>
     </Compile>
     <Compile Include="BookingModel.cs" />
-    <Compile Include="Booking_Station.cs">
-      <DependentUpon>ElectricCarModel.tt</DependentUpon>
-    </Compile>
     <Compile Include="ConncectionModel.cs" />
     <Compile Include="Connection.cs">
-      <DependentUpon>ElectricCarModel.tt</DependentUpon>
+      <DependentUpon>ElectricCar.tt</DependentUpon>
     </Compile>
     <Compile Include="Customer.cs">
-      <DependentUpon>ElectricCarModel.tt</DependentUpon>
+      <DependentUpon>ElectricCar.tt</DependentUpon>
     </Compile>
     <Compile Include="DBattery.cs" />
     <Compile Include="DBatteryStorage.cs" />
     <Compile Include="DBatteryType.cs" />
     <Compile Include="DBooking.cs" />
     <Compile Include="DBookingLine.cs" />
-    <Compile Include="DBookingStation.cs" />
     <Compile Include="DCustomer.cs" />
     <Compile Include="DDiscountGroup.cs" />
     <Compile Include="DEmployee.cs" />
     <Compile Include="DiscoutGroup.cs">
-      <DependentUpon>ElectricCarModel.tt</DependentUpon>
+      <DependentUpon>ElectricCar.tt</DependentUpon>
     </Compile>
     <Compile Include="DLogInfo.cs" />
     <Compile Include="DPeriod.cs" />
     <Compile Include="DConnection.cs" />
     <Compile Include="DStation.cs" />
-    <Compile Include="ElectricCarModel.Context.cs">
+    <Compile Include="ElectricCar.Context.cs">
       <AutoGen>True</AutoGen>
       <DesignTime>True</DesignTime>
-      <DependentUpon>ElectricCarModel.Context.tt</DependentUpon>
+      <DependentUpon>ElectricCar.Context.tt</DependentUpon>
     </Compile>
-    <Compile Include="ElectricCarModel.cs">
+    <Compile Include="ElectricCar.cs">
       <AutoGen>True</AutoGen>
       <DesignTime>True</DesignTime>
-      <DependentUpon>ElectricCarModel.tt</DependentUpon>
+      <DependentUpon>ElectricCar.tt</DependentUpon>
     </Compile>
-    <Compile Include="ElectricCarModel.Designer.cs">
+    <Compile Include="ElectricCar.Designer.cs">
       <AutoGen>True</AutoGen>
       <DesignTime>True</DesignTime>
-      <DependentUpon>ElectricCarModel.edmx</DependentUpon>
+      <DependentUpon>ElectricCar.edmx</DependentUpon>
     </Compile>
     <Compile Include="Employee.cs">
-      <DependentUpon>ElectricCarModel.tt</DependentUpon>
+      <DependentUpon>ElectricCar.tt</DependentUpon>
     </Compile>
     <Compile Include="IDBattery.cs" />
     <Compile Include="IDBatteryStorage.cs" />
     <Compile Include="IDBatteryType.cs" />
     <Compile Include="IDBooking.cs" />
     <Compile Include="IDBookingLine.cs" />
-    <Compile Include="IDBookingStation.cs" />
     <Compile Include="IDCustomer.cs" />
     <Compile Include="IDDiscountGroup.cs" />
     <Compile Include="IDEmployee.cs" />
@@ -124,18 +119,18 @@
     <Compile Include="BatteryStorageModel.cs" />
     <Compile Include="BatteryTypeModel.cs" />
     <Compile Include="LoginInfo.cs">
-      <DependentUpon>ElectricCarModel.tt</DependentUpon>
+      <DependentUpon>ElectricCar.tt</DependentUpon>
     </Compile>
     <Compile Include="Period.cs">
-      <DependentUpon>ElectricCarModel.tt</DependentUpon>
+      <DependentUpon>ElectricCar.tt</DependentUpon>
     </Compile>
     <Compile Include="PeriodModel.cs" />
     <Compile Include="Person.cs">
-      <DependentUpon>ElectricCarModel.tt</DependentUpon>
+      <DependentUpon>ElectricCar.tt</DependentUpon>
     </Compile>
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="Station.cs">
-      <DependentUpon>ElectricCarModel.tt</DependentUpon>
+      <DependentUpon>ElectricCar.tt</DependentUpon>
     </Compile>
     <Compile Include="StationModel.cs" />
   </ItemGroup>
@@ -143,22 +138,22 @@
     <None Include="App.Config">
       <SubType>Designer</SubType>
     </None>
-    <EntityDeploy Include="ElectricCarModel.edmx">
+    <EntityDeploy Include="ElectricCar.edmx">
       <Generator>EntityModelCodeGenerator</Generator>
-      <LastGenOutput>ElectricCarModel.Designer.cs</LastGenOutput>
+      <LastGenOutput>ElectricCar.Designer.cs</LastGenOutput>
     </EntityDeploy>
-    <None Include="ElectricCarModel.Context.tt">
+    <None Include="ElectricCar.Context.tt">
       <Generator>TextTemplatingFileGenerator</Generator>
-      <DependentUpon>ElectricCarModel.edmx</DependentUpon>
-      <LastGenOutput>ElectricCarModel.Context.cs</LastGenOutput>
+      <DependentUpon>ElectricCar.edmx</DependentUpon>
+      <LastGenOutput>ElectricCar.Context.cs</LastGenOutput>
     </None>
-    <None Include="ElectricCarModel.edmx.diagram">
-      <DependentUpon>ElectricCarModel.edmx</DependentUpon>
+    <None Include="ElectricCar.edmx.diagram">
+      <DependentUpon>ElectricCar.edmx</DependentUpon>
     </None>
-    <None Include="ElectricCarModel.tt">
+    <None Include="ElectricCar.tt">
       <Generator>TextTemplatingFileGenerator</Generator>
-      <DependentUpon>ElectricCarModel.edmx</DependentUpon>
-      <LastGenOutput>ElectricCarModel.cs</LastGenOutput>
+      <DependentUpon>ElectricCar.edmx</DependentUpon>
+      <LastGenOutput>ElectricCar.cs</LastGenOutput>
     </None>
     <None Include="packages.config" />
   </ItemGroup>

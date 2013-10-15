@@ -18,7 +18,7 @@ namespace ElectricCarDB
 
         public int addNewRecord(int btID, int sID)
         {
-            using (ElectricCarEntities2 context = new ElectricCarEntities2())
+            using (ElectricCarEntities context = new ElectricCarEntities())
             {
                 try
                 {
@@ -42,7 +42,7 @@ namespace ElectricCarDB
 
         public MBatteryStorage getRecord(int id, bool getAssociation)
         {
-            using (ElectricCarEntities2 context = new ElectricCarEntities2())
+            using (ElectricCarEntities context = new ElectricCarEntities())
             {
                 try
                 {
@@ -65,7 +65,7 @@ namespace ElectricCarDB
 
         public void deleteRecord(int id)
         {
-            using (ElectricCarEntities2 context = new ElectricCarEntities2())
+            using (ElectricCarEntities context = new ElectricCarEntities())
             {
                 BatteryStorage storToDelete = context.BatteryStorages.Find(id);
                 if (storToDelete != null)
@@ -83,7 +83,7 @@ namespace ElectricCarDB
 
         public void updateRecord(int id, int btID, int sID)
         {
-            using (ElectricCarEntities2 context = new ElectricCarEntities2())
+            using (ElectricCarEntities context = new ElectricCarEntities())
             {
                 BatteryStorage storToUpdate = context.BatteryStorages.Find(id);
                 if (storToUpdate != null)
@@ -103,7 +103,7 @@ namespace ElectricCarDB
         public List<MBatteryStorage> getStationStorages(int sID)
         {
             List<MBatteryStorage> storages = new List<MBatteryStorage>();
-            using (ElectricCarEntities2 context = new ElectricCarEntities2())
+            using (ElectricCarEntities context = new ElectricCarEntities())
             {
                 foreach (BatteryStorage bs in context.BatteryStorages)
                 {
@@ -121,7 +121,7 @@ namespace ElectricCarDB
         public List<MBatteryStorage> getAllRecord(bool getAssociation)
         {
             List<MBatteryStorage> storages = new List<MBatteryStorage>();
-            using (ElectricCarEntities2 context = new ElectricCarEntities2())
+            using (ElectricCarEntities context = new ElectricCarEntities())
             {
                 foreach (BatteryStorage bs in context.BatteryStorages)
                 {
@@ -139,7 +139,7 @@ namespace ElectricCarDB
         public List<string> getAllInfo()
         {
             List<string> info = new List<string>();
-            using (ElectricCarEntities2 context = new ElectricCarEntities2())
+            using (ElectricCarEntities context = new ElectricCarEntities())
             {
                 foreach (BatteryStorage bs in context.BatteryStorages)
                 {
