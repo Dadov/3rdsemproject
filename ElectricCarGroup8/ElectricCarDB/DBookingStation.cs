@@ -145,5 +145,84 @@ namespace ElectricCarDB
             };
             return b_s;
         }
+
+
+        public void insertAllBSForBooking(int bId, List<MBookingStation> bss)
+        {
+            foreach (MBookingStation item in bss)
+            {
+                updateRecord(bId, item.Station.Id, item.bookedTime.Value);
+            }
+        }
+
+        public void updateAllBSForBooking(int bId, List<MBookingStation> bss)
+        {
+            using (ElectricCarEntities2 context = new ElectricCarEntities2())
+            {
+                bool success = false;
+                using (TransactionScope transaction = new TransactionScope())
+                {
+                    try
+                    {
+
+                        deleteAllBSForBooking(bId);
+                        foreach (MBookingStation item in bss)
+                        {
+                            updateRecord(bId, item.Station.Id, item.bookedTime.Value);
+                        }
+                        transaction.Complete();
+                        success = true;
+                    }
+                    catch (Exception)
+                    {
+
+                        throw new SystemException("Not able finish update for booking_station, please try again");
+                    }
+
+                }
+                if (success)
+                {
+                    // Reset the context since the operation succeeded.
+                    context.SaveChanges();
+                }
+                else
+                {
+                    throw new SystemException("Not able finish update for booking_station, please try again");
+                }
+
+
+                context.SaveChanges();
+            }
+            
+            
+        }
+
+        public void deleteAllBSForBooking(int bId)
+        {
+            using (ElectricCarEntities2 context = new ElectricCarEntities2())
+            {
+                try
+                {
+                    Booking_Station[] bssToDelete;
+                    var items = from item in context.Booking_Station where item.bId == bId select item;
+                    bssToDelete = items.ToArray<Booking_Station>();
+
+                    if (bssToDelete != null)
+                    {
+                        foreach (Booking_Station item in bssToDelete)
+                        {
+                            context.Entry(item).State = EntityState.Deleted;
+                        }
+                        
+                    }
+                    context.SaveChanges();
+                }
+                catch (Exception)
+                {
+
+                    throw new System.NullReferenceException("Can not find booking_station");
+                }
+            }
+        }
     }
 }

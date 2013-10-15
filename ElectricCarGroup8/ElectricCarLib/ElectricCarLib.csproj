@@ -52,6 +52,8 @@
     <Compile Include="BatteryStorageCtr.cs" />
     <Compile Include="BatteryTypeCtr.cs" />
     <Compile Include="BookingCtr.cs" />
+    <Compile Include="BookingLineCtr.cs" />
+    <Compile Include="BookingStationCtr.cs" />
     <Compile Include="ConnectionCtr.cs" />
     <Compile Include="PathFind.cs" />
     <Compile Include="PeriodCalculator.cs" />

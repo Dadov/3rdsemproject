@@ -15,5 +15,8 @@ namespace ElectricCarDB
         void updateRecord(int bId, int sId, DateTime time);
         List<MBookingStation> getAllStationsForBooking(int bId, bool getAssociation);
         List<MBookingStation> getAllBookingsForStation(int sId, bool getAssociation);
+        void insertAllBSForBooking(int bId, List<MBookingStation> bss);
+        void updateAllBSForBooking(int bId, List<MBookingStation> bss);
+        void deleteAllBSForBooking(int bId);
     }
 }

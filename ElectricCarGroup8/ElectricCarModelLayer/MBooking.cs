@@ -10,8 +10,8 @@ namespace ElectricCarModelLayer
     {
         public MBooking()
         {
-            //this.BookingLine = new HashSet<BookingLine>();
-            //this.Station = new HashSet<Station>();
+            bookinglines = new List<MBookingLine>();
+            bookingstations = new List<MBookingStation>();
         }
 
         
@@ -21,6 +21,8 @@ namespace ElectricCarModelLayer
         public Nullable<System.DateTime> createDate { get; set; }
         public Nullable<System.DateTime> tripStart { get; set; }
         public string creaditCard { get; set; }
+        public List<MBookingLine> bookinglines { get; set; }
+        public List<MBookingStation> bookingstations { get; set; }
 
         //public virtual Customer Customer { get; set; }
         //public virtual ICollection<BookingLine> BookingLine { get; set; }
