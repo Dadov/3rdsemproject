@@ -8,6 +8,7 @@ namespace ElectricCarModelLayer
 {
     public class MCustomer : MPerson
     {
+        public MCustomer() { }
         public MCustomer(MDiscountGroup discountGroup, int id, string fName, string lName,
             string address, string country, string phone, string email, MLogInfo logInfo,
             string payStatus)

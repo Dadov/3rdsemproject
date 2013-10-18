@@ -11,8 +11,6 @@ namespace ElectricCarModelLayer
         public MBooking()
         {
             bookinglines = new List<MBookingLine>();
-            bookingstations = new List<MBookingStation>();
-            route = new Dictionary<MStation, DateTime>();
         }
 
         
@@ -23,11 +21,6 @@ namespace ElectricCarModelLayer
         public Nullable<System.DateTime> tripStart { get; set; }
         public string creaditCard { get; set; }
         public List<MBookingLine> bookinglines { get; set; }
-        public List<MBookingStation> bookingstations { get; set; }
-        public Dictionary<MStation, DateTime> route { get; set; }
-
-        //public virtual Customer Customer { get; set; }
-        //public virtual ICollection<BookingLine> BookingLine { get; set; }
-        //public virtual ICollection<Station> Station { get; set; }
+        public MCustomer customer {get; set;}
     }
 }

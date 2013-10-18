@@ -14,7 +14,6 @@ namespace ElectricCarModelLayer
         public Nullable<DateTime> time { get; set; }
 
         public MBatteryType BatteryType { get; set; }
-        public MBooking Booking { get; set; }
         public MStation Station { get; set; }
     }
 }

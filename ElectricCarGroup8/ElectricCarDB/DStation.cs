@@ -13,7 +13,7 @@ namespace ElectricCarDB
 {
     public class DStation : IDStation
     {
-        //private DBBatteryStorage dbStorage = new DBBatteryStorage();
+        private DBBatteryStorage dbStorage = new DBBatteryStorage();
 
         public int addNewRecord(string Name, string Address, string Country, string State)
         {
@@ -53,7 +53,8 @@ namespace ElectricCarDB
                     MStation station = buildStation(s);
                     if (getAssociation)
                     {
-                        //TODO get association
+                        station.storages = dbStorage.getStationStorages(id);
+                        station.naboStations = getNaborStations(id);
                     }
                     return station;
                 }
@@ -117,7 +118,8 @@ namespace ElectricCarDB
                     MStation station = buildStation(s);
                     if (getAssociation)
                     {
-                        //TODO
+                        station.storages = dbStorage.getStationStorages(s.Id);
+                        station.naboStations = getNaborStations(s.Id);
                     }
                     stations.Add(station);
                 }
@@ -161,8 +163,6 @@ namespace ElectricCarDB
                 country = s.country,
                 //TODO
                 state = (State)Enum.Parse(typeof(State), s.state),
-                //storages = dbStorage.getStationStorages(s.Id)
-
             };
             return station;
         }

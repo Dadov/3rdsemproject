@@ -53,6 +53,7 @@
     <Compile Include="DBBatteryTest.cs" />
     <Compile Include="DBBookingLineTest.cs" />
     <Compile Include="DBBookingTest.cs" />
+    <Compile Include="DBConnectionTest.cs" />
     <Compile Include="DBPeriodTest.cs" />
     <Compile Include="DBStationTest.cs" />
     <Compile Include="PathFindTest.cs" />
