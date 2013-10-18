@@ -13,6 +13,9 @@ namespace ElectricCarDB
 {
     public class DBooking : IDBooking
     {
+        private DBookingLine dbBL = new DBookingLine();
+        private DCustomer dbCustomer = new DCustomer();
+
         public int addRecord(int CId, decimal TotalPrice, DateTime CreateDate, DateTime TripStart, string CreditCard)
         {
             using (ElectricCarEntities context = new ElectricCarEntities())
@@ -51,7 +54,8 @@ namespace ElectricCarDB
                     MBooking booking = buildBooking(b);
                     if (getAssociation)
                     {
-                        //TODO
+                        dbBL.getBookingLinesForBooking(id, true);
+                        //dbCustomer.getRecord(b.cId, true); //TODO wait for completion of DCustomer
                     }
                     return booking;
                 }
@@ -116,7 +120,8 @@ namespace ElectricCarDB
                     MBooking booking = buildBooking(b);
                     if (getAssociation)
                     {
-                        //TODO
+                        dbBL.getBookingLinesForBooking(b.Id, true);
+                        //dbCustomer.getRecord(b.cId, true);
                     }
                     bookings.Add(booking);
                 }
@@ -129,7 +134,7 @@ namespace ElectricCarDB
             MBooking booking = new MBooking()
             {
                 Id = b.Id,
-                cId = b.cId, //TODO generate new customer
+                customer = new MCustomer(){ID = b.cId.Value},
                 totalPrice = b.totalPrice,
                 creaditCard = b.creaditCard,
                 createDate = b.createDate,

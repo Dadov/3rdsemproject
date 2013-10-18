@@ -13,6 +13,7 @@ namespace ElectricCarDB
 {
     public class DConnection: IDConnection
     {
+        private DStation dbStation = new DStation();
         public void addNewRecord(int id1, int id2, decimal dist, decimal time)
         {
             using (ElectricCarEntities context = new ElectricCarEntities())
@@ -46,7 +47,8 @@ namespace ElectricCarDB
                     MConnection connection = buildConnection(c);
                     if (getAssociation)
                     {
-                        //TODO get stationCtr to retreive station info
+                        connection.Station1 = dbStation.getRecord(connection.Station1.Id, false);
+                        connection.Station2 = dbStation.getRecord(connection.Station2.Id, false);
                     }
 
                     return connection;
@@ -54,7 +56,6 @@ namespace ElectricCarDB
                 catch (Exception e)
                 {
                     throw new System.NullReferenceException("Can not find nabor station", e);
-                    //throw new SystemException("Can not find nabor station");
                 }
             }
         }
@@ -72,7 +73,6 @@ namespace ElectricCarDB
                 else
                 {
                     throw new System.NullReferenceException("Can not find nabor station");
-                    //throw new SystemException("Can not find association between these two stations");
                 }
             }
         }
@@ -91,7 +91,6 @@ namespace ElectricCarDB
                 else
                 {
                     throw new System.NullReferenceException("Can not find nabor station");
-                    //throw new SystemException("Can not find association between these two stations");
                 }
             }
         }
@@ -106,7 +105,8 @@ namespace ElectricCarDB
                     MConnection connection = buildConnection(c);
                     if (getAssociation)
                     {
-                        //TODO
+                        connection.Station1 = dbStation.getRecord(connection.Station1.Id, false);
+                        connection.Station2 = dbStation.getRecord(connection.Station2.Id, false);
                     }
                     connections.Add(connection);
                 }

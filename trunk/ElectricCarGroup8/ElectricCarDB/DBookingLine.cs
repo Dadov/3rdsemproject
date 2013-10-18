@@ -14,6 +14,8 @@ namespace ElectricCarDB
 {
     public class DBookingLine: IDBookingLine
     {
+        private DBatteryType dbBT = new DBatteryType();
+        private DStation dbStation = new DStation();
         public void addRecord(int BId, int BtId, int SId, int Quantity, decimal Price, DateTime Time)
         {
             using (ElectricCarEntities context = new ElectricCarEntities())
@@ -81,7 +83,8 @@ namespace ElectricCarDB
                     MBookingLine bl = buildBookingLine(b);
                     if (getAssociation)
                     {
-                        //TODO get association
+                        bl.BatteryType = dbBT.getRecord(btId, true);
+                        bl.Station = dbStation.getRecord(sId, false);
                     }
                     return bl;
                 }
@@ -97,7 +100,6 @@ namespace ElectricCarDB
         {
             MBookingLine b = new MBookingLine()
             {
-                Booking = new MBooking() {Id = bl.bId },
                 BatteryType = new MBatteryType { id = bl.btId },
                 Station = new MStation() { Id = bl.sId },
                 quantity = bl.quantity,
@@ -119,11 +121,13 @@ namespace ElectricCarDB
 
                 foreach (BookingLine bl in bls)
                 {
-                    blForBooking.Add(buildBookingLine(bl));
+                    MBookingLine boookingLine = buildBookingLine(bl);
                     if (getAssociation)
                     {
-                        //TODO
+                        boookingLine.BatteryType = dbBT.getRecord(bl.btId, true);
+                        boookingLine.Station = dbStation.getRecord(bl.sId, false);
                     }
+                    blForBooking.Add(boookingLine);
                     
                 }
                 return blForBooking;

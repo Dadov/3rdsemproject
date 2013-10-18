@@ -16,6 +16,9 @@ namespace ElectricCarLibTest
     {
         private DStation dbStation = new DStation();
         private IDConnection dbConnection = new DConnection();
+        private IDBBatteryStorage dbBS = new DBBatteryStorage();
+        private IDBatteryType dbBT = new DBatteryType();
+
         public DBStationTest()
         {
             //
@@ -66,21 +69,43 @@ namespace ElectricCarLibTest
         [TestMethod]
         public void addGetDeleteStation()
         {
-            int id = dbStation.addNewRecord("BoholmStation", "Boholm", "Denmark", "Open");
+            int id1 = dbStation.addNewRecord("BoholmStation", "Boholm", "Denmark", "Open");
+            int id2 = dbStation.addNewRecord("AalborgStation", "Aalborg", "Denmark", "Open");
+            int id3 = dbBT.addNewRecord("SmallBattery", "TODB", 8, 30, 1);
+            
+            dbConnection.addNewRecord(id1, id2, 300, 7);
+            int id4 = dbBS.addNewRecord(id3, id1);
+
             try
             {
-                MStation station = dbStation.getRecord(id, false);
+                MStation station = dbStation.getRecord(id1, true);
                 Assert.AreEqual("BoholmStation", station.name);
                 Assert.AreEqual("Boholm", station.address);
                 Assert.AreEqual("Denmark", station.country);
                 Assert.AreEqual("Open", station.state.ToString());
+
+                Assert.AreEqual("AalborgStation", station.naboStations.First.Value.name);
+                Assert.AreEqual("Aalborg", station.naboStations.First.Value.address);
+                Assert.AreEqual("Denmark", station.naboStations.First.Value.country);
+                Assert.AreEqual("Open", station.naboStations.First.Value.state.ToString());
+
+                Assert.AreEqual(id3, station.storages[0].type.id);
+                Assert.AreEqual("SmallBattery", station.storages[0].type.name);
+                Assert.AreEqual("TODB", station.storages[0].type.producer);
+                Assert.AreEqual(8, Convert.ToInt32(station.storages[0].type.capacity));
+                Assert.AreEqual(30, Convert.ToInt32(station.storages[0].type.exchangeCost));
+                Assert.AreEqual(1, Convert.ToInt32(station.storages[0].type.storageNumber));
             }
             catch
             {
             }
             finally
             {
-                dbStation.deleteRecord(id);
+                dbBS.deleteRecord(id4);
+                dbBT.deleteRecord(id3);
+                dbConnection.deleteRecord(id1, id2);
+                dbStation.deleteRecord(id2);
+                dbStation.deleteRecord(id1);
             }
         }
 

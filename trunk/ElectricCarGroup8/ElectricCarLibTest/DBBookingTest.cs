@@ -62,6 +62,10 @@ namespace ElectricCarLibTest
         #endregion
 
         private IDBooking dbBooking = new DBooking();
+        private IDStation dbStation = new DStation();
+        private IDBatteryType dbBT = new DBatteryType();
+        private IDBBatteryStorage dbBS = new DBBatteryStorage();
+
         [TestMethod]
         public void AddGetDeleteBooking()
         {
@@ -77,6 +81,8 @@ namespace ElectricCarLibTest
                 Assert.AreEqual(createTime, booking.createDate);
                 Assert.AreEqual(trip, booking.tripStart);
                 Assert.AreEqual("1234456", booking.creaditCard);
+
+
             }
             catch (Exception)
             {

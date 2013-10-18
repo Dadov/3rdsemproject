@@ -21,7 +21,7 @@ namespace ElectricCarModelLayer
             Email = email;
             PayStatus = payStatus;
         }
-
+        public MPerson() { }
         // properties
         public int ID { get; set; }
         public string FName { get; set; }
