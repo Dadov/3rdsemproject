@@ -11,7 +11,7 @@ namespace ElectricCarModelLayer
     {
         public MStation()
         {
-            this.naboStations = new LinkedList<MStation>();
+            this.naboStations = new Dictionary<MStation, decimal>();
         }
 
         public int Id { get; set; }
@@ -21,7 +21,7 @@ namespace ElectricCarModelLayer
         public State state { get; set; }
         public List<MBatteryStorage> storages { get; set; }
 
-        public LinkedList<MStation> naboStations { get; set; }
+        public Dictionary<MStation, decimal> naboStations { get; set; }
 
     }
 }

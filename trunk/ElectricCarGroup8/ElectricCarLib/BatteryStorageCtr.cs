@@ -57,5 +57,40 @@ namespace ElectricCarLib
         {
             this.Dispose();
         }
+
+        public bool validateBookingForStation(int sId, int btId, int quantity, DateTime time)
+        {
+            bool validate = true;
+            //TODO validate whether the booking can be placed in period for the station and battery type
+            return validate;
+        }
+
+        public bool validateUpdateBookingForStation(int sId, int btId, int updateQuantity, DateTime time)
+        {
+            bool validate = true;
+            //TODO validate whether the update can be placed in period for the station and battery type
+            return validate;
+        }
+
+        public bool addBookingForStation(int sId, int btId, int quantity, DateTime time)
+        {
+            bool success = true;
+            //TODO calculate and update the numbers in period for spcific battery type with quantity  
+            return success;
+        }
+
+        public bool deleteBookingForStation(int sId, int btId, int quantity, DateTime time)
+        {
+            bool success = true;
+            //TODO calculate and update the numbers in period for spcific battery type with quantity  
+            return success;
+        }
+
+        public bool updateBookingForStation(int sId, int btId, int updateQuantity, DateTime time)
+        {
+            bool success = true;
+            //TODO calculate and update the numbers in period for spcific battery type with quantity 
+            return success;
+        }
     }
 }

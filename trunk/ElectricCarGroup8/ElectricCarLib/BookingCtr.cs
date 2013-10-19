@@ -13,17 +13,31 @@ namespace ElectricCarLib
     {
         private DBooking dbBooking = new DBooking();
         private BookingLineCtr blCtr = new BookingLineCtr();
+        private BatteryStorageCtr bsCtr = new BatteryStorageCtr();
         public void addBooking(MBooking booking) 
         {
-            using (TransactionScope trsaction = new TransactionScope())
+            using (TransactionScope scope = new TransactionScope())
             {
-                //TODO validate period for specific battery type
+                //validate period for specific battery type
+                foreach (MBookingLine item in booking.bookinglines)
+                {
+                    if (!bsCtr.validateBookingForStation(item.Station.Id, item.BatteryType.id, item.quantity.Value, item.time.Value))
+                    {
+                        throw new SystemException("Booking fail because one of the stations is fully booked");
+                    }
+                }
 
                 int bId = addBookingRecord(booking.cId.Value, booking.totalPrice.Value, booking.createDate.Value, booking.tripStart.Value, booking.creaditCard);
-                blCtr.insertAllBLForBooking(booking.bookinglines);
                 //decrease the number in Period
-
+                foreach (MBookingLine item in booking.bookinglines)
+                {
+                    bsCtr.addBookingForStation(item.Station.Id, item.BatteryType.id, item.quantity.Value, item.time.Value);
+                }
                 
+                blCtr.insertAllBLForBooking(booking.bookinglines);
+
+                scope.Complete();
+
             }
         }
 
@@ -36,19 +50,39 @@ namespace ElectricCarLib
 
         public void deleteBooking(int id)
         {
-            blCtr.deleteAllBLForBooking(id);
-            dbBooking.deleteRecord(id);
+            using (TransactionScope scope = new TransactionScope())
+            {
+                MBooking b = getBooking(id);
+                foreach (MBookingLine item in b.bookinglines)
+                {
+                    bsCtr.deleteBookingForStation(item.Station.Id, item.BatteryType.id, item.quantity.Value, item.time.Value);
+                }
+
+                blCtr.deleteAllBLForBooking(id);
+                dbBooking.deleteRecord(id);
+                scope.Complete();
+            }
         }
 
         public void updateBooking(MBooking booking)
         {
-            using (TransactionScope trsaction = new TransactionScope())
+            using (TransactionScope scope = new TransactionScope())
             {
-                //TODO validate whether update is valid
-
+                //validate whether update is valid
+                foreach (MBookingLine item in booking.bookinglines)
+                {
+                    if (!bsCtr.validateUpdateBookingForStation(item.Station.Id, item.BatteryType.id, item.quantity.Value, item.time.Value))
+                    {
+                        throw new SystemException("Update booking fail because one of the stations is fully booked");
+                    }
+                }
                 updateBookingRecord(booking.Id, booking.cId.Value, booking.totalPrice.Value, booking.createDate.Value, booking.tripStart.Value, booking.creaditCard);
+                foreach (MBookingLine item in booking.bookinglines)
+                {
+                    bsCtr.updateBookingForStation(item.Station.Id, item.BatteryType.id, item.quantity.Value, item.time.Value);
+                }
                 blCtr.updateAllBLForBooking(booking.Id, booking.bookinglines);
-                
+                scope.Complete();
             }
         }
 

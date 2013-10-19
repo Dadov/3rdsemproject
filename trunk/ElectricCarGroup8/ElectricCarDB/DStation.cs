@@ -8,6 +8,7 @@ using System.Transactions;
 using System.Data;
 using System.Data.Objects;
 using System.Data.Entity;
+using System.Collections;
 
 namespace ElectricCarDB
 {
@@ -54,7 +55,7 @@ namespace ElectricCarDB
                     if (getAssociation)
                     {
                         station.storages = dbStorage.getStationStorages(id);
-                        station.naboStations = getNaborStations(id);
+                        station.naboStations = getNaborStationsWithDriveHour(id);
                     }
                     return station;
                 }
@@ -119,7 +120,7 @@ namespace ElectricCarDB
                     if (getAssociation)
                     {
                         station.storages = dbStorage.getStationStorages(s.Id);
-                        station.naboStations = getNaborStations(s.Id);
+                        station.naboStations = getNaborStationsWithDriveHour(s.Id);
                     }
                     stations.Add(station);
                 }
@@ -127,7 +128,33 @@ namespace ElectricCarDB
             return stations;
         }
 
-        public LinkedList<MStation> getNaborStations(int id)
+        public Dictionary<MStation, decimal> getNaborStationsWithDriveHour(int id)
+        {
+            Dictionary<MStation, decimal> nStations = new Dictionary<MStation, decimal>();
+            nStations.Add(getRecord(id, false), 0);
+            using (ElectricCarEntities context = new ElectricCarEntities())
+            {
+                var connections = from c in context.Connections where c.sId1 == id || c.sId2 == id select c;
+                foreach (var c in connections)
+                {
+                    MStation sToAdd = new MStation();
+                    decimal driveHour = c.driveHour.Value;
+                    if (c.sId1 == id)
+                    {
+                        sToAdd = getRecord(c.sId2, false);
+                    }
+                    else
+                    {
+                        sToAdd = getRecord(c.sId1, false);
+                    }
+                    nStations.Add(sToAdd, driveHour);
+                }
+
+            }
+            return nStations;
+        }
+
+        public LinkedList<MStation> getNaborStationsWithoutDriveHour(int id)
         {
             LinkedList<MStation> nStations = new LinkedList<MStation>();
             nStations.AddFirst(getRecord(id, false));
