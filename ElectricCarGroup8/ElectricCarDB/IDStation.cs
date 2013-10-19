@@ -14,6 +14,7 @@ namespace ElectricCarDB
         void deleteRecord(int id);
         void updateRecord(int id, string Name, string Address, string Country, string State);
         List<MStation> getAllRecord(bool getAssociation);
-        LinkedList<MStation> getNaborStations(int id);
+        Dictionary<MStation, decimal> getNaborStationsWithDriveHour(int id);
+        LinkedList<MStation> getNaborStationsWithoutDriveHour(int id);
     }
 }

@@ -1,6 +1,7 @@
 ﻿using System;
 using System.Text;
 using System.Collections.Generic;
+using System.Collections;
 using Microsoft.VisualStudio.TestTools.UnitTesting;
 
 using ElectricCarModelLayer;
@@ -79,15 +80,23 @@ namespace ElectricCarLibTest
             try
             {
                 MStation station = dbStation.getRecord(id1, true);
+                Dictionary<MStation, decimal> adj = station.naboStations;
+                ICollection<MStation> naborStations =  (ICollection<MStation>)(adj.Keys);
+                IEnumerator ei = naborStations.GetEnumerator();
+                MStation naborStation = new MStation();
+                if (ei.MoveNext())
+	            {
+		            naborStation = (MStation)ei.Current;
+	            }
                 Assert.AreEqual("BoholmStation", station.name);
                 Assert.AreEqual("Boholm", station.address);
                 Assert.AreEqual("Denmark", station.country);
                 Assert.AreEqual("Open", station.state.ToString());
 
-                Assert.AreEqual("AalborgStation", station.naboStations.First.Value.name);
-                Assert.AreEqual("Aalborg", station.naboStations.First.Value.address);
-                Assert.AreEqual("Denmark", station.naboStations.First.Value.country);
-                Assert.AreEqual("Open", station.naboStations.First.Value.state.ToString());
+                Assert.AreEqual("AalborgStation", naborStation.name);
+                Assert.AreEqual("Aalborg", naborStation.address);
+                Assert.AreEqual("Denmark", naborStation.country);
+                Assert.AreEqual("Open", naborStation.state.ToString());
 
                 Assert.AreEqual(id3, station.storages[0].type.id);
                 Assert.AreEqual("SmallBattery", station.storages[0].type.name);
@@ -142,7 +151,7 @@ namespace ElectricCarLibTest
             dbConnection.addNewRecord(id1, id3, 300, 3);
             try
             {
-                LinkedList<MStation> stations = dbStation.getNaborStations(id1);
+                LinkedList<MStation> stations = dbStation.getNaborStationsWithoutDriveHour(id1);
                 Assert.AreEqual(3, stations.Count);
                 MStation startStation = new MStation();
                 MStation naborStationId2 = new MStation();

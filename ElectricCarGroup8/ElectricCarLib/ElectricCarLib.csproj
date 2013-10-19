@@ -55,6 +55,7 @@
     <Compile Include="BookingLineCtr.cs" />
     <Compile Include="ConnectionCtr.cs" />
     <Compile Include="PathFind.cs" />
+    <Compile Include="PathFindCtr.cs" />
     <Compile Include="PeriodCalculator.cs" />
     <Compile Include="PeriodCtr.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />

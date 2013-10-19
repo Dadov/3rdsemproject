@@ -12,9 +12,10 @@ using System.Data.Entity;
 
 namespace ElectricCarLib
 {
-    class StationCtr
+    public class StationCtr
     {
         private IDStation dbStation = new DStation();
+        private IDConnection dbConnection = new DConnection();
         public void addStation(string name, string address, string country, string state)
         {
             dbStation.addNewRecord(name, address, country, state);
@@ -44,6 +45,30 @@ namespace ElectricCarLib
         private void Dispose(bool disposing)
         {
             this.Dispose();
+        }
+
+        public Dictionary<MStation, Dictionary<MStation, decimal>> adjListWithWeight()
+        {
+            Dictionary<MStation, Dictionary<MStation, decimal>> adjList = new Dictionary<MStation, Dictionary<MStation, decimal>>();
+            List<MStation> stations = dbStation.getAllRecord(false);
+            foreach (MStation s in stations)
+            {
+                Dictionary<MStation, decimal> naborStations = dbStation.getNaborStationsWithDriveHour(s.Id);
+                adjList.Add(s, naborStations);
+            }
+            return adjList;
+        }
+
+        public Dictionary<MStation, LinkedList<MStation>> adjListWithoutWeight()
+        {
+            Dictionary<MStation, LinkedList<MStation>> adjList = new Dictionary<MStation, LinkedList<MStation>>();
+            List<MStation> stations = dbStation.getAllRecord(false);
+            foreach (MStation s in stations)
+            {
+                LinkedList<MStation> naborStations = dbStation.getNaborStationsWithoutDriveHour(s.Id);
+                adjList.Add(s, naborStations);
+            }
+            return adjList;
         }
     }
 }
