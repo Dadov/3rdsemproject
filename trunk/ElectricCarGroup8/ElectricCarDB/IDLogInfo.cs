@@ -9,10 +9,10 @@ namespace ElectricCarDB
 {
     public interface IDLogInfo
     {
-        int addNewRecord(string loginName, string password);
+        int addNewRecord(string loginName, string password, int personId);
         MLogInfo getRecord(int id, bool retrieveAssociation);
         void deleteRecord(int id, bool retrieveAssociation);
-        void updateRecord(int id, string loginName, string password);
+        void updateRecord(int id, string loginName, string password, int personId);
         List<MLogInfo> getAllRecord();
         List<string> getAllInfo();
     }

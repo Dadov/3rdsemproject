@@ -8,20 +8,23 @@ namespace ElectricCarModelLayer
 {
     public class MEmployee : MPerson
     {
-        public MEmployee(EmployeePosition position, int id, string fName, string lName,
-            string address, string country, string phone, string email, ICollection<MLogInfo> logInfos, 
-            string payStatus)
-            : base(id, fName, lName, address, country, phone, email, logInfos, payStatus)
+        public MEmployee(int id, string fName, string lName, string address, string country,
+            string phone, string email, ICollection<MLogInfo> logInfos,
+            PType pType, EmployeePosition position, int sId)
+            : base(id, fName, lName, address, country, phone, email, logInfos, pType)
         {
             Position = position;
+            StationId = sId;
         }
 
+        int StationId { get; set; }
         EmployeePosition Position { get; set; }
     }
 
     public enum EmployeePosition
     {
         // TODO: define possible positions
-        Boss, LiftBoy
+        Boss,
+        LiftBoy
     }
 }

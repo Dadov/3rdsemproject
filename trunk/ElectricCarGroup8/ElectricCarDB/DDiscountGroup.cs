@@ -3,6 +3,10 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
+using System.Transactions;
+using System.Data;
+using System.Data.Objects;
+using System.Data.Entity;
 using ElectricCarModelLayer;
 
 namespace ElectricCarDB
@@ -11,7 +15,49 @@ namespace ElectricCarDB
     {
         public int addNewRecord(string name, Nullable<decimal> discount)
         {
-            throw new NotImplementedException();
+            using (ElectricCarEntities context = new ElectricCarEntities())
+            {
+                try
+                {
+                    bool success = false;
+                    int newId = -1;
+                    using (TransactionScope scope = new TransactionScope())
+                    {
+                        try
+                        {
+                            newId = context.DiscoutGroups.Last().Id + 1;
+                            context.DiscoutGroups.Add(new DiscoutGroup()
+                            {
+                                Id = newId,
+                                name = name,
+                                dgRate = discount
+                            });
+                            context.SaveChanges();
+                            success = true;
+                        }
+                        catch (Exception e)
+                        {
+                            throw new SystemException("Cannot add new Discount Group record " + 
+                                " with an error " + e.Message);
+                        }
+                        if (success)
+                        {
+                            scope.Complete();
+                            return newId;
+                        }
+                        else
+                        {
+                            // gonna be -1
+                            return newId;
+                        }
+                    }
+                }
+                catch (TransactionAbortedException e)
+                {
+                    throw new SystemException("Cannot finish transaction for adding Discount Group " +
+                       " with an error " + e.Message);
+                }
+            }
         }
 
         public MDiscountGroup getRecord(int id, bool retrieveAssociation)
@@ -28,31 +74,128 @@ namespace ElectricCarDB
                     }
                     return mdg;
                 }
-                catch(Exception)
+                catch(Exception e)
                 {
-                    throw new System.NullReferenceException("Can not find discount grup with id: " + id);
+                    throw new System.NullReferenceException("Cannot get discount grup with id: " + id + 
+                        " with an error " + e.Message);
                 }
             }
         }
 
         public void deleteRecord(int id, bool retrieveAssociation)
         {
-            throw new NotImplementedException();
+            using (ElectricCarEntities context = new ElectricCarEntities())
+            {
+                try
+                {
+                    bool success = false;
+                    using (TransactionScope scope = new TransactionScope())
+                    {
+                        try
+                        {
+                            DiscoutGroup dg = context.DiscoutGroups.Find(id);
+                            if (dg != null)
+                            {
+                                context.Entry(dg).State = EntityState.Deleted;
+                                context.SaveChanges();
+                                success = true;
+                            }
+                        }
+                        catch (Exception e)
+                        {
+                            throw new SystemException("Cannot delete Discount Group " + id + " record " +
+                                " with an error " + e.Message);
+                        }
+                        if (success)
+                        {
+                            scope.Complete();
+                        }
+                    }
+                }
+                catch (TransactionAbortedException e)
+                {
+                    throw new SystemException("Cannot finish transaction for deleting Discount Group " +
+                       " with an error " + e.Message);
+                }
+            }
         }
 
         public void updateRecord(int id, string name, Nullable<decimal> discount)
         {
-            throw new NotImplementedException();
+            using (ElectricCarEntities context = new ElectricCarEntities())
+            {
+                try
+                {
+                    bool success = false;
+                    using (TransactionScope scope = new TransactionScope())
+                    {
+                        try
+                        {
+                            DiscoutGroup dg = context.DiscoutGroups.Find(id);
+                            dg.name = name;
+                            dg.dgRate = discount;
+                            context.SaveChanges();
+                            success = true;
+                        }
+                        catch (Exception e)
+                        {
+                            throw new SystemException("Cannot update Discount Group " + id + " record " +
+                                " with an error " + e.Message);
+                        }
+                        if (success)
+                        {
+                            scope.Complete();
+                        }
+                    }
+                }
+                catch (TransactionAbortedException e)
+                {
+                    throw new SystemException("Cannot finish transaction for updating Discount Group " +
+                       " with an error " + e.Message);
+                }
+            }
         }
 
         public List<MDiscountGroup> getAllRecord()
         {
-            throw new NotImplementedException();
+            using (ElectricCarEntities context = new ElectricCarEntities())
+            {
+                List<MDiscountGroup> discountGroups = new List<MDiscountGroup>();
+                try 
+                {
+                    foreach(DiscoutGroup dg in context.DiscoutGroups)
+                    {
+                        discountGroups.Add(DDiscountGroup.buildMDiscountGroup(dg));
+                    }
+                    return discountGroups;
+                }
+                catch (Exception e)
+                {
+                    throw new SystemException("Cannot get all Discount Groups " +
+                       " with an error " + e.Message);
+                }
+            }        
         }
 
         public List<string> getAllInfo()
         {
-            throw new NotImplementedException();
+            using (ElectricCarEntities context = new ElectricCarEntities())
+            {
+                List<string> discountGroups = new List<string>();
+                try 
+                {
+                    foreach(DiscoutGroup dg in context.DiscoutGroups)
+                    {
+                        discountGroups.Add(dg.ToString());
+                    }
+                    return discountGroups;
+                }
+                catch (Exception e)
+                {
+                    throw new SystemException("Cannot get all Discount Groups info " +
+                       " with an error " + e.Message);
+                }
+            } 
         }
 
         public static MDiscountGroup buildMDiscountGroup(DiscoutGroup discountGroup)

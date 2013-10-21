@@ -9,14 +9,17 @@ namespace ElectricCarModelLayer
     public class MCustomer : MPerson
     {
         public MCustomer() { }
-        public MCustomer(MDiscountGroup discountGroup, int id, string fName, string lName,
-            string address, string country, string phone, string email, ICollection<MLogInfo> logInfos,
-            string payStatus)
-            : base(id, fName, lName, address, country, phone, email, logInfos, payStatus) 
+
+        public MCustomer(int id, string fName, string lName, string address, string country,
+            string phone, string email, ICollection<MLogInfo> logInfos,
+            PType pType, MDiscountGroup discountGroup, string payStatus)
+            : base(id, fName, lName, address, country, phone, email, logInfos, pType) 
         {
             DiscountGroup = discountGroup;
+            PaymentStatus = payStatus;
         }
 
+        string PaymentStatus { get; set; }
         MDiscountGroup DiscountGroup { get; set; }
     }
 }
