@@ -11,16 +11,14 @@ namespace ElectricCarDB
     public interface IDEmployee
     {
         int addNewRecord(EmployeePosition position, string fName, string lName,
-            string address, string country, string phone, string email, MLogInfo logInfo,
+            string address, string country, string phone, string email, ICollection<MLogInfo> logInfos,
             string payStatus);
         MEmployee getRecord(int id, bool retrieveAssociation);
         void deleteRecord(int id);
         void updateRecord(int id, EmployeePosition position, string fName, string lName,
-            string address, string country, string phone, string email, MLogInfo logInfo,
+            string address, string country, string phone, string email, ICollection<MLogInfo> logInfos,
             string payStatus);
         List<MEmployee> getAllRecord();
         List<string> getAllInfo();
-        // private methods are forbidden in an interface
-        // private MEmployee buildMEmployee(Employee employee);
     }
 }

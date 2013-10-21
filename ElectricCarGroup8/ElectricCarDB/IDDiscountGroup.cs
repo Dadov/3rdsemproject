@@ -15,7 +15,5 @@ namespace ElectricCarDB
         void updateRecord(int id, string name, Nullable<decimal> discount);
         List<MDiscountGroup> getAllRecord();
         List<string> getAllInfo();
-        // private methods are forbidden
-        // private MDiscountGroup buildMDiscountGroup(DiscoutGroup discountGroup);
     }
 }

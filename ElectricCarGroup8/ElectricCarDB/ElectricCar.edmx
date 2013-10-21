@@ -55,6 +55,14 @@
             <End Role="Station" EntitySet="Station" />
             <End Role="Connection" EntitySet="Connection" />
           </AssociationSet>
+          <AssociationSet Name="Fk_Customer_ToPerson" Association="ElectricCarModel.Store.Fk_Customer_ToPerson">
+            <End Role="Person" EntitySet="Person" />
+            <End Role="Customer" EntitySet="Customer" />
+          </AssociationSet>
+          <AssociationSet Name="Fk_Employee_ToPerson" Association="ElectricCarModel.Store.Fk_Employee_ToPerson">
+            <End Role="Person" EntitySet="Person" />
+            <End Role="Employee" EntitySet="Employee" />
+          </AssociationSet>
           <AssociationSet Name="FK_Employee_ToTable" Association="ElectricCarModel.Store.FK_Employee_ToTable">
             <End Role="Station" EntitySet="Station" />
             <End Role="Employee" EntitySet="Employee" />
@@ -139,6 +147,7 @@
           </Key>
           <Property Name="Id" Type="int" Nullable="false" />
           <Property Name="dgId" Type="int" />
+          <Property Name="payStatus" Type="varchar" MaxLength="50" />
         </EntityType>
         <EntityType Name="DiscoutGroup">
           <Key>
@@ -307,6 +316,30 @@
             </Dependent>
           </ReferentialConstraint>
         </Association>
+        <Association Name="Fk_Customer_ToPerson">
+          <End Role="Person" Type="ElectricCarModel.Store.Person" Multiplicity="1" />
+          <End Role="Customer" Type="ElectricCarModel.Store.Customer" Multiplicity="0..1" />
+          <ReferentialConstraint>
+            <Principal Role="Person">
+              <PropertyRef Name="Id" />
+            </Principal>
+            <Dependent Role="Customer">
+              <PropertyRef Name="Id" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="Fk_Employee_ToPerson">
+          <End Role="Person" Type="ElectricCarModel.Store.Person" Multiplicity="1" />
+          <End Role="Employee" Type="ElectricCarModel.Store.Employee" Multiplicity="0..1" />
+          <ReferentialConstraint>
+            <Principal Role="Person">
+              <PropertyRef Name="Id" />
+            </Principal>
+            <Dependent Role="Employee">
+              <PropertyRef Name="Id" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
         <Association Name="FK_Employee_ToTable">
           <End Role="Station" Type="ElectricCarModel.Store.Station" Multiplicity="0..1" />
           <End Role="Employee" Type="ElectricCarModel.Store.Employee" Multiplicity="*" />
@@ -366,9 +399,7 @@
           <EntitySet Name="Bookings" EntityType="ElectricCarModel.Booking" />
           <EntitySet Name="BookingLines" EntityType="ElectricCarModel.BookingLine" />
           <EntitySet Name="Connections" EntityType="ElectricCarModel.Connection" />
-          <EntitySet Name="Customers" EntityType="ElectricCarModel.Customer" />
           <EntitySet Name="DiscoutGroups" EntityType="ElectricCarModel.DiscoutGroup" />
-          <EntitySet Name="Employees" EntityType="ElectricCarModel.Employee" />
           <EntitySet Name="LoginInfoes" EntityType="ElectricCarModel.LoginInfo" />
           <EntitySet Name="Periods" EntityType="ElectricCarModel.Period" />
           <EntitySet Name="People" EntityType="ElectricCarModel.Person" />
@@ -394,7 +425,7 @@
             <End Role="BookingLine" EntitySet="BookingLines" />
           </AssociationSet>
           <AssociationSet Name="FK_Booking_ToTable" Association="ElectricCarModel.FK_Booking_ToTable">
-            <End Role="Customer" EntitySet="Customers" />
+            <End Role="Customer" EntitySet="People" />
             <End Role="Booking" EntitySet="Bookings" />
           </AssociationSet>
           <AssociationSet Name="FK_BookingLine_ToTable" Association="ElectricCarModel.FK_BookingLine_ToTable">
@@ -415,11 +446,11 @@
           </AssociationSet>
           <AssociationSet Name="FK_Table_ToTable" Association="ElectricCarModel.FK_Table_ToTable">
             <End Role="DiscoutGroup" EntitySet="DiscoutGroups" />
-            <End Role="Customer" EntitySet="Customers" />
+            <End Role="Customer" EntitySet="People" />
           </AssociationSet>
           <AssociationSet Name="FK_Employee_ToTable" Association="ElectricCarModel.FK_Employee_ToTable">
             <End Role="Station" EntitySet="Stations" />
-            <End Role="Employee" EntitySet="Employees" />
+            <End Role="Employee" EntitySet="People" />
           </AssociationSet>
           <AssociationSet Name="FK_LoginInfo_ToTable" Association="ElectricCarModel.FK_LoginInfo_ToTable">
             <End Role="Person" EntitySet="People" />
@@ -501,14 +532,11 @@
           <NavigationProperty Name="Station" Relationship="ElectricCarModel.FK_Connection_ToTable" FromRole="Connection" ToRole="Station" />
           <NavigationProperty Name="Station1" Relationship="ElectricCarModel.FK_Connection_ToTable_1" FromRole="Connection" ToRole="Station" />
         </EntityType>
-        <EntityType Name="Customer">
-          <Key>
-            <PropertyRef Name="Id" />
-          </Key>
-          <Property Name="Id" Type="Int32" Nullable="false" />
+        <EntityType Name="Customer" BaseType="ElectricCarModel.Person">
           <Property Name="dgId" Type="Int32" />
           <NavigationProperty Name="Bookings" Relationship="ElectricCarModel.FK_Booking_ToTable" FromRole="Customer" ToRole="Booking" />
           <NavigationProperty Name="DiscoutGroup" Relationship="ElectricCarModel.FK_Table_ToTable" FromRole="Customer" ToRole="DiscoutGroup" />
+          <Property Type="String" Name="payStatus" MaxLength="50" FixedLength="false" Unicode="false" />
         </EntityType>
         <EntityType Name="DiscoutGroup">
           <Key>
@@ -519,11 +547,7 @@
           <Property Name="dgRate" Type="Decimal" Precision="18" Scale="0" />
           <NavigationProperty Name="Customers" Relationship="ElectricCarModel.FK_Table_ToTable" FromRole="DiscoutGroup" ToRole="Customer" />
         </EntityType>
-        <EntityType Name="Employee">
-          <Key>
-            <PropertyRef Name="Id" />
-          </Key>
-          <Property Name="Id" Type="Int32" Nullable="false" />
+        <EntityType Name="Employee" BaseType="ElectricCarModel.Person">
           <Property Name="position" Type="String" MaxLength="50" Unicode="false" FixedLength="false" />
           <Property Name="sId" Type="Int32" />
           <NavigationProperty Name="Station" Relationship="ElectricCarModel.FK_Employee_ToTable" FromRole="Employee" ToRole="Station" />
@@ -550,7 +574,7 @@
           <Property Name="futureBookNumber" Type="Int32" />
           <NavigationProperty Name="BatteryStorage" Relationship="ElectricCarModel.FK_Period_ToTable" FromRole="Period" ToRole="BatteryStorage" />
         </EntityType>
-        <EntityType Name="Person">
+        <EntityType Name="Person" Abstract="true">
           <Key>
             <PropertyRef Name="Id" />
           </Key>
@@ -805,29 +829,12 @@
               </MappingFragment>
             </EntityTypeMapping>
           </EntitySetMapping>
-          <EntitySetMapping Name="Customers">
-            <EntityTypeMapping TypeName="ElectricCarModel.Customer">
-              <MappingFragment StoreEntitySet="Customer">
-                <ScalarProperty Name="Id" ColumnName="Id" />
-                <ScalarProperty Name="dgId" ColumnName="dgId" />
-              </MappingFragment>
-            </EntityTypeMapping>
-          </EntitySetMapping>
           <EntitySetMapping Name="DiscoutGroups">
             <EntityTypeMapping TypeName="ElectricCarModel.DiscoutGroup">
               <MappingFragment StoreEntitySet="DiscoutGroup">
                 <ScalarProperty Name="Id" ColumnName="Id" />
                 <ScalarProperty Name="name" ColumnName="name" />
                 <ScalarProperty Name="dgRate" ColumnName="dgRate" />
-              </MappingFragment>
-            </EntityTypeMapping>
-          </EntitySetMapping>
-          <EntitySetMapping Name="Employees">
-            <EntityTypeMapping TypeName="ElectricCarModel.Employee">
-              <MappingFragment StoreEntitySet="Employee">
-                <ScalarProperty Name="Id" ColumnName="Id" />
-                <ScalarProperty Name="position" ColumnName="position" />
-                <ScalarProperty Name="sId" ColumnName="sId" />
               </MappingFragment>
             </EntityTypeMapping>
           </EntitySetMapping>
@@ -853,16 +860,30 @@
             </EntityTypeMapping>
           </EntitySetMapping>
           <EntitySetMapping Name="People">
-            <EntityTypeMapping TypeName="ElectricCarModel.Person">
+            <EntityTypeMapping TypeName="IsTypeOf(ElectricCarModel.Person)">
               <MappingFragment StoreEntitySet="Person">
                 <ScalarProperty Name="Id" ColumnName="Id" />
-                <ScalarProperty Name="fName" ColumnName="fName" />
-                <ScalarProperty Name="lname" ColumnName="lname" />
-                <ScalarProperty Name="address" ColumnName="address" />
-                <ScalarProperty Name="country" ColumnName="country" />
-                <ScalarProperty Name="phone" ColumnName="phone" />
-                <ScalarProperty Name="email" ColumnName="email" />
                 <ScalarProperty Name="pType" ColumnName="pType" />
+                <ScalarProperty Name="email" ColumnName="email" />
+                <ScalarProperty Name="phone" ColumnName="phone" />
+                <ScalarProperty Name="country" ColumnName="country" />
+                <ScalarProperty Name="address" ColumnName="address" />
+                <ScalarProperty Name="lname" ColumnName="lname" />
+                <ScalarProperty Name="fName" ColumnName="fName" />
+              </MappingFragment>
+            </EntityTypeMapping>
+            <EntityTypeMapping TypeName="IsTypeOf(ElectricCarModel.Customer)">
+              <MappingFragment StoreEntitySet="Customer">
+                <ScalarProperty Name="payStatus" ColumnName="payStatus" />
+                <ScalarProperty Name="dgId" ColumnName="dgId" />
+                <ScalarProperty Name="Id" ColumnName="Id" />
+              </MappingFragment>
+            </EntityTypeMapping>
+            <EntityTypeMapping TypeName="IsTypeOf(ElectricCarModel.Employee)">
+              <MappingFragment StoreEntitySet="Employee">
+                <ScalarProperty Name="sId" ColumnName="sId" />
+                <ScalarProperty Name="position" ColumnName="position" />
+                <ScalarProperty Name="Id" ColumnName="Id" />
               </MappingFragment>
             </EntityTypeMapping>
           </EntitySetMapping>

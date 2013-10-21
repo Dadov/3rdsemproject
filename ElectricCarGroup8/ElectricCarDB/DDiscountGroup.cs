@@ -55,9 +55,19 @@ namespace ElectricCarDB
             throw new NotImplementedException();
         }
 
-        private MDiscountGroup buildMDiscountGroup(DiscoutGroup discountGroup)
+        public static MDiscountGroup buildMDiscountGroup(DiscoutGroup discountGroup)
         {
             return new MDiscountGroup(discountGroup.Id, discountGroup.name, discountGroup.dgRate);
+        }
+
+        public static DiscoutGroup buildDiscountGroup(MDiscountGroup mDiscountGroup)
+        {
+            return new DiscoutGroup()
+            {
+                Id = mDiscountGroup.ID,
+                name = mDiscountGroup.Name,
+                dgRate = mDiscountGroup.Discount
+            };
         }
     }
 }

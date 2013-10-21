@@ -12,15 +12,15 @@ namespace ElectricCarDB
     using System;
     using System.Collections.Generic;
     
-    public partial class Customer
+    public partial class Customer : Person
     {
         public Customer()
         {
             this.Bookings = new HashSet<Booking>();
         }
     
-        public int Id { get; set; }
         public Nullable<int> dgId { get; set; }
+        public string payStatus { get; set; }
     
         public virtual ICollection<Booking> Bookings { get; set; }
         public virtual DiscoutGroup DiscoutGroup { get; set; }

@@ -31,9 +31,7 @@ namespace ElectricCarDB
         public DbSet<Booking> Bookings { get; set; }
         public DbSet<BookingLine> BookingLines { get; set; }
         public DbSet<Connection> Connections { get; set; }
-        public DbSet<Customer> Customers { get; set; }
         public DbSet<DiscoutGroup> DiscoutGroups { get; set; }
-        public DbSet<Employee> Employees { get; set; }
         public DbSet<LoginInfo> LoginInfoes { get; set; }
         public DbSet<Period> Periods { get; set; }
         public DbSet<Person> People { get; set; }

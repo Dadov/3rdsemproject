@@ -10,16 +10,14 @@ namespace ElectricCarDB
     public interface IDCustomer
     {
         int addNewRecord(MDiscountGroup discountGroup, string fName, string lName,
-            string address, string country, string phone, string email, MLogInfo logInfo,
+            string address, string country, string phone, string email, ICollection<MLogInfo> logInfos,
             string payStatus);
         MCustomer getRecord(int id, bool retrieveAssociation);
         void deleteRecord(int id);
         void updateRecord(int id, MDiscountGroup discountGroup, string fName, string lName,
-            string address, string country, string phone, string email, MLogInfo logInfo,
+            string address, string country, string phone, string email, ICollection<MLogInfo> logInfos,
             string payStatus);
         List<MCustomer> getAllRecord();
         List<string> getAllInfo();
-        // privte methods are forbidden in an interface
-        // private MCustomer buildMCustomer(Customer customer);
     }
 }

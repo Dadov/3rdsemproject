@@ -12,7 +12,7 @@ namespace ElectricCarDB
     using System;
     using System.Collections.Generic;
     
-    public partial class Person
+    public abstract partial class Person
     {
         public Person()
         {

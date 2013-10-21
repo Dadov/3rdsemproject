@@ -9,9 +9,9 @@ namespace ElectricCarModelLayer
     public class MEmployee : MPerson
     {
         public MEmployee(EmployeePosition position, int id, string fName, string lName,
-            string address, string country, string phone, string email, MLogInfo logInfo, 
+            string address, string country, string phone, string email, ICollection<MLogInfo> logInfos, 
             string payStatus)
-            : base(id, fName, lName, address, country, phone, email, logInfo, payStatus)
+            : base(id, fName, lName, address, country, phone, email, logInfos, payStatus)
         {
             Position = position;
         }
