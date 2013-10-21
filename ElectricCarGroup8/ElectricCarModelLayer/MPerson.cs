@@ -10,7 +10,7 @@ namespace ElectricCarModelLayer
     {
         // constructor
         public MPerson(int id, string fName, string lName, string address, string country,
-            string phone, string email, ICollection<MLogInfo> logInfos, string payStatus)
+            string phone, string email, ICollection<MLogInfo> logInfos, PType pType)
         {
             ID = id;
             FName = fName;
@@ -20,7 +20,7 @@ namespace ElectricCarModelLayer
             Phone = phone;
             Email = email;
             LogInfos = logInfos;
-            PayStatus = payStatus;
+            PersonType = pType;
         }
         public MPerson() { }
         // properties
@@ -31,8 +31,13 @@ namespace ElectricCarModelLayer
         public string Country { get; set; }
         public string Phone { get; set; }
         public string Email { get; set; }
+        public PType PersonType { get; set; }
         public ICollection<MLogInfo> LogInfos { get; set; }
-        // TODO: what is this for?
-        public string PayStatus { get; set; }
+    }
+
+    public enum PType
+    {
+        Customer,
+        Employee
     }
 }
