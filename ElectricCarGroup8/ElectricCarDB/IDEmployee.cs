@@ -12,12 +12,12 @@ namespace ElectricCarDB
     {
         int addNewRecord(EmployeePosition position, string fName, string lName,
             string address, string country, string phone, string email, ICollection<MLogInfo> logInfos,
-            string payStatus);
+            int sId);
         MEmployee getRecord(int id, bool retrieveAssociation);
         void deleteRecord(int id);
         void updateRecord(int id, EmployeePosition position, string fName, string lName,
             string address, string country, string phone, string email, ICollection<MLogInfo> logInfos,
-            string payStatus);
+            int sId);
         List<MEmployee> getAllRecord();
         List<string> getAllInfo();
     }

@@ -3,48 +3,74 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
-using ElectricCarModelLayer;
 using System.Transactions;
 using System.Data;
 using System.Data.Objects;
 using System.Data.Entity;
+using ElectricCarModelLayer;
 
 namespace ElectricCarDB
 {
     public class DCustomer : IDCustomer
     {
-        public int addNewRecord(MDiscountGroup discountGroup, string fName, string lName, string address, string country, string phone, string email, ICollection<MLogInfo> logInfos, string payStatus)
+        // delete LoginInfoes from arguments
+        public int addNewRecord(MDiscountGroup discountGroup, string fName, string lName, string address, string country, string phone, string email, ICollection<MLogInfo> logInfos, string payStatus) 
         {
-            using (ElectricCarEntities context = new ElectricCarEntities())
+            using (ElectricCarEntities context = new ElectricCarEntities()) 
             {
-                // TODO: transaction scope
-                try
+                try 
                 {
-                    int newId = context.Bookings.Count() + 1;
-                    context.People.Add(new Customer()
+                    bool success = false;
+                    int newId = -1;
+                    using (TransactionScope scope = new TransactionScope()) 
                     {
-                        Id = newId,
-                        fName = fName,
-                        lname = lName,
-                        address = address,
-                        country = country,
-                        phone = phone,
-                        email = email,
-                        LoginInfoes = DLogInfo.buildLogInfos(logInfos),
-                        // TODO: change to enum
-                        pType = "Customer",
-                        payStatus = null,
-                        // TODO: not considering putting the ICollection<Booking> Bookings on Customer record creation
-                        // TODO: dgId or DiscountGroup
-                        dgId = discountGroup.ID,
-                        DiscoutGroup = DDiscountGroup.buildDiscountGroup(discountGroup),
-                    });
-                    context.SaveChanges();
-                    return newId;
+                        try 
+                        {
+                            newId = context.People.Last().Id + 1;
+                            context.People.Add(new Customer()
+                            {
+                                Id = newId,
+                                fName = fName,
+                                lname = lName,
+                                address = address,
+                                country = country,
+                                phone = phone,
+                                email = email,
+                                // together and after customer creation add logInfo and include returned 
+                                // person Id in there
+                                // LoginInfoes = DLogInfo.buildLogInfos(logInfos),
+                                // TODO: change to enum
+                                pType = PType.Customer.ToString(),
+                                payStatus = null,
+                                // TODO: not considering putting the ICollection<Booking> Bookings on Customer record creation
+                                // TODO: dgId or DiscountGroup, using dgId
+                                dgId = discountGroup.ID,
+                                // DiscoutGroup = DDiscountGroup.buildDiscountGroup(discountGroup)
+                            });
+                            context.SaveChanges();
+                            success = true;
+                        } 
+                        catch (Exception e) 
+                        {
+                            throw new SystemException("Cannot add new Customer record " +
+                                " with an error " + e.Message);
+                        }
+                        if (success)
+                        {
+                            scope.Complete();
+                            return newId;
+                        }
+                        else
+                        {
+                            // gonna be -1
+                            return newId;
+                        }
+                    }
                 }
-                catch (Exception)
+                catch (TransactionAbortedException e) 
                 {
-                    throw new System.NullReferenceException("Cannot add new Customer. ");
+                    throw new SystemException("Cannot finish transaction for adding Customer " +
+                       " with an error " + e.Message);
                 }
             }
         }
@@ -63,36 +89,56 @@ namespace ElectricCarDB
                     }
                     return mcust;
                 }
-                catch(Exception)
+                catch(Exception e)
                 {
-                    throw new System.NullReferenceException("Cannot find Customer with id: " + id);
+                    throw new System.NullReferenceException("Cannot get Customer with id: " + id 
+                        + " with message " + e.Message);
                 }
             }
-            throw new NotImplementedException();
         }
 
         public void deleteRecord(int id)
         {
             using (ElectricCarEntities context = new ElectricCarEntities())
             {
-                // TODO: transaction scope
                 try
                 {
-                    Person cust = context.People.Find(id);
-                    if (cust != null)
+                    bool success = false;
+                    using (TransactionScope scope = new TransactionScope())
                     {
-                        // TODO: do I need to delete each separately, or going to be done all together, cascade
-                        context.Entry(cust).State = EntityState.Deleted;
-                        // context.Entry(cust.LoginInfo) = EntityState.Deleted;
-                        context.SaveChanges();
+                        try
+                        {
+                            Person cust = context.People.Find(id);
+                            IEnumerable<LoginInfo> logInfos = context.LoginInfoes.Where(pid => pid.pId == cust.Id);
+                            if (cust != null)
+                            {
+                                context.Entry(cust).State = EntityState.Deleted;
+                                // delete all associated logInfos
+                                foreach (LoginInfo logInfo in logInfos)
+                                {
+                                    context.Entry(logInfo).State = EntityState.Deleted;
+                                }
+                                context.SaveChanges();
+                                success = true;
+                            }
+                        }
+                        catch (Exception e)
+                        {
+                            throw new SystemException("Cannot delete Customers " + id + " record "
+                                + " with message " + e.Message);
+                        }
+                        if (success)
+                        {
+                            scope.Complete();
+                        }
                     }
                 }
-                catch (Exception)
+                catch (TransactionAbortedException e)
                 {
-                    throw new System.NullReferenceException("Cannot delete Customer record ");
+                    throw new SystemException("Cannot finish transaction for deleting Customer " +
+                       " with an error " + e.Message);
                 }
             }
-            throw new NotImplementedException();
         }
 
         public void updateRecord(int id, MDiscountGroup discountGroup, string fName, string lName, string address, string country, string phone, string email, ICollection<MLogInfo> logInfos, string payStatus)
@@ -106,82 +152,87 @@ namespace ElectricCarDB
                     {
                         try
                         {
-                            /*
-                            deleteAllBookingLineForBooking(bookingid);
-                            foreach (MBookingLine bl in bls)
-                            {
-                                updateRecord(bl.Booking.Id, bl.BatteryType.id, bl.quantity.Value, bl.price.Value);
-                            }
-                             */
-                            scope.Complete();
+                            Customer cust = (Customer) context.People.Find(id);
+                            cust.fName = fName;
+                            cust.lname = lName;
+                            cust.address = address;
+                            cust.country = country;
+                            cust.phone = phone;
+                            cust.email = email;
+                            // to be or not to be, cos LoginInfoes is 'virtual' in Customer EF model
+                            cust.LoginInfoes = DLogInfo.buildLogInfos(logInfos);
+                            cust.dgId = discountGroup.ID;
+                            cust.payStatus = payStatus;
+                            context.SaveChanges();
                             success = true;
                         }
-                        catch (Exception)
+                        catch (Exception e)
                         {
-
-                            throw new SystemException("Cannot update Customer record");
+                            throw new SystemException("Cannot update Customer record " + id
+                                + " with message " + e.Message);
+                        }
+                        if (success)
+                        {
+                            scope.Complete();
                         }
                     }
-
-                    if (success)
-                    {
-                        // Reset the context since the operation succeeded.
-                        context.SaveChanges();
-                    }
-                    else
-                    {
-                        throw new SystemException("Cannot update Customer record");
-                    }
                 }
-                catch (Exception)
+                catch (TransactionAbortedException e)
                 {
+                    throw new SystemException("Cannot finish transaction for updating Customer " +
+                       " with an error " + e.Message);
                 }
             }
-            throw new NotImplementedException();
         }
 
         public List<MCustomer> getAllRecord()
         {
             using (ElectricCarEntities context = new ElectricCarEntities())
             {
+                List<MCustomer> customers = new List<MCustomer>();
                 try
                 {
+                    foreach (Customer cust in context.People.Where(pt => pt.pType == PType.Customer.ToString()))
+                    {
+                        customers.Add(DCustomer.buildMCustomer(cust));
+                    }
+                    return customers;
                 }
-                catch (Exception)
+                catch (Exception e)
                 {
+                    throw new SystemException("Cannot get all Customers"
+                        + " with message " + e.Message);
                 }
             }
-            throw new NotImplementedException();
         }
 
         public List<string> getAllInfo()
         {
             using (ElectricCarEntities context = new ElectricCarEntities())
             {
+                List<string> info = new List<string>();
                 try
-                {
+                {   
+                    foreach (Customer cust in context.People.Where(pt => pt.pType == PType.Customer.ToString()))
+                    {
+                        info.Add(cust.ToString());
+                    }
+                    return info;
                 }
-                catch (Exception)
+                catch (Exception e)
                 {
+                    throw new SystemException("Cannot get all Customers info"
+                        + " with message " + e.Message);
                 }
             }
-            throw new NotImplementedException();
         }
 
         public static MCustomer buildMCustomer(Customer customer)
         {
-            // TODO: payStatus is undefined in DB schema, using placeholder "daco"
-            return new MCustomer(DDiscountGroup.buildMDiscountGroup(customer.DiscoutGroup), customer.Id,
-                customer.fName, customer.lname, customer.address, customer.country, customer.phone, customer.email,
-                DLogInfo.buildMlogInfos(customer.LoginInfoes), "daco");
+            return new MCustomer(customer.Id, customer.fName, customer.lname, customer.address,
+                customer.country, customer.phone, customer.email, DLogInfo.buildMlogInfos(customer.LoginInfoes),
+                (PType) Enum.Parse(typeof(PType), customer.pType),
+                DDiscountGroup.buildMDiscountGroup(customer.DiscoutGroup), customer.payStatus);
         }
     }
-
-    /*
-    public enum PType
-    {
-        Customer = { string "Customer"},
-        Employee = string "Employee"
-    }
-    */
 }
