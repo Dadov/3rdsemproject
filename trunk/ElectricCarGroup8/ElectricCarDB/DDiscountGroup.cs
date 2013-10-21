@@ -82,7 +82,7 @@ namespace ElectricCarDB
             }
         }
 
-        public void deleteRecord(int id, bool retrieveAssociation)
+        public void deleteRecord(int id)
         {
             using (ElectricCarEntities context = new ElectricCarEntities())
             {
