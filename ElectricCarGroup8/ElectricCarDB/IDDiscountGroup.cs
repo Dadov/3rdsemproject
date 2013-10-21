@@ -11,7 +11,7 @@ namespace ElectricCarDB
     {
         int addNewRecord(string name, Nullable<decimal> discount);
         MDiscountGroup getRecord(int id, bool retrieveAssociation);
-        void deleteRecord(int id, bool retrieveAssociation);
+        void deleteRecord(int id);
         void updateRecord(int id, string name, Nullable<decimal> discount);
         List<MDiscountGroup> getAllRecord();
         List<string> getAllInfo();
