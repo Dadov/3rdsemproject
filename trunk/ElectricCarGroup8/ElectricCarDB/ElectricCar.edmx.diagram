@@ -4,7 +4,7 @@
   <edmx:Designer xmlns="http://schemas.microsoft.com/ado/2009/11/edmx">
     <!-- Diagram content (shape and connector positions) -->
     <edmx:Diagrams>
-      <Diagram DiagramId="455f4df4a02d4a07a72e9f953543fefd" Name="Diagram1" ZoomLevel="64">
+      <Diagram DiagramId="455f4df4a02d4a07a72e9f953543fefd" Name="Diagram1" ZoomLevel="109">
         <EntityTypeShape EntityType="ElectricCarModel.Battery" Width="1.5" PointX="3" PointY="23" IsExpanded="true" />
         <EntityTypeShape EntityType="ElectricCarModel.BatteryStorage" Width="1.5" PointX="3" PointY="5.875" IsExpanded="true" />
         <EntityTypeShape EntityType="ElectricCarModel.BatteryType" Width="1.5" PointX="0.75" PointY="1.625" IsExpanded="true" />
@@ -31,6 +31,8 @@
         <AssociationConnector Association="ElectricCarModel.FK_Table_ToTable" ManuallyRouted="false" />
         <AssociationConnector Association="ElectricCarModel.FK_Employee_ToTable" ManuallyRouted="false" />
         <AssociationConnector Association="ElectricCarModel.FK_LoginInfo_ToTable" ManuallyRouted="false" />
+        <InheritanceConnector EntityType="ElectricCarModel.Customer" />
+        <InheritanceConnector EntityType="ElectricCarModel.Employee" />
       </Diagram>
     </edmx:Diagrams>
   </edmx:Designer>

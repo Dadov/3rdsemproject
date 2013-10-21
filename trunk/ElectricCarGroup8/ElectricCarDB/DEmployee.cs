@@ -9,7 +9,7 @@ namespace ElectricCarDB
 {
     public class DEmployee : IDEmployee
     {
-        public int addNewRecord(EmployeePosition position, string fName, string lName, string address, string country, string phone, string email, MLogInfo logInfo, string payStatus)
+        public int addNewRecord(EmployeePosition position, string fName, string lName, string address, string country, string phone, string email, ICollection<MLogInfo> logInfos, string payStatus)
         {
             throw new NotImplementedException();
         }
@@ -24,7 +24,7 @@ namespace ElectricCarDB
             throw new NotImplementedException();
         }
 
-        public void updateRecord(int id, EmployeePosition position, string fName, string lName, string address, string country, string phone, string email, MLogInfo logInfo, string payStatus)
+        public void updateRecord(int id, EmployeePosition position, string fName, string lName, string address, string country, string phone, string email, ICollection<MLogInfo> logInfos, string payStatus)
         {
             throw new NotImplementedException();
         }
@@ -39,7 +39,7 @@ namespace ElectricCarDB
             throw new NotImplementedException();
         }
 
-        private MEmployee buildMEmployee(Employee employee)
+        public static MEmployee buildMEmployee(Employee employee)
         {
             throw new NotImplementedException();
         }

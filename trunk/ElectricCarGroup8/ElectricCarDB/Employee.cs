@@ -12,9 +12,8 @@ namespace ElectricCarDB
     using System;
     using System.Collections.Generic;
     
-    public partial class Employee
+    public partial class Employee : Person
     {
-        public int Id { get; set; }
         public string position { get; set; }
         public Nullable<int> sId { get; set; }
     
