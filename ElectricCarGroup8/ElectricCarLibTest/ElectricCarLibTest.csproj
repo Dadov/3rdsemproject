@@ -54,6 +54,10 @@
     <Compile Include="DBBookingLineTest.cs" />
     <Compile Include="DBBookingTest.cs" />
     <Compile Include="DBConnectionTest.cs" />
+    <Compile Include="DBCustomerTest.cs" />
+    <Compile Include="DBDiscountGroup.cs" />
+    <Compile Include="DBEmployeeTest.cs" />
+    <Compile Include="DBLogInfoTest.cs" />
     <Compile Include="DBPeriodTest.cs" />
     <Compile Include="DBStationTest.cs" />
     <Compile Include="PathFindTest.cs" />
