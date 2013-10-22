@@ -7,6 +7,7 @@ using System.Transactions;
 using System.Data;
 using System.Data.Objects;
 using System.Data.Entity;
+using System.Data.Entity.Infrastructure;
 using ElectricCarModelLayer;
 
 namespace ElectricCarDB
@@ -15,43 +16,45 @@ namespace ElectricCarDB
     {
         public int addNewRecord(string loginName, string password, int personId)
         {
-            using (ElectricCarEntities context = new ElectricCarEntities())
+            // althought 'Required' is supposed to be default
+            using (TransactionScope transaction = new TransactionScope((TransactionScopeOption.Required)))
             {
                 try
                 {
-                    bool success = false;
                     int newId = -1;
-                    using (TransactionScope scope = new TransactionScope())
+                    using (ElectricCarEntities context = new ElectricCarEntities())
                     {
-                        try
+                        bool failed = true;
+                        do
                         {
-                            newId = context.LoginInfoes.Last().Id + 1;
-                            context.LoginInfoes.Add(new LoginInfo()
+                            try
                             {
-                                Id = newId,
-                                name = loginName,
-                                password = password,
-                                pId = personId
-                            });
-                            context.SaveChanges();
-                            success = true;
-                        }
-                        catch (Exception e)
-                        {
-                            throw new SystemException("Cannot add new Login Info record " +
-                                " with an error " + e.Message);
-                        }
-                        if (success)
-                        {
-                            scope.Complete();
-                            return newId;
-                        }
-                        else
-                        {
-                            // gonna be -1
-                            return newId;
-                        }
+                                newId = context.LoginInfoes.Last().Id + 1;
+                                context.LoginInfoes.Add(new LoginInfo()
+                                {
+                                    Id = newId,
+                                    name = loginName,
+                                    password = password,
+                                    pId = personId
+                                });
+                                context.SaveChanges();
+                                failed = false;
+                            }
+                            // needs to be done:
+                            // set 'Concurrency Mode = Fixed' in the property panel for the timestamp in the designer
+                            // DbUpdateConcurrencyException or OptimisticConcurrencyException
+                            catch (DbUpdateConcurrencyException e)
+                            {
+                                // just in case, shouldn't be needed to set explicitly failed
+                                failed = true;
+                                e.Entries.Single().Reload();
+                                Console.WriteLine("DbUpdateConcurrencyException with message: " +
+                                    e.Message + "\n\n was handled and trying again");
+                            }
+                        } while (failed);
                     }
+                    transaction.Complete();
+                    return newId;
                 }
                 catch (TransactionAbortedException e)
                 {
