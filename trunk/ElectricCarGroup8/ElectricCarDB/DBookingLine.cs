@@ -164,57 +164,47 @@ namespace ElectricCarDB
 
         public void updateAllBookingLineForBooking(int bookingid, List<MBookingLine> bls)
         {
-            using (ElectricCarEntities context = new ElectricCarEntities())
+            try
             {
-                try
+                using (TransactionScope scope = new TransactionScope())
                 {
-                    bool success = false;
-                    using (TransactionScope transaction = new TransactionScope())
+                    using (ElectricCarEntities context = new ElectricCarEntities())
                     {
-                        try
+                        deleteAllBookingLineForBooking(bookingid);
+                        foreach (MBookingLine bl in bls)
                         {
-                            deleteAllBookingLineForBooking(bookingid);
-                            foreach (MBookingLine bl in bls)
-                            {
-                                updateRecord(bl.Station.Id, bl.BatteryType.id, bl.Station.Id, bl.quantity.Value, bl.price.Value, bl.time.Value);
-                            }
-                            transaction.Complete();
-                            success = true;
-                        }
-                        catch (Exception)
-                        {
-
-                            throw new SystemException("Not able finish update for bookingline, please try again");
+                            updateRecord(bl.Station.Id, bl.BatteryType.id, bl.Station.Id, bl.quantity.Value, bl.price.Value, bl.time.Value);
                         }
                     }
-
-                    if (success)            
-                    {
-                        // Reset the context since the operation succeeded.
-                        context.SaveChanges();
-                    }
-                    else
-                    {
-                        throw new SystemException("Not able finish update for bookingline, please try again");
-                    }
-                    
-
-                    context.SaveChanges();
+                    scope.Complete(); 
                 }
-                catch (Exception)
-                {
+            }
+            catch (TransactionAbortedException)
+            {
 
-                    throw new System.NullReferenceException("Can not find booking line");
-                }
+                throw new SystemException("Can not update booking lines");
             }
         }
 
         public void insertAllBookingLineForBooking(List<MBookingLine> bls)
         {
-            foreach (MBookingLine bl in bls)
+            try
             {
-                addRecord(bl.Station.Id, bl.BatteryType.id, bl.Station.Id, bl.quantity.Value, bl.price.Value, bl.time.Value);
+                using (TransactionScope scope = new TransactionScope())
+                {
+                    foreach (MBookingLine bl in bls)
+                    {
+                        addRecord(bl.Station.Id, bl.BatteryType.id, bl.Station.Id, bl.quantity.Value, bl.price.Value, bl.time.Value);
+                    }
+                    scope.Complete();
+                }
             }
+            catch (TransactionAbortedException)
+            {
+
+                throw new SystemException("Can not insert booking lines");
+            }
+            
         }
     }
 }
