@@ -18,30 +18,35 @@ namespace ElectricCarDB
 
         public int addNewRecord(string Name, string Address, string Country, string State)
         {
-            using (ElectricCarEntities context = new ElectricCarEntities())
+            try
             {
-                try
+                using (TransactionScope scope = new TransactionScope()) //open transaction
                 {
-                    int newid = context.Stations.Count() + 1;
-                    context.Stations.Add(new Station()
+                    int newid = -1;
+                    using (ElectricCarEntities context = new ElectricCarEntities())
                     {
-                        Id = newid,
-                        name = Name,
-                        address = Address,
-                        country = Country,
-                        state = State
-                    });
-                    context.SaveChanges();
+                        newid = context.Stations.Count() + 1;  //read and lock station table
+                        context.Stations.Add(new Station()
+                        {
+                            Id = newid,
+                            name = Name,
+                            address = Address,
+                            country = Country,
+                            state = State
+                        });
+                        context.SaveChanges();  //update station table
+                    }
+                    scope.Complete(); //close transaction
                     return newid;
                 }
-                catch (Exception)
-                {
-
-                    throw new SystemException("Can not add association between two stations");
-                }
-
 
             }
+            catch (TransactionAbortedException)
+            {
+                throw new SystemException("Can not add new station");
+            }
+
+
         }
 
         public MStation getRecord(int id, bool getAssociation)

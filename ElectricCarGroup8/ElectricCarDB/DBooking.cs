@@ -18,30 +18,34 @@ namespace ElectricCarDB
 
         public int addRecord(int CId, decimal TotalPrice, DateTime CreateDate, DateTime TripStart, string CreditCard)
         {
-            using (ElectricCarEntities context = new ElectricCarEntities())
+            try
             {
-                try
+                using (TransactionScope scope = new TransactionScope())
                 {
-                    int newid = context.Bookings.Count() + 1;
-                    context.Bookings.Add(new Booking()
+                    int newid = -1;
+                    using (ElectricCarEntities context = new ElectricCarEntities())
                     {
+                        context.Bookings.Add(new Booking()
+                        {
                         Id = newid,
                         cId = CId,
                         totalPrice = TotalPrice,
                         createDate = CreateDate,
                         tripStart = TripStart,
                         creaditCard = CreditCard
-                    });
+                        });
                     context.SaveChanges();
+                    }
+                    scope.Complete();
                     return newid;
-
-                }
-                catch (Exception)
-                {
-
-                    throw new SystemException("Can not add booking");
                 }
             }
+            catch (TransactionAbortedException)
+            {
+
+                throw new SystemException("Can not add new booking");
+            }
+            
         }
 
         public MBooking getRecord(int id, bool getAssociation)
