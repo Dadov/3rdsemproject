@@ -80,9 +80,7 @@ namespace ElectricCarLibTest
                 Assert.AreEqual(5, period.bookedBatteryNumber);
                 Assert.AreEqual(1, period.futureBatteryNumber);
             }
-            catch
-            {
-            }
+           
             finally
             {
                 dbPeriod.deleteRecord(id, time);

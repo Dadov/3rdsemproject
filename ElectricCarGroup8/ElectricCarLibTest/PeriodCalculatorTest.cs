@@ -76,9 +76,9 @@ namespace ElectricCarLibTest
             storage = dbStorage.getRecord(bsID, true);
             try
             {
-                MPeriod firstPeriod = pCalc.getPeriod(storage);
+                MPeriod firstPeriod = pCalc.createPeriod(storage);
                 storage = dbStorage.getRecord(storage.id, true);
-                MPeriod secondPeriod = pCalc.getPeriod(storage);
+                MPeriod secondPeriod = pCalc.createPeriod(storage);
                 Assert.AreEqual(DateTime.Today.AddHours(20), secondPeriod.time);
                 Assert.AreEqual(9, secondPeriod.initBatteryNumber);
                 Assert.AreEqual(1, firstPeriod.bookedBatteryNumber);
@@ -94,6 +94,33 @@ namespace ElectricCarLibTest
                 
                 
                
+            }
+        }
+        [TestMethod]
+        public void testBookingPeriod()
+        {
+            int btId = dbType.addNewRecord("newName", "newProducer", 10, 100, 20); //capacity equals 10 hours
+            int sID = dbStation.addNewRecord("newName", "newAddress", "newCountry", "newState");
+            int bsID = dbStorage.addNewRecord(btId, sID);
+            dbPeriod.addNewRecord(bsID, DateTime.Today, 10, 5, 1); // initial =10 custom = 5 future = 1
+            period = dbPeriod.getRecord(bsID, DateTime.Today, true);
+            storage = dbStorage.getRecord(bsID, true);
+            DateTime time = new DateTime(2013, 10, 19);
+            try
+            {
+               period = pCalc.getBookingPeriod(storage, time);
+               Console.WriteLine(period.time.ToLongDateString());
+            }
+            finally
+            {
+                storage = dbStorage.getRecord(storage.id,true);
+                foreach (MPeriod p in storage.periods)
+                {
+                    dbPeriod.deleteRecord(bsID,p.time);
+                }
+                dbStorage.deleteRecord(bsID);
+                dbStation.deleteRecord(sID);
+                dbType.deleteRecord(btId);
             }
         }
     }

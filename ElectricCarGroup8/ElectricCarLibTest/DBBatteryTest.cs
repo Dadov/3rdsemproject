@@ -1,12 +1,14 @@
 ﻿using System;
+using System.Text;
+using System.Collections.Generic;
 using Microsoft.VisualStudio.TestTools.UnitTesting;
-using ElectricCarDB;
 using ElectricCarModelLayer;
-
+using ElectricCarDB;
 
 namespace ElectricCarLibTest
 {
-    class DBBatteryTest
+    [TestClass]
+    public class DBBatteryTest
     {
         private IDBattery dbBattery = new DBattery();
         private IDBatteryType dbType = new DBatteryType();
@@ -68,12 +70,11 @@ namespace ElectricCarLibTest
                 Assert.AreEqual("newState",battery.state);
                 Assert.AreEqual(btId, battery.type.id);
             }
-            catch
-            {
-            }
             finally
             {
-                dbType.deleteRecord(id);
+                dbBattery.deleteRecord(id);
+                dbType.deleteRecord(btId);
+                
             }
         }
 
@@ -96,7 +97,9 @@ namespace ElectricCarLibTest
             }
             finally
             {
-                dbType.deleteRecord(id);
+                dbBattery.deleteRecord(id);
+                dbType.deleteRecord(btId);
+                dbType.deleteRecord(btId2);
             }
         }      
     }

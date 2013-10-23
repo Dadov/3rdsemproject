@@ -11,5 +11,6 @@ namespace ElectricCarModelLayer
         public int id { get; set; }
         public virtual MBatteryType type { get; set; }
         public List<MPeriod> periods { get; set; }
+        public List<MBattery> batteries { get; set; }
     }
 }

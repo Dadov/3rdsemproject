@@ -8,6 +8,7 @@ using System.Transactions;
 using System.Data;
 using System.Data.Objects;
 using System.Data.Entity;
+using System.Data.Entity.Infrastructure;
 
 namespace ElectricCarDB
 {
@@ -15,24 +16,47 @@ namespace ElectricCarDB
     {
         private IDBatteryType dbType = new DBatteryType();
         public int addNewRecord(string state, int btid)
-        {
-            using (ElectricCarEntities context = new ElectricCarEntities())
+            {
+         using (TransactionScope transaction = new TransactionScope((TransactionScopeOption.Required)))
             {
                 try
                 {
-                    int newid = context.Batteries.Count() + 1;
-                    context.Batteries.Add(new Battery()
+                    int newid = -1;
+                    using (ElectricCarEntities context = new ElectricCarEntities())
                     {
-                        Id = newid,
-                        state = state,
-                        btId = btid
-                    });
-                    context.SaveChanges();
+                        bool failed = true;
+                        do
+                        {
+                            try
+                            {
+                            var max= context.Batteries.Max( dg => dg.Id);
+                            newid = (int) max + 1;
+                            context.Batteries.Add(new Battery()
+                            {
+                                Id = newid,
+                                state = state,
+                                btId = btid
+                            });
+                            context.SaveChanges();
+                            failed = false;
+                        }
+                       catch (DbUpdateConcurrencyException e)
+                            {
+                                // just in case, shouldn't be needed to set explicitly failed
+                                failed = true;
+                                e.Entries.Single().Reload();
+                                Console.WriteLine("DbUpdateConcurrencyException with message: " +
+                                    e.Message + "\n\n was handled and trying again");
+                            }
+                        } while (failed);
+                    }
+                    transaction.Complete();
                     return newid;
-                }
-                catch (Exception)
+                    }
+                catch (TransactionAbortedException e)
                 {
-                    throw new SystemException("Can not add battery");
+                    throw new SystemException("Cannot finish transaction for adding Battery Storage " +
+                       " with an error " + e.Message);
                 }
 
             }
@@ -58,6 +82,7 @@ namespace ElectricCarDB
                     throw new System.NullReferenceException("Can not find battery", e);
                     //throw new SystemException("Can not find battery type");
                 }
+
             }
         }
 
@@ -65,35 +90,73 @@ namespace ElectricCarDB
         {
             using (ElectricCarEntities context = new ElectricCarEntities())
             {
-                Battery batToDelete = context.Batteries.Find(id);
-                if (batToDelete != null)
+                try
                 {
-                    context.Entry(batToDelete).State = EntityState.Deleted;
-                    context.SaveChanges();
+                    bool success = false;
+                    using (TransactionScope scope = new TransactionScope())
+                    {
+                        try
+                        {
+                        Battery batToDelete = context.Batteries.Find(id);
+                        
+                        
+                            context.Entry(batToDelete).State = EntityState.Deleted;
+                            context.SaveChanges();
+                            success = true;
+                        
+                         }
+                        catch(Exception)
+                        {
+                            throw new System.NullReferenceException("Can not find battery type");
+                            //throw new SystemException("Can not find battery type");
+                        }
+                        if (success)
+                        {
+                            scope.Complete();
+                        }
+                       
+                    }
                 }
-                else
-                {
-                    throw new System.NullReferenceException("Can not find battery");
-                    //throw new SystemException("Can not find battery");
+                    catch (TransactionAbortedException e)
+                    {
+                        throw new SystemException("Cannot finish transaction for deleting BatteryType " +
+                           " with an error " + e.Message);
+                    }
                 }
             }
-        }
 
         public void updateRecord(int id, string state, int btid)
         {
             using (ElectricCarEntities context = new ElectricCarEntities())
             {
-                Battery batToUpdate = context.Batteries.Find(id);
-                if (batToUpdate != null)
+                try
                 {
-                    batToUpdate.state = state;
-                    batToUpdate.btId = btid;
-                    context.SaveChanges();
+                    bool success = false;
+                    using (TransactionScope scope = new TransactionScope())
+                    {
+                        try
+                        {
+                        Battery batToUpdate = context.Batteries.Find(id);
+                        
+                            batToUpdate.state = state;
+                            batToUpdate.btId = btid;
+                             context.SaveChanges();
+                            success = true;
+                    }
+                        catch (Exception)
+                        {
+                            throw new System.NullReferenceException("Can not find battery type");
+                            //throw new SystemException("Can not find battery type");
+                        }
+                        if (success)
+                        {
+                            scope.Complete();
+                        }
+                    }
                 }
-                else
+                catch (Exception)
                 {
-                    throw new System.NullReferenceException("Can not find battery");
-                    //throw new SystemException("Can not find battery");
+                    throw new SystemException("Can not open transaction scope");
                 }
             }
         }

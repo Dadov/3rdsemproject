@@ -8,35 +8,60 @@ using System.Transactions;
 using System.Data;
 using System.Data.Objects;
 using System.Data.Entity;
+using System.Data.Entity.Infrastructure;
 
 namespace ElectricCarDB
 {
     public class DBPeriod:IDPeriod
     {
         public int addNewRecord(int bsID, DateTime time, int init, int cust, int future)
-        {
-            using (ElectricCarEntities context = new ElectricCarEntities())
+           {
+         using (TransactionScope transaction = new TransactionScope((TransactionScopeOption.Required)))
             {
                 try
                 {
-                    context.Periods.Add(new Period()
+                    int newid = -1;
+                    using (ElectricCarEntities context = new ElectricCarEntities())
                     {
-                        bsId = bsID,
-                        time = time,
-                        avaiNumber = init,
-                        custBookNumber = cust,
-                        futureBookNumber = future
-                    });
-                    context.SaveChanges();
-                    return bsID;
+                        bool failed = true;
+                        do
+                        {
+                            try
+                            
+                        {
+                            context.Periods.Add(new Period()
+                            {
+                                bsId = bsID,
+                                time = time,
+                                avaiNumber = init,
+                                custBookNumber = cust,
+                                futureBookNumber = future
+                            });
+                            newid = bsID;
+                            context.SaveChanges();
+                            failed = false;
+                        }
+                            catch (DbUpdateConcurrencyException e)
+                            {
+                                // just in case, shouldn't be needed to set explicitly failed
+                                failed = true;
+                                e.Entries.Single().Reload();
+                                Console.WriteLine("DbUpdateConcurrencyException with message: " +
+                                    e.Message + "\n\n was handled and trying again");
+                            }
+                        } while (failed);
+                    }
+                    transaction.Complete();
+                    return newid;
                 }
-                catch (Exception)
+                catch (TransactionAbortedException e)
                 {
-                    throw new SystemException("Can not add period");
+                    throw new SystemException("Cannot finish transaction for adding Period " +
+                       " with an error " + e.Message);
                 }
 
             }
-        }
+           }
 
         public MPeriod getRecord(int bsID,DateTime time, bool getAssociation)
         {
@@ -66,39 +91,74 @@ namespace ElectricCarDB
         {
             using (ElectricCarEntities context = new ElectricCarEntities())
             {
-                Object[] key = { bsID, time };
-                Period perToDelete = context.Periods.Find(key);
-                if (perToDelete != null)
+                try 
                 {
-                    context.Entry(perToDelete).State = EntityState.Deleted;
-                    context.SaveChanges();
+                bool success = false;
+                using(TransactionScope scope = new TransactionScope())
+                {
+                    try
+                    {
+                    Object[] key = { bsID, time };
+                    Period perToDelete = context.Periods.Find(key);
+                        context.Entry(perToDelete).State = EntityState.Deleted;
+                        context.SaveChanges();
+                        success = true;
+                    }
+                    catch (Exception)
+                    {
+                        throw new System.NullReferenceException("Can not find battery type");
+                        //throw new SystemException("Can not find battery type");
+                    }
+                    if (success)
+                    {
+                        scope.Complete();
+                    }
+
                 }
-                else
+                }
+                catch (TransactionAbortedException e)
                 {
-                    throw new System.NullReferenceException("Can not find period");
-                    //throw new SystemException("Can not find period");
+                    throw new SystemException("Cannot finish transaction for deleting BatteryType " +
+                       " with an error " + e.Message);
                 }
             }
         }
 
         public void updateRecord(int bsID, DateTime time, int init, int cust, int future)
         {
-            using (ElectricCarEntities context = new ElectricCarEntities())
+           using (ElectricCarEntities context = new ElectricCarEntities())
             {
+                try
+                {
+                    bool success = false;
+                    using (TransactionScope scope = new TransactionScope())
+                    {
+                        try
+                        {
                 Object[] key = { bsID, time };
                 Period perToUpdate = context.Periods.Find(key);
-                if (perToUpdate != null)
-                {
+                
                     perToUpdate.time = time;
                     perToUpdate.avaiNumber = init;
                     perToUpdate.custBookNumber = cust;
                     perToUpdate.futureBookNumber = future;
                     context.SaveChanges();
+                    success = true;
+                        }
+                        catch (Exception)
+                        {
+                            throw new System.NullReferenceException("Can not find battery type");
+                            //throw new SystemException("Can not find battery type");
+                        }
+                        if (success)
+                        {
+                            scope.Complete();
+                        }
+                    }
                 }
-                else
+                catch (Exception)
                 {
-                    throw new System.NullReferenceException("Can not find period");
-                    //throw new SystemException("Can not find period");
+                    throw new SystemException("Can not open transaction scope");
                 }
             }
         }
@@ -120,7 +180,7 @@ namespace ElectricCarDB
             }
             return periods;
         }
-        public List<MPeriod> getStoragePeriods(int bsID)
+        public List<MPeriod> getStoragePeriods(int bsID, Boolean getAssociation)
         {
             List<MPeriod> periods = new List<MPeriod>();
             using (ElectricCarEntities context = new ElectricCarEntities())

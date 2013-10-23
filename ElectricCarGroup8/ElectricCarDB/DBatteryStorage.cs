@@ -8,6 +8,7 @@ using System.Transactions;
 using System.Data;
 using System.Data.Objects;
 using System.Data.Entity;
+using System.Data.Entity.Infrastructure;
 
 namespace ElectricCarDB
 {
@@ -18,23 +19,47 @@ namespace ElectricCarDB
 
         public int addNewRecord(int btID, int sID)
         {
-            using (ElectricCarEntities context = new ElectricCarEntities())
+             // althought 'Required' is supposed to be default
+            using (TransactionScope transaction = new TransactionScope((TransactionScopeOption.Required)))
             {
                 try
                 {
-                    int newid = context.BatteryStorages.Count() + 1;
-                    context.BatteryStorages.Add(new BatteryStorage()
+                    int newid = -1;
+                    using (ElectricCarEntities context = new ElectricCarEntities())
                     {
-                        Id = newid,
-                        sId = sID,
-                        btId = btID
-                    });
-                    context.SaveChanges();
+                        bool failed = true;
+                        do
+                        {
+                        try
+                        {
+                            var max= context.BatteryStorages.Max( dg => dg.Id);
+                            newid = (int) max + 1;
+                            context.BatteryStorages.Add(new BatteryStorage()
+                            {
+                                Id = newid,
+                                sId = sID,
+                                btId = btID
+                            });
+                            context.SaveChanges();
+                            failed = false;
+                        }
+                       catch (DbUpdateConcurrencyException e)
+                            {
+                                // just in case, shouldn't be needed to set explicitly failed
+                                failed = true;
+                                e.Entries.Single().Reload();
+                                Console.WriteLine("DbUpdateConcurrencyException with message: " +
+                                    e.Message + "\n\n was handled and trying again");
+                            }
+                        } while (failed);
+                    }
+                    transaction.Complete();
                     return newid;
-                }
-                catch (Exception)
+                    }
+                catch (TransactionAbortedException e)
                 {
-                    throw new SystemException("Can not add battery storage");
+                    throw new SystemException("Cannot finish transaction for adding Battery Storage " +
+                       " with an error " + e.Message);
                 }
 
             }
@@ -63,39 +88,90 @@ namespace ElectricCarDB
             }
         }
 
-        public void deleteRecord(int id)
+        public MBatteryStorage getRecord(int btid, int sid, bool getAssociation)
         {
             using (ElectricCarEntities context = new ElectricCarEntities())
             {
-                BatteryStorage storToDelete = context.BatteryStorages.Find(id);
-                if (storToDelete != null)
+                try
                 {
-                    context.Entry(storToDelete).State = EntityState.Deleted;
-                    context.SaveChanges();
+                    BatteryStorage s = context.BatteryStorages.Where(bs => bs.btId == btid && bs.sId == sid).FirstOrDefault();
+                    MBatteryStorage storage = buildStorage(s);
+                    return storage;
                 }
-                else
+                catch (Exception e)
                 {
-                    throw new System.NullReferenceException("Can not find battery storage");
+                    throw new System.NullReferenceException("Can not find battery storage", e);
                     //throw new SystemException("Can not find battery storage");
                 }
             }
         }
+        public void deleteRecord(int id)
+        {
+             using (ElectricCarEntities context = new ElectricCarEntities())
+            {
+                try 
+                {
+                bool success = false;
+                using(TransactionScope scope = new TransactionScope())
+                {
+                    try
+                    {
+                    BatteryStorage storToDelete = context.BatteryStorages.Find(id);
+                    context.Entry(storToDelete).State = EntityState.Deleted;
+                    context.SaveChanges();
+                    success = true;
+                    }
+                        catch(Exception)
+                        {
+                            throw new System.NullReferenceException("Can not find battery type");
+                            //throw new SystemException("Can not find battery type");
+                        }
+                        if (success)
+                        {
+                            scope.Complete();
+                        }
+                       
+                    }
+                }
+                    catch (TransactionAbortedException e)
+                    {
+                        throw new SystemException("Cannot finish transaction for deleting BatteryType " +
+                           " with an error " + e.Message);
+                    }
+                }
+            }
 
         public void updateRecord(int id, int btID, int sID)
         {
-            using (ElectricCarEntities context = new ElectricCarEntities())
+             using (ElectricCarEntities context = new ElectricCarEntities())
             {
-                BatteryStorage storToUpdate = context.BatteryStorages.Find(id);
-                if (storToUpdate != null)
+                try
                 {
-                    storToUpdate.btId = btID;
-                    storToUpdate.sId = sID;
-                    context.SaveChanges();
+                    bool success = false;
+                    using (TransactionScope scope = new TransactionScope())
+                    {
+                        try
+                        {
+                    BatteryStorage storToUpdate = context.BatteryStorages.Find(id);
+                       storToUpdate.btId = btID;
+                       storToUpdate.sId = sID;
+                       context.SaveChanges();
+                       success = true;
+                        }
+                        catch (Exception)
+                        {
+                            throw new System.NullReferenceException("Can not find battery type");
+                            //throw new SystemException("Can not find battery type");
+                        }
+                        if (success)
+                        {
+                            scope.Complete();
+                        }
+                    }
                 }
-                else
+                catch (Exception)
                 {
-                    throw new System.NullReferenceException("Can not find battery storage");
-                    //throw new SystemException("Can not find battery storage");
+                    throw new SystemException("Can not open transaction scope");
                 }
             }
         }
@@ -155,7 +231,7 @@ namespace ElectricCarDB
             {
                 id = bs.Id,
                 type = new MBatteryType() { id = (int)bs.btId },
-                periods = dbPeriod.getStoragePeriods(bs.Id),
+                periods = dbPeriod.getStoragePeriods(bs.Id, true),
             };
             return storage;
         }
