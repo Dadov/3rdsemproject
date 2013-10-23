@@ -60,36 +60,98 @@ namespace ElectricCarLib
 
         public bool validateBookingForStation(int sId, int btId, int quantity, DateTime time)
         {
-            bool validate = true;
-            //TODO validate whether the booking can be placed in period for the station and battery type
+            bool validate = false;
+            IDBBatteryStorage dbStorage = new DBBatteryStorage();
+            MBatteryStorage storage = dbStorage.getRecord(btId, sId, true);
+            PeriodCalculator pCalc = new PeriodCalculator();
+            MPeriod period = pCalc.getBookingPeriod(storage,time);
+            MPeriod previous = pCalc.getPreviousPeriod(storage, period);
+            int booked = period.bookedBatteryNumber + previous.bookedBatteryNumber;
+            int available = period.initBatteryNumber - booked;
+            if (available>=quantity)
+            {
+                validate = true;
+            }
             return validate;
         }
 
         public bool validateUpdateBookingForStation(int sId, int btId, int updateQuantity, DateTime time)
         {
-            bool validate = true;
-            //TODO validate whether the update can be placed in period for the station and battery type
+            bool validate = false;
+            IDBBatteryStorage dbStorage = new DBBatteryStorage();
+            MBatteryStorage storage = dbStorage.getRecord(btId, sId, true);
+            PeriodCalculator pCalc = new PeriodCalculator();
+            MPeriod period = pCalc.getBookingPeriod(storage, time);
+            MPeriod previous = pCalc.getPreviousPeriod(storage, period);
+            int booked = period.bookedBatteryNumber + previous.bookedBatteryNumber;
+            int available = period.initBatteryNumber - booked;
+            if (available >= updateQuantity)
+            {
+                validate = true;
+            }
             return validate;
         }
 
         public bool addBookingForStation(int sId, int btId, int quantity, DateTime time)
         {
-            bool success = true;
-            //TODO calculate and update the numbers in period for spcific battery type with quantity  
+            bool success = false;
+            IDBBatteryStorage dbStorage = new DBBatteryStorage();
+            MBatteryStorage storage = dbStorage.getRecord(btId, sId, true);
+            IDPeriod dbPeriod = new DBPeriod();
+            PeriodCalculator pCalc = new PeriodCalculator();
+            try
+            {
+                MPeriod period = pCalc.getBookingPeriod(storage, time);
+                period.bookedBatteryNumber = period.bookedBatteryNumber + quantity;
+                dbPeriod.updateRecord(storage.id,period.time,period.initBatteryNumber,period.bookedBatteryNumber,period.futureBatteryNumber);
+                success = true;
+            }
+            catch(Exception)
+            {
+                throw new SystemException("Can not add Booking");
+            }
             return success;
-        }
+           }
 
         public bool deleteBookingForStation(int sId, int btId, int quantity, DateTime time)
         {
-            bool success = true;
-            //TODO calculate and update the numbers in period for spcific battery type with quantity  
+            bool success = false;
+            IDBBatteryStorage dbStorage = new DBBatteryStorage();
+            MBatteryStorage storage = dbStorage.getRecord(btId, sId, true);
+            IDPeriod dbPeriod = new DBPeriod();
+            PeriodCalculator pCalc = new PeriodCalculator();
+            try
+            {
+                MPeriod period = pCalc.getBookingPeriod(storage, time);
+                period.bookedBatteryNumber = period.bookedBatteryNumber - quantity;
+                dbPeriod.updateRecord(storage.id, period.time, period.initBatteryNumber, period.bookedBatteryNumber, period.futureBatteryNumber);
+                success = true;
+            }
+            catch (Exception)
+            {
+                throw new SystemException("Can not delete Booking");
+            }
             return success;
         }
 
         public bool updateBookingForStation(int sId, int btId, int updateQuantity, DateTime time)
         {
-            bool success = true;
-            //TODO calculate and update the numbers in period for spcific battery type with quantity 
+            bool success = false;
+            IDBBatteryStorage dbStorage = new DBBatteryStorage();
+            MBatteryStorage storage = dbStorage.getRecord(btId, sId, true);
+            IDPeriod dbPeriod = new DBPeriod();
+            PeriodCalculator pCalc = new PeriodCalculator();
+            try
+            {
+                MPeriod period = pCalc.getBookingPeriod(storage, time);
+                period.bookedBatteryNumber = period.bookedBatteryNumber + updateQuantity;
+                dbPeriod.updateRecord(storage.id, period.time, period.initBatteryNumber, period.bookedBatteryNumber, period.futureBatteryNumber);
+                success = true;
+            }
+            catch (Exception)
+            {
+                throw new SystemException("Can not update Booking");
+            }
             return success;
         }
     }

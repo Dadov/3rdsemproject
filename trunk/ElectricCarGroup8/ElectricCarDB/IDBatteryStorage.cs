@@ -11,6 +11,7 @@ namespace ElectricCarDB
     {
         int addNewRecord(int btID, int sID);
         MBatteryStorage getRecord(int id, Boolean getAssociation);
+        MBatteryStorage getRecord(int btid, int sid, Boolean getAssociation);
         void deleteRecord(int id);
         void updateRecord(int id, int btID, int sID);
         List<MBatteryStorage> getAllRecord(Boolean getAssociation);

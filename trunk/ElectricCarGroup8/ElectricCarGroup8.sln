@@ -1,6 +1,8 @@
 ﻿
 Microsoft Visual Studio Solution File, Format Version 12.00
-# Visual Studio 2012
+# Visual Studio 2013
+VisualStudioVersion = 12.0.20827.3
+MinimumVisualStudioVersion = 10.0.40219.1
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "ElectricCarWCF", "ElectricCarWCF\ElectricCarWCF.csproj", "{15B3E0D2-6217-493A-A690-158C497F5318}"
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "ElectricCarLib", "ElectricCarLib\ElectricCarLib.csproj", "{FE580513-61E1-4547-9606-6E32C3BA2A2F}"

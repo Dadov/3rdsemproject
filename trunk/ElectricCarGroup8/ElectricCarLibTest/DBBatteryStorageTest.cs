@@ -69,9 +69,6 @@ namespace ElectricCarLibTest
                 MBatteryStorage storage = dbStorage.getRecord(id, false);
                 Assert.AreEqual(btId, storage.type.id);
             }
-            catch
-            {
-            }
             finally
             {
                 dbStorage.deleteRecord(id);

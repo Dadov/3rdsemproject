@@ -14,6 +14,7 @@ namespace ElectricCarDB
         void deleteRecord(int bsID, DateTime time);
         void updateRecord(int bsID, DateTime time, int init, int cust, int future);
         List<MPeriod> getAllRecord(Boolean getAssociation);
+        List<MPeriod> getStoragePeriods(int bsID, Boolean getAssociation);
         List<string> getAllInfo();
     }
 }
