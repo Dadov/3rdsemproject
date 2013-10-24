@@ -138,13 +138,10 @@ namespace ElectricCarLib
                 }
                 leastStopsPath.Reverse();
                 numOfStops = leastStopsPath.Count; //including start station and end station
-                return leastStopsPath;
+                
             }
 
-            else
-            {
-                throw new SystemException("The start station and end station is not connected in road map");
-            }
+            return leastStopsPath;
         }
 
         public static int breathFirstSearch(Dictionary<MStation, LinkedList<MStation>> adjList, MStation start, MStation destination)
