@@ -14,7 +14,7 @@ namespace ElectricCarDB
 {
     public class DBPeriod:IDPeriod
     {
-        public int addNewRecord(int bsID, DateTime time, int init, int cust, int future)
+        public int addNewRecord(int bsID, DateTime time, int init, int cust)
            {
          using (TransactionScope transaction = new TransactionScope((TransactionScopeOption.Required)))
             {
@@ -34,8 +34,7 @@ namespace ElectricCarDB
                                 bsId = bsID,
                                 time = time,
                                 avaiNumber = init,
-                                custBookNumber = cust,
-                                futureBookNumber = future
+                                custBookNumber = cust
                             });
                             newid = bsID;
                             context.SaveChanges();
@@ -124,7 +123,7 @@ namespace ElectricCarDB
             }
         }
 
-        public void updateRecord(int bsID, DateTime time, int init, int cust, int future)
+        public void updateRecord(int bsID, DateTime time, int init)
         {
            using (ElectricCarEntities context = new ElectricCarEntities())
             {
@@ -140,10 +139,46 @@ namespace ElectricCarDB
                 
                     perToUpdate.time = time;
                     perToUpdate.avaiNumber = init;
-                    perToUpdate.custBookNumber = cust;
-                    perToUpdate.futureBookNumber = future;
                     context.SaveChanges();
                     success = true;
+                        }
+                        catch (Exception)
+                        {
+                            throw new System.NullReferenceException("Can not find battery type");
+                            //throw new SystemException("Can not find battery type");
+                        }
+                        if (success)
+                        {
+                            scope.Complete();
+                        }
+                    }
+                }
+                catch (Exception)
+                {
+                    throw new SystemException("Can not open transaction scope");
+                }
+            }
+        }
+
+        public void updateRecord(int bsID, DateTime time, int init, int cust)
+        {
+            using (ElectricCarEntities context = new ElectricCarEntities())
+            {
+                try
+                {
+                    bool success = false;
+                    using (TransactionScope scope = new TransactionScope())
+                    {
+                        try
+                        {
+                            Object[] key = { bsID, time };
+                            Period perToUpdate = context.Periods.Find(key);
+
+                            perToUpdate.time = time;
+                            perToUpdate.avaiNumber = init;
+                            perToUpdate.custBookNumber = cust;
+                            context.SaveChanges();
+                            success = true;
                         }
                         catch (Exception)
                         {
@@ -216,7 +251,6 @@ namespace ElectricCarDB
                 time = p.time,
                 initBatteryNumber = (int) p.avaiNumber,
                 bookedBatteryNumber = (int) p.custBookNumber,
-                futureBatteryNumber = (int) p.futureBookNumber
             };
             return period;
         }

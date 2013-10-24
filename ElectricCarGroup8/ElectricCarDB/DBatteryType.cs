@@ -28,8 +28,15 @@ namespace ElectricCarDB
                         {
                             try
                             {
-                            var max= context.BatteryTypes.Max( dg => dg.Id);
-                            newid = (int) max + 1;
+                                try
+                                {
+                                    var max = context.BatteryTypes.Max(bt => bt.Id);
+                                    newid = (int)max + 1;
+                                }
+                                catch (Exception)
+                                {
+                                    newid = 1;
+                                }
                                 context.BatteryTypes.Add(new BatteryType()
                             {
                                 Id = newid,
@@ -76,7 +83,9 @@ namespace ElectricCarDB
                     MBatteryType batteryType = buildBatteryType(bt);
                     if (getAssociation)
                     {
-                        //TODO get stationCtr to retreive station info
+                        IDBattery dbBattery = new DBattery();
+                        List<MBattery> batteries = dbBattery.getTypeBatteries(id,true);
+                        batteryType.batteries = batteries;
                     }
 
                     return batteryType;

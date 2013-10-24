@@ -103,7 +103,7 @@ namespace ElectricCarLib
             {
                 MPeriod period = pCalc.getBookingPeriod(storage, time);
                 period.bookedBatteryNumber = period.bookedBatteryNumber + quantity;
-                dbPeriod.updateRecord(storage.id,period.time,period.initBatteryNumber,period.bookedBatteryNumber,period.futureBatteryNumber);
+                dbPeriod.updateRecord(storage.id,period.time,period.initBatteryNumber,period.bookedBatteryNumber);
                 success = true;
             }
             catch(Exception)
@@ -124,7 +124,7 @@ namespace ElectricCarLib
             {
                 MPeriod period = pCalc.getBookingPeriod(storage, time);
                 period.bookedBatteryNumber = period.bookedBatteryNumber - quantity;
-                dbPeriod.updateRecord(storage.id, period.time, period.initBatteryNumber, period.bookedBatteryNumber, period.futureBatteryNumber);
+                dbPeriod.updateRecord(storage.id, period.time, period.initBatteryNumber, period.bookedBatteryNumber);
                 success = true;
             }
             catch (Exception)
@@ -145,7 +145,7 @@ namespace ElectricCarLib
             {
                 MPeriod period = pCalc.getBookingPeriod(storage, time);
                 period.bookedBatteryNumber = period.bookedBatteryNumber + updateQuantity;
-                dbPeriod.updateRecord(storage.id, period.time, period.initBatteryNumber, period.bookedBatteryNumber, period.futureBatteryNumber);
+                dbPeriod.updateRecord(storage.id, period.time, period.initBatteryNumber, period.bookedBatteryNumber);
                 success = true;
             }
             catch (Exception)

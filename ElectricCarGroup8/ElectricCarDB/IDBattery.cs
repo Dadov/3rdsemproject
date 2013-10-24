@@ -14,6 +14,7 @@ namespace ElectricCarDB
         void deleteRecord(int id);
         void updateRecord(int id, string state, int btid);
         List<MBattery> getAllRecord(Boolean getAssociation);
+        List<MBattery> getTypeBatteries(int btId, bool getAssociation);
         List<string> getAllInfo();
     }
 }

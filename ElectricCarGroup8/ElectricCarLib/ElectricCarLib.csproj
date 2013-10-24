@@ -53,6 +53,7 @@
     <Compile Include="BatteryTypeCtr.cs" />
     <Compile Include="BookingCtr.cs" />
     <Compile Include="BookingLineCtr.cs" />
+    <Compile Include="BatteryState.cs" />
     <Compile Include="ConnectionCtr.cs" />
     <Compile Include="CustomerCtr.cs" />
     <Compile Include="DiscountGroupCtr.cs" />

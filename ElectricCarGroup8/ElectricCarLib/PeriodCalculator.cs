@@ -26,20 +26,8 @@ namespace ElectricCarLib
         //This method will return number of batteries of given type for one storage
         public int getInitNumber(MBatteryStorage storage)
         {
-            List<MPeriod> pers = storage.periods;
-            int count = pers.Count;
-            //(an = bn-2 + an-1 - bn-1) 
-            int bn2 = 0;
-            if (count >= 2) bn2 = pers[count - 2].bookedBatteryNumber;
-            int an1 = pers[count - 1].initBatteryNumber;
-            int bn1 = pers[count - 1].bookedBatteryNumber;
-            int init =  bn2 + an1 - bn1;
+            int init = storage.type.batteries.Count();
             return init;
-        }
-
-        public int setBookedBatteries(MBatteryStorage storage)
-        {
-            return storage.periods[storage.periods.Count - 1].futureBatteryNumber;
         }
 
         public MPeriod createPeriod(MBatteryStorage storage)
@@ -48,8 +36,7 @@ namespace ElectricCarLib
             MPeriod newPeriod = new MPeriod();
             newPeriod.time = getTime(storage);
             newPeriod.initBatteryNumber = getInitNumber(storage);
-            newPeriod.bookedBatteryNumber = setBookedBatteries(storage);
-            dbPeriod.addNewRecord(storage.id, newPeriod.time, newPeriod.initBatteryNumber, newPeriod.bookedBatteryNumber, newPeriod.futureBatteryNumber);
+            dbPeriod.addNewRecord(storage.id, newPeriod.time, newPeriod.initBatteryNumber, newPeriod.bookedBatteryNumber);
             return newPeriod;
         }
 
@@ -71,7 +58,7 @@ namespace ElectricCarLib
                 {
                     MPeriod next = periods[x]; //last created period
                     MPeriod curr = periods[x - 1]; //second last period
-                    if ((time.CompareTo(curr) >= 0) & (time.CompareTo(next) < 0)) //if time of booking is later then current and earlier then next period
+                    if ((time.CompareTo(curr.time) >= 0) & (time.CompareTo(next.time) < 0)) //if time of booking is later then current and earlier then next period
                     {
                         return curr;
                     }

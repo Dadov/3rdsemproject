@@ -10,10 +10,13 @@ namespace ElectricCarLib
 {
     class PeriodCtr:IDisposable
     {
-        public int addNewRecord(int bsID, DateTime time, int init, int cust, int future)
+        public int addNewRecord(int bsID, DateTime time)
         {
             IDPeriod dbPeriod = new DBPeriod();
-            int id = dbPeriod.addNewRecord(bsID,time,init,cust,future);
+            IDBBatteryStorage dbStorage = new DBBatteryStorage();
+            MBatteryStorage storage = dbStorage.getRecord(bsID, true);
+            int init = storage.type.batteries.Count();
+            int id = dbPeriod.addNewRecord(bsID,time,init,0);
             return id;
         }
 
@@ -29,10 +32,13 @@ namespace ElectricCarLib
             dbPeriod.deleteRecord(id, time);
         }
 
-        public void updateRecord(int bsID, DateTime time, int init, int cust, int future)
+        public void updateRecord(int bsID, DateTime time)
         {
             IDPeriod dbPeriod = new DBPeriod();
-            dbPeriod.updateRecord(bsID, time, init, cust, future);
+            IDBBatteryStorage dbStorage = new DBBatteryStorage();
+            MBatteryStorage storage = dbStorage.getRecord(bsID, true);
+            int init = storage.type.batteries.Count();
+            dbPeriod.updateRecord(bsID, time, init);
         }
 
         public List<MPeriod> getAllRecord(Boolean getAssociation)

@@ -71,14 +71,13 @@ namespace ElectricCarLibTest
             int sID = dbStation.addNewRecord("newName", "newAddress", "newCountry", "newState");
             int bsID =  dbStorage.addNewRecord(btId,sID);
             DateTime time = DateTime.Today;
-            int id = dbPeriod.addNewRecord(bsID,time, 10, 5, 1);
+            int id = dbPeriod.addNewRecord(bsID,time, 10, 5);
             try
             {
                 MPeriod period = dbPeriod.getRecord(id,time, true);
                 Assert.AreEqual(DateTime.Today, period.time);
                 Assert.AreEqual(10, period.initBatteryNumber);
                 Assert.AreEqual(5, period.bookedBatteryNumber);
-                Assert.AreEqual(1, period.futureBatteryNumber);
             }
            
             finally
@@ -96,16 +95,15 @@ namespace ElectricCarLibTest
             int btId = dbType.addNewRecord("newName", "newProducer", 10, 100, 20);
             int sID = dbStation.addNewRecord("newName", "newAddress", "newCountry", "newState");
             int bsID = dbStorage.addNewRecord(btId, sID);
-            int id = dbPeriod.addNewRecord(bsID, DateTime.Today, 10, 5, 1);
+            int id = dbPeriod.addNewRecord(bsID, DateTime.Today, 10, 5);
             DateTime time = DateTime.Today;
             try
             {
-                dbPeriod.updateRecord(bsID, time, 20, 10, 2);
+                dbPeriod.updateRecord(bsID, time, 20, 10);
                 MPeriod period = dbPeriod.getRecord(id, time, true);
                 Assert.AreEqual(DateTime.Today, period.time);
                 Assert.AreEqual(20, period.initBatteryNumber);
                 Assert.AreEqual(10, period.bookedBatteryNumber);
-                Assert.AreEqual(2, period.futureBatteryNumber);
             }
             catch
             {

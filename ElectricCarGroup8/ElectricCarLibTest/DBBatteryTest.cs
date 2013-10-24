@@ -68,7 +68,6 @@ namespace ElectricCarLibTest
             {
                 MBattery battery = dbBattery.getRecord(id, false);
                 Assert.AreEqual("newState",battery.state);
-                Assert.AreEqual(btId, battery.type.id);
             }
             finally
             {
@@ -89,7 +88,6 @@ namespace ElectricCarLibTest
                 dbBattery.updateRecord(id, "Update", btId2);
                 MBattery battery = dbBattery.getRecord(id, false);
                 Assert.AreEqual("Update", battery.state);
-                Assert.AreEqual(btId2, battery.type.id);
             }
             catch
             {

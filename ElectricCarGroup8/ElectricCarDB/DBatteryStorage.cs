@@ -32,8 +32,15 @@ namespace ElectricCarDB
                         {
                         try
                         {
-                            var max= context.BatteryStorages.Max( dg => dg.Id);
-                            newid = (int) max + 1;
+                            try
+                            {
+                                var max = context.BatteryStorages.Max(bs => bs.Id);
+                                newid = (int)max + 1;
+                            }
+                            catch (Exception)
+                            {
+                                newid = 1;
+                            }
                             context.BatteryStorages.Add(new BatteryStorage()
                             {
                                 Id = newid,
