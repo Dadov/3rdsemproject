@@ -15,17 +15,22 @@ namespace ElectricCarDB
     {
         public int addNewRecord(string name, Nullable<decimal> discount)
         {
-            using (ElectricCarEntities context = new ElectricCarEntities())
+            using (TransactionScope transaction = new TransactionScope((TransactionScopeOption.Required)))
             {
                 try
                 {
-                    bool success = false;
                     int newId = -1;
-                    using (TransactionScope scope = new TransactionScope())
+                    using (ElectricCarEntities context = new ElectricCarEntities())
                     {
                         try
                         {
-                            newId = context.DiscoutGroups.Last().Id + 1;
+                            int max;
+                            try {
+                                max = context.DiscoutGroups.Max(dg => dg.Id);
+                            } catch {
+                                max = 0;
+                            }
+                            newId = max + 1;
                             context.DiscoutGroups.Add(new DiscoutGroup()
                             {
                                 Id = newId,
@@ -33,24 +38,15 @@ namespace ElectricCarDB
                                 dgRate = discount
                             });
                             context.SaveChanges();
-                            success = true;
                         }
                         catch (Exception e)
                         {
                             throw new SystemException("Cannot add new Discount Group record " + 
                                 " with an error " + e.Message);
                         }
-                        if (success)
-                        {
-                            scope.Complete();
-                            return newId;
-                        }
-                        else
-                        {
-                            // gonna be -1
-                            return newId;
-                        }
                     }
+                    transaction.Complete();
+                    return newId;
                 }
                 catch (TransactionAbortedException e)
                 {
@@ -84,12 +80,11 @@ namespace ElectricCarDB
 
         public void deleteRecord(int id)
         {
-            using (ElectricCarEntities context = new ElectricCarEntities())
+            using (TransactionScope transaction = new TransactionScope((TransactionScopeOption.Required)))
             {
                 try
                 {
-                    bool success = false;
-                    using (TransactionScope scope = new TransactionScope())
+                    using (ElectricCarEntities context = new ElectricCarEntities())
                     {
                         try
                         {
@@ -98,7 +93,6 @@ namespace ElectricCarDB
                             {
                                 context.Entry(dg).State = EntityState.Deleted;
                                 context.SaveChanges();
-                                success = true;
                             }
                         }
                         catch (Exception e)
@@ -106,11 +100,8 @@ namespace ElectricCarDB
                             throw new SystemException("Cannot delete Discount Group " + id + " record " +
                                 " with an error " + e.Message);
                         }
-                        if (success)
-                        {
-                            scope.Complete();
-                        }
                     }
+                    transaction.Complete();
                 }
                 catch (TransactionAbortedException e)
                 {
@@ -122,12 +113,11 @@ namespace ElectricCarDB
 
         public void updateRecord(int id, string name, Nullable<decimal> discount)
         {
-            using (ElectricCarEntities context = new ElectricCarEntities())
+            using (TransactionScope transaction = new TransactionScope((TransactionScopeOption.Required)))
             {
                 try
                 {
-                    bool success = false;
-                    using (TransactionScope scope = new TransactionScope())
+                    using (ElectricCarEntities context = new ElectricCarEntities())
                     {
                         try
                         {
@@ -135,18 +125,14 @@ namespace ElectricCarDB
                             dg.name = name;
                             dg.dgRate = discount;
                             context.SaveChanges();
-                            success = true;
                         }
                         catch (Exception e)
                         {
                             throw new SystemException("Cannot update Discount Group " + id + " record " +
                                 " with an error " + e.Message);
                         }
-                        if (success)
-                        {
-                            scope.Complete();
-                        }
                     }
+                    transaction.Complete();
                 }
                 catch (TransactionAbortedException e)
                 {

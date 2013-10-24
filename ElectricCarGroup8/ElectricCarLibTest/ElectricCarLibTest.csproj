@@ -55,7 +55,7 @@
     <Compile Include="DBBookingTest.cs" />
     <Compile Include="DBConnectionTest.cs" />
     <Compile Include="DBCustomerTest.cs" />
-    <Compile Include="DBDiscountGroup.cs" />
+    <Compile Include="DBDiscountGroupTest.cs" />
     <Compile Include="DBEmployeeTest.cs" />
     <Compile Include="DBLogInfoTest.cs" />
     <Compile Include="DBPeriodTest.cs" />

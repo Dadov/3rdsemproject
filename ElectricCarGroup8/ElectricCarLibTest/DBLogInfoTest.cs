@@ -2,6 +2,8 @@
 using System.Text;
 using System.Collections.Generic;
 using Microsoft.VisualStudio.TestTools.UnitTesting;
+using ElectricCarDB;
+using ElectricCarModelLayer;
 
 namespace ElectricCarLibTest
 {
@@ -11,11 +13,18 @@ namespace ElectricCarLibTest
     [TestClass]
     public class DBLogInfoTest
     {
+        IDLogInfo dbLogInfo;
+        IDCustomer dbCustomer;
+        IDDiscountGroup dbDiscountGroup;
+
         public DBLogInfoTest()
         {
             //
             // TODO: Add constructor logic here
             //
+            dbLogInfo = new DLogInfo();
+            dbCustomer = new DCustomer();
+            dbDiscountGroup = new DDiscountGroup();
         }
 
         private TestContext testContextInstance;
@@ -59,11 +68,23 @@ namespace ElectricCarLibTest
         #endregion
 
         [TestMethod]
-        public void TestMethod1()
+        public void logInfoCRUD()
         {
-            //
-            // TODO: Add test logic here
-            //
+            // prerequisites
+            int dgId = dbDiscountGroup.addNewRecord("zidaci", -100);
+            MDiscountGroup dg = dbDiscountGroup.getRecord(dgId, false);
+            int custId = dbCustomer.addNewRecord("jozko", "mkrvicka", "nema", "vsade", "luxus", "bez", dg, "nikdaj");
+
+            int liId = dbLogInfo.addNewRecord("jozin", "zaba", custId);
+            List<MLogInfo> lis = dbLogInfo.getAllRecord();
+            int last = lis.Count;
+            MLogInfo li = dbLogInfo.getRecord(last, false);
+            dbLogInfo.deleteRecord(li.ID);
+            // testing if it has been deleted
+            Assert.IsTrue(!dbLogInfo.getAllRecord().Contains(li));
+
+            dbCustomer.deleteRecord(custId);
+            dbDiscountGroup.deleteRecord(dgId);
         }
     }
 }

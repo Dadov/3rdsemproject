@@ -13,19 +13,24 @@ namespace ElectricCarDB
 {
     public class DEmployee : IDEmployee
     {
-        public int addNewRecord(EmployeePosition position, string fName, string lName, string address, string country, string phone, string email, ICollection<MLogInfo> logInfos, int sId)
+        public int addNewRecord(string fName, string lName, string address, string country, string phone, string email, int sId, EmployeePosition position)
         {
-            using (ElectricCarEntities context = new ElectricCarEntities())
+            using (TransactionScope transaction = new TransactionScope((TransactionScopeOption.Required)))
             {
                 try
                 {
-                    bool success = false;
                     int newId = -1;
-                    using (TransactionScope scope = new TransactionScope())
+                    using (ElectricCarEntities context = new ElectricCarEntities())
                     {
                         try
                         {
-                            newId = context.People.Last().Id + 1;
+                            int max;
+                            try {
+                                max = context.People.Max(emp => emp.Id);
+                            } catch {
+                                max = 0;
+                            }
+                            newId = max + 1;
                             context.People.Add(new Employee()
                             {
                                 Id = newId,
@@ -43,24 +48,15 @@ namespace ElectricCarDB
                                 position = position.ToString(),
                             });
                             context.SaveChanges();
-                            success = true;
                         }
                         catch (Exception e)
                         {
                             throw new SystemException("Cannot add new Employee record " +
                                  " with an error " + e.Message);
                         }
-                        if (success)
-                        {
-                            scope.Complete();
-                            return newId;
-                        }
-                        else
-                        {
-                            // gonna be -1
-                            return newId;
-                        }
                     }
+                    transaction.Complete();
+                    return newId;
                 }
                 catch (TransactionAbortedException e)
                 {
@@ -94,12 +90,11 @@ namespace ElectricCarDB
 
         public void deleteRecord(int id)
         {
-            using (ElectricCarEntities context = new ElectricCarEntities())
+            using (TransactionScope transaction = new TransactionScope((TransactionScopeOption.Required)))
             {
                 try
                 {
-                    bool success = false;
-                    using (TransactionScope scope = new TransactionScope())
+                    using (ElectricCarEntities context = new ElectricCarEntities())
                     {
                         try
                         {
@@ -114,7 +109,6 @@ namespace ElectricCarDB
                                     context.Entry(logInfo).State = EntityState.Deleted;
                                 }
                                 context.SaveChanges();
-                                success = true;
                             }
                         }
                         catch (Exception e)
@@ -122,11 +116,8 @@ namespace ElectricCarDB
                             throw new SystemException("Cannot delete Employee " + id + " record "
                                 + " with message " + e.Message);
                         }
-                        if (success)
-                        {
-                            scope.Complete();
-                        }
                     }
+                    transaction.Complete();
                 }
                 catch (TransactionAbortedException e)
                 {
@@ -136,14 +127,13 @@ namespace ElectricCarDB
             }
         }
 
-        public void updateRecord(int id, EmployeePosition position, string fName, string lName, string address, string country, string phone, string email, ICollection<MLogInfo> logInfos, int sId)
+        public void updateRecord(int id, string fName, string lName, string address, string country, string phone, string email, ICollection<MLogInfo> logInfos, int sId, EmployeePosition position)
         {
-            using (ElectricCarEntities context = new ElectricCarEntities())
+            using (TransactionScope transaction = new TransactionScope((TransactionScopeOption.Required)))
             {
                 try
                 {
-                    bool success = false;
-                    using (TransactionScope scope = new TransactionScope())
+                    using (ElectricCarEntities context = new ElectricCarEntities())
                     {
                         try
                         {
@@ -159,18 +149,14 @@ namespace ElectricCarDB
                             emp.position = position.ToString();
                             emp.sId = sId;
                             context.SaveChanges();
-                            success = true;
                         }
                         catch (Exception e)
                         {
                             throw new SystemException("Cannot update Employee record " + id 
                                 + " with message " + e.Message);
                         }
-                        if (success)
-                        {
-                            scope.Complete();
-                        }
                     }
+                    transaction.Complete();
                 }
                 catch (TransactionAbortedException e)
                 {
@@ -187,7 +173,10 @@ namespace ElectricCarDB
                 List<MEmployee> employees = new List<MEmployee>();
                 try
                 {
-                    foreach (Employee emp in context.People.Where(pt => pt.pType == PType.Employee.ToString()))
+                    // have to make string representation of enum cos LINQ doesn't
+                    // understand ToString() inside expression
+                    string empString = PType.Employee.ToString();
+                    foreach (Employee emp in context.People.Where(pt => pt.pType.Equals(empString)))
                     {
                         employees.Add(DEmployee.buildMEmployee(emp));
                     }
@@ -208,7 +197,10 @@ namespace ElectricCarDB
                 List<string> info = new List<string>();
                 try
                 {
-                    foreach (Employee emp in context.People.Where(pt => pt.pType == PType.Employee.ToString()))
+                    // have to make string representation of enum cos LINQ doesn't
+                    // understand ToString() inside expression
+                    string empString = PType.Employee.ToString();
+                    foreach (Employee emp in context.People.Where(pt => pt.pType.Equals(empString)))
                     {
                         info.Add(emp.ToString());
                     }

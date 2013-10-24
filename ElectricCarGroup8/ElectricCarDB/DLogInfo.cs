@@ -24,12 +24,15 @@ namespace ElectricCarDB
                     int newId = -1;
                     using (ElectricCarEntities context = new ElectricCarEntities())
                     {
-                        bool failed = true;
-                        do
-                        {
                             try
                             {
-                                newId = context.LoginInfoes.Last().Id + 1;
+                                int max;
+                                try {
+                                    max = context.LoginInfoes.Max(li => li.Id);
+                                } catch {
+                                    max = 0;
+                                }
+                                newId = max + 1;
                                 context.LoginInfoes.Add(new LoginInfo()
                                 {
                                     Id = newId,
@@ -38,20 +41,11 @@ namespace ElectricCarDB
                                     pId = personId
                                 });
                                 context.SaveChanges();
-                                failed = false;
                             }
-                            // needs to be done:
-                            // set 'Concurrency Mode = Fixed' in the property panel for the timestamp in the designer
-                            // DbUpdateConcurrencyException or OptimisticConcurrencyException
-                            catch (DbUpdateConcurrencyException e)
+                            catch (Exception e)
                             {
-                                // just in case, shouldn't be needed to set explicitly failed
-                                failed = true;
-                                e.Entries.Single().Reload();
-                                Console.WriteLine("DbUpdateConcurrencyException with message: " +
-                                    e.Message + "\n\n was handled and trying again");
+                                throw new SystemException("Cannot add new Log Info with an error: " + e.Message);
                             }
-                        } while (failed);
                     }
                     transaction.Complete();
                     return newId;
@@ -88,12 +82,11 @@ namespace ElectricCarDB
 
         public void deleteRecord(int id)
         {
-            using (ElectricCarEntities context = new ElectricCarEntities())
+            using (TransactionScope transaction = new TransactionScope((TransactionScopeOption.Required)))
             {
                 try
                 {
-                    bool success = false;
-                    using (TransactionScope scope = new TransactionScope())
+                    using (ElectricCarEntities context = new ElectricCarEntities())
                     {
                         try
                         {
@@ -102,7 +95,6 @@ namespace ElectricCarDB
                             {
                                 context.Entry(li).State = EntityState.Deleted;
                                 context.SaveChanges();
-                                success = true;
                             }
                         }
                         catch (Exception e)
@@ -110,11 +102,8 @@ namespace ElectricCarDB
                             throw new SystemException("Cannot delete Login Info " + id + " record " +
                                 " with an error " + e.Message);
                         }
-                        if (success)
-                        {
-                            scope.Complete();
-                        }
                     }
+                    transaction.Complete();
                 }
                 catch (TransactionAbortedException e)
                 {
@@ -126,12 +115,11 @@ namespace ElectricCarDB
 
         public void updateRecord(int id, string loginName, string password, int personId)
         {
-            using (ElectricCarEntities context = new ElectricCarEntities())
+            using (TransactionScope transaction = new TransactionScope((TransactionScopeOption.Required)))
             {
                 try
                 {
-                    bool success = false;
-                    using (TransactionScope scope = new TransactionScope())
+                    using (ElectricCarEntities context = new ElectricCarEntities())
                     {
                         try
                         {
@@ -140,18 +128,14 @@ namespace ElectricCarDB
                             li.password = password;
                             li.pId = personId;
                             context.SaveChanges();
-                            success = true;
                         }
                         catch (Exception e)
                         {
                             throw new SystemException("Cannot update Login Info " + id + " record " +
                                 " with an error " + e.Message);
                         }
-                        if (success)
-                        {
-                            scope.Complete();
-                        }
                     }
+                    transaction.Complete();
                 }
                 catch (TransactionAbortedException e)
                 {

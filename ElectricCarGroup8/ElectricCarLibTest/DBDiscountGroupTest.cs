@@ -2,6 +2,8 @@
 using System.Text;
 using System.Collections.Generic;
 using Microsoft.VisualStudio.TestTools.UnitTesting;
+using ElectricCarDB;
+using ElectricCarModelLayer;
 
 namespace ElectricCarLibTest
 {
@@ -9,13 +11,16 @@ namespace ElectricCarLibTest
     /// Summary description for DBDiscountGroup
     /// </summary>
     [TestClass]
-    public class DBDiscountGroup
+    public class DBDiscountGroupTest
     {
-        public DBDiscountGroup()
+        IDDiscountGroup dbDiscountGroup;
+
+        public DBDiscountGroupTest()
         {
             //
             // TODO: Add constructor logic here
             //
+            dbDiscountGroup = new DDiscountGroup();
         }
 
         private TestContext testContextInstance;
@@ -59,11 +64,15 @@ namespace ElectricCarLibTest
         #endregion
 
         [TestMethod]
-        public void TestMethod1()
+        public void discountGroupCRUD()
         {
-            //
-            // TODO: Add test logic here
-            //
+            int btId = dbDiscountGroup.addNewRecord("zidaci", -100);
+            List<MDiscountGroup> dgs = dbDiscountGroup.getAllRecord();
+            int last = dgs.Count;
+            MDiscountGroup dg = dbDiscountGroup.getRecord(last, false);
+            dbDiscountGroup.deleteRecord(dg.ID);
+            // testing if it has been deleted
+            Assert.IsTrue(!dbDiscountGroup.getAllRecord().Contains(dg));
         }
     }
 }
