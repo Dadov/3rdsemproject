@@ -29,9 +29,17 @@ namespace ElectricCarDB
                         {
                             try
                             {
-                            var max= context.Batteries.Max( dg => dg.Id);
-                            newid = (int) max + 1;
-                            context.Batteries.Add(new Battery()
+                                
+                                try
+                                {
+                                    var max = context.Batteries.Max(b => b.Id);
+                                    newid = (int)max + 1;
+                                }
+                                catch (Exception)
+                                {
+                                    newid = 1;
+                                }
+                                    context.Batteries.Add(new Battery()
                             {
                                 Id = newid,
                                 state = state,
@@ -72,7 +80,6 @@ namespace ElectricCarDB
                     MBattery battery = buildBattery(b);
                     if (getAssociation)
                     {
-                        battery.type = dbType.getRecord(battery.type.id, true);
                     }
 
                     return battery;
@@ -171,9 +178,24 @@ namespace ElectricCarDB
                     MBattery battery = buildBattery(b);
                     if (getAssociation)
                     {
-                        battery.type = dbType.getRecord(battery.type.id, true);
                     }
                     batteries.Add(battery);
+                }
+            }
+            return batteries;
+        }
+        public List<MBattery> getTypeBatteries(int btId, bool getAssociation)
+        {
+            List<MBattery> batteries = new List<MBattery>();
+            using (ElectricCarEntities context = new ElectricCarEntities())
+            {
+                foreach (Battery b in context.Batteries)
+                {
+                    if (b.btId == btId)
+                    {
+                        MBattery battery = buildBattery(b);
+                        batteries.Add(battery);
+                    }
                 }
             }
             return batteries;
@@ -198,7 +220,6 @@ namespace ElectricCarDB
             {
                 id = b.Id,
                 state = b.state,
-                type = new MBatteryType() { id = (int) b.btId },
             };
             return battery;
         }

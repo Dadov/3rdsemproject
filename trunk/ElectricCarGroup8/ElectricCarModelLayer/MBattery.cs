@@ -11,12 +11,10 @@ namespace ElectricCarModelLayer
     {
         public int id { get; set; }
         public string state { get; set; }
-        public virtual MBatteryType type { get; set; } 
         public override string ToString()
         {
             return "id: " + Convert.ToString(id) +
-                " name: " + state +
-                " battery type ID: " + Convert.ToString(type.id);
+                " name: " + state;
         }
     }
     
