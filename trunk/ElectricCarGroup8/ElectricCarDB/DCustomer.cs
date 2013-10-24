@@ -14,19 +14,24 @@ namespace ElectricCarDB
     public class DCustomer : IDCustomer
     {
         // delete LoginInfoes from arguments
-        public int addNewRecord(MDiscountGroup discountGroup, string fName, string lName, string address, string country, string phone, string email, ICollection<MLogInfo> logInfos, string payStatus) 
+        public int addNewRecord(string fName, string lName, string address, string country, string phone, string email, MDiscountGroup discountGroup, string payStatus) 
         {
-            using (ElectricCarEntities context = new ElectricCarEntities()) 
+            using (TransactionScope transaction = new TransactionScope((TransactionScopeOption.Required))) 
             {
                 try 
                 {
-                    bool success = false;
                     int newId = -1;
-                    using (TransactionScope scope = new TransactionScope()) 
+                    using (ElectricCarEntities context = new ElectricCarEntities()) 
                     {
-                        try 
+                        try
                         {
-                            newId = context.People.Last().Id + 1;
+                            int max;
+                            try {
+                                max = context.People.Max(cust => cust.Id);
+                            } catch {
+                                max = 0;
+                            }
+                            newId = max + 1;
                             context.People.Add(new Customer()
                             {
                                 Id = newId,
@@ -48,24 +53,15 @@ namespace ElectricCarDB
                                 // DiscoutGroup = DDiscountGroup.buildDiscountGroup(discountGroup)
                             });
                             context.SaveChanges();
-                            success = true;
                         } 
                         catch (Exception e) 
                         {
                             throw new SystemException("Cannot add new Customer record " +
                                 " with an error " + e.Message);
                         }
-                        if (success)
-                        {
-                            scope.Complete();
-                            return newId;
-                        }
-                        else
-                        {
-                            // gonna be -1
-                            return newId;
-                        }
                     }
+                    transaction.Complete();
+                    return newId;
                 }
                 catch (TransactionAbortedException e) 
                 {
@@ -99,12 +95,11 @@ namespace ElectricCarDB
 
         public void deleteRecord(int id)
         {
-            using (ElectricCarEntities context = new ElectricCarEntities())
+            using (TransactionScope transaction = new TransactionScope((TransactionScopeOption.Required)))
             {
                 try
                 {
-                    bool success = false;
-                    using (TransactionScope scope = new TransactionScope())
+                    using (ElectricCarEntities context = new ElectricCarEntities())
                     {
                         try
                         {
@@ -119,7 +114,6 @@ namespace ElectricCarDB
                                     context.Entry(logInfo).State = EntityState.Deleted;
                                 }
                                 context.SaveChanges();
-                                success = true;
                             }
                         }
                         catch (Exception e)
@@ -127,11 +121,8 @@ namespace ElectricCarDB
                             throw new SystemException("Cannot delete Customers " + id + " record "
                                 + " with message " + e.Message);
                         }
-                        if (success)
-                        {
-                            scope.Complete();
-                        }
                     }
+                    transaction.Complete();
                 }
                 catch (TransactionAbortedException e)
                 {
@@ -141,14 +132,13 @@ namespace ElectricCarDB
             }
         }
 
-        public void updateRecord(int id, MDiscountGroup discountGroup, string fName, string lName, string address, string country, string phone, string email, ICollection<MLogInfo> logInfos, string payStatus)
+        public void updateRecord(int id, string fName, string lName, string address, string country, string phone, string email, ICollection<MLogInfo> logInfos, MDiscountGroup discountGroup, string payStatus)
         {
-            using (ElectricCarEntities context = new ElectricCarEntities())
+            using (TransactionScope transaction = new TransactionScope((TransactionScopeOption.Required)))
             {
                 try
                 {
-                    bool success = false;
-                    using (TransactionScope scope = new TransactionScope())
+                    using (ElectricCarEntities context = new ElectricCarEntities())
                     {
                         try
                         {
@@ -164,18 +154,14 @@ namespace ElectricCarDB
                             cust.dgId = discountGroup.ID;
                             cust.payStatus = payStatus;
                             context.SaveChanges();
-                            success = true;
                         }
                         catch (Exception e)
                         {
                             throw new SystemException("Cannot update Customer record " + id
                                 + " with message " + e.Message);
                         }
-                        if (success)
-                        {
-                            scope.Complete();
-                        }
                     }
+                    transaction.Complete();
                 }
                 catch (TransactionAbortedException e)
                 {
@@ -192,7 +178,10 @@ namespace ElectricCarDB
                 List<MCustomer> customers = new List<MCustomer>();
                 try
                 {
-                    foreach (Customer cust in context.People.Where(pt => pt.pType == PType.Customer.ToString()))
+                    // have to make string representation of enum cos LINQ doesn't
+                    // understand ToString() inside expression
+                    string custString = PType.Customer.ToString();
+                    foreach (Customer cust in context.People.Where(pt => pt.pType.Equals(custString)))
                     {
                         customers.Add(DCustomer.buildMCustomer(cust));
                     }
@@ -213,7 +202,10 @@ namespace ElectricCarDB
                 List<string> info = new List<string>();
                 try
                 {   
-                    foreach (Customer cust in context.People.Where(pt => pt.pType == PType.Customer.ToString()))
+                    // have to make string representation of enum cos LINQ doesn't
+                    // understand ToString() inside expression
+                    string custString = PType.Customer.ToString();
+                    foreach (Customer cust in context.People.Where(pt => pt.pType.Equals(custString)))
                     {
                         info.Add(cust.ToString());
                     }

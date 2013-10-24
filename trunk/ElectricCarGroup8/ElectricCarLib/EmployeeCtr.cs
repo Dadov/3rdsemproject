@@ -13,13 +13,15 @@ namespace ElectricCarLib
     {
         IDEmployee dbEmployee = new DEmployee();
 
-        public int add(EmployeePosition position, string fName, string lName,
+        public int add(string fName, string lName,
             string address, string country, string phone, string email, // ICollection<MLogInfo> logInfos,
-            int sId)
+            int sId, EmployeePosition position)
         {
-            ICollection<MLogInfo> lis = new List<MLogInfo>();
-            //empty list at employee creation
-            return dbEmployee.addNewRecord(position, fName, lName, address, country, phone, email, lis, sId);
+            // TODO: station id from StationCtr
+
+            // cannot be empty list at Employee creation, because it requires Person ID
+            // ICollection<MLogInfo> lis = new List<MLogInfo>();
+            return dbEmployee.addNewRecord(fName, lName, address, country, phone, email, sId, position);
         }
 
         public MEmployee get(int id, Boolean getAssociation)
@@ -32,11 +34,11 @@ namespace ElectricCarLib
             dbEmployee.deleteRecord(id);
         }
 
-        public void update(int id, EmployeePosition position, string fName, string lName,
+        public void update(int id,string fName, string lName,
             string address, string country, string phone, string email, ICollection<MLogInfo> logInfos,
-            int sId)
+            int sId,  EmployeePosition position)
         {
-            dbEmployee.updateRecord(id, position, fName, lName, address, country, phone, email, logInfos, sId);
+            dbEmployee.updateRecord(id, fName, lName, address, country, phone, email, logInfos, sId, position);
         }
 
         public List<MEmployee> getAll()
