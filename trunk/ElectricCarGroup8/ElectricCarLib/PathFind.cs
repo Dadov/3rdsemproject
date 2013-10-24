@@ -10,10 +10,79 @@ namespace ElectricCarLib
 {
     public class PathFind
     {
+        public static LinkedList<PathStop> shortestPathWithFibonacci(Dictionary<int, Dictionary<int, decimal>> adjListWithWeight, int startSID, int endSID)
+        {
+            FibonacciHeap Q = new FibonacciHeap();
+            Dictionary<int, FibonacciNode> QCopy = new Dictionary<int, FibonacciNode>();
+            List<int> R = new List<int>();
+            List<FibonacciNode> S = new List<FibonacciNode>();
+            Q.insert(startSID);
+
+            while (R.Contains(endSID))
+            {
+                FibonacciNode u = Q.extractMinNode();
+                R.Add(u.StationID);
+                S.Add(u);
+                foreach (int vId in adjListWithWeight[u.StationID].Keys)
+                {
+                    FibonacciNode v = null;
+                    if (!Q.stationIDs.Contains(vId))
+	                {
+                         v= Q.insert(vId);
+                         QCopy.Add(vId, v);
+	                }
+                    else
+                    {
+                        v = QCopy[vId];
+                        
+                    }
+                    decimal w = adjListWithWeight[u.StationID][vId];
+                    relax(u, v, w, Q, QCopy);
+                }
+            }
+
+            LinkedList<PathStop> route = new LinkedList<PathStop>();
+            if (R.Contains(endSID))
+	        {
+                return buildRoute(S, endSID);
+	        }
+            else
+	        {
+                throw new SystemException("The start station and end station is not connected.");
+	        }
+        }
+
+        public static void relax(FibonacciNode u, FibonacciNode v, decimal w, FibonacciHeap Q, Dictionary<int, FibonacciNode> QCopy)
+        {
+            if (v.MinPathValue > u.MinPathValue + w)
+            {
+                Q.DecreasingKey(Q.root, v, u.MinPathValue + w);
+                QCopy[v.StationID].MinPathValue = u.MinPathValue + w;
+                v.lastStop = u;
+            }
+        }
+
+        //return a path consists of station id and drivehour from each station to start station. 
+        public static LinkedList<PathStop> buildRoute(List<FibonacciNode> S, int endSID)
+        {
+            LinkedList<PathStop> route = new LinkedList<PathStop>();
+            FibonacciNode endNode = S.Find(node => node.StationID == endSID);
+            FibonacciNode lastStop = endNode;
+            while (lastStop != null)
+            {
+                PathStop stop = new PathStop() { stationID = lastStop.StationID, driveHour = lastStop.MinPathValue };
+                route.AddFirst(stop);
+                lastStop = lastStop.lastStop;
+            }
+            return route;
+        }
+
+
+
         public static List<MStation> leastStopsPath(Dictionary<MStation, LinkedList<MStation>> adjList, MStation start, MStation destination, out int numOfStops)
         {
-            
-            
+
+
             //keep track of visited nodes
             HashSet<MStation> reachedStations = new HashSet<MStation>();
             Queue<MStation> queue = new Queue<MStation>();
@@ -31,7 +100,7 @@ namespace ElectricCarLib
 
             queue.Enqueue(start);
 
-            while(queue.Count  != 0)
+            while (queue.Count != 0)
             {
                 MStation u = queue.Dequeue();
                 if (u.Id == destination.Id)
@@ -69,9 +138,13 @@ namespace ElectricCarLib
                 }
                 leastStopsPath.Reverse();
                 numOfStops = leastStopsPath.Count; //including start station and end station
-            }    
-            
-            return leastStopsPath;//include start and end stations
+                return leastStopsPath;
+            }
+
+            else
+            {
+                throw new SystemException("The start station and end station is not connected in road map");
+            }
         }
 
         public static int breathFirstSearch(Dictionary<MStation, LinkedList<MStation>> adjList, MStation start, MStation destination)
@@ -109,7 +182,7 @@ namespace ElectricCarLib
                         queue.Enqueue(station);
                     }
                 }
-                
+
             }
 
             if (station_distance.ContainsKey(destination))

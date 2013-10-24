@@ -10,6 +10,35 @@ namespace ElectricCarLibTest
     [TestClass]
     public class PathFindTest
     {
+        [TestMethod]
+        public void shortestPathWithFibonacciLinearGraph()
+        {
+            
+        }
+
+        [TestMethod]
+        public void shortestPathWithFibonacciTreeGraph()
+        {
+
+        }
+
+        [TestMethod]
+        public void shortestPathWithFibonacciUndirectedGraph()
+        {
+
+        }
+
+        [TestMethod]
+        public void buildRoute()
+        {
+            
+        }
+
+        [TestMethod]
+        public void relax()
+        {
+
+        }
         
         [TestMethod]
         public void leastStopsPathLinearDataStructure()
