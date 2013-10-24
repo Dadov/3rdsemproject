@@ -23,8 +23,10 @@ namespace ElectricCarDB
                 using (TransactionScope scope = new TransactionScope())
                 {
                     int newid = -1;
+                    
                     using (ElectricCarEntities context = new ElectricCarEntities())
                     {
+                        newid = context.Bookings.Count() + 1;
                         context.Bookings.Add(new Booking()
                         {
                         Id = newid,
