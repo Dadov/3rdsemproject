@@ -60,6 +60,7 @@
     <Compile Include="DBLogInfoTest.cs" />
     <Compile Include="DBPeriodTest.cs" />
     <Compile Include="DBStationTest.cs" />
+    <Compile Include="DoubleLinkedListTest.cs" />
     <Compile Include="FibonacciHeapTest.cs" />
     <Compile Include="PathFindTest.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />

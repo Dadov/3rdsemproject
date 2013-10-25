@@ -26,7 +26,7 @@ namespace ElectricCarModelLayer
             lastStop = null;
             Degree = 0;
             Parent = null;
-            MinPathValue = Convert.ToDecimal(double.PositiveInfinity);
+            MinPathValue = decimal.MaxValue;
             Mark = false; //newly created node
             LeftNode = this; //node points to itself
             RightNode = this;
