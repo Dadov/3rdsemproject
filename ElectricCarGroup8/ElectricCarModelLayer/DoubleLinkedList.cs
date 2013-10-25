@@ -9,10 +9,11 @@ namespace ElectricCarModelLayer
     public class DoubleLinkedList
     {
         public FibonacciNode head { get; set; }
+        public int Size { get; set; }
         
         public void Add(FibonacciNode node)
         {
-            //TODO
+            
             if (head == null)
             {
                 head = node;
@@ -25,6 +26,7 @@ namespace ElectricCarModelLayer
                 node.LeftNode = lastNode;
                 head.LeftNode = node;
             }
+            Size++;
         }
 
         public void Delete(FibonacciNode node)
@@ -38,7 +40,7 @@ namespace ElectricCarModelLayer
             leftNode.RightNode = rightNode;
             rightNode.LeftNode = leftNode;
 
-
+            Size--;
         }
 
        

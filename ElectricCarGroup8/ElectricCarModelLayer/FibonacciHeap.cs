@@ -8,7 +8,7 @@ namespace ElectricCarModelLayer
 {
     public class FibonacciHeap
     {
-        private FibonacciNode minNode;
+        public FibonacciNode minNode { get; set; }
         public DoubleLinkedList root { get; set; }
         
 
@@ -17,8 +17,10 @@ namespace ElectricCarModelLayer
 
         public FibonacciHeap()
         {
+            minNode = null;
             numberOfNodes = 0;
             root = new DoubleLinkedList();
+            stationIDs = new List<int>();
         }
 
         
@@ -28,8 +30,8 @@ namespace ElectricCarModelLayer
             if (minNode == null || node.MinPathValue < minNode.MinPathValue)
             {
                 minNode = node;
-                root.Add(node);
             }
+            root.Add(node);
             stationIDs.Add(id);
             numberOfNodes++;
             return node;
@@ -40,23 +42,33 @@ namespace ElectricCarModelLayer
             FibonacciNode extractNode = minNode;
             if (extractNode != null)
             {
-                for (FibonacciNode node = extractNode.Child; node.RightNode != extractNode.Child.RightNode; node = node.RightNode)
+                if (extractNode.Child != null)
                 {
-                    root.Add(node);
-                    node.Parent = null;
+                    //TODO could be a bug when tranversing child list
+                    FibonacciNode node = extractNode.Child;
+                    do
+                    {
+                        FibonacciNode nextNode = node.RightNode; //store current node's next node before the next node change to root list node
+                        root.Add(node);
+                        node.Parent = null;
+                        node = nextNode;
+                    } while (node != extractNode.Child);
+
                 }
                 root.Delete(extractNode);
+                numberOfNodes--;
                 if (extractNode == extractNode.RightNode)
                 {
                     //if extractNode is the only node in the root
                     root = null;
+                    minNode = null;
                 }
                 else
                 {
                     minNode = extractNode.RightNode; //not necessary a minimum node
                     consolidateTree(root);
                 }
-                numberOfNodes--;
+                
             }
             return extractNode;
         }
@@ -68,7 +80,9 @@ namespace ElectricCarModelLayer
             {
                 A[i] = null;
             }
-            for (FibonacciNode w = root.head; w.RightNode != root.head.Child.RightNode; w = w.RightNode)
+
+            FibonacciNode w = root.head; //pointer for tranverse nodes
+            for (int i = 0; i < root.Size; i++)
             {
                 FibonacciNode x = w;
                 int d = x.Degree;
@@ -77,14 +91,21 @@ namespace ElectricCarModelLayer
                     FibonacciNode y = A[d];
                     if (x.MinPathValue > y.MinPathValue)
                     {
-                        A[d] = x;
+                        //exchange x and y
+                        FibonacciNode c = x;
+                        x = y;
+                        y = c;
+                        
                     }
+                    w = w.LeftNode; //set the pointer back to the node on the left
                     Link(root, y, x);
                     A[d] = null;
                     d += 1;
                 }
                 A[d] = x;
+                w = w.RightNode; //pointer continue move to next node 
             }
+
             minNode = null; 
             root = new DoubleLinkedList();
             for (int j = 0; j < A.Length; j++)
@@ -101,13 +122,16 @@ namespace ElectricCarModelLayer
         }
 
         //remove node y from root list, and link node y to x 
-        private void Link(DoubleLinkedList root, FibonacciNode y, FibonacciNode x)
+        public void Link(DoubleLinkedList root, FibonacciNode y, FibonacciNode x)
         {
             root.Delete(y);
             //add y as a child of x
             if (x.Child == null)
             {
                 y.Parent = x;
+                x.Child = y;
+                y.RightNode = y;
+                y.LeftNode = y;
             }
             else
             {
@@ -140,13 +164,20 @@ namespace ElectricCarModelLayer
 	        }
         }
 
-        private void Cut(DoubleLinkedList list, FibonacciNode x, FibonacciNode y)
+        public void Cut(DoubleLinkedList list, FibonacciNode x, FibonacciNode y)
         {
             //remove x from y child least
-            FibonacciNode leftNode = x.LeftNode;
-            FibonacciNode rightNode = x.RightNode;
-            leftNode.RightNode = rightNode;
-            rightNode.LeftNode = leftNode;
+            if (y.Child == x)
+            {
+                y.Child = null;
+            }
+            else
+            {
+                FibonacciNode leftNode = x.LeftNode;
+                FibonacciNode rightNode = x.RightNode;
+                leftNode.RightNode = rightNode;
+                rightNode.LeftNode = leftNode;
+            }
 
             //add x to the list
             FibonacciNode lastNode = list.head.LeftNode;
@@ -159,7 +190,7 @@ namespace ElectricCarModelLayer
             x.Mark = false;
         }
 
-        private void CascadingCut(DoubleLinkedList list, FibonacciNode y)
+        public void CascadingCut(DoubleLinkedList list, FibonacciNode y)
         {
             FibonacciNode z = y.Parent;
             if (z != null)
@@ -176,7 +207,7 @@ namespace ElectricCarModelLayer
             }
         }
 
-        private int calculateArraySize(int n)
+        public int calculateArraySize(int n)
         {
             int s;
             long result = 0;
@@ -186,7 +217,7 @@ namespace ElectricCarModelLayer
                 if (result >= n)
                     break;
             }
-            return s;
+            return s+1;
         }
         
     }

@@ -72,10 +72,10 @@ namespace ElectricCarLibTest
         {
             int id1 = dbStation.addNewRecord("BoholmStation", "Boholm", "Denmark", "Open");
             int id2 = dbStation.addNewRecord("AalborgStation", "Aalborg", "Denmark", "Open");
-            //int id3 = dbBT.addNewRecord("SmallBattery", "TODB", 8, 30, 1);
+            int id3 = dbBT.addNewRecord("SmallBattery", "TODB", 8, 30, 1);
             
             dbConnection.addNewRecord(id1, id2, 300, 7);
-            //int id4 = dbBS.addNewRecord(id3, id1);
+            int id4 = dbBS.addNewRecord(id3, id1);
 
             try
             {
@@ -98,20 +98,20 @@ namespace ElectricCarLibTest
                 Assert.AreEqual("Denmark", naborStation.country);
                 Assert.AreEqual("Open", naborStation.state.ToString());
 
-                //Assert.AreEqual(id3, station.storages[0].type.id);
-                //Assert.AreEqual("SmallBattery", station.storages[0].type.name);
-                //Assert.AreEqual("TODB", station.storages[0].type.producer);
-                //Assert.AreEqual(8, Convert.ToInt32(station.storages[0].type.capacity));
-                //Assert.AreEqual(30, Convert.ToInt32(station.storages[0].type.exchangeCost));
-                //Assert.AreEqual(1, Convert.ToInt32(station.storages[0].type.storageNumber));
+                Assert.AreEqual(id3, station.storages[0].type.id);
+                Assert.AreEqual("SmallBattery", station.storages[0].type.name);
+                Assert.AreEqual("TODB", station.storages[0].type.producer);
+                Assert.AreEqual(8, Convert.ToInt32(station.storages[0].type.capacity));
+                Assert.AreEqual(30, Convert.ToInt32(station.storages[0].type.exchangeCost));
+                Assert.AreEqual(1, Convert.ToInt32(station.storages[0].type.storageNumber));
             }
             catch
             {
             }
             finally
             {
-                //dbBS.deleteRecord(id4);
-                //dbBT.deleteRecord(id3);
+                dbBS.deleteRecord(id4);
+                dbBT.deleteRecord(id3);
                 dbConnection.deleteRecord(id1, id2);
                 dbStation.deleteRecord(id2);
                 dbStation.deleteRecord(id1);
