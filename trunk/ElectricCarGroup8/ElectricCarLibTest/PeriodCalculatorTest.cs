@@ -56,7 +56,7 @@ namespace ElectricCarLibTest
             try
             {
                 int init = pCalc.getInitNumber(storage);
-                Assert.AreEqual(init, 0);
+                Assert.AreEqual(init, 20);
             }
             finally
             {
@@ -81,7 +81,7 @@ namespace ElectricCarLibTest
                 storage = dbStorage.getRecord(storage.id, true);
                 MPeriod secondPeriod = pCalc.createPeriod(storage);
                 Assert.AreEqual(DateTime.Today.AddHours(20), secondPeriod.time);
-                Assert.AreEqual(0, secondPeriod.initBatteryNumber);
+                Assert.AreEqual(20, secondPeriod.initBatteryNumber);
                 Assert.AreEqual(0, firstPeriod.bookedBatteryNumber);
             }
             finally

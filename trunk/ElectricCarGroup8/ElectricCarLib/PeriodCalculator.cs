@@ -26,7 +26,7 @@ namespace ElectricCarLib
         //This method will return number of batteries of given type for one storage
         public int getInitNumber(MBatteryStorage storage)
         {
-            int init = storage.type.batteries.Count();
+            int init = storage.type.storageNumber;
             return init;
         }
 
@@ -73,7 +73,7 @@ namespace ElectricCarLib
            int x = periods.Count;
             bool found = false;
             MPeriod previous = new MPeriod();
-            while(!found || x<0)
+            while(!found || x>0)
            {
                MPeriod period = periods[x-1];
                if (period.time == current.time)
@@ -84,6 +84,32 @@ namespace ElectricCarLib
                x--;
            }
             return previous;
+        }
+
+        public MPeriod getNextPeriod(MBatteryStorage storage, MPeriod current)
+        {
+            List<MPeriod> periods = dbPeriod.getStoragePeriods(storage.id, true);
+            int x = 0;
+            bool found = false;
+            MPeriod next = new MPeriod();
+            while (!found || x < periods.Count)
+            {
+                MPeriod period = periods[x];
+                if (period.time == current.time)
+                {
+                    found = true;
+                    try
+                    {
+                        next = periods[x + 1];
+                    }
+                    catch (Exception)
+                    {
+                        next = createPeriod(storage);
+                    }
+                }
+                x++;
+            }
+            return next;
         }
 
     }
