@@ -83,9 +83,7 @@ namespace ElectricCarDB
                     MBatteryType batteryType = buildBatteryType(bt);
                     if (getAssociation)
                     {
-                        IDBattery dbBattery = new DBattery();
-                        List<MBattery> batteries = dbBattery.getTypeBatteries(id,true);
-                        batteryType.batteries = batteries;
+                       
                     }
 
                     return batteryType;

@@ -14,7 +14,6 @@ namespace ElectricCarModelLayer
         public Nullable<decimal> capacity { get; set; }
         public Nullable<decimal> exchangeCost { get; set; }
         public int storageNumber { get; set; }
-        public List<MBattery> batteries { get; set; }
       
     }
 }

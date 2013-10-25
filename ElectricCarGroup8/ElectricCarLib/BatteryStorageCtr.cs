@@ -66,9 +66,12 @@ namespace ElectricCarLib
             PeriodCalculator pCalc = new PeriodCalculator();
             MPeriod period = pCalc.getBookingPeriod(storage,time);
             MPeriod previous = pCalc.getPreviousPeriod(storage, period);
+            MPeriod next = pCalc.getNextPeriod(storage, period);
             int booked = period.bookedBatteryNumber + previous.bookedBatteryNumber;
             int available = period.initBatteryNumber - booked;
-            if (available>=quantity)
+            int futureBooked = period.bookedBatteryNumber + next.bookedBatteryNumber;
+            int futureAvailable = next.initBatteryNumber - futureBooked;
+            if (available >= quantity && futureAvailable >= quantity)
             {
                 validate = true;
             }
@@ -83,9 +86,12 @@ namespace ElectricCarLib
             PeriodCalculator pCalc = new PeriodCalculator();
             MPeriod period = pCalc.getBookingPeriod(storage, time);
             MPeriod previous = pCalc.getPreviousPeriod(storage, period);
+            MPeriod next = pCalc.getNextPeriod(storage, period);
             int booked = period.bookedBatteryNumber + previous.bookedBatteryNumber;
             int available = period.initBatteryNumber - booked;
-            if (available >= updateQuantity)
+            int futureBooked = period.bookedBatteryNumber + next.bookedBatteryNumber;
+            int futureAvailable = next.initBatteryNumber - futureBooked;
+            if (available >= updateQuantity && futureAvailable >= updateQuantity)
             {
                 validate = true;
             }
@@ -106,9 +112,9 @@ namespace ElectricCarLib
                 dbPeriod.updateRecord(storage.id,period.time,period.initBatteryNumber,period.bookedBatteryNumber);
                 success = true;
             }
-            catch(Exception)
+            catch(Exception e)
             {
-                throw new SystemException("Can not add Booking");
+                throw new SystemException("Can not add Booking" + e.Message);
             }
             return success;
            }

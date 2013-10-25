@@ -80,6 +80,7 @@ namespace ElectricCarDB
                     MBattery battery = buildBattery(b);
                     if (getAssociation)
                     {
+                        battery.type = dbType.getRecord(battery.type.id, true);
                     }
 
                     return battery;
@@ -178,6 +179,7 @@ namespace ElectricCarDB
                     MBattery battery = buildBattery(b);
                     if (getAssociation)
                     {
+                        battery.type = dbType.getRecord(battery.type.id, true);
                     }
                     batteries.Add(battery);
                 }
@@ -194,6 +196,7 @@ namespace ElectricCarDB
                     if (b.btId == btId)
                     {
                         MBattery battery = buildBattery(b);
+                        battery.type = dbType.getRecord(battery.type.id,true);
                         batteries.Add(battery);
                     }
                 }
@@ -220,6 +223,7 @@ namespace ElectricCarDB
             {
                 id = b.Id,
                 state = b.state,
+                type = new MBatteryType { id = b.btId.Value },
             };
             return battery;
         }

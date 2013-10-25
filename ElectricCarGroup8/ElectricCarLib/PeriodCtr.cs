@@ -15,7 +15,7 @@ namespace ElectricCarLib
             IDPeriod dbPeriod = new DBPeriod();
             IDBBatteryStorage dbStorage = new DBBatteryStorage();
             MBatteryStorage storage = dbStorage.getRecord(bsID, true);
-            int init = storage.type.batteries.Count();
+            int init = storage.type.storageNumber;
             int id = dbPeriod.addNewRecord(bsID,time,init,0);
             return id;
         }
@@ -37,7 +37,7 @@ namespace ElectricCarLib
             IDPeriod dbPeriod = new DBPeriod();
             IDBBatteryStorage dbStorage = new DBBatteryStorage();
             MBatteryStorage storage = dbStorage.getRecord(bsID, true);
-            int init = storage.type.batteries.Count();
+            int init = storage.type.storageNumber;
             dbPeriod.updateRecord(bsID, time, init);
         }
 
