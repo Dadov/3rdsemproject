@@ -233,7 +233,7 @@ namespace ElectricCarLibTest
                 int ran = 0;
                 decimal preValue = 0;
                 decimal currentExtractValue = 0;
-                int size = 100; //can be adjust it
+                int size = 100; //can be adjusted
                 for (int i = 0; i < size; i++)
                 {
                     FibonacciNode node = heap.insert(i + 1);
@@ -270,7 +270,7 @@ namespace ElectricCarLibTest
 
         }
 
-        [TestMethod]
+        
         public void runUnpassedData()
         {
             List<int> dataList = readDataFromFile();
