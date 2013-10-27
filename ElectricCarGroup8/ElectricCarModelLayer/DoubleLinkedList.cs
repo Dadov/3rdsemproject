@@ -17,6 +17,8 @@ namespace ElectricCarModelLayer
             if (head == null)
             {
                 head = node;
+                node.LeftNode = node;
+                node.RightNode = node;
             }
             else
             {

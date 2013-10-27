@@ -1,7 +1,9 @@
 ﻿using System;
 using Microsoft.VisualStudio.TestTools.UnitTesting;
 using ElectricCarModelLayer;
-
+using System.Collections;
+using System.Collections.Generic;
+using System.IO;
 namespace ElectricCarLibTest
 {
     [TestClass]
@@ -12,7 +14,7 @@ namespace ElectricCarLibTest
         {
             FibonacciHeap heap = new FibonacciHeap();
             heap.insert(1);
-            
+
             Assert.AreEqual(1, heap.numberOfNodes);
             Assert.AreEqual(1, heap.root.head.StationID);
             Assert.AreEqual(1, heap.minNode.StationID);
@@ -199,6 +201,153 @@ namespace ElectricCarLibTest
             Assert.AreEqual(3, heap.calculateArraySize(7));
             Assert.AreEqual(4, heap.calculateArraySize(8));
 
+        }
+
+        [TestMethod]
+        public void streessTest()
+        {
+            long i = 0;
+            while (i <= 100)//value can be changed to 1000000(28 min to finish) or others
+            {
+                //if (i % 100 == 0)
+                //{
+                    System.Diagnostics.Debug.WriteLine(i + "");
+                //}
+
+                extract_minWithRandomNumbers();
+                i++;
+
+                
+            }
+            Assert.AreEqual(1, 1);
+        }
+
+        [TestMethod]
+        public void extract_minWithRandomNumbers()
+        {
+            List<int> dataList = new List<int>();
+            try
+            {
+                FibonacciHeap heap = new FibonacciHeap();
+                Random r = new Random();
+                int ran = 0;
+                decimal preValue = 0;
+                decimal currentExtractValue = 0;
+                int size = 100; //can be adjust it
+                for (int i = 0; i < size; i++)
+                {
+                    FibonacciNode node = heap.insert(i + 1);
+                    ran = r.Next(1, 100);
+                    heap.DecreasingKey(heap.root, node, ran);
+                    dataList.Add(ran);
+                    Assert.AreEqual(i + 1, heap.numberOfNodes);
+                }
+
+                for (int i = 0; i < size; i++)
+                {
+                    FibonacciNode node = heap.extractMinNode();
+                    Assert.AreEqual(size - (i + 1), heap.numberOfNodes);
+                    currentExtractValue = node.MinPathValue;
+                    if (currentExtractValue < preValue)
+                    {
+                        Assert.Fail();
+                    }
+                    preValue = currentExtractValue;
+
+                }
+            }
+            catch (IndexOutOfRangeException e)
+            {
+                writeDataToFile(e.Message, dataList);
+                throw new Exception();
+            }
+            catch (AssertFailedException e)
+            {
+                writeDataToFile(e.Message, dataList);
+                throw new Exception();
+            }
+
+
+        }
+
+        [TestMethod]
+        public void runUnpassedData()
+        {
+            List<int> dataList = readDataFromFile();
+            decimal preValue = 0;
+            decimal currentExtractValue = 0;
+            FibonacciHeap heap = new FibonacciHeap();
+            for (int i = 0; i < dataList.Count; i++)
+            {
+                FibonacciNode node = heap.insert(i+1);
+                heap.DecreasingKey(heap.root, node, dataList[i]);
+                Assert.AreEqual(i + 1, heap.numberOfNodes);
+            }
+
+            dataList.Sort();
+
+            
+            List<FibonacciNode> listNode = new List<FibonacciNode>();
+            int size = dataList.Count;
+            for (int i = 0; i < dataList.Count; i++)
+            {
+                FibonacciNode node = heap.extractMinNode();
+                listNode.Add(node);
+                Assert.AreEqual(size - (i + 1), heap.numberOfNodes);
+                currentExtractValue = node.MinPathValue;
+                if (currentExtractValue < preValue)
+                {
+                    Assert.Fail();
+                }
+                preValue = currentExtractValue;
+
+            }
+
+            for (int i = 0; i < dataList.Count; i++)
+            {
+                Assert.AreEqual(dataList[i], Convert.ToInt32(listNode[i].MinPathValue));
+            }
+        }
+
+        [TestMethod]
+        public List<int> readDataFromFile()
+        {
+            List<int> dataList = new List<int>();
+            string path = Directory.GetCurrentDirectory();
+            string suffix = @"bin\Debug";
+            char[] trailingChars = suffix.ToCharArray();
+            path = path.TrimEnd(trailingChars);
+            using (StreamReader sr = new StreamReader(path + @"\Unpassed data\data2.txt"))
+            {
+
+                String[] line = sr.ReadToEnd().Split(new string[] { Environment.NewLine }, StringSplitOptions.None);
+                for (int i = 1; i < line.Length - 1; i++)
+                {
+                    string t = line[i].Trim();
+                    dataList.Add(Convert.ToInt32(t));
+                }
+            }
+            
+            
+            return dataList;
+
+        }
+
+        public void writeDataToFile(string message, List<int> data)
+        {
+            string path = Directory.GetCurrentDirectory();
+            string suffix = @"bin\Debug";
+            char[] trailingChars = suffix.ToCharArray();
+            path = path.TrimEnd(trailingChars);
+            using (StreamWriter file = new StreamWriter(path + @"\Unpassed data\data5.txt"))
+            {
+
+                file.WriteLine(message);
+                foreach (int i in data)
+                {
+                    file.WriteLine(i);
+                }
+            }
         }
     }
 }

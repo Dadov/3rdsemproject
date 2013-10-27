@@ -16,9 +16,12 @@ namespace ElectricCarLib
             Dictionary<int, FibonacciNode> QCopy = new Dictionary<int, FibonacciNode>();
             List<int> R = new List<int>();
             List<FibonacciNode> S = new List<FibonacciNode>();
-            Q.insert(startSID);
+            //initialize start node
+            FibonacciNode start = Q.insert(startSID);
+            start.MinPathValue = 0;
+            QCopy.Add(startSID, start);
 
-            while (R.Contains(endSID))
+            while (Q.numberOfNodes != 0)
             {
                 FibonacciNode u = Q.extractMinNode();
                 R.Add(u.StationID);
@@ -44,12 +47,13 @@ namespace ElectricCarLib
             LinkedList<PathStop> route = new LinkedList<PathStop>();
             if (R.Contains(endSID))
 	        {
-                return buildRoute(S, endSID);
-	        }
+                route = buildRoute(S, endSID);
+            }
             else
-	        {
-                throw new SystemException("The start station and end station is not connected.");
-	        }
+            {
+                route = null;
+            }
+            return route;
         }
 
         public static void relax(FibonacciNode u, FibonacciNode v, decimal w, FibonacciHeap Q, Dictionary<int, FibonacciNode> QCopy)

@@ -11,32 +11,189 @@ namespace ElectricCarLibTest
     public class PathFindTest
     {
         [TestMethod]
-        public void shortestPathWithFibonacciLinearGraph()
+        public void shortestPathWithFibonacci()
         {
+            Dictionary<int, Dictionary<int, decimal>> adjListWithWeight = new Dictionary<int,Dictionary<int,decimal>>();
+            Dictionary<int, decimal> s = new Dictionary<int,decimal>();
+            s.Add(2, 5); s.Add(4, 4);
+            Dictionary<int, decimal> t = new Dictionary<int,decimal>();
+            t.Add(3, 6); t.Add(1, 5);
+            Dictionary<int, decimal> y = new Dictionary<int,decimal>();
+            y.Add(1, 4); y.Add(5, 2);
+            Dictionary<int, decimal> x = new Dictionary<int,decimal>();
+            x.Add(2, 6);
+            Dictionary<int, decimal> u = new Dictionary<int,decimal>();
+            u.Add(4, 2);
+
+            adjListWithWeight.Add(1, s);
+            adjListWithWeight.Add(2, t);
+            adjListWithWeight.Add(3, x);
+            adjListWithWeight.Add(4, y);
+            adjListWithWeight.Add(5, u);
+
+            LinkedList<PathStop> route = new LinkedList<PathStop>();
+
+            route = PathFind.shortestPathWithFibonacci(adjListWithWeight, 3, 5);
+            Assert.AreEqual(17, route.Last.Value.driveHour);
+
+            route = PathFind.shortestPathWithFibonacci(adjListWithWeight, 1, 2);
+            Assert.AreEqual(1, route.First.Value.stationID);
+            Assert.AreEqual(0, Convert.ToInt32(route.First.Value.driveHour));
+            Assert.AreEqual(2, route.First.Next.Value.stationID);
+            Assert.AreEqual(5, Convert.ToInt32(route.First.Next.Value.driveHour));
+
+            route = PathFind.shortestPathWithFibonacci(adjListWithWeight, 1, 3);
+            Assert.AreEqual(1, route.First.Value.stationID);
+            Assert.AreEqual(0, Convert.ToInt32(route.First.Value.driveHour));
+            Assert.AreEqual(2, route.First.Next.Value.stationID);
+            Assert.AreEqual(5, Convert.ToInt32(route.First.Next.Value.driveHour));
+            Assert.AreEqual(3, route.First.Next.Next.Value.stationID);
+            Assert.AreEqual(11, Convert.ToInt32(route.First.Next.Next.Value.driveHour));
+
+            route = PathFind.shortestPathWithFibonacci(adjListWithWeight, 1, 4);
+            Assert.AreEqual(1, route.First.Value.stationID);
+            Assert.AreEqual(0, Convert.ToInt32(route.First.Value.driveHour));
+            Assert.AreEqual(4, route.First.Next.Value.stationID);
+            Assert.AreEqual(4, Convert.ToInt32(route.First.Next.Value.driveHour));
+
+            route = PathFind.shortestPathWithFibonacci(adjListWithWeight, 1, 5);
+            Assert.AreEqual(1, route.First.Value.stationID);
+            Assert.AreEqual(0, Convert.ToInt32(route.First.Value.driveHour));
+            Assert.AreEqual(4, route.First.Next.Value.stationID);
+            Assert.AreEqual(4, Convert.ToInt32(route.First.Next.Value.driveHour));
+            Assert.AreEqual(5, route.First.Next.Next.Value.stationID);
+            Assert.AreEqual(6, Convert.ToInt32(route.First.Next.Next.Value.driveHour));
+
+            route = PathFind.shortestPathWithFibonacci(adjListWithWeight, 2, 3);
+            Assert.AreEqual(2, route.First.Value.stationID);
+            Assert.AreEqual(0, Convert.ToInt32(route.First.Value.driveHour));
+            Assert.AreEqual(3, route.First.Next.Value.stationID);
+            Assert.AreEqual(6, Convert.ToInt32(route.First.Next.Value.driveHour));
+            
+
             
         }
 
         [TestMethod]
-        public void shortestPathWithFibonacciTreeGraph()
+        public void shortestPathWithFibonacci2()
         {
+            Dictionary<int, Dictionary<int, decimal>> adjListWithWeight = new Dictionary<int, Dictionary<int, decimal>>();
+            Dictionary<int, decimal> s = new Dictionary<int, decimal>();
+            s.Add(2, 10); s.Add(3, 5);
+            Dictionary<int, decimal> t = new Dictionary<int, decimal>();
+            t.Add(4, 1); t.Add(3, 2);
+            Dictionary<int, decimal> y = new Dictionary<int, decimal>();
+            y.Add(2, 3); y.Add(5, 2); y.Add(4, 9);
+            Dictionary<int, decimal> x = new Dictionary<int, decimal>();
+            x.Add(5, 4);
+            Dictionary<int, decimal> u = new Dictionary<int, decimal>();
+            u.Add(4, 6); u.Add(1, 7);
 
+            adjListWithWeight.Add(1, s);
+            adjListWithWeight.Add(2, t);
+            adjListWithWeight.Add(3, y);
+            adjListWithWeight.Add(4, x);
+            adjListWithWeight.Add(5, u);
+
+            LinkedList<PathStop> route = new LinkedList<PathStop>();
+
+            route = PathFind.shortestPathWithFibonacci(adjListWithWeight, 1, 4);
+            Assert.AreEqual(1, route.First.Value.stationID);
+            Assert.AreEqual(0, Convert.ToInt32(route.First.Value.driveHour));
+            Assert.AreEqual(3, route.First.Next.Value.stationID);
+            Assert.AreEqual(5, Convert.ToInt32(route.First.Next.Value.driveHour));
+            Assert.AreEqual(2, route.First.Next.Next.Value.stationID);
+            Assert.AreEqual(8, Convert.ToInt32(route.First.Next.Next.Value.driveHour));
+            Assert.AreEqual(4, route.First.Next.Next.Next.Value.stationID);
+            Assert.AreEqual(9, Convert.ToInt32(route.First.Next.Next.Next.Value.driveHour));
+
+            route = PathFind.shortestPathWithFibonacci(adjListWithWeight, 1, 5);
+            Assert.AreEqual(1, route.First.Value.stationID);
+            Assert.AreEqual(0, Convert.ToInt32(route.First.Value.driveHour));
+            Assert.AreEqual(3, route.First.Next.Value.stationID);
+            Assert.AreEqual(5, Convert.ToInt32(route.First.Next.Value.driveHour));
+            Assert.AreEqual(5, route.First.Next.Next.Value.stationID);
+            Assert.AreEqual(7, Convert.ToInt32(route.First.Next.Next.Value.driveHour));
         }
-
-        [TestMethod]
-        public void shortestPathWithFibonacciUndirectedGraph()
-        {
-
-        }
-
         [TestMethod]
         public void buildRoute()
         {
-            
+            List<FibonacciNode> S = new List<FibonacciNode>();
+            FibonacciNode s = new FibonacciNode() { StationID = 1, MinPathValue = 0, lastStop = null };
+            FibonacciNode y = new FibonacciNode() { StationID = 3, MinPathValue = 5, lastStop = s };
+            FibonacciNode t = new FibonacciNode() { StationID = 2, MinPathValue = 8, lastStop = y };
+            FibonacciNode x = new FibonacciNode() { StationID = 4, MinPathValue = 9, lastStop = t };
+            FibonacciNode z = new FibonacciNode() { StationID = 5, MinPathValue = 7, lastStop = y };
+            S.Add(s);
+            S.Add(t);
+            S.Add(y);
+            S.Add(x);
+            S.Add(z);
+
+            LinkedList<PathStop> route = new LinkedList<PathStop>();
+            route = PathFind.buildRoute(S, 1);
+            Assert.AreEqual(1, route.First.Value.stationID);
+            Assert.AreEqual(0, Convert.ToInt32(route.First.Value.driveHour));
+
+            route = PathFind.buildRoute(S, 2);
+            Assert.AreEqual(1, route.First.Value.stationID);
+            Assert.AreEqual(0, Convert.ToInt32(route.First.Value.driveHour));
+            Assert.AreEqual(3, route.First.Next.Value.stationID);
+            Assert.AreEqual(5, Convert.ToInt32(route.First.Next.Value.driveHour));
+            Assert.AreEqual(2, route.First.Next.Next.Value.stationID);
+            Assert.AreEqual(8, Convert.ToInt32(route.First.Next.Next.Value.driveHour));
+
+            route = PathFind.buildRoute(S, 4);
+            Assert.AreEqual(1, route.First.Value.stationID);
+            Assert.AreEqual(0, Convert.ToInt32(route.First.Value.driveHour));
+            Assert.AreEqual(3, route.First.Next.Value.stationID);
+            Assert.AreEqual(5, Convert.ToInt32(route.First.Next.Value.driveHour));
+            Assert.AreEqual(2, route.First.Next.Next.Value.stationID);
+            Assert.AreEqual(8, Convert.ToInt32(route.First.Next.Next.Value.driveHour));
+            Assert.AreEqual(4, route.First.Next.Next.Next.Value.stationID);
+            Assert.AreEqual(9, Convert.ToInt32(route.First.Next.Next.Next.Value.driveHour));
+
+            route = PathFind.buildRoute(S, 3);
+            Assert.AreEqual(1, route.First.Value.stationID);
+            Assert.AreEqual(0, Convert.ToInt32(route.First.Value.driveHour));
+            Assert.AreEqual(3, route.First.Next.Value.stationID);
+            Assert.AreEqual(5, Convert.ToInt32(route.First.Next.Value.driveHour));
+
+            route = PathFind.buildRoute(S, 5);
+            Assert.AreEqual(1, route.First.Value.stationID);
+            Assert.AreEqual(0, Convert.ToInt32(route.First.Value.driveHour));
+            Assert.AreEqual(3, route.First.Next.Value.stationID);
+            Assert.AreEqual(5, Convert.ToInt32(route.First.Next.Value.driveHour));
+            Assert.AreEqual(5, route.First.Next.Next.Value.stationID);
+            Assert.AreEqual(7, Convert.ToInt32(route.First.Next.Next.Value.driveHour));
         }
 
         [TestMethod]
         public void relax()
         {
+            FibonacciHeap Q = new FibonacciHeap();
+            FibonacciNode u = Q.insert(1);
+            u.MinPathValue = 5;
+            FibonacciNode v = Q.insert(2);
+            v.MinPathValue = 6;
+            Dictionary<int, FibonacciNode> QCopy = new Dictionary<int, FibonacciNode>();
+            QCopy.Add(1, u);
+            QCopy.Add(2, v);
+            decimal w = 3;
+
+            PathFind.relax(u, v, w, Q, QCopy);
+            Assert.AreEqual(6, Convert.ToInt32(v.MinPathValue));
+            Assert.AreEqual(null, v.lastStop);
+            Assert.AreEqual(6, Convert.ToInt32(QCopy[2].MinPathValue));
+
+            v.MinPathValue = 10;
+            PathFind.relax(u, v, w, Q, QCopy);
+
+            Assert.AreEqual(8, Convert.ToInt32(v.MinPathValue));
+            Assert.AreEqual(u, v.lastStop);
+            Assert.AreEqual(8, Convert.ToInt32(QCopy[2].MinPathValue));
+
+            
 
         }
         
