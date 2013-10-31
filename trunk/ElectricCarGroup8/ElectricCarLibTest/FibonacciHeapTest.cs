@@ -207,7 +207,7 @@ namespace ElectricCarLibTest
         public void streessTest()
         {
             long i = 0;
-            while (i <= 100)//value can be changed to 1000000(28 min to finish) or others
+            while (i <= 10)//value can be changed to 1000000(28 min to finish) or others
             {
                 //if (i % 100 == 0)
                 //{
@@ -233,7 +233,7 @@ namespace ElectricCarLibTest
                 int ran = 0;
                 decimal preValue = 0;
                 decimal currentExtractValue = 0;
-                int size = 100; //can be adjusted
+                int size = 30000; //can be adjusted
                 for (int i = 0; i < size; i++)
                 {
                     FibonacciNode node = heap.insert(i + 1);

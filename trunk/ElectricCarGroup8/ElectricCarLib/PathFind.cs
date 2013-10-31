@@ -10,6 +10,7 @@ namespace ElectricCarLib
 {
     public class PathFind
     {
+        //return a path with min weight
         public static LinkedList<PathStop> shortestPathWithFibonacci(Dictionary<int, Dictionary<int, decimal>> adjListWithWeight, int startSID, int endSID)
         {
             FibonacciHeap Q = new FibonacciHeap();
@@ -49,10 +50,6 @@ namespace ElectricCarLib
 	        {
                 route = buildRoute(S, endSID);
             }
-            else
-            {
-                route = null;
-            }
             return route;
         }
 
@@ -66,6 +63,80 @@ namespace ElectricCarLib
             }
         }
 
+        public static LinkedList<PathStop> shortestPathWithoutFibonacci(Dictionary<int, Dictionary<int, decimal>> adjListWithWeight, int startSID, int endSID)
+        {
+            Dictionary<int, decimal> visitedStationIDs_distance = new Dictionary<int, decimal>(); //keep track of extracted nodes
+            Dictionary<int, int> stationID_parentID = new Dictionary<int, int>();
+            HashSet<int> reachedStations = new HashSet<int>();
+            Dictionary<int, decimal> queue = new Dictionary<int, decimal>();
+
+            //initiate the start
+            reachedStations.Add(startSID);
+            stationID_parentID.Add(startSID, 0);
+
+            queue.Add(startSID, 0);
+
+            while (queue.Count != 0)
+            {
+                int uId = getIdWithMinValue(queue);
+                visitedStationIDs_distance.Add(uId, queue[uId]);
+                queue.Remove(uId); 
+                
+                foreach (int vId in adjListWithWeight[uId].Keys)
+                {
+                    if (!reachedStations.Contains(vId)) //if it is a new node
+                    {
+                        queue.Add(vId, decimal.MaxValue);
+                        reachedStations.Add(vId);
+
+                        decimal w = adjListWithWeight[uId][vId];
+                        relax(uId, visitedStationIDs_distance[uId], vId, w, queue, stationID_parentID);
+                    }
+                    else if (!visitedStationIDs_distance.Keys.Contains(vId)) //if the node is not extracted and still in the queue
+                    {                                                        //then do relax
+                        decimal w = adjListWithWeight[uId][vId];             
+                        relax(uId, visitedStationIDs_distance[uId], vId, w, queue, stationID_parentID);
+                    }
+                }
+            }
+
+            LinkedList<PathStop> route = new LinkedList<PathStop>();
+            if (visitedStationIDs_distance.Keys.Contains(endSID))
+            {
+                route = buildRoute(visitedStationIDs_distance, stationID_parentID, endSID);
+            }
+            
+            return route;
+        }
+
+        public static int getIdWithMinValue(Dictionary<int, decimal> q)
+        {
+           return q.OrderBy(i => i.Value).First().Key; //using quick sort O(NlogN) at average
+        }
+
+        public static void relax(int u, decimal uMinVal, int v, decimal w, Dictionary<int, decimal> q, Dictionary<int, int> stationID_parentID)
+        {
+            if (q[v] > uMinVal + w)
+            {
+                q[v] = uMinVal + w;
+                stationID_parentID[v] = u;
+            }
+        }
+
+        public static LinkedList<PathStop> buildRoute(Dictionary<int, decimal> visitedStationIDs_distance, Dictionary<int, int> stationID_parentID, int endSID)
+        {
+            LinkedList<PathStop> route = new LinkedList<PathStop>();
+            int parentId = endSID;
+            while (parentId!=0)
+            {
+                PathStop stop = new PathStop() { stationID = parentId, driveHour = visitedStationIDs_distance[parentId] };
+                route.AddFirst(stop);
+                parentId = stationID_parentID[parentId];
+            }
+            return route;
+        }
+
+        
         //return a path consists of station id and drivehour from each station to start station. 
         public static LinkedList<PathStop> buildRoute(List<FibonacciNode> S, int endSID)
         {
@@ -81,7 +152,65 @@ namespace ElectricCarLib
             return route;
         }
 
+        //build route based on BFS and least stops route
+        public static LinkedList<PathStop> buildRoute(Dictionary<int, int> stationID_stops, Dictionary<int, int> stationID_parentID, int endSID)
+        {
+            LinkedList<PathStop> route = new LinkedList<PathStop>();
+            int parentId = endSID;
+            while (parentId!= 0)
+            {
+                PathStop stop = new PathStop(){stationID = parentId, driveHour = stationID_stops[parentId]};
+                route.AddFirst(stop);
+                parentId = stationID_parentID[parentId];
+            }
+            return route;
+        }
 
+        public static LinkedList<PathStop> leastStopsPathWithIds(Dictionary<int, Dictionary<int, decimal>> adjListWithWeight, int startSID, int endSID)
+        {
+            Dictionary<int, int> visitedStationIDs_stops = new Dictionary<int, int>(); //keep track of reached nodes and stops
+            Dictionary<int, int> stationID_parentID = new Dictionary<int, int>();
+            HashSet<int> reachedStations = new HashSet<int>();
+            Queue<int> queue = new Queue<int>();
+
+            //initiate the start
+            reachedStations.Add(startSID);
+            visitedStationIDs_stops.Add(startSID, 0);
+            stationID_parentID.Add(startSID, 0);
+
+            queue.Enqueue(startSID);
+            while (queue.Count != 0)
+            {
+                int u = queue.Dequeue();
+                if (u == endSID)
+                {
+                    break;
+                }
+                else
+                {
+                    foreach (int sID in adjListWithWeight[u].Keys)
+                    {
+                        if (!reachedStations.Contains(sID))
+                        {
+                            reachedStations.Add(sID);
+
+                            visitedStationIDs_stops.Add(sID, visitedStationIDs_stops[u] + 1);
+                            stationID_parentID.Add(sID, u);
+
+                            queue.Enqueue(sID);
+                        }
+                    }
+                }
+            }
+
+            //build route
+            LinkedList<PathStop> route = new LinkedList<PathStop>();
+            if (visitedStationIDs_stops.Keys.Contains(endSID))
+            {
+                route = buildRoute(visitedStationIDs_stops, stationID_parentID, endSID);
+            }
+            return route;
+        }
 
         public static List<MStation> leastStopsPath(Dictionary<MStation, LinkedList<MStation>> adjList, MStation start, MStation destination, out int numOfStops)
         {
@@ -146,6 +275,43 @@ namespace ElectricCarLib
             }
 
             return leastStopsPath;
+        }
+
+        public static int breathFirstSearchWithIds(Dictionary<int, Dictionary<int, decimal>> adjListWithWeight, int startID, int endID)
+        {
+            int distance = 0;
+
+            HashSet<int> reachedStationIDs = new HashSet<int>();
+            Queue<int> queue = new Queue<int>();
+            Dictionary<int, int> stationId_stops = new Dictionary<int, int>();
+
+            //initiation
+            reachedStationIDs.Add(startID);
+            stationId_stops.Add(startID, 0);
+            queue.Enqueue(startID);
+
+            //start search
+            while (queue.Count != 0)
+            {
+                int u = queue.Dequeue();
+                foreach (int sID in adjListWithWeight[u].Keys)
+                {
+                    if (!reachedStationIDs.Contains(sID))
+                    {
+                        reachedStationIDs.Add(sID);
+                        stationId_stops.Add(sID, stationId_stops[u] + 1);
+                        queue.Enqueue(sID);
+                    }
+                }
+
+            }
+
+            //check if end station id is in the searched stations
+            if (stationId_stops.ContainsKey(endID))
+            {
+                distance = stationId_stops[endID];
+            }
+            return distance;
         }
 
         public static int breathFirstSearch(Dictionary<MStation, LinkedList<MStation>> adjList, MStation start, MStation destination)

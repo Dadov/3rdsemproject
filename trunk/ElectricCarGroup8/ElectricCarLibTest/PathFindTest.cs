@@ -4,6 +4,7 @@ using System.Collections;
 using System.Collections.Generic;
 using ElectricCarModelLayer;
 using ElectricCarLib;
+using System.IO;
 
 namespace ElectricCarLibTest
 {
@@ -13,16 +14,16 @@ namespace ElectricCarLibTest
         [TestMethod]
         public void shortestPathWithFibonacci()
         {
-            Dictionary<int, Dictionary<int, decimal>> adjListWithWeight = new Dictionary<int,Dictionary<int,decimal>>();
-            Dictionary<int, decimal> s = new Dictionary<int,decimal>();
+            Dictionary<int, Dictionary<int, decimal>> adjListWithWeight = new Dictionary<int, Dictionary<int, decimal>>();
+            Dictionary<int, decimal> s = new Dictionary<int, decimal>();
             s.Add(2, 5); s.Add(4, 4);
-            Dictionary<int, decimal> t = new Dictionary<int,decimal>();
+            Dictionary<int, decimal> t = new Dictionary<int, decimal>();
             t.Add(3, 6); t.Add(1, 5);
-            Dictionary<int, decimal> y = new Dictionary<int,decimal>();
+            Dictionary<int, decimal> y = new Dictionary<int, decimal>();
             y.Add(1, 4); y.Add(5, 2);
-            Dictionary<int, decimal> x = new Dictionary<int,decimal>();
+            Dictionary<int, decimal> x = new Dictionary<int, decimal>();
             x.Add(2, 6);
-            Dictionary<int, decimal> u = new Dictionary<int,decimal>();
+            Dictionary<int, decimal> u = new Dictionary<int, decimal>();
             u.Add(4, 2);
 
             adjListWithWeight.Add(1, s);
@@ -69,9 +70,9 @@ namespace ElectricCarLibTest
             Assert.AreEqual(0, Convert.ToInt32(route.First.Value.driveHour));
             Assert.AreEqual(3, route.First.Next.Value.stationID);
             Assert.AreEqual(6, Convert.ToInt32(route.First.Next.Value.driveHour));
-            
 
-            
+
+
         }
 
         [TestMethod]
@@ -193,10 +194,10 @@ namespace ElectricCarLibTest
             Assert.AreEqual(u, v.lastStop);
             Assert.AreEqual(8, Convert.ToInt32(QCopy[2].MinPathValue));
 
-            
+
 
         }
-        
+
         [TestMethod]
         public void leastStopsPathLinearDataStructure()
         {
@@ -310,7 +311,7 @@ namespace ElectricCarLibTest
             Assert.AreEqual(5, path8[1].Id);
             Assert.AreEqual(6, path8[2].Id);
             Assert.AreEqual(7, path8[3].Id);
-           
+
         }
 
         [TestMethod]
@@ -380,7 +381,7 @@ namespace ElectricCarLibTest
             Assert.AreEqual(1, path2[0].Id);
             Assert.AreEqual(2, path2[1].Id);
             Assert.AreEqual(4, path2[2].Id);
-           
+
             Assert.AreEqual(stops3 - 1, PathFind.breathFirstSearch(adjList, s, u));
             Assert.AreEqual(1, path3[0].Id);
             Assert.AreEqual(2, path3[1].Id);
@@ -391,7 +392,7 @@ namespace ElectricCarLibTest
             Assert.AreEqual(1, path4[0].Id);
             Assert.AreEqual(3, path4[1].Id);
             Assert.AreEqual(6, path4[2].Id);
-            
+
             Assert.AreEqual(stops5, PathFind.breathFirstSearch(adjList, x, y));
             Assert.AreEqual(0, path5.Count);
 
@@ -492,7 +493,7 @@ namespace ElectricCarLibTest
             Assert.AreEqual(1, PathFind.breathFirstSearch(adjList, s, w));
             Assert.AreEqual(1, path3[0].Id);
             Assert.AreEqual(4, path3[1].Id);
-            
+
             Assert.AreEqual(2, PathFind.breathFirstSearch(adjList, s, t));
             Assert.AreEqual(1, path4[0].Id);
             Assert.AreEqual(4, path4[1].Id);
@@ -655,10 +656,10 @@ namespace ElectricCarLibTest
 
             adjS.AddFirst(w);
             adjS.AddLast(r);
-            
+
             adjR.AddFirst(v);
             adjR.AddLast(s);
-            
+
             adjW.AddFirst(t);
             adjW.AddLast(x);
             adjW.AddLast(s);
@@ -688,7 +689,7 @@ namespace ElectricCarLibTest
             adjList.Add(v, adjV);
             adjList.Add(u, adjU);
             adjList.Add(w, adjW);
-            
+
             Assert.AreEqual(1, PathFind.breathFirstSearch(adjList, s, r));
             Assert.AreEqual(2, PathFind.breathFirstSearch(adjList, s, v));
             Assert.AreEqual(1, PathFind.breathFirstSearch(adjList, s, w));
@@ -698,6 +699,428 @@ namespace ElectricCarLibTest
             Assert.AreEqual(3, PathFind.breathFirstSearch(adjList, s, y));
             Assert.AreEqual(5, PathFind.breathFirstSearch(adjList, u, v));
             Assert.AreEqual(2, PathFind.breathFirstSearch(adjList, w, y));
+        }
+
+        [TestMethod]
+        public void getIdWithMinValue()
+        {
+            Dictionary<int, decimal> q = new Dictionary<int, decimal>();
+            q.Add(1, 10);
+            q.Add(2, 3);
+            q.Add(3, 2);
+            q.Add(4, 2);
+            q.Add(5, 1);
+            q.Add(6, 7);
+
+            Assert.AreEqual(5, PathFind.getIdWithMinValue(q));
+
+
+        }
+
+        [TestMethod]
+        public void leastStopsPathWithIds()
+        {
+            Dictionary<int, Dictionary<int, decimal>> adjListWithWeight = new Dictionary<int, Dictionary<int, decimal>>();
+            Dictionary<int, decimal> s = new Dictionary<int, decimal>();
+            s.Add(2, 5); s.Add(4, 4);
+            Dictionary<int, decimal> t = new Dictionary<int, decimal>();
+            t.Add(3, 6); t.Add(1, 5);
+            Dictionary<int, decimal> y = new Dictionary<int, decimal>();
+            y.Add(1, 4); y.Add(5, 2);
+            Dictionary<int, decimal> x = new Dictionary<int, decimal>();
+            x.Add(2, 6);
+            Dictionary<int, decimal> u = new Dictionary<int, decimal>();
+            u.Add(4, 2);
+
+            adjListWithWeight.Add(1, s);
+            adjListWithWeight.Add(2, t);
+            adjListWithWeight.Add(3, x);
+            adjListWithWeight.Add(4, y);
+            adjListWithWeight.Add(5, u);
+
+            LinkedList<PathStop> route = new LinkedList<PathStop>();
+
+            route = PathFind.leastStopsPathWithIds(adjListWithWeight, 3, 5);
+            Assert.AreEqual(4, route.Last.Value.driveHour);
+
+            route = PathFind.leastStopsPathWithIds(adjListWithWeight, 1, 2);
+            Assert.AreEqual(1, route.First.Value.stationID);
+            Assert.AreEqual(0, Convert.ToInt32(route.First.Value.driveHour));
+            Assert.AreEqual(2, route.First.Next.Value.stationID);
+            Assert.AreEqual(1, Convert.ToInt32(route.First.Next.Value.driveHour));
+
+            route = PathFind.leastStopsPathWithIds(adjListWithWeight, 1, 3);
+            Assert.AreEqual(1, route.First.Value.stationID);
+            Assert.AreEqual(0, Convert.ToInt32(route.First.Value.driveHour));
+            Assert.AreEqual(2, route.First.Next.Value.stationID);
+            Assert.AreEqual(1, Convert.ToInt32(route.First.Next.Value.driveHour));
+            Assert.AreEqual(3, route.First.Next.Next.Value.stationID);
+            Assert.AreEqual(2, Convert.ToInt32(route.First.Next.Next.Value.driveHour));
+
+            route = PathFind.leastStopsPathWithIds(adjListWithWeight, 1, 4);
+            Assert.AreEqual(1, route.First.Value.stationID);
+            Assert.AreEqual(0, Convert.ToInt32(route.First.Value.driveHour));
+            Assert.AreEqual(4, route.First.Next.Value.stationID);
+            Assert.AreEqual(1, Convert.ToInt32(route.First.Next.Value.driveHour));
+
+            route = PathFind.leastStopsPathWithIds(adjListWithWeight, 1, 5);
+            Assert.AreEqual(1, route.First.Value.stationID);
+            Assert.AreEqual(0, Convert.ToInt32(route.First.Value.driveHour));
+            Assert.AreEqual(4, route.First.Next.Value.stationID);
+            Assert.AreEqual(1, Convert.ToInt32(route.First.Next.Value.driveHour));
+            Assert.AreEqual(5, route.First.Next.Next.Value.stationID);
+            Assert.AreEqual(2, Convert.ToInt32(route.First.Next.Next.Value.driveHour));
+
+            route = PathFind.leastStopsPathWithIds(adjListWithWeight, 2, 3);
+            Assert.AreEqual(2, route.First.Value.stationID);
+            Assert.AreEqual(0, Convert.ToInt32(route.First.Value.driveHour));
+            Assert.AreEqual(3, route.First.Next.Value.stationID);
+            Assert.AreEqual(1, Convert.ToInt32(route.First.Next.Value.driveHour));
+        }
+
+        [TestMethod]
+        public void leastStopsPathWithIds2()
+        {
+            Dictionary<int, Dictionary<int, decimal>> adjListWithWeight = new Dictionary<int, Dictionary<int, decimal>>();
+            Dictionary<int, decimal> s = new Dictionary<int, decimal>();
+            s.Add(2, 10); s.Add(3, 5);
+            Dictionary<int, decimal> t = new Dictionary<int, decimal>();
+            t.Add(4, 1); t.Add(3, 2);
+            Dictionary<int, decimal> y = new Dictionary<int, decimal>();
+            y.Add(2, 3); y.Add(5, 2); y.Add(4, 9);
+            Dictionary<int, decimal> x = new Dictionary<int, decimal>();
+            x.Add(5, 4);
+            Dictionary<int, decimal> u = new Dictionary<int, decimal>();
+            u.Add(4, 6); u.Add(1, 7);
+
+            adjListWithWeight.Add(1, s);
+            adjListWithWeight.Add(2, t);
+            adjListWithWeight.Add(3, y);
+            adjListWithWeight.Add(4, x);
+            adjListWithWeight.Add(5, u);
+
+            LinkedList<PathStop> route = new LinkedList<PathStop>();
+
+            route = PathFind.leastStopsPathWithIds(adjListWithWeight, 1, 4);
+            Assert.AreEqual(1, route.First.Value.stationID);
+            Assert.AreEqual(0, Convert.ToInt32(route.First.Value.driveHour));
+            Assert.AreEqual(2, route.First.Next.Value.stationID);
+            Assert.AreEqual(1, Convert.ToInt32(route.First.Next.Value.driveHour));
+            Assert.AreEqual(4, route.First.Next.Next.Value.stationID);
+            Assert.AreEqual(2, Convert.ToInt32(route.First.Next.Next.Value.driveHour));
+
+            route = PathFind.leastStopsPathWithIds(adjListWithWeight, 1, 5);
+            Assert.AreEqual(1, route.First.Value.stationID);
+            Assert.AreEqual(0, Convert.ToInt32(route.First.Value.driveHour));
+            Assert.AreEqual(3, route.First.Next.Value.stationID);
+            Assert.AreEqual(1, Convert.ToInt32(route.First.Next.Value.driveHour));
+            Assert.AreEqual(5, route.First.Next.Next.Value.stationID);
+            Assert.AreEqual(2, Convert.ToInt32(route.First.Next.Next.Value.driveHour));
+        }
+
+        [TestMethod]
+        public void shortestPathWithoutFibonacci()
+        {
+            Dictionary<int, Dictionary<int, decimal>> adjListWithWeight = new Dictionary<int, Dictionary<int, decimal>>();
+            Dictionary<int, decimal> s = new Dictionary<int, decimal>();
+            s.Add(2, 5); s.Add(4, 4);
+            Dictionary<int, decimal> t = new Dictionary<int, decimal>();
+            t.Add(3, 6); t.Add(1, 5);
+            Dictionary<int, decimal> y = new Dictionary<int, decimal>();
+            y.Add(1, 4); y.Add(5, 2);
+            Dictionary<int, decimal> x = new Dictionary<int, decimal>();
+            x.Add(2, 6);
+            Dictionary<int, decimal> u = new Dictionary<int, decimal>();
+            u.Add(4, 2);
+
+            adjListWithWeight.Add(1, s);
+            adjListWithWeight.Add(2, t);
+            adjListWithWeight.Add(3, x);
+            adjListWithWeight.Add(4, y);
+            adjListWithWeight.Add(5, u);
+
+            LinkedList<PathStop> route = new LinkedList<PathStop>();
+
+            route = PathFind.shortestPathWithoutFibonacci(adjListWithWeight, 3, 5);
+            Assert.AreEqual(17, route.Last.Value.driveHour);
+
+            route = PathFind.shortestPathWithoutFibonacci(adjListWithWeight, 1, 2);
+            Assert.AreEqual(1, route.First.Value.stationID);
+            Assert.AreEqual(0, Convert.ToInt32(route.First.Value.driveHour));
+            Assert.AreEqual(2, route.First.Next.Value.stationID);
+            Assert.AreEqual(5, Convert.ToInt32(route.First.Next.Value.driveHour));
+
+            route = PathFind.shortestPathWithoutFibonacci(adjListWithWeight, 1, 3);
+            Assert.AreEqual(1, route.First.Value.stationID);
+            Assert.AreEqual(0, Convert.ToInt32(route.First.Value.driveHour));
+            Assert.AreEqual(2, route.First.Next.Value.stationID);
+            Assert.AreEqual(5, Convert.ToInt32(route.First.Next.Value.driveHour));
+            Assert.AreEqual(3, route.First.Next.Next.Value.stationID);
+            Assert.AreEqual(11, Convert.ToInt32(route.First.Next.Next.Value.driveHour));
+
+            route = PathFind.shortestPathWithoutFibonacci(adjListWithWeight, 1, 4);
+            Assert.AreEqual(1, route.First.Value.stationID);
+            Assert.AreEqual(0, Convert.ToInt32(route.First.Value.driveHour));
+            Assert.AreEqual(4, route.First.Next.Value.stationID);
+            Assert.AreEqual(4, Convert.ToInt32(route.First.Next.Value.driveHour));
+
+            route = PathFind.shortestPathWithoutFibonacci(adjListWithWeight, 1, 5);
+            Assert.AreEqual(1, route.First.Value.stationID);
+            Assert.AreEqual(0, Convert.ToInt32(route.First.Value.driveHour));
+            Assert.AreEqual(4, route.First.Next.Value.stationID);
+            Assert.AreEqual(4, Convert.ToInt32(route.First.Next.Value.driveHour));
+            Assert.AreEqual(5, route.First.Next.Next.Value.stationID);
+            Assert.AreEqual(6, Convert.ToInt32(route.First.Next.Next.Value.driveHour));
+
+            route = PathFind.shortestPathWithoutFibonacci(adjListWithWeight, 2, 3);
+            Assert.AreEqual(2, route.First.Value.stationID);
+            Assert.AreEqual(0, Convert.ToInt32(route.First.Value.driveHour));
+            Assert.AreEqual(3, route.First.Next.Value.stationID);
+            Assert.AreEqual(6, Convert.ToInt32(route.First.Next.Value.driveHour));
+
+        }
+
+        [TestMethod]
+        public void shortestPathWithoutFibonacci2()
+        {
+            Dictionary<int, Dictionary<int, decimal>> adjListWithWeight = new Dictionary<int, Dictionary<int, decimal>>();
+            Dictionary<int, decimal> s = new Dictionary<int, decimal>();
+            s.Add(2, 10); s.Add(3, 5);
+            Dictionary<int, decimal> t = new Dictionary<int, decimal>();
+            t.Add(4, 1); t.Add(3, 2);
+            Dictionary<int, decimal> y = new Dictionary<int, decimal>();
+            y.Add(2, 3); y.Add(5, 2); y.Add(4, 9);
+            Dictionary<int, decimal> x = new Dictionary<int, decimal>();
+            x.Add(5, 4);
+            Dictionary<int, decimal> u = new Dictionary<int, decimal>();
+            u.Add(4, 6); u.Add(1, 7);
+
+            adjListWithWeight.Add(1, s);
+            adjListWithWeight.Add(2, t);
+            adjListWithWeight.Add(3, y);
+            adjListWithWeight.Add(4, x);
+            adjListWithWeight.Add(5, u);
+
+            LinkedList<PathStop> route = new LinkedList<PathStop>();
+
+            route = PathFind.shortestPathWithoutFibonacci(adjListWithWeight, 1, 4);
+            Assert.AreEqual(1, route.First.Value.stationID);
+            Assert.AreEqual(0, Convert.ToInt32(route.First.Value.driveHour));
+            Assert.AreEqual(3, route.First.Next.Value.stationID);
+            Assert.AreEqual(5, Convert.ToInt32(route.First.Next.Value.driveHour));
+            Assert.AreEqual(2, route.First.Next.Next.Value.stationID);
+            Assert.AreEqual(8, Convert.ToInt32(route.First.Next.Next.Value.driveHour));
+            Assert.AreEqual(4, route.First.Next.Next.Next.Value.stationID);
+            Assert.AreEqual(9, Convert.ToInt32(route.First.Next.Next.Next.Value.driveHour));
+
+            route = PathFind.shortestPathWithoutFibonacci(adjListWithWeight, 1, 5);
+            Assert.AreEqual(1, route.First.Value.stationID);
+            Assert.AreEqual(0, Convert.ToInt32(route.First.Value.driveHour));
+            Assert.AreEqual(3, route.First.Next.Value.stationID);
+            Assert.AreEqual(5, Convert.ToInt32(route.First.Next.Value.driveHour));
+            Assert.AreEqual(5, route.First.Next.Next.Value.stationID);
+            Assert.AreEqual(7, Convert.ToInt32(route.First.Next.Next.Value.driveHour));
+        }
+
+        [TestMethod]
+        public void breathFirstSearchWithIds2()
+        {
+            Dictionary<int, Dictionary<int, decimal>> adjListWithWeight = new Dictionary<int, Dictionary<int, decimal>>();
+            Dictionary<int, decimal> s = new Dictionary<int, decimal>();
+            s.Add(2, 10); s.Add(3, 5);
+            Dictionary<int, decimal> t = new Dictionary<int, decimal>();
+            t.Add(4, 1); t.Add(3, 2);
+            Dictionary<int, decimal> y = new Dictionary<int, decimal>();
+            y.Add(2, 3); y.Add(5, 2); y.Add(4, 9);
+            Dictionary<int, decimal> x = new Dictionary<int, decimal>();
+            x.Add(5, 4);
+            Dictionary<int, decimal> u = new Dictionary<int, decimal>();
+            u.Add(4, 6); u.Add(1, 7);
+
+            adjListWithWeight.Add(1, s);
+            adjListWithWeight.Add(2, t);
+            adjListWithWeight.Add(3, y);
+            adjListWithWeight.Add(4, x);
+            adjListWithWeight.Add(5, u);
+
+            Assert.AreEqual(2, PathFind.breathFirstSearchWithIds(adjListWithWeight, 1, 4));
+            Assert.AreEqual(2, PathFind.breathFirstSearchWithIds(adjListWithWeight, 1, 5));
+        }
+
+        [TestMethod]
+        public void breathFirstSearchWithIds()
+        {
+            Dictionary<int, Dictionary<int, decimal>> adjListWithWeight = new Dictionary<int, Dictionary<int, decimal>>();
+            Dictionary<int, decimal> s = new Dictionary<int, decimal>();
+            s.Add(2, 5); s.Add(4, 4);
+            Dictionary<int, decimal> t = new Dictionary<int, decimal>();
+            t.Add(3, 6); t.Add(1, 5);
+            Dictionary<int, decimal> y = new Dictionary<int, decimal>();
+            y.Add(1, 4); y.Add(5, 2);
+            Dictionary<int, decimal> x = new Dictionary<int, decimal>();
+            x.Add(2, 6);
+            Dictionary<int, decimal> u = new Dictionary<int, decimal>();
+            u.Add(4, 2);
+
+            adjListWithWeight.Add(1, s);
+            adjListWithWeight.Add(2, t);
+            adjListWithWeight.Add(3, x);
+            adjListWithWeight.Add(4, y);
+            adjListWithWeight.Add(5, u);
+
+            Assert.AreEqual(4, PathFind.breathFirstSearchWithIds(adjListWithWeight, 3, 5));
+            Assert.AreEqual(1, PathFind.breathFirstSearchWithIds(adjListWithWeight, 1, 2));
+            Assert.AreEqual(2, PathFind.breathFirstSearchWithIds(adjListWithWeight, 1, 3));
+            Assert.AreEqual(1, PathFind.breathFirstSearchWithIds(adjListWithWeight, 1, 4));
+            Assert.AreEqual(2, PathFind.breathFirstSearchWithIds(adjListWithWeight, 1, 5));
+            Assert.AreEqual(1, PathFind.breathFirstSearchWithIds(adjListWithWeight, 2, 3));
+        }
+
+        [TestMethod]
+        public void stressTestWithWeight()
+        {
+
+        }
+
+        [TestMethod]
+        public void runUnpassedStressTestWithWeight()
+        {
+
+        }
+
+        
+        public void runUnpassedStressTestWithWeightOf1()
+        {
+            Dictionary<int, Dictionary<int, decimal>> list = readDataFromFile();
+            int BFS = PathFind.breathFirstSearchWithIds(list, 3, 1);
+            int leastS = PathFind.leastStopsPathWithIds(list, 3, 1).Count -1;
+            Assert.AreEqual(1, leastS);
+            Assert.AreEqual(1, BFS);
+        }
+
+        [TestMethod]
+        public void streessTestWithWeightOf1()
+        {
+            int i = 0;
+            while (i < 10)
+            {
+                Dictionary<int, Dictionary<int, decimal>> adjList = new Dictionary<int, Dictionary<int, decimal>>();
+                int size = 1000;
+                Random r = new Random();
+                int startId = r.Next(1, size +1);
+                int endId = r.Next(1, size +1);
+                try
+                {
+
+                    double density = 0.2;
+                    RandomGraphGenerator graph = new RandomGraphGenerator(size, density, 1, 1);
+                    adjList = graph.getAdjList();
+                    int withF = PathFind.shortestPathWithFibonacci(adjList, startId, endId).Count;
+                    int withoutF = PathFind.shortestPathWithoutFibonacci(adjList, startId, endId).Count;
+                    int leastS = PathFind.leastStopsPathWithIds(adjList, startId, endId).Count;
+                    if (leastS != 0)
+                    {
+                        leastS = leastS-1;
+                    }
+                    
+                    int BFS = PathFind.breathFirstSearchWithIds(adjList, startId, endId);
+
+                    //                    Assert.AreEqual(withF, withoutF);
+                    //                    Assert.AreEqual(withF, leastS);
+                    //                    Assert.AreEqual(withF, BFS);
+                    Assert.AreEqual(leastS, BFS);
+
+                    System.Diagnostics.Debug.WriteLine(i + "");
+                }
+                catch (NullReferenceException e)
+                {
+                    writeDataToFile(e.Message + "Start: " + startId + "  End: " + endId, adjList);
+                    throw new Exception();
+                }
+                catch (AssertFailedException e)
+                {
+
+                    writeDataToFile(e.Message + "Start: " + startId + "  End: " + endId, adjList);
+                    throw new Exception();
+                }
+                i++;
+            }
+
+        }
+
+        public Dictionary<int, Dictionary<int, decimal>> readDataFromFile()
+        {
+            Dictionary<int, Dictionary<int, decimal>> adjList = new Dictionary<int, Dictionary<int, decimal>>();
+            string path = Directory.GetCurrentDirectory();
+            string suffix = @"bin\Debug";
+            char[] trailingChars = suffix.ToCharArray();
+            path = path.TrimEnd(trailingChars);
+            using (StreamReader sr = new StreamReader(path + @"\Unpassed data\data5.txt"))
+            {
+
+                String[] line = sr.ReadToEnd().Split(new string[] { Environment.NewLine }, StringSplitOptions.None);
+                int nodeId = 0;
+                for (int i = 1; i < line.Length - 1; i++)
+                {
+                    string t = line[i].Trim();
+
+                    if (t != "")
+                    {
+                        if (t.Length == 1)
+                        {
+                            Dictionary<int, decimal> list = new Dictionary<int, decimal>();
+                            nodeId = Convert.ToInt32(t);
+                            adjList.Add(nodeId, list);
+                        }
+                        else
+                        {
+                            String[] pair = t.Split(new string[] { "," }, StringSplitOptions.None);
+                            if (pair[0].Equals("No edge"))
+                            {
+                                
+                            } else
+                            {
+                                adjList[nodeId].Add(Convert.ToInt32(pair[0]), Convert.ToDecimal(pair[1]));
+                            }
+                         }
+                    }
+                }
+            }
+            return adjList;
+        }
+
+        public void writeDataToFile(string message, Dictionary<int, Dictionary<int, decimal>> list)
+        {
+            string path = Directory.GetCurrentDirectory();
+            string suffix = @"bin\Debug";
+            char[] trailingChars = suffix.ToCharArray();
+            path = path.TrimEnd(trailingChars);
+            using (StreamWriter file = new StreamWriter(path + @"\Unpassed data\data5.txt"))
+            {
+
+                file.WriteLine(message);
+
+                foreach (int i in list.Keys)
+                {
+
+
+                    file.WriteLine(i);
+                    foreach (int j in list[i].Keys)
+                    {
+                        if (list[i].Count != 0)
+                        {
+                            file.WriteLine(j + "," + list[i][j]);
+                        }
+                        else
+                        {
+                            file.WriteLine("No edge");
+                        }
+
+                    }
+                    file.WriteLine("");
+
+                }
+            }
         }
     }
 }
