@@ -976,26 +976,166 @@ namespace ElectricCarLibTest
             Assert.AreEqual(1, PathFind.breathFirstSearchWithIds(adjListWithWeight, 2, 3));
         }
 
-        [TestMethod]
-        public void stressTestWithWeight()
-        {
-
-        }
-
-        [TestMethod]
-        public void runUnpassedStressTestWithWeight()
-        {
-
-        }
-
         
+
+        //[TestMethod]
+        public void runUnpassedStressTestWithRandomWeight()
+        {
+            Dictionary<int, Dictionary<int, decimal>> list = readDataFromFile();
+            LinkedList<PathStop> routeWoutF = PathFind.shortestPathWithoutFibonacci(list, 5, 15);
+            LinkedList<PathStop> routeWF = PathFind.shortestPathWithFibonacci(list, 5, 15);
+            
+
+            decimal lastStopDistanceWF = 0;
+            if (routeWF.Count != 0)
+            {
+                lastStopDistanceWF = routeWF.Last.Value.driveHour;
+            }
+            
+            decimal lastStopDistanceWoutF = 0;
+            if (routeWoutF.Count != 0)
+            {
+                lastStopDistanceWoutF = routeWoutF.Last.Value.driveHour;
+            }
+            
+            Assert.AreEqual(lastStopDistanceWF, lastStopDistanceWoutF);
+
+        }
+
+        //[TestMethod]
         public void runUnpassedStressTestWithWeightOf1()
         {
             Dictionary<int, Dictionary<int, decimal>> list = readDataFromFile();
-            int BFS = PathFind.breathFirstSearchWithIds(list, 3, 1);
-            int leastS = PathFind.leastStopsPathWithIds(list, 3, 1).Count -1;
+            int BFS = PathFind.breathFirstSearchWithIds(list, 7, 5);
+            int leastS = PathFind.leastStopsPathWithIds(list, 7, 5).Count -1;
             Assert.AreEqual(1, leastS);
             Assert.AreEqual(1, BFS);
+        }
+
+         [TestMethod]
+        public void streessTestWithRandomWeight()
+        {
+            int i = 0;
+            while (i<10)//can be adjusted
+            {
+                Dictionary<int, Dictionary<int, decimal>> adjList = new Dictionary<int, Dictionary<int, decimal>>();
+                int size = 1000; //size of random graph can be ajusted
+                Random r = new Random();
+                int startId = r.Next(1, size + 1);
+                int endId = r.Next(1, size + 1);
+                try
+                {
+
+                    double density = 0.1; //density of random graph can be adjusted
+                    RandomGraphGenerator graph = new RandomGraphGenerator(size, density, 1, 300);
+                    adjList = graph.getAdjList();
+                    LinkedList<PathStop> routeWF = PathFind.shortestPathWithFibonacci(adjList, startId, endId);
+                    decimal lastStopDistanceWF = 0;
+                    if (routeWF.Count != 0)
+                    {
+                        lastStopDistanceWF = routeWF.Last.Value.driveHour;
+                    }
+
+                    LinkedList<PathStop> routeWoutF = PathFind.shortestPathWithoutFibonacci(adjList, startId, endId);
+                    int withoutF = PathFind.shortestPathWithoutFibonacci(adjList, startId, endId).Count;
+                    decimal lastStopDistanceWoutF = 0;
+                    if (routeWoutF.Count != 0)
+                    {
+                        lastStopDistanceWoutF = routeWoutF.Last.Value.driveHour;
+                    }
+
+                    Assert.AreEqual(lastStopDistanceWF, lastStopDistanceWoutF);
+                    System.Diagnostics.Debug.WriteLine(i + "");
+    
+                }
+                catch (NullReferenceException e)
+                {
+                    writeDataToFile(e.Message + "Start: " + startId + "  End: " + endId, adjList);
+                    outPutGraphData(adjList, startId, endId);
+                    throw e;
+                }
+                catch (AssertFailedException e)
+                {
+
+                    writeDataToFile(e.Message + "Start: " + startId + "  End: " + endId, adjList);
+                    outPutGraphData(adjList, startId, endId);
+                    throw e;
+                }
+
+                catch (IndexOutOfRangeException e)
+                {
+
+                    writeDataToFile(e.Message + "Start: " + startId + "  End: " + endId, adjList);
+                    outPutGraphData(adjList, startId, endId);
+                    throw e;
+                }
+                catch(OutOfMemoryException e)
+                {
+                    throw e;
+                }
+                i++;
+            }
+        }
+
+         public void outPutGraphData(Dictionary<int, Dictionary<int, decimal>> adjList, int startId, int endId)
+         {
+            string path = Directory.GetCurrentDirectory();
+            string suffix = @"bin\Debug";
+            char[] trailingChars = suffix.ToCharArray();
+            path = path.TrimEnd(trailingChars);
+            using (StreamWriter file = new StreamWriter(path + @"\Unpassed data\data9.gexf"))
+            {
+                file.WriteLine("<?xml version='1.0' encoding='UTF-8'?>");
+                file.WriteLine("<gexf xmlns='http://www.gexf.net/1.2draft' version='1.2'>");
+                file.WriteLine("<meta lastmodifieddate='2009-03-20'>");
+                file.WriteLine("<creator>Gexf.net</creator>");
+                file.WriteLine("<description>A hello world! file</description>");
+                file.WriteLine("</meta>");
+                file.WriteLine("<graph mode='static' defaultedgetype='undirected'>");
+                file.WriteLine("<attributes class='node' mode='static'>");
+                file.WriteLine("<attribute id='0' title='selected' type='integer'>");
+                file.WriteLine("<default>1</default>");
+                file.WriteLine("</attribute>");
+                file.WriteLine("</attributes>");
+                //add nodes
+                file.WriteLine("<nodes>");
+                foreach (int id in adjList.Keys)
+                {
+                    if (id == startId || id == endId)
+                    {
+                        file.WriteLine("<node id='" + id + "' label='" + id + "'>");
+                        file.WriteLine("<attvalues>");
+                        file.WriteLine("<attvalue for='0' value='100'/>");
+                        file.WriteLine("</attvalues>");
+                        file.WriteLine("</node>");
+                    }
+                    else
+                    {
+                        file.WriteLine("<node id='" + id + "' label='" + id + "'/>");
+                    }
+                    
+                }
+                file.WriteLine("</nodes>");
+
+                //add edges
+                int edgeId = 0;
+                file.WriteLine("<edges>");
+                foreach (int id in adjList.Keys)
+                {
+                    foreach (int id2 in adjList[id].Keys)
+                    {
+                        if (id2 > id)
+                        {
+                            file.WriteLine("<edge id='" + edgeId + "' source='" + id + "' target='" + id2 + "' weight='" + adjList[id][id2] + "'/>");
+                            edgeId++;
+                        }
+                    }
+                }
+
+                file.WriteLine("</edges>");
+                file.WriteLine("</graph>");
+                file.WriteLine("</gexf>");
+            }
         }
 
         [TestMethod]
@@ -1016,7 +1156,17 @@ namespace ElectricCarLibTest
                     RandomGraphGenerator graph = new RandomGraphGenerator(size, density, 1, 1);
                     adjList = graph.getAdjList();
                     int withF = PathFind.shortestPathWithFibonacci(adjList, startId, endId).Count;
+                    if (withF != 0)
+                    {
+                        withF = withF - 1;
+                    }
+                    
                     int withoutF = PathFind.shortestPathWithoutFibonacci(adjList, startId, endId).Count;
+                    if (withoutF != 0)
+                    {
+                        withoutF = withoutF - 1;
+                    }
+                    
                     int leastS = PathFind.leastStopsPathWithIds(adjList, startId, endId).Count;
                     if (leastS != 0)
                     {
@@ -1025,9 +1175,10 @@ namespace ElectricCarLibTest
                     
                     int BFS = PathFind.breathFirstSearchWithIds(adjList, startId, endId);
 
-                    //                    Assert.AreEqual(withF, withoutF);
-                    //                    Assert.AreEqual(withF, leastS);
-                    //                    Assert.AreEqual(withF, BFS);
+                    Assert.AreEqual(withF, leastS);
+                    Assert.AreEqual(withF, withoutF);
+                    Assert.AreEqual(withoutF, leastS);
+                                       
                     Assert.AreEqual(leastS, BFS);
 
                     System.Diagnostics.Debug.WriteLine(i + "");
@@ -1055,7 +1206,7 @@ namespace ElectricCarLibTest
             string suffix = @"bin\Debug";
             char[] trailingChars = suffix.ToCharArray();
             path = path.TrimEnd(trailingChars);
-            using (StreamReader sr = new StreamReader(path + @"\Unpassed data\data5.txt"))
+            using (StreamReader sr = new StreamReader(path + @"\Unpassed data\data9.txt"))
             {
 
                 String[] line = sr.ReadToEnd().Split(new string[] { Environment.NewLine }, StringSplitOptions.None);
@@ -1066,7 +1217,8 @@ namespace ElectricCarLibTest
 
                     if (t != "")
                     {
-                        if (t.Length == 1)
+                        String[] pair = t.Split(new string[] { "," }, StringSplitOptions.None);
+                        if (pair.Length == 1)
                         {
                             Dictionary<int, decimal> list = new Dictionary<int, decimal>();
                             nodeId = Convert.ToInt32(t);
@@ -1074,8 +1226,8 @@ namespace ElectricCarLibTest
                         }
                         else
                         {
-                            String[] pair = t.Split(new string[] { "," }, StringSplitOptions.None);
-                            if (pair[0].Equals("No edge"))
+
+                            if (pair[0].Equals("No") && pair[1].Equals("edge"))
                             {
                                 
                             } else
@@ -1095,7 +1247,7 @@ namespace ElectricCarLibTest
             string suffix = @"bin\Debug";
             char[] trailingChars = suffix.ToCharArray();
             path = path.TrimEnd(trailingChars);
-            using (StreamWriter file = new StreamWriter(path + @"\Unpassed data\data5.txt"))
+            using (StreamWriter file = new StreamWriter(path + @"\Unpassed data\data9.txt"))
             {
 
                 file.WriteLine(message);
