@@ -27,21 +27,29 @@ namespace ElectricCarLib
                 FibonacciNode u = Q.extractMinNode();
                 R.Add(u.StationID);
                 S.Add(u);
+                if (R.Contains(endSID))
+                {
+                    break;  //if extracted list contains the end station id, stop algorithm
+                }
                 foreach (int vId in adjListWithWeight[u.StationID].Keys)
                 {
                     FibonacciNode v = null;
-                    if (!Q.stationIDs.Contains(vId))
-	                {
-                         v= Q.insert(vId);
-                         QCopy.Add(vId, v);
-	                }
-                    else
+                    if (!R.Contains(vId)) //if the node is not in extracted list
                     {
-                        v = QCopy[vId];
-                        
+                        if (!Q.stationIDs.Contains(vId))//if the node is not reached yet
+                        {
+                            v = Q.insert(vId);
+                            QCopy.Add(vId, v);
+                        }
+                        else
+                        {
+                            v = QCopy[vId]; //The node is reached
+
+                        }
+                        decimal w = adjListWithWeight[u.StationID][vId];
+                        relax(u, v, w, Q, QCopy);
                     }
-                    decimal w = adjListWithWeight[u.StationID][vId];
-                    relax(u, v, w, Q, QCopy);
+                    
                 }
             }
 
@@ -80,8 +88,13 @@ namespace ElectricCarLib
             {
                 int uId = getIdWithMinValue(queue);
                 visitedStationIDs_distance.Add(uId, queue[uId]);
-                queue.Remove(uId); 
-                
+                queue.Remove(uId);
+
+                if (visitedStationIDs_distance.Keys.Contains(endSID))
+                {
+                    break; //if extracted list contains the end station id, stop algorithm
+                }
+
                 foreach (int vId in adjListWithWeight[uId].Keys)
                 {
                     if (!reachedStations.Contains(vId)) //if it is a new node

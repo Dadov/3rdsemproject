@@ -152,6 +152,8 @@ namespace ElectricCarModelLayer
                 y.RightNode = x.Child;
                 y.LeftNode = lastNode;
                 x.Child.LeftNode = y;
+
+                y.Parent = x;
             }
             x.Degree++;
             y.Mark = false;
@@ -185,18 +187,28 @@ namespace ElectricCarModelLayer
             }
             else
             {
+
+                if (x == y.Child)
+                {
+                    y.Child = x.RightNode;
+                }
+
                 FibonacciNode leftNode = x.LeftNode;
                 FibonacciNode rightNode = x.RightNode;
                 leftNode.RightNode = rightNode;
                 rightNode.LeftNode = leftNode;
+                
             }
+            y.Degree--;
 
             //add x to the list
-            FibonacciNode lastNode = list.head.LeftNode;
-            lastNode.RightNode = x;
-            x.LeftNode = lastNode;
-            x.RightNode = list.head;
-            list.head.LeftNode = x;
+            list.Add(x);
+            //FibonacciNode lastNode = list.head.LeftNode;
+            //lastNode.RightNode = x;
+            //x.LeftNode = lastNode;
+            //x.RightNode = list.head;
+            //list.head.LeftNode = x;
+            //list.Size++;
 
             x.Parent = null;
             x.Mark = false;
@@ -222,13 +234,16 @@ namespace ElectricCarModelLayer
         public int calculateArraySize(int n)
         {
             int s;
-            long result = 0;
-            for (s = 0; s < n; s++)
-            {
-                result = result + (long)Math.Pow(2, s);
-                if (result >= n)
-                    break;
-            }
+            //long result = 0;
+            //for (s = 0; s < n; s++)
+            //{
+            //    result = result + (long)Math.Pow(2, s);
+            //    if (result >= n)
+            //        break;
+            //}
+
+            double result = Math.Log(n) / Math.Log((1 + Math.Sqrt(5)) / 2);
+            s = (int)Math.Floor(result);
             return s + 1;
         }
 
