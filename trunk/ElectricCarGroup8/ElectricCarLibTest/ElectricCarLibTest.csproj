@@ -70,6 +70,7 @@
     <Compile Include="DBBatteryStorageTest.cs" />
     <Compile Include="PeriodCalculatorTest.cs" />
     <Compile Include="RandomGraphGenerator.cs" />
+    <Compile Include="BookingValidationTest.cs" />
   </ItemGroup>
   <ItemGroup>
     <ProjectReference Include="..\ElectricCarDB\ElectricCarDB.csproj">
