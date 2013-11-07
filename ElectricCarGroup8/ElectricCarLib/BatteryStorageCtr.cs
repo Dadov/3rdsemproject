@@ -8,7 +8,7 @@ using ElectricCarModelLayer;
 
 namespace ElectricCarLib
 {
-    class BatteryStorageCtr
+    public class BatteryStorageCtr
     {
         public int addNewRecord(int btID, int sID)
         {
