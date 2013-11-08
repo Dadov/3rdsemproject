@@ -71,20 +71,24 @@ namespace ElectricCarLibTest
         public void logInfoCRUD()
         {
             // prerequisites
-            int dgId = dbDiscountGroup.addNewRecord("zidaci", -100);
-            MDiscountGroup dg = dbDiscountGroup.getRecord(dgId, false);
+            int dgID = dbDiscountGroup.addNewRecord("zidaci", -100);
+            MDiscountGroup dg = dbDiscountGroup.getRecord(dgID, false);
             int custId = dbCustomer.addNewRecord("jozko", "mkrvicka", "nema", "vsade", "luxus", "bez", dg, "nikdaj");
 
-            int liId = dbLogInfo.addNewRecord("jozin", "zaba", custId);
+            // create
+            int liID = dbLogInfo.addNewRecord("jozin", "zaba", custId);
+            // get all
             List<MLogInfo> lis = dbLogInfo.getAllRecord();
-            int last = lis.Count;
-            MLogInfo li = dbLogInfo.getRecord(last, false);
+            // int last = lis.Count;
+            MLogInfo li = dbLogInfo.getRecord(liID, false);
+            Assert.IsNotNull(li);
+            // delete
             dbLogInfo.deleteRecord(li.ID);
             // testing if it has been deleted
             Assert.IsTrue(!dbLogInfo.getAllRecord().Contains(li));
 
             dbCustomer.deleteRecord(custId);
-            dbDiscountGroup.deleteRecord(dgId);
+            dbDiscountGroup.deleteRecord(dgID);
         }
     }
 }

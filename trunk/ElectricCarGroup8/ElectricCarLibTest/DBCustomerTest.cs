@@ -72,10 +72,15 @@ namespace ElectricCarLibTest
             int dgId = dbDiscountGroup.addNewRecord("zidaci", -100);
             MDiscountGroup dg = dbDiscountGroup.getRecord(dgId, false);
 
+            // create
             int custID = dbCustomer.addNewRecord("jozko", "mkrvicka", "nema", "vsade", "luxus", "bez", dg, "nikdaj");
+            // get all
             List<MCustomer> custs = dbCustomer.getAllRecord();
-            int last = custs.Count;
-            MCustomer cust = dbCustomer.getRecord(last, false);
+            // int last = custs.FindLast();
+            // get
+            MCustomer cust = dbCustomer.getRecord(custID, false);
+            Assert.IsNotNull(cust);
+            // delete
             dbCustomer.deleteRecord(cust.ID);
             // testing if it has been deleted
             Assert.IsTrue(!dbCustomer.getAllRecord().Contains(cust));

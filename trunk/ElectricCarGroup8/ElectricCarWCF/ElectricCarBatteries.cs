@@ -6,11 +6,7 @@ using System.Threading.Tasks;
 
 namespace ElectricCarWCF
 {
-    class ElectricCar: IElectricCar
+    public partial class ElectricCarBatteries : IElectricCar
     {
-        public string test(int id)
-        {
-            return "";
-        }
     }
 }

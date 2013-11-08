@@ -70,11 +70,16 @@ namespace ElectricCarLibTest
         {
             int stationId = dbStation.addNewRecord("stratena", "po ceste", "atlantida", "na dne");
 
-            int empId = dbEmployee.addNewRecord("pistek", "baci", "tryskacova", "kokotlina", "chujovina",
+            // create
+            int empID = dbEmployee.addNewRecord("pistek", "baci", "tryskacova", "kokotlina", "chujovina",
                 "ale picu", stationId, EmployeePosition.LiftBoy);
+            // get all
             List<MEmployee> emps = dbEmployee.getAllRecord();
-            int last = emps.Count;
-            MEmployee emp = dbEmployee.getRecord(last, false);
+            // int last = emps.Count;
+            // get
+            MEmployee emp = dbEmployee.getRecord(empID, false);
+            Assert.IsNotNull(emp);
+            // delete
             dbEmployee.deleteRecord(emp.ID);
             // testing if it has been deleted
             Assert.IsTrue(!dbEmployee.getAllRecord().Contains(emp));
