@@ -8,9 +8,21 @@ using System.ServiceModel;
 namespace ElectricCarWCF
 {
     [ServiceContract]
-    interface IElectricCar
+    public partial interface IElectricCar
     {
+        #region People
+
         [OperationContract]
-        string test(int id);
+        string getME();
+
+        #endregion 
+
+        #region Routes
+
+        #endregion
+
+        #region Batteries
+
+        #endregion
     }
 }

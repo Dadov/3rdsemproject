@@ -66,10 +66,15 @@ namespace ElectricCarLibTest
         [TestMethod]
         public void discountGroupCRUD()
         {
-            int btId = dbDiscountGroup.addNewRecord("zidaci", -100);
+            // create
+            int dgID = dbDiscountGroup.addNewRecord("zidaci", -100);
+            // get all
             List<MDiscountGroup> dgs = dbDiscountGroup.getAllRecord();
-            int last = dgs.Count;
-            MDiscountGroup dg = dbDiscountGroup.getRecord(last, false);
+            // int last = dgs.Count;
+            // get
+            MDiscountGroup dg = dbDiscountGroup.getRecord(dgID, false);
+            Assert.IsNotNull(dg);
+            // delete
             dbDiscountGroup.deleteRecord(dg.ID);
             // testing if it has been deleted
             Assert.IsTrue(!dbDiscountGroup.getAllRecord().Contains(dg));
