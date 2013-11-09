@@ -12,6 +12,59 @@ namespace ElectricCarLibTest
     public class PathFindTest
     {
         [TestMethod]
+        public void getAllPossiblePathsBetweenTwoPoints()
+        {
+            Dictionary<int, decimal> node1List = new Dictionary<int, decimal>();
+            node1List.Add(2, 1);
+            node1List.Add(3, 2);
+
+            Dictionary<int, decimal> node2List = new Dictionary<int, decimal>();
+            node2List.Add(1, 1);
+            node2List.Add(4, 1);
+            node2List.Add(3, 2);
+
+            Dictionary<int, decimal> node3List = new Dictionary<int, decimal>();
+            node3List.Add(1, 2);
+            node3List.Add(4, 1);
+            node3List.Add(2, 2);
+
+            Dictionary<int, decimal> node4List = new Dictionary<int, decimal>();
+            node4List.Add(2, 1);
+            node4List.Add(3, 1);
+
+            Dictionary<int, Dictionary<int, decimal>> adjList = new Dictionary<int, Dictionary<int, decimal>>();
+            adjList.Add(1, node1List);
+            adjList.Add(2, node2List);
+            adjList.Add(3, node3List);
+            adjList.Add(4, node4List);
+
+            List<List<PathStop>> paths = PathFind.getAllPossiblePathsBetweenTwoPoints(adjList, 1, 4);
+
+            Assert.AreEqual(1, paths[0][0].stationID);
+            Assert.AreEqual(2, paths[0][1].stationID);
+            Assert.AreEqual(4, paths[0][2].stationID);
+            Assert.AreEqual(2, Convert.ToInt32(paths[0][2].driveHour));
+
+            Assert.AreEqual(1, paths[1][0].stationID);
+            Assert.AreEqual(3, paths[1][1].stationID);
+            Assert.AreEqual(4, paths[1][2].stationID);
+            Assert.AreEqual(3, Convert.ToInt32(paths[1][2].driveHour));
+
+            Assert.AreEqual(1, paths[2][0].stationID);
+            Assert.AreEqual(2, paths[2][1].stationID);
+            Assert.AreEqual(3, paths[2][2].stationID);
+            Assert.AreEqual(4, paths[2][3].stationID);
+            Assert.AreEqual(4, Convert.ToInt32(paths[2][3].driveHour));
+
+            Assert.AreEqual(1, paths[3][0].stationID);
+            Assert.AreEqual(3, paths[3][1].stationID);
+            Assert.AreEqual(2, paths[3][2].stationID);
+            Assert.AreEqual(4, paths[3][3].stationID);
+            Assert.AreEqual(5, Convert.ToInt32(paths[3][3].driveHour));
+
+        }
+
+        [TestMethod]
         public void shortestPathWithFibonacci()
         {
             Dictionary<int, Dictionary<int, decimal>> adjListWithWeight = new Dictionary<int, Dictionary<int, decimal>>();
@@ -32,44 +85,44 @@ namespace ElectricCarLibTest
             adjListWithWeight.Add(4, y);
             adjListWithWeight.Add(5, u);
 
-            LinkedList<PathStop> route = new LinkedList<PathStop>();
+            List<PathStop> route = new List<PathStop>();
 
             route = PathFind.shortestPathWithFibonacci(adjListWithWeight, 3, 5);
-            Assert.AreEqual(17, route.Last.Value.driveHour);
+            Assert.AreEqual(17, route[route.Count-1].driveHour);
 
             route = PathFind.shortestPathWithFibonacci(adjListWithWeight, 1, 2);
-            Assert.AreEqual(1, route.First.Value.stationID);
-            Assert.AreEqual(0, Convert.ToInt32(route.First.Value.driveHour));
-            Assert.AreEqual(2, route.First.Next.Value.stationID);
-            Assert.AreEqual(5, Convert.ToInt32(route.First.Next.Value.driveHour));
+            Assert.AreEqual(1, route[0].stationID);
+            Assert.AreEqual(0, Convert.ToInt32(route[0].driveHour));
+            Assert.AreEqual(2, route[1].stationID);
+            Assert.AreEqual(5, Convert.ToInt32(route[1].driveHour));
 
             route = PathFind.shortestPathWithFibonacci(adjListWithWeight, 1, 3);
-            Assert.AreEqual(1, route.First.Value.stationID);
-            Assert.AreEqual(0, Convert.ToInt32(route.First.Value.driveHour));
-            Assert.AreEqual(2, route.First.Next.Value.stationID);
-            Assert.AreEqual(5, Convert.ToInt32(route.First.Next.Value.driveHour));
-            Assert.AreEqual(3, route.First.Next.Next.Value.stationID);
-            Assert.AreEqual(11, Convert.ToInt32(route.First.Next.Next.Value.driveHour));
+            Assert.AreEqual(1, route[0].stationID);
+            Assert.AreEqual(0, Convert.ToInt32(route[0].driveHour));
+            Assert.AreEqual(2, route[1].stationID);
+            Assert.AreEqual(5, Convert.ToInt32(route[1].driveHour));
+            Assert.AreEqual(3, route[2].stationID);
+            Assert.AreEqual(11, Convert.ToInt32(route[2].driveHour));
 
             route = PathFind.shortestPathWithFibonacci(adjListWithWeight, 1, 4);
-            Assert.AreEqual(1, route.First.Value.stationID);
-            Assert.AreEqual(0, Convert.ToInt32(route.First.Value.driveHour));
-            Assert.AreEqual(4, route.First.Next.Value.stationID);
-            Assert.AreEqual(4, Convert.ToInt32(route.First.Next.Value.driveHour));
+            Assert.AreEqual(1, route[0].stationID);
+            Assert.AreEqual(0, Convert.ToInt32(route[0].driveHour));
+            Assert.AreEqual(4, route[1].stationID);
+            Assert.AreEqual(4, Convert.ToInt32(route[1].driveHour));
 
             route = PathFind.shortestPathWithFibonacci(adjListWithWeight, 1, 5);
-            Assert.AreEqual(1, route.First.Value.stationID);
-            Assert.AreEqual(0, Convert.ToInt32(route.First.Value.driveHour));
-            Assert.AreEqual(4, route.First.Next.Value.stationID);
-            Assert.AreEqual(4, Convert.ToInt32(route.First.Next.Value.driveHour));
-            Assert.AreEqual(5, route.First.Next.Next.Value.stationID);
-            Assert.AreEqual(6, Convert.ToInt32(route.First.Next.Next.Value.driveHour));
+            Assert.AreEqual(1, route[0].stationID);
+            Assert.AreEqual(0, Convert.ToInt32(route[0].driveHour));
+            Assert.AreEqual(4, route[1].stationID);
+            Assert.AreEqual(4, Convert.ToInt32(route[1].driveHour));
+            Assert.AreEqual(5, route[2].stationID);
+            Assert.AreEqual(6, Convert.ToInt32(route[2].driveHour));
 
             route = PathFind.shortestPathWithFibonacci(adjListWithWeight, 2, 3);
-            Assert.AreEqual(2, route.First.Value.stationID);
-            Assert.AreEqual(0, Convert.ToInt32(route.First.Value.driveHour));
-            Assert.AreEqual(3, route.First.Next.Value.stationID);
-            Assert.AreEqual(6, Convert.ToInt32(route.First.Next.Value.driveHour));
+            Assert.AreEqual(2, route[0].stationID);
+            Assert.AreEqual(0, Convert.ToInt32(route[0].driveHour));
+            Assert.AreEqual(3, route[1].stationID);
+            Assert.AreEqual(6, Convert.ToInt32(route[1].driveHour));
 
 
 
@@ -96,25 +149,25 @@ namespace ElectricCarLibTest
             adjListWithWeight.Add(4, x);
             adjListWithWeight.Add(5, u);
 
-            LinkedList<PathStop> route = new LinkedList<PathStop>();
+            List<PathStop> route = new List<PathStop>();
 
             route = PathFind.shortestPathWithFibonacci(adjListWithWeight, 1, 4);
-            Assert.AreEqual(1, route.First.Value.stationID);
-            Assert.AreEqual(0, Convert.ToInt32(route.First.Value.driveHour));
-            Assert.AreEqual(3, route.First.Next.Value.stationID);
-            Assert.AreEqual(5, Convert.ToInt32(route.First.Next.Value.driveHour));
-            Assert.AreEqual(2, route.First.Next.Next.Value.stationID);
-            Assert.AreEqual(8, Convert.ToInt32(route.First.Next.Next.Value.driveHour));
-            Assert.AreEqual(4, route.First.Next.Next.Next.Value.stationID);
-            Assert.AreEqual(9, Convert.ToInt32(route.First.Next.Next.Next.Value.driveHour));
+            Assert.AreEqual(1, route[0].stationID);
+            Assert.AreEqual(0, Convert.ToInt32(route[0].driveHour));
+            Assert.AreEqual(3, route[1].stationID);
+            Assert.AreEqual(5, Convert.ToInt32(route[1].driveHour));
+            Assert.AreEqual(2, route[2].stationID);
+            Assert.AreEqual(8, Convert.ToInt32(route[2].driveHour));
+            Assert.AreEqual(4, route[3].stationID);
+            Assert.AreEqual(9, Convert.ToInt32(route[3].driveHour));
 
             route = PathFind.shortestPathWithFibonacci(adjListWithWeight, 1, 5);
-            Assert.AreEqual(1, route.First.Value.stationID);
-            Assert.AreEqual(0, Convert.ToInt32(route.First.Value.driveHour));
-            Assert.AreEqual(3, route.First.Next.Value.stationID);
-            Assert.AreEqual(5, Convert.ToInt32(route.First.Next.Value.driveHour));
-            Assert.AreEqual(5, route.First.Next.Next.Value.stationID);
-            Assert.AreEqual(7, Convert.ToInt32(route.First.Next.Next.Value.driveHour));
+            Assert.AreEqual(1, route[0].stationID);
+            Assert.AreEqual(0, Convert.ToInt32(route[0].driveHour));
+            Assert.AreEqual(3, route[1].stationID);
+            Assert.AreEqual(5, Convert.ToInt32(route[1].driveHour));
+            Assert.AreEqual(5, route[2].stationID);
+            Assert.AreEqual(7, Convert.ToInt32(route[2].driveHour));
         }
         [TestMethod]
         public void buildRoute()
@@ -131,42 +184,42 @@ namespace ElectricCarLibTest
             S.Add(x);
             S.Add(z);
 
-            LinkedList<PathStop> route = new LinkedList<PathStop>();
+            List<PathStop> route = new List<PathStop>();
             route = PathFind.buildRoute(S, 1);
-            Assert.AreEqual(1, route.First.Value.stationID);
-            Assert.AreEqual(0, Convert.ToInt32(route.First.Value.driveHour));
+            Assert.AreEqual(1, route[0].stationID);
+            Assert.AreEqual(0, Convert.ToInt32(route[0].driveHour));
 
             route = PathFind.buildRoute(S, 2);
-            Assert.AreEqual(1, route.First.Value.stationID);
-            Assert.AreEqual(0, Convert.ToInt32(route.First.Value.driveHour));
-            Assert.AreEqual(3, route.First.Next.Value.stationID);
-            Assert.AreEqual(5, Convert.ToInt32(route.First.Next.Value.driveHour));
-            Assert.AreEqual(2, route.First.Next.Next.Value.stationID);
-            Assert.AreEqual(8, Convert.ToInt32(route.First.Next.Next.Value.driveHour));
+            Assert.AreEqual(1, route[0].stationID);
+            Assert.AreEqual(0, Convert.ToInt32(route[0].driveHour));
+            Assert.AreEqual(3, route[1].stationID);
+            Assert.AreEqual(5, Convert.ToInt32(route[1].driveHour));
+            Assert.AreEqual(2, route[2].stationID);
+            Assert.AreEqual(8, Convert.ToInt32(route[2].driveHour));
 
             route = PathFind.buildRoute(S, 4);
-            Assert.AreEqual(1, route.First.Value.stationID);
-            Assert.AreEqual(0, Convert.ToInt32(route.First.Value.driveHour));
-            Assert.AreEqual(3, route.First.Next.Value.stationID);
-            Assert.AreEqual(5, Convert.ToInt32(route.First.Next.Value.driveHour));
-            Assert.AreEqual(2, route.First.Next.Next.Value.stationID);
-            Assert.AreEqual(8, Convert.ToInt32(route.First.Next.Next.Value.driveHour));
-            Assert.AreEqual(4, route.First.Next.Next.Next.Value.stationID);
-            Assert.AreEqual(9, Convert.ToInt32(route.First.Next.Next.Next.Value.driveHour));
+            Assert.AreEqual(1, route[0].stationID);
+            Assert.AreEqual(0, Convert.ToInt32(route[0].driveHour));
+            Assert.AreEqual(3, route[1].stationID);
+            Assert.AreEqual(5, Convert.ToInt32(route[1].driveHour));
+            Assert.AreEqual(2, route[2].stationID);
+            Assert.AreEqual(8, Convert.ToInt32(route[2].driveHour));
+            Assert.AreEqual(4, route[3].stationID);
+            Assert.AreEqual(9, Convert.ToInt32(route[3].driveHour));
 
             route = PathFind.buildRoute(S, 3);
-            Assert.AreEqual(1, route.First.Value.stationID);
-            Assert.AreEqual(0, Convert.ToInt32(route.First.Value.driveHour));
-            Assert.AreEqual(3, route.First.Next.Value.stationID);
-            Assert.AreEqual(5, Convert.ToInt32(route.First.Next.Value.driveHour));
+            Assert.AreEqual(1, route[0].stationID);
+            Assert.AreEqual(0, Convert.ToInt32(route[0].driveHour));
+            Assert.AreEqual(3, route[1].stationID);
+            Assert.AreEqual(5, Convert.ToInt32(route[1].driveHour));
 
             route = PathFind.buildRoute(S, 5);
-            Assert.AreEqual(1, route.First.Value.stationID);
-            Assert.AreEqual(0, Convert.ToInt32(route.First.Value.driveHour));
-            Assert.AreEqual(3, route.First.Next.Value.stationID);
-            Assert.AreEqual(5, Convert.ToInt32(route.First.Next.Value.driveHour));
-            Assert.AreEqual(5, route.First.Next.Next.Value.stationID);
-            Assert.AreEqual(7, Convert.ToInt32(route.First.Next.Next.Value.driveHour));
+            Assert.AreEqual(1, route[0].stationID);
+            Assert.AreEqual(0, Convert.ToInt32(route[0].driveHour));
+            Assert.AreEqual(3, route[1].stationID);
+            Assert.AreEqual(5, Convert.ToInt32(route[1].driveHour));
+            Assert.AreEqual(5, route[2].stationID);
+            Assert.AreEqual(7, Convert.ToInt32(route[2].driveHour));
         }
 
         [TestMethod]
@@ -738,44 +791,44 @@ namespace ElectricCarLibTest
             adjListWithWeight.Add(4, y);
             adjListWithWeight.Add(5, u);
 
-            LinkedList<PathStop> route = new LinkedList<PathStop>();
+            List<PathStop> route = new List<PathStop>();
 
             route = PathFind.leastStopsPathWithIds(adjListWithWeight, 3, 5);
-            Assert.AreEqual(4, route.Last.Value.driveHour);
+            Assert.AreEqual(4, route[route.Count-1].driveHour);
 
             route = PathFind.leastStopsPathWithIds(adjListWithWeight, 1, 2);
-            Assert.AreEqual(1, route.First.Value.stationID);
-            Assert.AreEqual(0, Convert.ToInt32(route.First.Value.driveHour));
-            Assert.AreEqual(2, route.First.Next.Value.stationID);
-            Assert.AreEqual(1, Convert.ToInt32(route.First.Next.Value.driveHour));
+            Assert.AreEqual(1, route[0].stationID);
+            Assert.AreEqual(0, Convert.ToInt32(route[0].driveHour));
+            Assert.AreEqual(2, route[1].stationID);
+            Assert.AreEqual(1, Convert.ToInt32(route[1].driveHour));
 
             route = PathFind.leastStopsPathWithIds(adjListWithWeight, 1, 3);
-            Assert.AreEqual(1, route.First.Value.stationID);
-            Assert.AreEqual(0, Convert.ToInt32(route.First.Value.driveHour));
-            Assert.AreEqual(2, route.First.Next.Value.stationID);
-            Assert.AreEqual(1, Convert.ToInt32(route.First.Next.Value.driveHour));
-            Assert.AreEqual(3, route.First.Next.Next.Value.stationID);
-            Assert.AreEqual(2, Convert.ToInt32(route.First.Next.Next.Value.driveHour));
+            Assert.AreEqual(1, route[0].stationID);
+            Assert.AreEqual(0, Convert.ToInt32(route[0].driveHour));
+            Assert.AreEqual(2, route[1].stationID);
+            Assert.AreEqual(1, Convert.ToInt32(route[1].driveHour));
+            Assert.AreEqual(3, route[2].stationID);
+            Assert.AreEqual(2, Convert.ToInt32(route[2].driveHour));
 
             route = PathFind.leastStopsPathWithIds(adjListWithWeight, 1, 4);
-            Assert.AreEqual(1, route.First.Value.stationID);
-            Assert.AreEqual(0, Convert.ToInt32(route.First.Value.driveHour));
-            Assert.AreEqual(4, route.First.Next.Value.stationID);
-            Assert.AreEqual(1, Convert.ToInt32(route.First.Next.Value.driveHour));
+            Assert.AreEqual(1, route[0].stationID);
+            Assert.AreEqual(0, Convert.ToInt32(route[0].driveHour));
+            Assert.AreEqual(4, route[1].stationID);
+            Assert.AreEqual(1, Convert.ToInt32(route[1].driveHour));
 
             route = PathFind.leastStopsPathWithIds(adjListWithWeight, 1, 5);
-            Assert.AreEqual(1, route.First.Value.stationID);
-            Assert.AreEqual(0, Convert.ToInt32(route.First.Value.driveHour));
-            Assert.AreEqual(4, route.First.Next.Value.stationID);
-            Assert.AreEqual(1, Convert.ToInt32(route.First.Next.Value.driveHour));
-            Assert.AreEqual(5, route.First.Next.Next.Value.stationID);
-            Assert.AreEqual(2, Convert.ToInt32(route.First.Next.Next.Value.driveHour));
+            Assert.AreEqual(1, route[0].stationID);
+            Assert.AreEqual(0, Convert.ToInt32(route[0].driveHour));
+            Assert.AreEqual(4, route[1].stationID);
+            Assert.AreEqual(1, Convert.ToInt32(route[1].driveHour));
+            Assert.AreEqual(5, route[2].stationID);
+            Assert.AreEqual(2, Convert.ToInt32(route[2].driveHour));
 
             route = PathFind.leastStopsPathWithIds(adjListWithWeight, 2, 3);
-            Assert.AreEqual(2, route.First.Value.stationID);
-            Assert.AreEqual(0, Convert.ToInt32(route.First.Value.driveHour));
-            Assert.AreEqual(3, route.First.Next.Value.stationID);
-            Assert.AreEqual(1, Convert.ToInt32(route.First.Next.Value.driveHour));
+            Assert.AreEqual(2, route[0].stationID);
+            Assert.AreEqual(0, Convert.ToInt32(route[0].driveHour));
+            Assert.AreEqual(3, route[1].stationID);
+            Assert.AreEqual(1, Convert.ToInt32(route[1].driveHour));
         }
 
         [TestMethod]
@@ -799,23 +852,23 @@ namespace ElectricCarLibTest
             adjListWithWeight.Add(4, x);
             adjListWithWeight.Add(5, u);
 
-            LinkedList<PathStop> route = new LinkedList<PathStop>();
+            List<PathStop> route = new List<PathStop>();
 
             route = PathFind.leastStopsPathWithIds(adjListWithWeight, 1, 4);
-            Assert.AreEqual(1, route.First.Value.stationID);
-            Assert.AreEqual(0, Convert.ToInt32(route.First.Value.driveHour));
-            Assert.AreEqual(2, route.First.Next.Value.stationID);
-            Assert.AreEqual(1, Convert.ToInt32(route.First.Next.Value.driveHour));
-            Assert.AreEqual(4, route.First.Next.Next.Value.stationID);
-            Assert.AreEqual(2, Convert.ToInt32(route.First.Next.Next.Value.driveHour));
+            Assert.AreEqual(1, route[0].stationID);
+            Assert.AreEqual(0, Convert.ToInt32(route[0].driveHour));
+            Assert.AreEqual(2, route[1].stationID);
+            Assert.AreEqual(1, Convert.ToInt32(route[1].driveHour));
+            Assert.AreEqual(4, route[2].stationID);
+            Assert.AreEqual(2, Convert.ToInt32(route[2].driveHour));
 
             route = PathFind.leastStopsPathWithIds(adjListWithWeight, 1, 5);
-            Assert.AreEqual(1, route.First.Value.stationID);
-            Assert.AreEqual(0, Convert.ToInt32(route.First.Value.driveHour));
-            Assert.AreEqual(3, route.First.Next.Value.stationID);
-            Assert.AreEqual(1, Convert.ToInt32(route.First.Next.Value.driveHour));
-            Assert.AreEqual(5, route.First.Next.Next.Value.stationID);
-            Assert.AreEqual(2, Convert.ToInt32(route.First.Next.Next.Value.driveHour));
+            Assert.AreEqual(1, route[0].stationID);
+            Assert.AreEqual(0, Convert.ToInt32(route[0].driveHour));
+            Assert.AreEqual(3, route[1].stationID);
+            Assert.AreEqual(1, Convert.ToInt32(route[1].driveHour));
+            Assert.AreEqual(5, route[2].stationID);
+            Assert.AreEqual(2, Convert.ToInt32(route[2].driveHour));
         }
 
         [TestMethod]
@@ -839,44 +892,44 @@ namespace ElectricCarLibTest
             adjListWithWeight.Add(4, y);
             adjListWithWeight.Add(5, u);
 
-            LinkedList<PathStop> route = new LinkedList<PathStop>();
+            List<PathStop> route = new List<PathStop>();
 
             route = PathFind.shortestPathWithoutFibonacci(adjListWithWeight, 3, 5);
-            Assert.AreEqual(17, route.Last.Value.driveHour);
+            Assert.AreEqual(17, route[route.Count-1].driveHour);
 
             route = PathFind.shortestPathWithoutFibonacci(adjListWithWeight, 1, 2);
-            Assert.AreEqual(1, route.First.Value.stationID);
-            Assert.AreEqual(0, Convert.ToInt32(route.First.Value.driveHour));
-            Assert.AreEqual(2, route.First.Next.Value.stationID);
-            Assert.AreEqual(5, Convert.ToInt32(route.First.Next.Value.driveHour));
+            Assert.AreEqual(1, route[0].stationID);
+            Assert.AreEqual(0, Convert.ToInt32(route[0].driveHour));
+            Assert.AreEqual(2, route[1].stationID);
+            Assert.AreEqual(5, Convert.ToInt32(route[1].driveHour));
 
             route = PathFind.shortestPathWithoutFibonacci(adjListWithWeight, 1, 3);
-            Assert.AreEqual(1, route.First.Value.stationID);
-            Assert.AreEqual(0, Convert.ToInt32(route.First.Value.driveHour));
-            Assert.AreEqual(2, route.First.Next.Value.stationID);
-            Assert.AreEqual(5, Convert.ToInt32(route.First.Next.Value.driveHour));
-            Assert.AreEqual(3, route.First.Next.Next.Value.stationID);
-            Assert.AreEqual(11, Convert.ToInt32(route.First.Next.Next.Value.driveHour));
+            Assert.AreEqual(1, route[0].stationID);
+            Assert.AreEqual(0, Convert.ToInt32(route[0].driveHour));
+            Assert.AreEqual(2, route[1].stationID);
+            Assert.AreEqual(5, Convert.ToInt32(route[1].driveHour));
+            Assert.AreEqual(3, route[2].stationID);
+            Assert.AreEqual(11, Convert.ToInt32(route[2].driveHour));
 
             route = PathFind.shortestPathWithoutFibonacci(adjListWithWeight, 1, 4);
-            Assert.AreEqual(1, route.First.Value.stationID);
-            Assert.AreEqual(0, Convert.ToInt32(route.First.Value.driveHour));
-            Assert.AreEqual(4, route.First.Next.Value.stationID);
-            Assert.AreEqual(4, Convert.ToInt32(route.First.Next.Value.driveHour));
+            Assert.AreEqual(1, route[0].stationID);
+            Assert.AreEqual(0, Convert.ToInt32(route[0].driveHour));
+            Assert.AreEqual(4, route[1].stationID);
+            Assert.AreEqual(4, Convert.ToInt32(route[1].driveHour));
 
             route = PathFind.shortestPathWithoutFibonacci(adjListWithWeight, 1, 5);
-            Assert.AreEqual(1, route.First.Value.stationID);
-            Assert.AreEqual(0, Convert.ToInt32(route.First.Value.driveHour));
-            Assert.AreEqual(4, route.First.Next.Value.stationID);
-            Assert.AreEqual(4, Convert.ToInt32(route.First.Next.Value.driveHour));
-            Assert.AreEqual(5, route.First.Next.Next.Value.stationID);
-            Assert.AreEqual(6, Convert.ToInt32(route.First.Next.Next.Value.driveHour));
+            Assert.AreEqual(1, route[0].stationID);
+            Assert.AreEqual(0, Convert.ToInt32(route[0].driveHour));
+            Assert.AreEqual(4, route[1].stationID);
+            Assert.AreEqual(4, Convert.ToInt32(route[1].driveHour));
+            Assert.AreEqual(5, route[2].stationID);
+            Assert.AreEqual(6, Convert.ToInt32(route[2].driveHour));
 
             route = PathFind.shortestPathWithoutFibonacci(adjListWithWeight, 2, 3);
-            Assert.AreEqual(2, route.First.Value.stationID);
-            Assert.AreEqual(0, Convert.ToInt32(route.First.Value.driveHour));
-            Assert.AreEqual(3, route.First.Next.Value.stationID);
-            Assert.AreEqual(6, Convert.ToInt32(route.First.Next.Value.driveHour));
+            Assert.AreEqual(2, route[0].stationID);
+            Assert.AreEqual(0, Convert.ToInt32(route[0].driveHour));
+            Assert.AreEqual(3, route[1].stationID);
+            Assert.AreEqual(6, Convert.ToInt32(route[1].driveHour));
 
         }
 
@@ -901,25 +954,25 @@ namespace ElectricCarLibTest
             adjListWithWeight.Add(4, x);
             adjListWithWeight.Add(5, u);
 
-            LinkedList<PathStop> route = new LinkedList<PathStop>();
+            List<PathStop> route = new List<PathStop>();
 
             route = PathFind.shortestPathWithoutFibonacci(adjListWithWeight, 1, 4);
-            Assert.AreEqual(1, route.First.Value.stationID);
-            Assert.AreEqual(0, Convert.ToInt32(route.First.Value.driveHour));
-            Assert.AreEqual(3, route.First.Next.Value.stationID);
-            Assert.AreEqual(5, Convert.ToInt32(route.First.Next.Value.driveHour));
-            Assert.AreEqual(2, route.First.Next.Next.Value.stationID);
-            Assert.AreEqual(8, Convert.ToInt32(route.First.Next.Next.Value.driveHour));
-            Assert.AreEqual(4, route.First.Next.Next.Next.Value.stationID);
-            Assert.AreEqual(9, Convert.ToInt32(route.First.Next.Next.Next.Value.driveHour));
+            Assert.AreEqual(1, route[0].stationID);
+            Assert.AreEqual(0, Convert.ToInt32(route[0].driveHour));
+            Assert.AreEqual(3, route[1].stationID);
+            Assert.AreEqual(5, Convert.ToInt32(route[1].driveHour));
+            Assert.AreEqual(2, route[2].stationID);
+            Assert.AreEqual(8, Convert.ToInt32(route[2].driveHour));
+            Assert.AreEqual(4, route[3].stationID);
+            Assert.AreEqual(9, Convert.ToInt32(route[3].driveHour));
 
             route = PathFind.shortestPathWithoutFibonacci(adjListWithWeight, 1, 5);
-            Assert.AreEqual(1, route.First.Value.stationID);
-            Assert.AreEqual(0, Convert.ToInt32(route.First.Value.driveHour));
-            Assert.AreEqual(3, route.First.Next.Value.stationID);
-            Assert.AreEqual(5, Convert.ToInt32(route.First.Next.Value.driveHour));
-            Assert.AreEqual(5, route.First.Next.Next.Value.stationID);
-            Assert.AreEqual(7, Convert.ToInt32(route.First.Next.Next.Value.driveHour));
+            Assert.AreEqual(1, route[0].stationID);
+            Assert.AreEqual(0, Convert.ToInt32(route[0].driveHour));
+            Assert.AreEqual(3, route[1].stationID);
+            Assert.AreEqual(5, Convert.ToInt32(route[1].driveHour));
+            Assert.AreEqual(5, route[2].stationID);
+            Assert.AreEqual(7, Convert.ToInt32(route[2].driveHour));
         }
 
         [TestMethod]
@@ -982,20 +1035,20 @@ namespace ElectricCarLibTest
         public void runUnpassedStressTestWithRandomWeight()
         {
             Dictionary<int, Dictionary<int, decimal>> list = readDataFromFile();
-            LinkedList<PathStop> routeWoutF = PathFind.shortestPathWithoutFibonacci(list, 5, 15);
-            LinkedList<PathStop> routeWF = PathFind.shortestPathWithFibonacci(list, 5, 15);
+            List<PathStop> routeWoutF = PathFind.shortestPathWithoutFibonacci(list, 5, 15);
+            List<PathStop> routeWF = PathFind.shortestPathWithFibonacci(list, 5, 15);
             
 
             decimal lastStopDistanceWF = 0;
             if (routeWF.Count != 0)
             {
-                lastStopDistanceWF = routeWF.Last.Value.driveHour;
+                lastStopDistanceWF = routeWF[routeWF.Count -1].driveHour;
             }
             
             decimal lastStopDistanceWoutF = 0;
             if (routeWoutF.Count != 0)
             {
-                lastStopDistanceWoutF = routeWoutF.Last.Value.driveHour;
+                lastStopDistanceWoutF = routeWoutF[routeWoutF.Count - 1].driveHour;
             }
             
             Assert.AreEqual(lastStopDistanceWF, lastStopDistanceWoutF);
@@ -1029,19 +1082,19 @@ namespace ElectricCarLibTest
                     double density = 0.1; //density of random graph can be adjusted
                     RandomGraphGenerator graph = new RandomGraphGenerator(size, density, 1, 300);
                     adjList = graph.getAdjList();
-                    LinkedList<PathStop> routeWF = PathFind.shortestPathWithFibonacci(adjList, startId, endId);
+                    List<PathStop> routeWF = PathFind.shortestPathWithFibonacci(adjList, startId, endId);
                     decimal lastStopDistanceWF = 0;
                     if (routeWF.Count != 0)
                     {
-                        lastStopDistanceWF = routeWF.Last.Value.driveHour;
+                        lastStopDistanceWF = routeWF[routeWF.Count-1].driveHour;
                     }
 
-                    LinkedList<PathStop> routeWoutF = PathFind.shortestPathWithoutFibonacci(adjList, startId, endId);
+                    List<PathStop> routeWoutF = PathFind.shortestPathWithoutFibonacci(adjList, startId, endId);
                     int withoutF = PathFind.shortestPathWithoutFibonacci(adjList, startId, endId).Count;
                     decimal lastStopDistanceWoutF = 0;
                     if (routeWoutF.Count != 0)
                     {
-                        lastStopDistanceWoutF = routeWoutF.Last.Value.driveHour;
+                        lastStopDistanceWoutF = routeWoutF[routeWoutF.Count - 1].driveHour;
                     }
 
                     Assert.AreEqual(lastStopDistanceWF, lastStopDistanceWoutF);

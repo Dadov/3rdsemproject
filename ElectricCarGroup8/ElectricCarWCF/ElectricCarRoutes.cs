@@ -6,7 +6,7 @@ using System.Threading.Tasks;
 
 namespace ElectricCarWCF
 {
-    public partial class ElectricCarRoutes : IElectricCar
+    public partial class ElectricCarRoutes 
     {
     }
 }

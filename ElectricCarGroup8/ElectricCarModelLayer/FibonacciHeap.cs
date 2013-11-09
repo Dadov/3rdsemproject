@@ -234,14 +234,6 @@ namespace ElectricCarModelLayer
         public int calculateArraySize(int n)
         {
             int s;
-            //long result = 0;
-            //for (s = 0; s < n; s++)
-            //{
-            //    result = result + (long)Math.Pow(2, s);
-            //    if (result >= n)
-            //        break;
-            //}
-
             double result = Math.Log(n) / Math.Log((1 + Math.Sqrt(5)) / 2);
             s = (int)Math.Floor(result);
             return s + 1;

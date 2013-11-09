@@ -6,7 +6,7 @@ using System.Threading.Tasks;
 
 namespace ElectricCarWCF
 {
-    public partial class ElectricCarBatteries : IElectricCar
+    public partial class ElectricCarBatteries 
     {
     }
 }
