@@ -197,9 +197,9 @@ namespace ElectricCarLibTest
         public void calculateArraySize()
         {
             FibonacciHeap heap = new FibonacciHeap();
-            Assert.AreEqual(4, heap.calculateArraySize(15));
-            Assert.AreEqual(3, heap.calculateArraySize(7));
-            Assert.AreEqual(4, heap.calculateArraySize(8));
+            Assert.AreEqual(6, heap.calculateArraySize(15));
+            Assert.AreEqual(5, heap.calculateArraySize(7));
+            Assert.AreEqual(5, heap.calculateArraySize(8));
 
         }
 
