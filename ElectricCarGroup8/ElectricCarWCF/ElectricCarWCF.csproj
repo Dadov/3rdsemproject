@@ -64,6 +64,10 @@
     </None>
   </ItemGroup>
   <ItemGroup>
+    <ProjectReference Include="..\ElectricCarLib\ElectricCarLib.csproj">
+      <Project>{fe580513-61e1-4547-9606-6e32c3ba2a2f}</Project>
+      <Name>ElectricCarLib</Name>
+    </ProjectReference>
     <ProjectReference Include="..\ElectricCarModelLayer\ElectricCarModelLayer.csproj">
       <Project>{00cbf9d5-e24a-4172-a982-2a4f8b2d4620}</Project>
       <Name>ElectricCarModelLayer</Name>

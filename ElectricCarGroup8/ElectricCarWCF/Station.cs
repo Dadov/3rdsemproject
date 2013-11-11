@@ -11,7 +11,7 @@ namespace ElectricCarWCF
     public class Station
     {
         [DataMember]
-        public string Id;
+        public int Id;
         [DataMember]
         public string Name;
         [DataMember]

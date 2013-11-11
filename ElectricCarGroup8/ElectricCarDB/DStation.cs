@@ -193,7 +193,6 @@ namespace ElectricCarDB
                 name = s.name,
                 address = s.address,
                 country = s.country,
-                //TODO
                 state = (State)Enum.Parse(typeof(State), s.state),
             };
             return station;

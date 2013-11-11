@@ -4,6 +4,7 @@
     <xsd:schema targetNamespace="http://tempuri.org/Imports">
       <xsd:import namespace="http://tempuri.org/" />
       <xsd:import namespace="http://schemas.microsoft.com/2003/10/Serialization/" />
+      <xsd:import namespace="http://schemas.datacontract.org/2004/07/ElectricCarWCF" />
     </xsd:schema>
   </wsdl:types>
   <wsdl:message name="IElectricCar_getME_InputMessage">
@@ -12,10 +13,90 @@
   <wsdl:message name="IElectricCar_getME_OutputMessage">
     <wsdl:part name="parameters" element="tns:getMEResponse" />
   </wsdl:message>
+  <wsdl:message name="IElectricCar_getAllStations_InputMessage">
+    <wsdl:part name="parameters" element="tns:getAllStations" />
+  </wsdl:message>
+  <wsdl:message name="IElectricCar_getAllStations_OutputMessage">
+    <wsdl:part name="parameters" element="tns:getAllStationsResponse" />
+  </wsdl:message>
+  <wsdl:message name="IElectricCar_getStation_InputMessage">
+    <wsdl:part name="parameters" element="tns:getStation" />
+  </wsdl:message>
+  <wsdl:message name="IElectricCar_getStation_OutputMessage">
+    <wsdl:part name="parameters" element="tns:getStationResponse" />
+  </wsdl:message>
+  <wsdl:message name="IElectricCar_updateStation_InputMessage">
+    <wsdl:part name="parameters" element="tns:updateStation" />
+  </wsdl:message>
+  <wsdl:message name="IElectricCar_updateStation_OutputMessage">
+    <wsdl:part name="parameters" element="tns:updateStationResponse" />
+  </wsdl:message>
+  <wsdl:message name="IElectricCar_deleteStation_InputMessage">
+    <wsdl:part name="parameters" element="tns:deleteStation" />
+  </wsdl:message>
+  <wsdl:message name="IElectricCar_deleteStation_OutputMessage">
+    <wsdl:part name="parameters" element="tns:deleteStationResponse" />
+  </wsdl:message>
+  <wsdl:message name="IElectricCar_getNaborStations_InputMessage">
+    <wsdl:part name="parameters" element="tns:getNaborStations" />
+  </wsdl:message>
+  <wsdl:message name="IElectricCar_getNaborStations_OutputMessage">
+    <wsdl:part name="parameters" element="tns:getNaborStationsResponse" />
+  </wsdl:message>
+  <wsdl:message name="IElectricCar_addNaborStations_InputMessage">
+    <wsdl:part name="parameters" element="tns:addNaborStations" />
+  </wsdl:message>
+  <wsdl:message name="IElectricCar_addNaborStations_OutputMessage">
+    <wsdl:part name="parameters" element="tns:addNaborStationsResponse" />
+  </wsdl:message>
+  <wsdl:message name="IElectricCar_updateNaborStations_InputMessage">
+    <wsdl:part name="parameters" element="tns:updateNaborStations" />
+  </wsdl:message>
+  <wsdl:message name="IElectricCar_updateNaborStations_OutputMessage">
+    <wsdl:part name="parameters" element="tns:updateNaborStationsResponse" />
+  </wsdl:message>
+  <wsdl:message name="IElectricCar_deleteNaborStations_InputMessage">
+    <wsdl:part name="parameters" element="tns:deleteNaborStations" />
+  </wsdl:message>
+  <wsdl:message name="IElectricCar_deleteNaborStations_OutputMessage">
+    <wsdl:part name="parameters" element="tns:deleteNaborStationsResponse" />
+  </wsdl:message>
   <wsdl:portType name="IElectricCar">
     <wsdl:operation name="getME">
       <wsdl:input wsaw:Action="http://tempuri.org/IElectricCar/getME" message="tns:IElectricCar_getME_InputMessage" />
       <wsdl:output wsaw:Action="http://tempuri.org/IElectricCar/getMEResponse" message="tns:IElectricCar_getME_OutputMessage" />
+    </wsdl:operation>
+    <wsdl:operation name="getAllStations">
+      <wsdl:input wsaw:Action="http://tempuri.org/IElectricCar/getAllStations" message="tns:IElectricCar_getAllStations_InputMessage" />
+      <wsdl:output wsaw:Action="http://tempuri.org/IElectricCar/getAllStationsResponse" message="tns:IElectricCar_getAllStations_OutputMessage" />
+    </wsdl:operation>
+    <wsdl:operation name="getStation">
+      <wsdl:input wsaw:Action="http://tempuri.org/IElectricCar/getStation" message="tns:IElectricCar_getStation_InputMessage" />
+      <wsdl:output wsaw:Action="http://tempuri.org/IElectricCar/getStationResponse" message="tns:IElectricCar_getStation_OutputMessage" />
+    </wsdl:operation>
+    <wsdl:operation name="updateStation">
+      <wsdl:input wsaw:Action="http://tempuri.org/IElectricCar/updateStation" message="tns:IElectricCar_updateStation_InputMessage" />
+      <wsdl:output wsaw:Action="http://tempuri.org/IElectricCar/updateStationResponse" message="tns:IElectricCar_updateStation_OutputMessage" />
+    </wsdl:operation>
+    <wsdl:operation name="deleteStation">
+      <wsdl:input wsaw:Action="http://tempuri.org/IElectricCar/deleteStation" message="tns:IElectricCar_deleteStation_InputMessage" />
+      <wsdl:output wsaw:Action="http://tempuri.org/IElectricCar/deleteStationResponse" message="tns:IElectricCar_deleteStation_OutputMessage" />
+    </wsdl:operation>
+    <wsdl:operation name="getNaborStations">
+      <wsdl:input wsaw:Action="http://tempuri.org/IElectricCar/getNaborStations" message="tns:IElectricCar_getNaborStations_InputMessage" />
+      <wsdl:output wsaw:Action="http://tempuri.org/IElectricCar/getNaborStationsResponse" message="tns:IElectricCar_getNaborStations_OutputMessage" />
+    </wsdl:operation>
+    <wsdl:operation name="addNaborStations">
+      <wsdl:input wsaw:Action="http://tempuri.org/IElectricCar/addNaborStations" message="tns:IElectricCar_addNaborStations_InputMessage" />
+      <wsdl:output wsaw:Action="http://tempuri.org/IElectricCar/addNaborStationsResponse" message="tns:IElectricCar_addNaborStations_OutputMessage" />
+    </wsdl:operation>
+    <wsdl:operation name="updateNaborStations">
+      <wsdl:input wsaw:Action="http://tempuri.org/IElectricCar/updateNaborStations" message="tns:IElectricCar_updateNaborStations_InputMessage" />
+      <wsdl:output wsaw:Action="http://tempuri.org/IElectricCar/updateNaborStationsResponse" message="tns:IElectricCar_updateNaborStations_OutputMessage" />
+    </wsdl:operation>
+    <wsdl:operation name="deleteNaborStations">
+      <wsdl:input wsaw:Action="http://tempuri.org/IElectricCar/deleteNaborStations" message="tns:IElectricCar_deleteNaborStations_InputMessage" />
+      <wsdl:output wsaw:Action="http://tempuri.org/IElectricCar/deleteNaborStationsResponse" message="tns:IElectricCar_deleteNaborStations_OutputMessage" />
     </wsdl:operation>
   </wsdl:portType>
   <wsdl:binding name="BasicHttpBinding_IElectricCar" type="tns:IElectricCar">
@@ -29,10 +110,82 @@
         <soap:body use="literal" />
       </wsdl:output>
     </wsdl:operation>
+    <wsdl:operation name="getAllStations">
+      <soap:operation soapAction="http://tempuri.org/IElectricCar/getAllStations" style="document" />
+      <wsdl:input>
+        <soap:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="getStation">
+      <soap:operation soapAction="http://tempuri.org/IElectricCar/getStation" style="document" />
+      <wsdl:input>
+        <soap:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="updateStation">
+      <soap:operation soapAction="http://tempuri.org/IElectricCar/updateStation" style="document" />
+      <wsdl:input>
+        <soap:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="deleteStation">
+      <soap:operation soapAction="http://tempuri.org/IElectricCar/deleteStation" style="document" />
+      <wsdl:input>
+        <soap:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="getNaborStations">
+      <soap:operation soapAction="http://tempuri.org/IElectricCar/getNaborStations" style="document" />
+      <wsdl:input>
+        <soap:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="addNaborStations">
+      <soap:operation soapAction="http://tempuri.org/IElectricCar/addNaborStations" style="document" />
+      <wsdl:input>
+        <soap:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="updateNaborStations">
+      <soap:operation soapAction="http://tempuri.org/IElectricCar/updateNaborStations" style="document" />
+      <wsdl:input>
+        <soap:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="deleteNaborStations">
+      <soap:operation soapAction="http://tempuri.org/IElectricCar/deleteNaborStations" style="document" />
+      <wsdl:input>
+        <soap:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
   </wsdl:binding>
   <wsdl:service name="ElectricCar">
     <wsdl:port name="BasicHttpBinding_IElectricCar" binding="tns:BasicHttpBinding_IElectricCar">
-      <soap:address location="http://localhost:8733/Design_Time_Addresses/ElectricCarWCF/ElectricCar/" />
+      <soap:address location="http://localhost:9000/Design_Time_Addresses/ElectricCarWCF/ElectricCar/" />
     </wsdl:port>
   </wsdl:service>
 </wsdl:definitions>

@@ -31,7 +31,7 @@ namespace ElectricCarGUI
             string position = "";
             if (e.Key == Key.Return)
             {
-                //Evaluate login name and password, get employee position
+                //TODO Evaluate login name and password, get employee position
                 position = "Admin"; 
                 success = true;
 
@@ -39,7 +39,7 @@ namespace ElectricCarGUI
             if (success)
             {
                 //create main window with authorized view
-                MainView mainView = new MainView(position);
+                MainView mainView = new MainView(txtName.Text, position);
                 mainView.Visibility = Visibility.Visible;
                 txtName.Text = "";
                 txtPass.Text = "";

@@ -8,7 +8,7 @@ using System.ServiceModel;
 namespace ElectricCarWCF
 {
     [ServiceContract]
-    public partial interface IElectricCar
+    public interface IElectricCar
     {
         #region People
 
