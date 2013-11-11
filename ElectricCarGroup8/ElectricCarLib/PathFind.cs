@@ -15,16 +15,39 @@ namespace ElectricCarLib
         {
             List<List<PathStop>> kShortestPaths = new List<List<PathStop>>();
             List<List<PathStop>> temporaryPaths = new List<List<PathStop>>();
+            kShortestPaths.Add(shortestPathWithoutFibonacci(adjListWithWeight, startSID, endSID));
 
-            for (int k = 0; k < numberOfPath; k++)
+            for (int k = 1; k < numberOfPath; k++)
             {
-                kShortestPaths.Add(shortestPathWithoutFibonacci(adjListWithWeight, startSID, endSID));
-
                 Dictionary<int, Dictionary<int, decimal>> removedEdges = new Dictionary<int, Dictionary<int, decimal>> ();
+                Dictionary<int, Dictionary<int, decimal>> removedNodes = new Dictionary<int, Dictionary<int, decimal>>();
 
                 for (int i = 0; i < (kShortestPaths[k-1].Count-1); i++)
                 {
                     PathStop spurNode = kShortestPaths[k - 1][i];
+
+                    //remove edges for node[i]
+                    if (i>0)
+                    {
+                        int removeNodeId = kShortestPaths[k - 1][i-1].stationID;
+                        foreach (int id in adjListWithWeight[removeNodeId].Keys)
+                        {
+                            if (!removedNodes.Keys.Contains(id))
+                            {
+                                Dictionary<int, decimal> edge = new Dictionary<int, decimal>();
+                                edge.Add(removeNodeId, adjListWithWeight[removeNodeId][id]);
+                                removedNodes.Add(id, edge);
+                            }
+                            else
+                            {
+                                removedNodes[id].Add(removeNodeId, adjListWithWeight[removeNodeId][id]);
+                            }
+                            
+                            adjListWithWeight[id].Remove(removeNodeId);
+                        }
+                    }
+                    
+
                     //initiate root path
                     List<PathStop> rootPath = new List<PathStop>();
                     for (int j = 0; j <= i; j++)
@@ -36,27 +59,58 @@ namespace ElectricCarLib
                     {
                         if (pathIsEqual(rootPath, p))
                         {
-                            Dictionary<int, decimal> edge1 = new Dictionary<int,decimal>();
-                            edge1.Add(i+1, adjListWithWeight[i][i + 1]);
-                            Dictionary<int, decimal> edge2 = new Dictionary<int,decimal>();
-                            edge2.Add(i, adjListWithWeight[i+1][i]);
-                            removedEdges.Add(i, edge1);
-                            removedEdges.Add(i+1, edge2);
+                            if (!removedEdges.Keys.Contains(p[i].stationID))
+                            {
+                                Dictionary<int, decimal> edge1 = new Dictionary<int,decimal>();
+                                edge1.Add(p[i + 1].stationID, adjListWithWeight[p[i].stationID][p[i + 1].stationID]);
+                                removedEdges.Add(p[i].stationID, edge1);
+                            } else
+	                        {
+                                if (!removedEdges[p[i].stationID].Keys.Contains(p[i + 1].stationID))
+                                {
+                                    removedEdges[p[i].stationID].Add(p[i + 1].stationID, adjListWithWeight[p[i].stationID][p[i + 1].stationID]);
+                                }
+                                
+	                        }
 
-                            adjListWithWeight[i].Remove(i + 1);
-                            adjListWithWeight[i + 1].Remove(i);
+                            if (!removedEdges.Keys.Contains(p[i+1].stationID))
+	                        {
+		                         Dictionary<int, decimal> edge2 = new Dictionary<int,decimal>();
+                                 edge2.Add(p[i].stationID, adjListWithWeight[p[i + 1].stationID][p[i].stationID]);
+                                 removedEdges.Add(p[i+1].stationID, edge2);
+	                        } else
+	                        {
+                                if (!removedEdges[p[i+1].stationID].Keys.Contains(p[i].stationID))
+	                            {
+		                            removedEdges[p[i+1].stationID].Add(p[i].stationID, adjListWithWeight[p[i + 1].stationID][p[i].stationID]);
+	                            }
+                                
+	                        }
+                            
+                            
+
+                            adjListWithWeight[p[i].stationID].Remove(p[i + 1].stationID);
+                            adjListWithWeight[p[i + 1].stationID].Remove(p[i].stationID);
                         }
                     }
                     List<PathStop> spurPath = shortestPathWithoutFibonacci(adjListWithWeight, spurNode.stationID, endSID);
-                    rootPath.AddRange(spurPath);
-                    if (temporaryPaths.Contains(rootPath))
+                    if (spurPath.Count!=0) //path exist
                     {
-                        temporaryPaths.Add(rootPath);
+                        //add spurPath to rootPath
+                        decimal lastWight = rootPath.Last().driveHour;
+                        for (int n = 1; n < spurPath.Count; n++)
+                        {
+                            spurPath[n].driveHour = lastWight + spurPath[n].driveHour;
+                            rootPath.Add(spurPath[n]);
+                        }
+
+                        if (!isInTemperaryAndKshortestPathList(temporaryPaths, kShortestPaths, rootPath))
+                        {
+                            temporaryPaths.Add(rootPath);
+                        }
                     }
+                    
                 }
-                temporaryPaths.OrderBy(x => x.Last().driveHour);
-                kShortestPaths[k] = temporaryPaths[0];
-                temporaryPaths.RemoveAt(0);
 
                 //restore edges
                 foreach (int id in removedEdges.Keys)
@@ -66,10 +120,85 @@ namespace ElectricCarLib
                         adjListWithWeight[id].Add(item, removedEdges[id][item]);
                     }
                 }
+
+                //restore nodes
+                foreach (int id in removedNodes.Keys)
+                {
+                    foreach (int item in removedNodes[id].Keys)
+                    {
+                        adjListWithWeight[id].Add(item, removedNodes[id][item]);
+                    }
+                }
+
+                temporaryPaths = pathsOrderByTotalWeight(temporaryPaths);
+                //end loop if no path is left
+                if (temporaryPaths.Count == 0)
+                {
+                    break;
+                }
+                kShortestPaths.Add(temporaryPaths[0]);
+                temporaryPaths.RemoveAt(0);
+                
+
+                
+                
+                
             }
 
             
             return kShortestPaths;
+        }
+
+        public static bool isInTemperaryAndKshortestPathList(List<List<PathStop>> temporaryPaths, List<List<PathStop>> kShortestPaths, List<PathStop> path)
+        {
+            
+            foreach (List<PathStop> p in temporaryPaths)
+            {
+                if (p.Count == path.Count)
+                {
+                    for (int i = 0; i < path.Count; i++)
+                    {
+                        if (p[i].stationID != path[i].stationID)
+                            break;
+                        if (i == (path.Count-1))
+                        {
+                            return true;
+                        }
+                    }
+                }
+                
+            }
+
+            foreach (List<PathStop> p in kShortestPaths)
+            {
+                if (p.Count == path.Count)
+                {
+                    for (int i = 0; i < path.Count; i++)
+                    {
+                        if (p[i].stationID != path[i].stationID)
+                            break;
+                        if (i == (path.Count - 1))
+                        {
+                            return true;
+                        }
+                    }
+                }
+            }
+            return false;
+        }
+
+        public static List<List<PathStop>> pathsOrderByTotalWeight(List<List<PathStop>> temporaryPaths)
+        {
+            List<List<PathStop>> orderedPaths = new List<List<PathStop>>();
+            Dictionary<List<PathStop>, decimal> paths = new Dictionary<List<PathStop>, decimal>();
+            foreach (List<PathStop> p in temporaryPaths)
+            {
+                paths.Add(p, p.Last().driveHour);
+            }
+            paths = paths.OrderBy(x => x.Value).ToDictionary(x => x.Key, x => x.Value);
+            orderedPaths = paths.Keys.ToList();
+
+            return orderedPaths;
         }
 
         public static bool pathIsEqual(List<PathStop> rootPath, List<PathStop> p)
@@ -155,7 +284,7 @@ namespace ElectricCarLib
                 }
             }
 
-            pathWithWeight.OrderBy(i => i.Value);
+            pathWithWeight = pathWithWeight.OrderBy(i => i.Value).ToDictionary(x => x.Key, x => x.Value);
             List<List<int>> sorted = pathWithWeight.Keys.ToList();
 
             //build the ordered paths
