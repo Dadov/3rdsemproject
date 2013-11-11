@@ -10,7 +10,7 @@ using ElectricCarModelLayer;
 namespace ElectricCarWCF
 {
     [DataContract]
-    public partial class ElectricCar : IElectricCar
+    public partial class ElectricCarPeople  
     {
         [DataMember]
         public MCustomer cust;
@@ -19,5 +19,8 @@ namespace ElectricCarWCF
         {
             return null;
         }
+
+
+        
     }
 }
