@@ -50,11 +50,13 @@
     <Reference Include="System.Xml.Linq" />
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="ElectricCar.cs" />
     <Compile Include="ElectricCarBatteries.cs" />
     <Compile Include="ElectricCarPeople.cs" />
     <Compile Include="ElectricCarRoutes.cs" />
     <Compile Include="IElectricCar.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
+    <Compile Include="Station.cs" />
   </ItemGroup>
   <ItemGroup>
     <None Include="App.config">
