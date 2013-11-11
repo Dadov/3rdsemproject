@@ -11,6 +11,263 @@ namespace ElectricCarLibTest
     [TestClass]
     public class PathFindTest
     {
+        //[TestMethod]
+        public void runUnPassedKShortestPathData()
+        {
+            Dictionary<int, Dictionary<int, decimal>> list = readDataFromFile();
+            int startId = 1;
+            int endId = 6;
+
+            List<List<PathStop>> allPaths = PathFind.getAllPossiblePathsBetweenTwoPoints(list, startId, endId);
+            int numberOfPath = allPaths.Count;
+            List<List<PathStop>> kPaths = PathFind.getKShortestPath(list, startId, endId, numberOfPath);
+
+            if (startId == endId)
+            {
+                Assert.AreEqual(1, kPaths.Count);
+                Assert.AreEqual(0, Convert.ToInt32(kPaths[0][0].driveHour));
+            }
+            else
+            {
+                for (int j = 0; j < numberOfPath; j++)
+                {
+
+                    Assert.AreEqual(kPaths[j][kPaths[j].Count - 1].driveHour, allPaths[j][allPaths[j].Count - 1].driveHour);
+                }
+            }
+        }
+
+        //[TestMethod]
+        //public void stressTestForAllPossiblePath()
+        //{
+        //    Dictionary<int, Dictionary<int, decimal>> adjList = new Dictionary<int, Dictionary<int, decimal>>();
+        //    int size = 30; //size of random graph can be ajusted
+        //    Random r = new Random();
+        //    int startId = r.Next(1, size + 1);
+        //    int endId = r.Next(1, size + 1);
+
+        //    double density = 0.1; //density of random graph can be adjusted
+        //    RandomGraphGenerator graph = new RandomGraphGenerator(size, density, 1, 300);
+        //    adjList = graph.getAdjList();
+        //    List<List<PathStop>> allPaths = PathFind.getAllPossiblePathsBetweenTwoPoints(adjList, startId, endId);
+        //    System.Diagnostics.Debug.WriteLine("1");
+        //    Assert.AreEqual(1, 1);
+
+        //}
+
+        [TestMethod]
+        public void stressTestForKShortestPath()
+        {
+            int i = 0;
+            while(i<1)
+            {
+                Dictionary<int, Dictionary<int, decimal>> adjList = new Dictionary<int, Dictionary<int, decimal>>();
+                int size = 100; //size of random graph can be ajusted
+                Random r = new Random();
+                int startId = r.Next(1, size + 1);
+                int endId = r.Next(1, size + 1);
+
+                double density = 0.1; //density of random graph can be adjusted
+                RandomGraphGenerator graph = new RandomGraphGenerator(size, density, 1, 300);
+                adjList = graph.getAdjList();
+
+                //try
+                //{
+                    //List<List<PathStop>> allPaths = PathFind.getAllPossiblePathsBetweenTwoPoints(adjList, startId, endId);
+                    int numberOfPath = 50;
+                    List<List<PathStop>> kPaths = PathFind.getKShortestPath(adjList, startId, endId, numberOfPath);
+
+                    if (startId == endId)
+                    {
+                        Assert.AreEqual(1, kPaths.Count);
+                        Assert.AreEqual(0, Convert.ToInt32(kPaths[0][0].driveHour));
+                    }
+                    else
+                    {
+                        int n;
+                        if (kPaths.Count > numberOfPath)
+                        {
+                            n = numberOfPath;
+                        }
+                        else
+                        {
+                            n = kPaths.Count;
+                        }
+                        for (int j = 1; j < n; j++)
+                        {
+                            if (kPaths[j][kPaths[j].Count - 1].driveHour < kPaths[j - 1][kPaths[j - 1].Count - 1].driveHour)
+                                Assert.Fail();
+                        }
+
+                        for (int j = 0; j < n; j++)
+                        {
+                            for (int h = 0; h < kPaths[j].Count; h++)
+                            {
+                                for (int x = h+1; x < kPaths[j].Count; x++)
+                                {
+                                    if (kPaths[j][h].stationID == kPaths[j][x].stationID)
+                                    {
+                                        Assert.Fail();
+                                    }
+                                }
+                            }
+                        }
+
+                        //for (int j = 0; j < numberOfPath; j++)
+                        //{
+
+                        //    Assert.AreEqual(kPaths[j][kPaths[j].Count - 1].driveHour, allPaths[j][allPaths[j].Count - 1].driveHour);
+                        //}
+                    }
+                    System.Diagnostics.Debug.WriteLine(i + "");
+                    i++;
+                //}
+                //catch (ArgumentOutOfRangeException e)
+                //{
+
+                //    writeDataToFile(e.Message + "Start: " + startId + "  End: " + endId, adjList);
+                //    outPutGraphData(adjList, startId, endId);
+                //    throw e;
+                //}
+                //catch (AssertFailedException e)
+                //{
+
+                //    writeDataToFile(e.Message + "Start: " + startId + "  End: " + endId, adjList);
+                //    outPutGraphData(adjList, startId, endId);
+                //    throw e;
+                //}
+                Assert.AreEqual(1, 1);
+
+                
+            }
+        }
+
+        [TestMethod]
+        public void getKShortestPath()
+        {
+            Dictionary<int, Dictionary<int, decimal>> adjListWithWeight = new Dictionary<int, Dictionary<int, decimal>>();
+            
+            Dictionary<int, decimal> node1 = new Dictionary<int, decimal>();
+            node1.Add(2, 2); node1.Add(3, 3);
+            adjListWithWeight.Add(1, node1);
+
+            Dictionary<int, decimal> node2 = new Dictionary<int, decimal>();
+            node2.Add(3, 1); node2.Add(5, 2); node2.Add(4, 3); node2.Add(1, 2);
+            adjListWithWeight.Add(2, node2);
+
+            Dictionary<int, decimal> node3 = new Dictionary<int, decimal>();
+            node3.Add(5, 4); node3.Add(1, 3); node3.Add(2, 1);
+            adjListWithWeight.Add(3, node3);
+
+            Dictionary<int, decimal> node4 = new Dictionary<int, decimal>();
+            node4.Add(6, 2); node4.Add(5, 2); node4.Add(2, 3); 
+            adjListWithWeight.Add(4, node4);
+
+            Dictionary<int, decimal> node5 = new Dictionary<int, decimal>();
+            node5.Add(4, 2); node5.Add(6, 1); node5.Add(2, 2); node5.Add(3, 4);
+            adjListWithWeight.Add(5, node5);
+
+            Dictionary<int, decimal> node6 = new Dictionary<int, decimal>();
+            node6.Add(5, 1); node6.Add(4, 2);
+            adjListWithWeight.Add(6, node6);
+
+            int startId = 1; int endId = 6;
+
+            int numberOfPath = 14;
+
+            List<List<PathStop>> kPaths = PathFind.getKShortestPath(adjListWithWeight, startId, endId, numberOfPath);
+            List<List<PathStop>> allPaths = PathFind.getAllPossiblePathsBetweenTwoPoints(adjListWithWeight, startId, endId);
+
+            Assert.AreEqual(1, kPaths[0][0].stationID);
+            Assert.AreEqual(2, kPaths[0][1].stationID);
+            Assert.AreEqual(5, kPaths[0][2].stationID);
+            Assert.AreEqual(6, kPaths[0][3].stationID);
+            Assert.AreEqual(0, Convert.ToInt32(kPaths[0][0].driveHour));
+            Assert.AreEqual(2, Convert.ToInt32(kPaths[0][1].driveHour));
+            Assert.AreEqual(4, Convert.ToInt32(kPaths[0][2].driveHour));
+            Assert.AreEqual(5, Convert.ToInt32(kPaths[0][3].driveHour));
+
+            Assert.AreEqual(1, kPaths[1][0].stationID);
+            Assert.AreEqual(3, kPaths[1][1].stationID);
+            Assert.AreEqual(2, kPaths[1][2].stationID);
+            Assert.AreEqual(5, kPaths[1][3].stationID);
+            Assert.AreEqual(6, kPaths[1][4].stationID);
+            Assert.AreEqual(0, Convert.ToInt32(kPaths[1][0].driveHour));
+            Assert.AreEqual(3, Convert.ToInt32(kPaths[1][1].driveHour));
+            Assert.AreEqual(4, Convert.ToInt32(kPaths[1][2].driveHour));
+            Assert.AreEqual(6, Convert.ToInt32(kPaths[1][3].driveHour));
+            Assert.AreEqual(7, Convert.ToInt32(kPaths[1][4].driveHour));
+
+            Assert.AreEqual(1, kPaths[2][0].stationID);
+            Assert.AreEqual(2, kPaths[2][1].stationID);
+            Assert.AreEqual(4, kPaths[2][2].stationID);
+            Assert.AreEqual(6, kPaths[2][3].stationID);
+            Assert.AreEqual(0, Convert.ToInt32(kPaths[2][0].driveHour));
+            Assert.AreEqual(2, Convert.ToInt32(kPaths[2][1].driveHour));
+            Assert.AreEqual(5, Convert.ToInt32(kPaths[2][2].driveHour));
+            Assert.AreEqual(7, Convert.ToInt32(kPaths[2][3].driveHour));
+
+            Assert.AreEqual(1, kPaths[3][0].stationID);
+            Assert.AreEqual(2, kPaths[3][1].stationID);
+            Assert.AreEqual(5, kPaths[3][2].stationID);
+            Assert.AreEqual(4, kPaths[3][3].stationID);
+            Assert.AreEqual(6, kPaths[3][4].stationID);
+            Assert.AreEqual(0, Convert.ToInt32(kPaths[3][0].driveHour));
+            Assert.AreEqual(2, Convert.ToInt32(kPaths[3][1].driveHour));
+            Assert.AreEqual(4, Convert.ToInt32(kPaths[3][2].driveHour));
+            Assert.AreEqual(6, Convert.ToInt32(kPaths[3][3].driveHour));
+            Assert.AreEqual(8, Convert.ToInt32(kPaths[3][4].driveHour));
+
+            Assert.AreEqual(1, kPaths[4][0].stationID);
+            Assert.AreEqual(3, kPaths[4][1].stationID);
+            Assert.AreEqual(5, kPaths[4][2].stationID);
+            Assert.AreEqual(6, kPaths[4][3].stationID);
+            Assert.AreEqual(0, Convert.ToInt32(kPaths[4][0].driveHour));
+            Assert.AreEqual(3, Convert.ToInt32(kPaths[4][1].driveHour));
+            Assert.AreEqual(7, Convert.ToInt32(kPaths[4][2].driveHour));
+            Assert.AreEqual(8, Convert.ToInt32(kPaths[4][3].driveHour));
+
+            Assert.AreEqual(1, kPaths[5][0].stationID);
+            Assert.AreEqual(2, kPaths[5][1].stationID);
+            Assert.AreEqual(3, kPaths[5][2].stationID);
+            Assert.AreEqual(5, kPaths[5][3].stationID);
+            Assert.AreEqual(6, kPaths[5][4].stationID);
+            Assert.AreEqual(0, Convert.ToInt32(kPaths[5][0].driveHour));
+            Assert.AreEqual(2, Convert.ToInt32(kPaths[5][1].driveHour));
+            Assert.AreEqual(3, Convert.ToInt32(kPaths[5][2].driveHour));
+            Assert.AreEqual(7, Convert.ToInt32(kPaths[5][3].driveHour));
+            Assert.AreEqual(8, Convert.ToInt32(kPaths[5][4].driveHour));
+
+            Assert.AreEqual(1, kPaths[6][0].stationID);
+            Assert.AreEqual(2, kPaths[6][1].stationID);
+            Assert.AreEqual(4, kPaths[6][2].stationID);
+            Assert.AreEqual(5, kPaths[6][3].stationID);
+            Assert.AreEqual(6, kPaths[6][4].stationID);
+            Assert.AreEqual(0, Convert.ToInt32(kPaths[6][0].driveHour));
+            Assert.AreEqual(2, Convert.ToInt32(kPaths[6][1].driveHour));
+            Assert.AreEqual(5, Convert.ToInt32(kPaths[6][2].driveHour));
+            Assert.AreEqual(7, Convert.ToInt32(kPaths[6][3].driveHour));
+            Assert.AreEqual(8, Convert.ToInt32(kPaths[6][4].driveHour));
+
+
+
+            Assert.AreEqual(1, kPaths[0][0].stationID);
+
+
+            int size;
+            if (numberOfPath == kPaths.Count)
+                size = numberOfPath;
+            else 
+                size = kPaths.Count;
+
+            for (int i = 0; i < size; i++)
+            {
+
+                Assert.AreEqual(kPaths[i][kPaths[i].Count - 1].driveHour, allPaths[i][allPaths[i].Count - 1].driveHour);
+            }
+            
+        }
+
         [TestMethod]
         public void getAllPossiblePathsBetweenTwoPoints()
         {
@@ -1069,7 +1326,7 @@ namespace ElectricCarLibTest
         public void streessTestWithRandomWeight()
         {
             int i = 0;
-            while (i<10)//can be adjusted
+            while (i<1)//can be adjusted
             {
                 Dictionary<int, Dictionary<int, decimal>> adjList = new Dictionary<int, Dictionary<int, decimal>>();
                 int size = 1000; //size of random graph can be ajusted
@@ -1195,7 +1452,7 @@ namespace ElectricCarLibTest
         public void streessTestWithWeightOf1()
         {
             int i = 0;
-            while (i < 10)
+            while (i < 1)
             {
                 Dictionary<int, Dictionary<int, decimal>> adjList = new Dictionary<int, Dictionary<int, decimal>>();
                 int size = 1000;
