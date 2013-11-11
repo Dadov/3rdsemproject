@@ -12,13 +12,19 @@ using System.Data.Entity;
 
 namespace ElectricCarLib
 {
-    public class StationCtr
+    public class StationCtr:IDisposable
     {
         private IDStation dbStation = new DStation();
         private IDConnection dbConnection = new DConnection();
         public void addStation(string name, string address, string country, string state)
         {
             dbStation.addNewRecord(name, address, country, state);
+        }
+
+        public List<MStation> getAllStation()
+        {
+            List<MStation> stations = dbStation.getAllRecord(false);
+            return stations;
         }
 
         public MStation getStation(int id, bool getAssociation)
@@ -36,16 +42,7 @@ namespace ElectricCarLib
             dbStation.updateRecord(id, name, address, country, state);
         }
 
-        public void Dispose()
-        {
-            Dispose(true);
-            GC.SuppressFinalize(this);
-        }
-
-        private void Dispose(bool disposing)
-        {
-            this.Dispose();
-        }
+        
 
         public Dictionary<MStation, Dictionary<MStation, decimal>> adjListWithWeight()
         {
@@ -69,6 +66,11 @@ namespace ElectricCarLib
                 adjList.Add(s, naborStations);
             }
             return adjList;
+        }
+
+        public void Dispose()
+        {
+            
         }
     }
 }

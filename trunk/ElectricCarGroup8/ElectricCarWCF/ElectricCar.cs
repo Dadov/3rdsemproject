@@ -4,6 +4,8 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 using System.ServiceModel;
+using ElectricCarLib;
+using ElectricCarModelLayer;
 
 namespace ElectricCarWCF
 {
@@ -21,7 +23,18 @@ namespace ElectricCarWCF
         #region Statons
         public List<Station> getAllStations()
         {
-            throw new NotImplementedException();
+            using (StationCtr sCtr = new StationCtr())
+            {
+                List<Station> ss = new List<Station>();
+                List<MStation> stations = sCtr.getAllStation();
+                foreach (MStation item in stations)
+                {
+                    Station s = new Station() { Id = item.Id, Name = item.name, Address = item.address, Country = item.country, State = item.state.ToString() };
+                    ss.Add(s);
+                    
+                }
+                return ss;
+            }
         }
 
         public Station getStation(int id)

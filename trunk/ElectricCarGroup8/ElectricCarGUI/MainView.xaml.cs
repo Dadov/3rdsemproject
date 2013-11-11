@@ -11,6 +11,8 @@ using System.Windows.Input;
 using System.Windows.Media;
 using System.Windows.Media.Imaging;
 using System.Windows.Shapes;
+using ElectricCarGUI.ElectricCarService;
+using System.Data;
 
 namespace ElectricCarGUI
 {
@@ -19,9 +21,26 @@ namespace ElectricCarGUI
     /// </summary>
     public partial class MainView : Window
     {
-        public MainView(string position)
+        static ElectricCarService.IElectricCar serviceObj = new ElectricCarService.ElectricCarClient();
+
+        public MainView(string name, string position)
         {
             InitializeComponent();
+            lblName.Content = name;
+            showStations();
+        }
+
+        private void btnLogOut_Click(object sender, RoutedEventArgs e)
+        {
+            MainWindow mw = new MainWindow();
+            mw.Visibility = Visibility.Visible;
+            Close();
+        }
+
+        private void showStations()
+        {
+            
+            dgStations.ItemsSource = serviceObj.getAllStations().ToList();
         }
     }
 }

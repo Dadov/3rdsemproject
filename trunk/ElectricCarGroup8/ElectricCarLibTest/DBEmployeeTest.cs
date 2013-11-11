@@ -68,7 +68,7 @@ namespace ElectricCarLibTest
         [TestMethod]
         public void employeeCRUD()
         {
-            int stationId = dbStation.addNewRecord("stratena", "po ceste", "atlantida", "na dne");
+            int stationId = dbStation.addNewRecord("AarhusStation", "Aarhus", "Denmark", "Open"); 
 
             // create
             int empID = dbEmployee.addNewRecord("pistek", "baci", "tryskacova", "kokotlina", "chujovina",

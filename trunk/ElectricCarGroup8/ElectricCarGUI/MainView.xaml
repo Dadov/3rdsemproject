@@ -2,7 +2,41 @@
         xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
         xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
         Title="MainView" Height="700" Width="1000">
-    <Grid>
-        
+    <Grid Background="#FFE5E5E5">
+        <TabControl HorizontalAlignment="Left" Height="624" VerticalAlignment="Top" Width="982" Margin="0,45,0,0">
+            <TabItem Header="Booking">
+                <Grid Background="#FFE5E5E5"/>
+            </TabItem>
+            <TabItem Header="Stations">
+                <Grid Background="#FFE5E5E5">
+                    <TextBox HorizontalAlignment="Left" Height="23" Margin="30,37,0,0" TextWrapping="Wrap" Text="TextBox" VerticalAlignment="Top" Width="454" />
+                    
+                    <DataGrid x:Name="dgStations" HorizontalAlignment="Left" Margin="30,65,0,0" VerticalAlignment="Top" Height="285" Width="454" AutoGenerateColumns="False">
+                        <DataGrid.Columns>
+                            <DataGridTextColumn Binding="{Binding Id}" Header="Id" Width="0.2*" IsReadOnly="True" SortDirection="Ascending"/>
+                            <DataGridTextColumn Binding="{Binding Name}" Header="Name" Width="0.2*" IsReadOnly="True"/>
+                            <DataGridTextColumn Binding="{Binding Country}" Header="Country" Width="0.2*" IsReadOnly="True"/>
+                            <DataGridTextColumn Binding="{Binding Address}"  Header="Address" Width="0.2*" IsReadOnly="True"/>
+                            <DataGridTextColumn Binding="{Binding State}" Header="State" Width="0.2*" IsReadOnly="True"/>
+                        </DataGrid.Columns>
+                    </DataGrid>
+
+                </Grid>
+            </TabItem>
+            <TabItem Header="Station">
+                <Grid Background="#FFE5E5E5"/>
+            </TabItem>
+            <TabItem Header="Customer">
+                <Grid Background="#FFE5E5E5"/>
+            </TabItem>
+            <TabItem Header="Employee">
+                <Grid Background="#FFE5E5E5"/>
+            </TabItem>
+
+        </TabControl>
+        <Label x:Name="lblName" Content="Name" HorizontalAlignment="Left" Margin="843,10,0,0" VerticalAlignment="Top" Height="30" Width="60"/>
+        <Button x:Name="btnLogOut" Content="LogOut" HorizontalAlignment="Left" Margin="903,10,0,0" VerticalAlignment="Top" Width="74" Height="22" Click="btnLogOut_Click"/>
+        <Label Content="Electric Car System" HorizontalAlignment="Left" Margin="426,10,0,0" VerticalAlignment="Top" Width="148" FontWeight="Bold"/>
+
     </Grid>
 </Window>

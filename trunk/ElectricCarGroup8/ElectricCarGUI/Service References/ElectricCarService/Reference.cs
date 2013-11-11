@@ -9,7 +9,118 @@
 //------------------------------------------------------------------------------
 
 namespace ElectricCarGUI.ElectricCarService {
+    using System.Runtime.Serialization;
+    using System;
     
+    
+    [System.Diagnostics.DebuggerStepThroughAttribute()]
+    [System.CodeDom.Compiler.GeneratedCodeAttribute("System.Runtime.Serialization", "4.0.0.0")]
+    [System.Runtime.Serialization.DataContractAttribute(Name="Station", Namespace="http://schemas.datacontract.org/2004/07/ElectricCarWCF")]
+    [System.SerializableAttribute()]
+    public partial class Station : object, System.Runtime.Serialization.IExtensibleDataObject, System.ComponentModel.INotifyPropertyChanged {
+        
+        [System.NonSerializedAttribute()]
+        private System.Runtime.Serialization.ExtensionDataObject extensionDataField;
+        
+        [System.Runtime.Serialization.OptionalFieldAttribute()]
+        private string AddressField;
+        
+        [System.Runtime.Serialization.OptionalFieldAttribute()]
+        private string CountryField;
+        
+        [System.Runtime.Serialization.OptionalFieldAttribute()]
+        private int IdField;
+        
+        [System.Runtime.Serialization.OptionalFieldAttribute()]
+        private string NameField;
+        
+        [System.Runtime.Serialization.OptionalFieldAttribute()]
+        private string StateField;
+        
+        [global::System.ComponentModel.BrowsableAttribute(false)]
+        public System.Runtime.Serialization.ExtensionDataObject ExtensionData {
+            get {
+                return this.extensionDataField;
+            }
+            set {
+                this.extensionDataField = value;
+            }
+        }
+        
+        [System.Runtime.Serialization.DataMemberAttribute()]
+        public string Address {
+            get {
+                return this.AddressField;
+            }
+            set {
+                if ((object.ReferenceEquals(this.AddressField, value) != true)) {
+                    this.AddressField = value;
+                    this.RaisePropertyChanged("Address");
+                }
+            }
+        }
+        
+        [System.Runtime.Serialization.DataMemberAttribute()]
+        public string Country {
+            get {
+                return this.CountryField;
+            }
+            set {
+                if ((object.ReferenceEquals(this.CountryField, value) != true)) {
+                    this.CountryField = value;
+                    this.RaisePropertyChanged("Country");
+                }
+            }
+        }
+        
+        [System.Runtime.Serialization.DataMemberAttribute()]
+        public int Id {
+            get {
+                return this.IdField;
+            }
+            set {
+                if ((this.IdField.Equals(value) != true)) {
+                    this.IdField = value;
+                    this.RaisePropertyChanged("Id");
+                }
+            }
+        }
+        
+        [System.Runtime.Serialization.DataMemberAttribute()]
+        public string Name {
+            get {
+                return this.NameField;
+            }
+            set {
+                if ((object.ReferenceEquals(this.NameField, value) != true)) {
+                    this.NameField = value;
+                    this.RaisePropertyChanged("Name");
+                }
+            }
+        }
+        
+        [System.Runtime.Serialization.DataMemberAttribute()]
+        public string State {
+            get {
+                return this.StateField;
+            }
+            set {
+                if ((object.ReferenceEquals(this.StateField, value) != true)) {
+                    this.StateField = value;
+                    this.RaisePropertyChanged("State");
+                }
+            }
+        }
+        
+        public event System.ComponentModel.PropertyChangedEventHandler PropertyChanged;
+        
+        protected void RaisePropertyChanged(string propertyName) {
+            System.ComponentModel.PropertyChangedEventHandler propertyChanged = this.PropertyChanged;
+            if ((propertyChanged != null)) {
+                propertyChanged(this, new System.ComponentModel.PropertyChangedEventArgs(propertyName));
+            }
+        }
+    }
     
     [System.CodeDom.Compiler.GeneratedCodeAttribute("System.ServiceModel", "4.0.0.0")]
     [System.ServiceModel.ServiceContractAttribute(ConfigurationName="ElectricCarService.IElectricCar")]
@@ -20,6 +131,54 @@ namespace ElectricCarGUI.ElectricCarService {
         
         [System.ServiceModel.OperationContractAttribute(Action="http://tempuri.org/IElectricCar/getME", ReplyAction="http://tempuri.org/IElectricCar/getMEResponse")]
         System.Threading.Tasks.Task<string> getMEAsync();
+        
+        [System.ServiceModel.OperationContractAttribute(Action="http://tempuri.org/IElectricCar/getAllStations", ReplyAction="http://tempuri.org/IElectricCar/getAllStationsResponse")]
+        ElectricCarGUI.ElectricCarService.Station[] getAllStations();
+        
+        [System.ServiceModel.OperationContractAttribute(Action="http://tempuri.org/IElectricCar/getAllStations", ReplyAction="http://tempuri.org/IElectricCar/getAllStationsResponse")]
+        System.Threading.Tasks.Task<ElectricCarGUI.ElectricCarService.Station[]> getAllStationsAsync();
+        
+        [System.ServiceModel.OperationContractAttribute(Action="http://tempuri.org/IElectricCar/getStation", ReplyAction="http://tempuri.org/IElectricCar/getStationResponse")]
+        ElectricCarGUI.ElectricCarService.Station getStation(int id);
+        
+        [System.ServiceModel.OperationContractAttribute(Action="http://tempuri.org/IElectricCar/getStation", ReplyAction="http://tempuri.org/IElectricCar/getStationResponse")]
+        System.Threading.Tasks.Task<ElectricCarGUI.ElectricCarService.Station> getStationAsync(int id);
+        
+        [System.ServiceModel.OperationContractAttribute(Action="http://tempuri.org/IElectricCar/updateStation", ReplyAction="http://tempuri.org/IElectricCar/updateStationResponse")]
+        bool updateStation(ElectricCarGUI.ElectricCarService.Station station);
+        
+        [System.ServiceModel.OperationContractAttribute(Action="http://tempuri.org/IElectricCar/updateStation", ReplyAction="http://tempuri.org/IElectricCar/updateStationResponse")]
+        System.Threading.Tasks.Task<bool> updateStationAsync(ElectricCarGUI.ElectricCarService.Station station);
+        
+        [System.ServiceModel.OperationContractAttribute(Action="http://tempuri.org/IElectricCar/deleteStation", ReplyAction="http://tempuri.org/IElectricCar/deleteStationResponse")]
+        bool deleteStation(int id);
+        
+        [System.ServiceModel.OperationContractAttribute(Action="http://tempuri.org/IElectricCar/deleteStation", ReplyAction="http://tempuri.org/IElectricCar/deleteStationResponse")]
+        System.Threading.Tasks.Task<bool> deleteStationAsync(int id);
+        
+        [System.ServiceModel.OperationContractAttribute(Action="http://tempuri.org/IElectricCar/getNaborStations", ReplyAction="http://tempuri.org/IElectricCar/getNaborStationsResponse")]
+        ElectricCarGUI.ElectricCarService.Station[] getNaborStations(int id);
+        
+        [System.ServiceModel.OperationContractAttribute(Action="http://tempuri.org/IElectricCar/getNaborStations", ReplyAction="http://tempuri.org/IElectricCar/getNaborStationsResponse")]
+        System.Threading.Tasks.Task<ElectricCarGUI.ElectricCarService.Station[]> getNaborStationsAsync(int id);
+        
+        [System.ServiceModel.OperationContractAttribute(Action="http://tempuri.org/IElectricCar/addNaborStations", ReplyAction="http://tempuri.org/IElectricCar/addNaborStationsResponse")]
+        bool addNaborStations(int id1, int id2, decimal distance);
+        
+        [System.ServiceModel.OperationContractAttribute(Action="http://tempuri.org/IElectricCar/addNaborStations", ReplyAction="http://tempuri.org/IElectricCar/addNaborStationsResponse")]
+        System.Threading.Tasks.Task<bool> addNaborStationsAsync(int id1, int id2, decimal distance);
+        
+        [System.ServiceModel.OperationContractAttribute(Action="http://tempuri.org/IElectricCar/updateNaborStations", ReplyAction="http://tempuri.org/IElectricCar/updateNaborStationsResponse")]
+        bool updateNaborStations(int id1, int id2, decimal distance);
+        
+        [System.ServiceModel.OperationContractAttribute(Action="http://tempuri.org/IElectricCar/updateNaborStations", ReplyAction="http://tempuri.org/IElectricCar/updateNaborStationsResponse")]
+        System.Threading.Tasks.Task<bool> updateNaborStationsAsync(int id1, int id2, decimal distance);
+        
+        [System.ServiceModel.OperationContractAttribute(Action="http://tempuri.org/IElectricCar/deleteNaborStations", ReplyAction="http://tempuri.org/IElectricCar/deleteNaborStationsResponse")]
+        bool deleteNaborStations(int id1, int id2);
+        
+        [System.ServiceModel.OperationContractAttribute(Action="http://tempuri.org/IElectricCar/deleteNaborStations", ReplyAction="http://tempuri.org/IElectricCar/deleteNaborStationsResponse")]
+        System.Threading.Tasks.Task<bool> deleteNaborStationsAsync(int id1, int id2);
     }
     
     [System.CodeDom.Compiler.GeneratedCodeAttribute("System.ServiceModel", "4.0.0.0")]
@@ -55,6 +214,70 @@ namespace ElectricCarGUI.ElectricCarService {
         
         public System.Threading.Tasks.Task<string> getMEAsync() {
             return base.Channel.getMEAsync();
+        }
+        
+        public ElectricCarGUI.ElectricCarService.Station[] getAllStations() {
+            return base.Channel.getAllStations();
+        }
+        
+        public System.Threading.Tasks.Task<ElectricCarGUI.ElectricCarService.Station[]> getAllStationsAsync() {
+            return base.Channel.getAllStationsAsync();
+        }
+        
+        public ElectricCarGUI.ElectricCarService.Station getStation(int id) {
+            return base.Channel.getStation(id);
+        }
+        
+        public System.Threading.Tasks.Task<ElectricCarGUI.ElectricCarService.Station> getStationAsync(int id) {
+            return base.Channel.getStationAsync(id);
+        }
+        
+        public bool updateStation(ElectricCarGUI.ElectricCarService.Station station) {
+            return base.Channel.updateStation(station);
+        }
+        
+        public System.Threading.Tasks.Task<bool> updateStationAsync(ElectricCarGUI.ElectricCarService.Station station) {
+            return base.Channel.updateStationAsync(station);
+        }
+        
+        public bool deleteStation(int id) {
+            return base.Channel.deleteStation(id);
+        }
+        
+        public System.Threading.Tasks.Task<bool> deleteStationAsync(int id) {
+            return base.Channel.deleteStationAsync(id);
+        }
+        
+        public ElectricCarGUI.ElectricCarService.Station[] getNaborStations(int id) {
+            return base.Channel.getNaborStations(id);
+        }
+        
+        public System.Threading.Tasks.Task<ElectricCarGUI.ElectricCarService.Station[]> getNaborStationsAsync(int id) {
+            return base.Channel.getNaborStationsAsync(id);
+        }
+        
+        public bool addNaborStations(int id1, int id2, decimal distance) {
+            return base.Channel.addNaborStations(id1, id2, distance);
+        }
+        
+        public System.Threading.Tasks.Task<bool> addNaborStationsAsync(int id1, int id2, decimal distance) {
+            return base.Channel.addNaborStationsAsync(id1, id2, distance);
+        }
+        
+        public bool updateNaborStations(int id1, int id2, decimal distance) {
+            return base.Channel.updateNaborStations(id1, id2, distance);
+        }
+        
+        public System.Threading.Tasks.Task<bool> updateNaborStationsAsync(int id1, int id2, decimal distance) {
+            return base.Channel.updateNaborStationsAsync(id1, id2, distance);
+        }
+        
+        public bool deleteNaborStations(int id1, int id2) {
+            return base.Channel.deleteNaborStations(id1, id2);
+        }
+        
+        public System.Threading.Tasks.Task<bool> deleteNaborStationsAsync(int id1, int id2) {
+            return base.Channel.deleteNaborStationsAsync(id1, id2);
         }
     }
 }

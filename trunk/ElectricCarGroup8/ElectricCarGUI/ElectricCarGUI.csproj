@@ -103,6 +103,12 @@
       <LastGenOutput>Settings.Designer.cs</LastGenOutput>
     </None>
     <AppDesigner Include="Properties\" />
+    <None Include="Service References\ElectricCarService\ElectricCarGUI.ElectricCarService.Station.datasource">
+      <DependentUpon>Reference.svcmap</DependentUpon>
+    </None>
+    <None Include="Service References\ElectricCarService\ElectricCarWCF.xsd">
+      <SubType>Designer</SubType>
+    </None>
     <None Include="Service References\ElectricCarService\service.wsdl" />
     <None Include="Service References\ElectricCarService\service.xsd">
       <SubType>Designer</SubType>
