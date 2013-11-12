@@ -9,9 +9,10 @@
             </TabItem>
             <TabItem Header="Stations">
                 <Grid Background="#FFE5E5E5">
-                    <TextBox HorizontalAlignment="Left" Height="23" Margin="30,37,0,0" TextWrapping="Wrap" Text="TextBox" VerticalAlignment="Top" Width="454" />
-                    
-                    <DataGrid x:Name="dgStations" HorizontalAlignment="Left" Margin="30,65,0,0" VerticalAlignment="Top" Height="285" Width="454" AutoGenerateColumns="False">
+                    <TextBox x:Name="txtSearch" HorizontalAlignment="Left" Height="23" Margin="30,37,0,0" TextWrapping="Wrap" VerticalAlignment="Top" Width="454" KeyDown="smartSearch" />
+
+                    <DataGrid x:Name="dgStations" CanUserAddRows="False" SelectedItem="{Binding Path=SelectedStation, Mode=TwoWay}" ScrollViewer.CanContentScroll="True" 
+                    ScrollViewer.VerticalScrollBarVisibility="Auto" HorizontalAlignment="Left" Margin="30,65,0,0" VerticalAlignment="Top" Height="233" Width="454" AutoGenerateColumns="False" SelectionChanged="rowSelected">
                         <DataGrid.Columns>
                             <DataGridTextColumn Binding="{Binding Id}" Header="Id" Width="0.2*" IsReadOnly="True" SortDirection="Ascending"/>
                             <DataGridTextColumn Binding="{Binding Name}" Header="Name" Width="0.2*" IsReadOnly="True"/>
@@ -19,7 +20,23 @@
                             <DataGridTextColumn Binding="{Binding Address}"  Header="Address" Width="0.2*" IsReadOnly="True"/>
                             <DataGridTextColumn Binding="{Binding State}" Header="State" Width="0.2*" IsReadOnly="True"/>
                         </DataGrid.Columns>
+                        
                     </DataGrid>
+                    <Label Content="Id: " HorizontalAlignment="Left" Margin="571,48,0,0" VerticalAlignment="Top" Width="59"/>
+                    <Label Content="Name: " HorizontalAlignment="Left" Margin="571,79,0,0" VerticalAlignment="Top" Width="59"/>
+                    <Label Content="Country: " HorizontalAlignment="Left" Margin="571,110,0,0" VerticalAlignment="Top" Width="59"/>
+                    <Label Content="Address: " HorizontalAlignment="Left" Margin="571,141,0,0" VerticalAlignment="Top" Width="76"/>
+                    <Label Content="State: " HorizontalAlignment="Left" Margin="571,172,0,0" VerticalAlignment="Top"/>
+                    <TextBox x:Name="txtId" HorizontalAlignment="Left" Height="23" Margin="669,48,0,0" TextWrapping="Wrap" Text="" VerticalAlignment="Top" Width="189" IsReadOnly="True" />
+                    <TextBox x:Name="txtName" HorizontalAlignment="Left" Height="23" Margin="669,79,0,0" TextWrapping="Wrap" Text="" VerticalAlignment="Top" Width="189"/>
+                    <TextBox x:Name="txtCountry" HorizontalAlignment="Left" Height="23" Margin="669,110,0,0" TextWrapping="Wrap" Text="" VerticalAlignment="Top" Width="189"/>
+                    <TextBox x:Name="txtAddress" HorizontalAlignment="Left" Height="23" Margin="669,141,0,0" TextWrapping="Wrap" Text="" VerticalAlignment="Top" Width="189"/>
+                    <ComboBox x:Name="cbbState" HorizontalAlignment="Left" Margin="669,172,0,0" VerticalAlignment="Top" Width="189"/>
+                    <Button x:Name="btnCreate" Content="Create" HorizontalAlignment="Left" Margin="571,240,0,0" VerticalAlignment="Top" Width="75" Click="btnCreate_Click"/>
+                    <Button x:Name="btnUpdate" Content="Update" HorizontalAlignment="Left" Margin="651,240,0,0" VerticalAlignment="Top" Width="75" Click="btnUpdate_Click"/>
+                    <Button x:Name="btnDelete" Content="Delete" HorizontalAlignment="Left" Margin="731,240,0,0" VerticalAlignment="Top" Width="75" Click="btnDelete_Click"/>
+                    <Button x:Name="btnCancel" Content="Clear" HorizontalAlignment="Left" Margin="811,240,0,0" VerticalAlignment="Top" Width="75" Click="btnCancel_Click"/>
+
 
                 </Grid>
             </TabItem>

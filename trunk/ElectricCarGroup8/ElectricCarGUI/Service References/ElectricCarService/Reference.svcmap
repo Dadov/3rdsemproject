@@ -26,6 +26,7 @@
     <MetadataFile FileName="service.xsd" MetadataType="Schema" ID="ff17dfb8-2e34-435c-bee9-2aa0fff5ee76" SourceId="1" SourceUrl="http://localhost:9000/Design_Time_Addresses/ElectricCarWCF/ElectricCar/mex" />
     <MetadataFile FileName="service1.xsd" MetadataType="Schema" ID="e2c1c960-8ef0-48af-8893-2d2ca0c954f0" SourceId="1" SourceUrl="http://localhost:9000/Design_Time_Addresses/ElectricCarWCF/ElectricCar/mex" />
     <MetadataFile FileName="ElectricCarWCF.xsd" MetadataType="Schema" ID="2bb2e5ef-715f-46a0-abb5-94180a127fb7" SourceId="1" SourceUrl="http://localhost:9000/Design_Time_Addresses/ElectricCarWCF/ElectricCar/mex" />
+    <MetadataFile FileName="Arrays.xsd" MetadataType="Schema" ID="c741d629-9529-4b58-8b31-71c2eefab0f7" SourceId="1" SourceUrl="http://localhost:9000/Design_Time_Addresses/ElectricCarWCF/ElectricCar/mex" />
   </Metadata>
   <Extensions>
     <ExtensionFile FileName="configuration91.svcinfo" Name="configuration91.svcinfo" />

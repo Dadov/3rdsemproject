@@ -68,6 +68,16 @@ namespace ElectricCarLib
             return adjList;
         }
 
+        public List<string> getStates()
+        {
+            List<string> states = new List<string>();
+            foreach (var item in Enum.GetValues(typeof(State)))
+            {
+                states.Add(item.ToString());
+            }
+            return states;
+        }
+
         public void Dispose()
         {
             

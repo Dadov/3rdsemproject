@@ -27,13 +27,16 @@ namespace ElectricCarWCF
         List<Station> getAllStations();
 
         [OperationContract]
+        void addStation(string name, string address, string country, string state);
+
+        [OperationContract]
         Station getStation(int id);
 
         [OperationContract]
-        bool updateStation(Station station);
+        void updateStation(int id, string name, string address, string country, string state);
 
         [OperationContract]
-        bool deleteStation(int id);
+        void deleteStation(int id);
 
         [OperationContract]
         List<Station> getNaborStations(int id);
@@ -46,6 +49,9 @@ namespace ElectricCarWCF
 
         [OperationContract]
         bool deleteNaborStations(int id1, int id2);
+
+        [OperationContract]
+        List<string> getStates();
         
         #endregion
 
