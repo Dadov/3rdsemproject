@@ -138,6 +138,12 @@ namespace ElectricCarGUI.ElectricCarService {
         [System.ServiceModel.OperationContractAttribute(Action="http://tempuri.org/IElectricCar/getAllStations", ReplyAction="http://tempuri.org/IElectricCar/getAllStationsResponse")]
         System.Threading.Tasks.Task<ElectricCarGUI.ElectricCarService.Station[]> getAllStationsAsync();
         
+        [System.ServiceModel.OperationContractAttribute(Action="http://tempuri.org/IElectricCar/addStation", ReplyAction="http://tempuri.org/IElectricCar/addStationResponse")]
+        void addStation(string name, string address, string country, string state);
+        
+        [System.ServiceModel.OperationContractAttribute(Action="http://tempuri.org/IElectricCar/addStation", ReplyAction="http://tempuri.org/IElectricCar/addStationResponse")]
+        System.Threading.Tasks.Task addStationAsync(string name, string address, string country, string state);
+        
         [System.ServiceModel.OperationContractAttribute(Action="http://tempuri.org/IElectricCar/getStation", ReplyAction="http://tempuri.org/IElectricCar/getStationResponse")]
         ElectricCarGUI.ElectricCarService.Station getStation(int id);
         
@@ -145,16 +151,16 @@ namespace ElectricCarGUI.ElectricCarService {
         System.Threading.Tasks.Task<ElectricCarGUI.ElectricCarService.Station> getStationAsync(int id);
         
         [System.ServiceModel.OperationContractAttribute(Action="http://tempuri.org/IElectricCar/updateStation", ReplyAction="http://tempuri.org/IElectricCar/updateStationResponse")]
-        bool updateStation(ElectricCarGUI.ElectricCarService.Station station);
+        void updateStation(int id, string name, string address, string country, string state);
         
         [System.ServiceModel.OperationContractAttribute(Action="http://tempuri.org/IElectricCar/updateStation", ReplyAction="http://tempuri.org/IElectricCar/updateStationResponse")]
-        System.Threading.Tasks.Task<bool> updateStationAsync(ElectricCarGUI.ElectricCarService.Station station);
+        System.Threading.Tasks.Task updateStationAsync(int id, string name, string address, string country, string state);
         
         [System.ServiceModel.OperationContractAttribute(Action="http://tempuri.org/IElectricCar/deleteStation", ReplyAction="http://tempuri.org/IElectricCar/deleteStationResponse")]
-        bool deleteStation(int id);
+        void deleteStation(int id);
         
         [System.ServiceModel.OperationContractAttribute(Action="http://tempuri.org/IElectricCar/deleteStation", ReplyAction="http://tempuri.org/IElectricCar/deleteStationResponse")]
-        System.Threading.Tasks.Task<bool> deleteStationAsync(int id);
+        System.Threading.Tasks.Task deleteStationAsync(int id);
         
         [System.ServiceModel.OperationContractAttribute(Action="http://tempuri.org/IElectricCar/getNaborStations", ReplyAction="http://tempuri.org/IElectricCar/getNaborStationsResponse")]
         ElectricCarGUI.ElectricCarService.Station[] getNaborStations(int id);
@@ -179,6 +185,12 @@ namespace ElectricCarGUI.ElectricCarService {
         
         [System.ServiceModel.OperationContractAttribute(Action="http://tempuri.org/IElectricCar/deleteNaborStations", ReplyAction="http://tempuri.org/IElectricCar/deleteNaborStationsResponse")]
         System.Threading.Tasks.Task<bool> deleteNaborStationsAsync(int id1, int id2);
+        
+        [System.ServiceModel.OperationContractAttribute(Action="http://tempuri.org/IElectricCar/getStates", ReplyAction="http://tempuri.org/IElectricCar/getStatesResponse")]
+        string[] getStates();
+        
+        [System.ServiceModel.OperationContractAttribute(Action="http://tempuri.org/IElectricCar/getStates", ReplyAction="http://tempuri.org/IElectricCar/getStatesResponse")]
+        System.Threading.Tasks.Task<string[]> getStatesAsync();
     }
     
     [System.CodeDom.Compiler.GeneratedCodeAttribute("System.ServiceModel", "4.0.0.0")]
@@ -224,6 +236,14 @@ namespace ElectricCarGUI.ElectricCarService {
             return base.Channel.getAllStationsAsync();
         }
         
+        public void addStation(string name, string address, string country, string state) {
+            base.Channel.addStation(name, address, country, state);
+        }
+        
+        public System.Threading.Tasks.Task addStationAsync(string name, string address, string country, string state) {
+            return base.Channel.addStationAsync(name, address, country, state);
+        }
+        
         public ElectricCarGUI.ElectricCarService.Station getStation(int id) {
             return base.Channel.getStation(id);
         }
@@ -232,19 +252,19 @@ namespace ElectricCarGUI.ElectricCarService {
             return base.Channel.getStationAsync(id);
         }
         
-        public bool updateStation(ElectricCarGUI.ElectricCarService.Station station) {
-            return base.Channel.updateStation(station);
+        public void updateStation(int id, string name, string address, string country, string state) {
+            base.Channel.updateStation(id, name, address, country, state);
         }
         
-        public System.Threading.Tasks.Task<bool> updateStationAsync(ElectricCarGUI.ElectricCarService.Station station) {
-            return base.Channel.updateStationAsync(station);
+        public System.Threading.Tasks.Task updateStationAsync(int id, string name, string address, string country, string state) {
+            return base.Channel.updateStationAsync(id, name, address, country, state);
         }
         
-        public bool deleteStation(int id) {
-            return base.Channel.deleteStation(id);
+        public void deleteStation(int id) {
+            base.Channel.deleteStation(id);
         }
         
-        public System.Threading.Tasks.Task<bool> deleteStationAsync(int id) {
+        public System.Threading.Tasks.Task deleteStationAsync(int id) {
             return base.Channel.deleteStationAsync(id);
         }
         
@@ -278,6 +298,14 @@ namespace ElectricCarGUI.ElectricCarService {
         
         public System.Threading.Tasks.Task<bool> deleteNaborStationsAsync(int id1, int id2) {
             return base.Channel.deleteNaborStationsAsync(id1, id2);
+        }
+        
+        public string[] getStates() {
+            return base.Channel.getStates();
+        }
+        
+        public System.Threading.Tasks.Task<string[]> getStatesAsync() {
+            return base.Channel.getStatesAsync();
         }
     }
 }

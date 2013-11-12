@@ -42,14 +42,22 @@ namespace ElectricCarWCF
             throw new NotImplementedException();
         }
 
-        public bool updateStation(Station station)
+        public void addStation(string name, string address, string country, string state)
         {
-            throw new NotImplementedException();
+            StationCtr sCtr = new StationCtr();
+            sCtr.addStation(name, address, country, state);
         }
 
-        public bool deleteStation(int id)
+        public void updateStation(int id, string name, string address, string country, string state)
         {
-            throw new NotImplementedException();
+            StationCtr sCtr = new StationCtr();
+            sCtr.updateStation(id, name, address, country, state);
+        }
+
+        public void deleteStation(int id)
+        {
+            StationCtr sCtr = new StationCtr();
+            sCtr.deleteStation(id);
         }
 
         public List<Station> getNaborStations(int id)
@@ -70,6 +78,12 @@ namespace ElectricCarWCF
         public bool deleteNaborStations(int id1, int id2)
         {
             throw new NotImplementedException();
+        }
+
+        public List<string> getStates()
+        {
+            StationCtr sCtr = new StationCtr();
+            return sCtr.getStates();
         }
 
         #endregion

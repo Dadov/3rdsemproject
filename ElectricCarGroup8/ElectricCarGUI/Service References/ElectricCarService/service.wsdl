@@ -5,6 +5,7 @@
       <xsd:import namespace="http://tempuri.org/" />
       <xsd:import namespace="http://schemas.microsoft.com/2003/10/Serialization/" />
       <xsd:import namespace="http://schemas.datacontract.org/2004/07/ElectricCarWCF" />
+      <xsd:import namespace="http://schemas.microsoft.com/2003/10/Serialization/Arrays" />
     </xsd:schema>
   </wsdl:types>
   <wsdl:message name="IElectricCar_getME_InputMessage">
@@ -18,6 +19,12 @@
   </wsdl:message>
   <wsdl:message name="IElectricCar_getAllStations_OutputMessage">
     <wsdl:part name="parameters" element="tns:getAllStationsResponse" />
+  </wsdl:message>
+  <wsdl:message name="IElectricCar_addStation_InputMessage">
+    <wsdl:part name="parameters" element="tns:addStation" />
+  </wsdl:message>
+  <wsdl:message name="IElectricCar_addStation_OutputMessage">
+    <wsdl:part name="parameters" element="tns:addStationResponse" />
   </wsdl:message>
   <wsdl:message name="IElectricCar_getStation_InputMessage">
     <wsdl:part name="parameters" element="tns:getStation" />
@@ -61,6 +68,12 @@
   <wsdl:message name="IElectricCar_deleteNaborStations_OutputMessage">
     <wsdl:part name="parameters" element="tns:deleteNaborStationsResponse" />
   </wsdl:message>
+  <wsdl:message name="IElectricCar_getStates_InputMessage">
+    <wsdl:part name="parameters" element="tns:getStates" />
+  </wsdl:message>
+  <wsdl:message name="IElectricCar_getStates_OutputMessage">
+    <wsdl:part name="parameters" element="tns:getStatesResponse" />
+  </wsdl:message>
   <wsdl:portType name="IElectricCar">
     <wsdl:operation name="getME">
       <wsdl:input wsaw:Action="http://tempuri.org/IElectricCar/getME" message="tns:IElectricCar_getME_InputMessage" />
@@ -69,6 +82,10 @@
     <wsdl:operation name="getAllStations">
       <wsdl:input wsaw:Action="http://tempuri.org/IElectricCar/getAllStations" message="tns:IElectricCar_getAllStations_InputMessage" />
       <wsdl:output wsaw:Action="http://tempuri.org/IElectricCar/getAllStationsResponse" message="tns:IElectricCar_getAllStations_OutputMessage" />
+    </wsdl:operation>
+    <wsdl:operation name="addStation">
+      <wsdl:input wsaw:Action="http://tempuri.org/IElectricCar/addStation" message="tns:IElectricCar_addStation_InputMessage" />
+      <wsdl:output wsaw:Action="http://tempuri.org/IElectricCar/addStationResponse" message="tns:IElectricCar_addStation_OutputMessage" />
     </wsdl:operation>
     <wsdl:operation name="getStation">
       <wsdl:input wsaw:Action="http://tempuri.org/IElectricCar/getStation" message="tns:IElectricCar_getStation_InputMessage" />
@@ -98,6 +115,10 @@
       <wsdl:input wsaw:Action="http://tempuri.org/IElectricCar/deleteNaborStations" message="tns:IElectricCar_deleteNaborStations_InputMessage" />
       <wsdl:output wsaw:Action="http://tempuri.org/IElectricCar/deleteNaborStationsResponse" message="tns:IElectricCar_deleteNaborStations_OutputMessage" />
     </wsdl:operation>
+    <wsdl:operation name="getStates">
+      <wsdl:input wsaw:Action="http://tempuri.org/IElectricCar/getStates" message="tns:IElectricCar_getStates_InputMessage" />
+      <wsdl:output wsaw:Action="http://tempuri.org/IElectricCar/getStatesResponse" message="tns:IElectricCar_getStates_OutputMessage" />
+    </wsdl:operation>
   </wsdl:portType>
   <wsdl:binding name="BasicHttpBinding_IElectricCar" type="tns:IElectricCar">
     <soap:binding transport="http://schemas.xmlsoap.org/soap/http" />
@@ -112,6 +133,15 @@
     </wsdl:operation>
     <wsdl:operation name="getAllStations">
       <soap:operation soapAction="http://tempuri.org/IElectricCar/getAllStations" style="document" />
+      <wsdl:input>
+        <soap:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="addStation">
+      <soap:operation soapAction="http://tempuri.org/IElectricCar/addStation" style="document" />
       <wsdl:input>
         <soap:body use="literal" />
       </wsdl:input>
@@ -175,6 +205,15 @@
     </wsdl:operation>
     <wsdl:operation name="deleteNaborStations">
       <soap:operation soapAction="http://tempuri.org/IElectricCar/deleteNaborStations" style="document" />
+      <wsdl:input>
+        <soap:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="getStates">
+      <soap:operation soapAction="http://tempuri.org/IElectricCar/getStates" style="document" />
       <wsdl:input>
         <soap:body use="literal" />
       </wsdl:input>
