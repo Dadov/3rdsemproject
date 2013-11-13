@@ -1,0 +1,24 @@
+﻿using System;
+using System.Collections.Generic;
+using System.Linq;
+using System.Text;
+using System.Threading.Tasks;
+using System.Runtime.Serialization;
+
+namespace ElectricCarWCF
+{
+    [DataContract]
+    public class NaborStation
+    {
+        [DataMember]
+        public int Id;
+        [DataMember]
+        public string Name;
+        [DataMember]
+        public string Address;
+        [DataMember]
+        public double Distance;
+        [DataMember]
+        public double DriveHour;
+    }
+}

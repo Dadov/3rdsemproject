@@ -60,24 +60,49 @@ namespace ElectricCarWCF
             sCtr.deleteStation(id);
         }
 
-        public List<Station> getNaborStations(int id)
+        public List<NaborStation> getNaborStations(int id)
         {
-            throw new NotImplementedException();
+            StationCtr sCtr = new StationCtr();
+            List<NaborStation> nbs = new List<NaborStation>();
+            List<MConnection> cs = sCtr.getNaborStations(id);
+            foreach (MConnection c in cs)
+            {
+                NaborStation n = new NaborStation();
+                if (c.Station1 != null)
+                {
+                    n.Id = c.Station1.Id;
+                    n.Name = c.Station1.name;
+                    n.Address = c.Station1.address;
+                }
+                else
+                {
+                    n.Id = c.Station2.Id;
+                    n.Name = c.Station2.name;
+                    n.Address = c.Station2.address;
+                }
+                n.Distance = Convert.ToDouble(c.distance);
+                n.DriveHour = Convert.ToDouble(c.driveHour);
+                nbs.Add(n);
+            }
+            return nbs;
         }
 
-        public bool addNaborStations(int id1, int id2, decimal distance)
+        public void addNaborStation(int id1, int id2, decimal distance, decimal drivehour)
         {
-            throw new NotImplementedException();
+            StationCtr sCtr = new StationCtr();
+            sCtr.addConnection(id1, id2, distance, drivehour);
         }
 
-        public bool updateNaborStations(int id1, int id2, decimal distance)
+        public void updateNaborStation(int id1, int id2, decimal distance, decimal driveHour)
         {
-            throw new NotImplementedException();
+            StationCtr sCtr = new StationCtr();
+            sCtr.updateConnection(id1, id2, distance, driveHour);
         }
 
-        public bool deleteNaborStations(int id1, int id2)
+        public void deleteNaborStation(int id1, int id2)
         {
-            throw new NotImplementedException();
+            StationCtr sCtr = new StationCtr();
+            sCtr.deleteConnection(id1, id2);
         }
 
         public List<string> getStates()

@@ -122,6 +122,115 @@ namespace ElectricCarGUI.ElectricCarService {
         }
     }
     
+    [System.Diagnostics.DebuggerStepThroughAttribute()]
+    [System.CodeDom.Compiler.GeneratedCodeAttribute("System.Runtime.Serialization", "4.0.0.0")]
+    [System.Runtime.Serialization.DataContractAttribute(Name="NaborStation", Namespace="http://schemas.datacontract.org/2004/07/ElectricCarWCF")]
+    [System.SerializableAttribute()]
+    public partial class NaborStation : object, System.Runtime.Serialization.IExtensibleDataObject, System.ComponentModel.INotifyPropertyChanged {
+        
+        [System.NonSerializedAttribute()]
+        private System.Runtime.Serialization.ExtensionDataObject extensionDataField;
+        
+        [System.Runtime.Serialization.OptionalFieldAttribute()]
+        private string AddressField;
+        
+        [System.Runtime.Serialization.OptionalFieldAttribute()]
+        private double DistanceField;
+        
+        [System.Runtime.Serialization.OptionalFieldAttribute()]
+        private double DriveHourField;
+        
+        [System.Runtime.Serialization.OptionalFieldAttribute()]
+        private int IdField;
+        
+        [System.Runtime.Serialization.OptionalFieldAttribute()]
+        private string NameField;
+        
+        [global::System.ComponentModel.BrowsableAttribute(false)]
+        public System.Runtime.Serialization.ExtensionDataObject ExtensionData {
+            get {
+                return this.extensionDataField;
+            }
+            set {
+                this.extensionDataField = value;
+            }
+        }
+        
+        [System.Runtime.Serialization.DataMemberAttribute()]
+        public string Address {
+            get {
+                return this.AddressField;
+            }
+            set {
+                if ((object.ReferenceEquals(this.AddressField, value) != true)) {
+                    this.AddressField = value;
+                    this.RaisePropertyChanged("Address");
+                }
+            }
+        }
+        
+        [System.Runtime.Serialization.DataMemberAttribute()]
+        public double Distance {
+            get {
+                return this.DistanceField;
+            }
+            set {
+                if ((this.DistanceField.Equals(value) != true)) {
+                    this.DistanceField = value;
+                    this.RaisePropertyChanged("Distance");
+                }
+            }
+        }
+        
+        [System.Runtime.Serialization.DataMemberAttribute()]
+        public double DriveHour {
+            get {
+                return this.DriveHourField;
+            }
+            set {
+                if ((this.DriveHourField.Equals(value) != true)) {
+                    this.DriveHourField = value;
+                    this.RaisePropertyChanged("DriveHour");
+                }
+            }
+        }
+        
+        [System.Runtime.Serialization.DataMemberAttribute()]
+        public int Id {
+            get {
+                return this.IdField;
+            }
+            set {
+                if ((this.IdField.Equals(value) != true)) {
+                    this.IdField = value;
+                    this.RaisePropertyChanged("Id");
+                }
+            }
+        }
+        
+        [System.Runtime.Serialization.DataMemberAttribute()]
+        public string Name {
+            get {
+                return this.NameField;
+            }
+            set {
+                if ((object.ReferenceEquals(this.NameField, value) != true)) {
+                    this.NameField = value;
+                    this.RaisePropertyChanged("Name");
+                }
+            }
+        }
+        
+        public event System.ComponentModel.PropertyChangedEventHandler PropertyChanged;
+        
+        protected void RaisePropertyChanged(string propertyName) {
+            System.ComponentModel.PropertyChangedEventHandler propertyChanged = this.PropertyChanged;
+            if ((propertyChanged != null)) {
+                propertyChanged(this, new System.ComponentModel.PropertyChangedEventArgs(propertyName));
+            }
+        }
+    }
+    
     [System.CodeDom.Compiler.GeneratedCodeAttribute("System.ServiceModel", "4.0.0.0")]
     [System.ServiceModel.ServiceContractAttribute(ConfigurationName="ElectricCarService.IElectricCar")]
     public interface IElectricCar {
@@ -163,28 +272,28 @@ namespace ElectricCarGUI.ElectricCarService {
         System.Threading.Tasks.Task deleteStationAsync(int id);
         
         [System.ServiceModel.OperationContractAttribute(Action="http://tempuri.org/IElectricCar/getNaborStations", ReplyAction="http://tempuri.org/IElectricCar/getNaborStationsResponse")]
-        ElectricCarGUI.ElectricCarService.Station[] getNaborStations(int id);
+        ElectricCarGUI.ElectricCarService.NaborStation[] getNaborStations(int id);
         
         [System.ServiceModel.OperationContractAttribute(Action="http://tempuri.org/IElectricCar/getNaborStations", ReplyAction="http://tempuri.org/IElectricCar/getNaborStationsResponse")]
-        System.Threading.Tasks.Task<ElectricCarGUI.ElectricCarService.Station[]> getNaborStationsAsync(int id);
+        System.Threading.Tasks.Task<ElectricCarGUI.ElectricCarService.NaborStation[]> getNaborStationsAsync(int id);
         
-        [System.ServiceModel.OperationContractAttribute(Action="http://tempuri.org/IElectricCar/addNaborStations", ReplyAction="http://tempuri.org/IElectricCar/addNaborStationsResponse")]
-        bool addNaborStations(int id1, int id2, decimal distance);
+        [System.ServiceModel.OperationContractAttribute(Action="http://tempuri.org/IElectricCar/addNaborStation", ReplyAction="http://tempuri.org/IElectricCar/addNaborStationResponse")]
+        void addNaborStation(int id1, int id2, decimal distance, decimal drivehour);
         
-        [System.ServiceModel.OperationContractAttribute(Action="http://tempuri.org/IElectricCar/addNaborStations", ReplyAction="http://tempuri.org/IElectricCar/addNaborStationsResponse")]
-        System.Threading.Tasks.Task<bool> addNaborStationsAsync(int id1, int id2, decimal distance);
+        [System.ServiceModel.OperationContractAttribute(Action="http://tempuri.org/IElectricCar/addNaborStation", ReplyAction="http://tempuri.org/IElectricCar/addNaborStationResponse")]
+        System.Threading.Tasks.Task addNaborStationAsync(int id1, int id2, decimal distance, decimal drivehour);
         
-        [System.ServiceModel.OperationContractAttribute(Action="http://tempuri.org/IElectricCar/updateNaborStations", ReplyAction="http://tempuri.org/IElectricCar/updateNaborStationsResponse")]
-        bool updateNaborStations(int id1, int id2, decimal distance);
+        [System.ServiceModel.OperationContractAttribute(Action="http://tempuri.org/IElectricCar/updateNaborStation", ReplyAction="http://tempuri.org/IElectricCar/updateNaborStationResponse")]
+        void updateNaborStation(int id1, int id2, decimal distance, decimal driveHour);
         
-        [System.ServiceModel.OperationContractAttribute(Action="http://tempuri.org/IElectricCar/updateNaborStations", ReplyAction="http://tempuri.org/IElectricCar/updateNaborStationsResponse")]
-        System.Threading.Tasks.Task<bool> updateNaborStationsAsync(int id1, int id2, decimal distance);
+        [System.ServiceModel.OperationContractAttribute(Action="http://tempuri.org/IElectricCar/updateNaborStation", ReplyAction="http://tempuri.org/IElectricCar/updateNaborStationResponse")]
+        System.Threading.Tasks.Task updateNaborStationAsync(int id1, int id2, decimal distance, decimal driveHour);
         
-        [System.ServiceModel.OperationContractAttribute(Action="http://tempuri.org/IElectricCar/deleteNaborStations", ReplyAction="http://tempuri.org/IElectricCar/deleteNaborStationsResponse")]
-        bool deleteNaborStations(int id1, int id2);
+        [System.ServiceModel.OperationContractAttribute(Action="http://tempuri.org/IElectricCar/deleteNaborStation", ReplyAction="http://tempuri.org/IElectricCar/deleteNaborStationResponse")]
+        void deleteNaborStation(int id1, int id2);
         
-        [System.ServiceModel.OperationContractAttribute(Action="http://tempuri.org/IElectricCar/deleteNaborStations", ReplyAction="http://tempuri.org/IElectricCar/deleteNaborStationsResponse")]
-        System.Threading.Tasks.Task<bool> deleteNaborStationsAsync(int id1, int id2);
+        [System.ServiceModel.OperationContractAttribute(Action="http://tempuri.org/IElectricCar/deleteNaborStation", ReplyAction="http://tempuri.org/IElectricCar/deleteNaborStationResponse")]
+        System.Threading.Tasks.Task deleteNaborStationAsync(int id1, int id2);
         
         [System.ServiceModel.OperationContractAttribute(Action="http://tempuri.org/IElectricCar/getStates", ReplyAction="http://tempuri.org/IElectricCar/getStatesResponse")]
         string[] getStates();
@@ -268,36 +377,36 @@ namespace ElectricCarGUI.ElectricCarService {
             return base.Channel.deleteStationAsync(id);
         }
         
-        public ElectricCarGUI.ElectricCarService.Station[] getNaborStations(int id) {
+        public ElectricCarGUI.ElectricCarService.NaborStation[] getNaborStations(int id) {
             return base.Channel.getNaborStations(id);
         }
         
-        public System.Threading.Tasks.Task<ElectricCarGUI.ElectricCarService.Station[]> getNaborStationsAsync(int id) {
+        public System.Threading.Tasks.Task<ElectricCarGUI.ElectricCarService.NaborStation[]> getNaborStationsAsync(int id) {
             return base.Channel.getNaborStationsAsync(id);
         }
         
-        public bool addNaborStations(int id1, int id2, decimal distance) {
-            return base.Channel.addNaborStations(id1, id2, distance);
+        public void addNaborStation(int id1, int id2, decimal distance, decimal drivehour) {
+            base.Channel.addNaborStation(id1, id2, distance, drivehour);
         }
         
-        public System.Threading.Tasks.Task<bool> addNaborStationsAsync(int id1, int id2, decimal distance) {
-            return base.Channel.addNaborStationsAsync(id1, id2, distance);
+        public System.Threading.Tasks.Task addNaborStationAsync(int id1, int id2, decimal distance, decimal drivehour) {
+            return base.Channel.addNaborStationAsync(id1, id2, distance, drivehour);
         }
         
-        public bool updateNaborStations(int id1, int id2, decimal distance) {
-            return base.Channel.updateNaborStations(id1, id2, distance);
+        public void updateNaborStation(int id1, int id2, decimal distance, decimal driveHour) {
+            base.Channel.updateNaborStation(id1, id2, distance, driveHour);
         }
         
-        public System.Threading.Tasks.Task<bool> updateNaborStationsAsync(int id1, int id2, decimal distance) {
-            return base.Channel.updateNaborStationsAsync(id1, id2, distance);
+        public System.Threading.Tasks.Task updateNaborStationAsync(int id1, int id2, decimal distance, decimal driveHour) {
+            return base.Channel.updateNaborStationAsync(id1, id2, distance, driveHour);
         }
         
-        public bool deleteNaborStations(int id1, int id2) {
-            return base.Channel.deleteNaborStations(id1, id2);
+        public void deleteNaborStation(int id1, int id2) {
+            base.Channel.deleteNaborStation(id1, id2);
         }
         
-        public System.Threading.Tasks.Task<bool> deleteNaborStationsAsync(int id1, int id2) {
-            return base.Channel.deleteNaborStationsAsync(id1, id2);
+        public System.Threading.Tasks.Task deleteNaborStationAsync(int id1, int id2) {
+            return base.Channel.deleteNaborStationAsync(id1, id2);
         }
         
         public string[] getStates() {

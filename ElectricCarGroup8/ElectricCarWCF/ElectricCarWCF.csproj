@@ -55,6 +55,7 @@
     <Compile Include="ElectricCarPeople.cs" />
     <Compile Include="ElectricCarRoutes.cs" />
     <Compile Include="IElectricCar.cs" />
+    <Compile Include="NaborStation.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="Station.cs" />
   </ItemGroup>

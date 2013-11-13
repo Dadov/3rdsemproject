@@ -16,4 +16,20 @@
     </xs:sequence>
   </xs:complexType>
   <xs:element name="Station" nillable="true" type="tns:Station" />
+  <xs:complexType name="ArrayOfNaborStation">
+    <xs:sequence>
+      <xs:element minOccurs="0" maxOccurs="unbounded" name="NaborStation" nillable="true" type="tns:NaborStation" />
+    </xs:sequence>
+  </xs:complexType>
+  <xs:element name="ArrayOfNaborStation" nillable="true" type="tns:ArrayOfNaborStation" />
+  <xs:complexType name="NaborStation">
+    <xs:sequence>
+      <xs:element minOccurs="0" name="Address" nillable="true" type="xs:string" />
+      <xs:element minOccurs="0" name="Distance" type="xs:double" />
+      <xs:element minOccurs="0" name="DriveHour" type="xs:double" />
+      <xs:element minOccurs="0" name="Id" type="xs:int" />
+      <xs:element minOccurs="0" name="Name" nillable="true" type="xs:string" />
+    </xs:sequence>
+  </xs:complexType>
+  <xs:element name="NaborStation" nillable="true" type="tns:NaborStation" />
 </xs:schema>

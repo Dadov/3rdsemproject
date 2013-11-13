@@ -133,6 +133,31 @@ namespace ElectricCarDB
             return stations;
         }
 
+        public List<MConnection> getNaborStations(int id)
+        {
+            List<MConnection> connections = new List<MConnection>();
+            
+            using (ElectricCarEntities context = new ElectricCarEntities())
+            {
+                var cs = from c in context.Connections where c.sId1 == id || c.sId2 == id select c;
+                foreach (var c in cs)
+                {
+                    MConnection mc = new MConnection();
+                    if (c.sId1 == id)
+                    {
+                        mc.Station2 = getRecord(c.sId2, false);
+                    } else
+	                {
+                        mc.Station2 = getRecord(c.sId1, false);
+	                }
+                    mc.distance = c.distance;
+                    mc.driveHour = c.driveHour;
+                    connections.Add(mc);
+                }
+            }
+            return connections;
+        }
+
         public Dictionary<MStation, decimal> getNaborStationsWithDriveHour(int id)
         {
             Dictionary<MStation, decimal> nStations = new Dictionary<MStation, decimal>();
