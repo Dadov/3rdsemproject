@@ -16,5 +16,7 @@ namespace ElectricCarDB
         List<MStation> getAllRecord(bool getAssociation);
         Dictionary<MStation, decimal> getNaborStationsWithDriveHour(int id);
         LinkedList<MStation> getNaborStationsWithoutDriveHour(int id);
+        List<MConnection> getNaborStations(int id);
+       
     }
 }

@@ -42,7 +42,25 @@ namespace ElectricCarLib
             dbStation.updateRecord(id, name, address, country, state);
         }
 
-        
+        public List<MConnection> getNaborStations(int id)
+        {
+            return dbStation.getNaborStations(id);
+        }
+
+        public void deleteConnection(int sId1, int sId2)
+        {
+            dbConnection.deleteRecord(sId1, sId2);
+        }
+
+        public void addConnection(int sId1, int sId2, decimal distance, decimal driveHour)
+        {
+            dbConnection.addNewRecord(sId1, sId2, distance, driveHour);
+        }
+
+        public void updateConnection(int sId1, int sId2, decimal distance, decimal driveHour)
+        {
+            dbConnection.updateRecord(sId1, sId2, distance, driveHour);
+        }
 
         public Dictionary<MStation, Dictionary<MStation, decimal>> adjListWithWeight()
         {

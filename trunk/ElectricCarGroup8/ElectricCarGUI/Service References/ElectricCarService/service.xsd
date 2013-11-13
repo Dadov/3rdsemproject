@@ -93,43 +93,41 @@
   <xs:element name="getNaborStationsResponse">
     <xs:complexType>
       <xs:sequence>
-        <xs:element xmlns:q3="http://schemas.datacontract.org/2004/07/ElectricCarWCF" minOccurs="0" name="getNaborStationsResult" nillable="true" type="q3:ArrayOfStation" />
+        <xs:element xmlns:q3="http://schemas.datacontract.org/2004/07/ElectricCarWCF" minOccurs="0" name="getNaborStationsResult" nillable="true" type="q3:ArrayOfNaborStation" />
       </xs:sequence>
     </xs:complexType>
   </xs:element>
-  <xs:element name="addNaborStations">
+  <xs:element name="addNaborStation">
     <xs:complexType>
       <xs:sequence>
         <xs:element minOccurs="0" name="id1" type="xs:int" />
         <xs:element minOccurs="0" name="id2" type="xs:int" />
         <xs:element minOccurs="0" name="distance" type="xs:decimal" />
+        <xs:element minOccurs="0" name="drivehour" type="xs:decimal" />
       </xs:sequence>
     </xs:complexType>
   </xs:element>
-  <xs:element name="addNaborStationsResponse">
+  <xs:element name="addNaborStationResponse">
     <xs:complexType>
-      <xs:sequence>
-        <xs:element minOccurs="0" name="addNaborStationsResult" type="xs:boolean" />
-      </xs:sequence>
+      <xs:sequence />
     </xs:complexType>
   </xs:element>
-  <xs:element name="updateNaborStations">
+  <xs:element name="updateNaborStation">
     <xs:complexType>
       <xs:sequence>
         <xs:element minOccurs="0" name="id1" type="xs:int" />
         <xs:element minOccurs="0" name="id2" type="xs:int" />
         <xs:element minOccurs="0" name="distance" type="xs:decimal" />
+        <xs:element minOccurs="0" name="driveHour" type="xs:decimal" />
       </xs:sequence>
     </xs:complexType>
   </xs:element>
-  <xs:element name="updateNaborStationsResponse">
+  <xs:element name="updateNaborStationResponse">
     <xs:complexType>
-      <xs:sequence>
-        <xs:element minOccurs="0" name="updateNaborStationsResult" type="xs:boolean" />
-      </xs:sequence>
+      <xs:sequence />
     </xs:complexType>
   </xs:element>
-  <xs:element name="deleteNaborStations">
+  <xs:element name="deleteNaborStation">
     <xs:complexType>
       <xs:sequence>
         <xs:element minOccurs="0" name="id1" type="xs:int" />
@@ -137,11 +135,9 @@
       </xs:sequence>
     </xs:complexType>
   </xs:element>
-  <xs:element name="deleteNaborStationsResponse">
+  <xs:element name="deleteNaborStationResponse">
     <xs:complexType>
-      <xs:sequence>
-        <xs:element minOccurs="0" name="deleteNaborStationsResult" type="xs:boolean" />
-      </xs:sequence>
+      <xs:sequence />
     </xs:complexType>
   </xs:element>
   <xs:element name="getStates">

@@ -106,6 +106,9 @@
     <None Include="Service References\ElectricCarService\Arrays.xsd">
       <SubType>Designer</SubType>
     </None>
+    <None Include="Service References\ElectricCarService\ElectricCarGUI.ElectricCarService.NaborStation.datasource">
+      <DependentUpon>Reference.svcmap</DependentUpon>
+    </None>
     <None Include="Service References\ElectricCarService\ElectricCarGUI.ElectricCarService.Station.datasource">
       <DependentUpon>Reference.svcmap</DependentUpon>
     </None>

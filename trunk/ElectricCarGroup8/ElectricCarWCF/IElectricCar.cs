@@ -39,16 +39,16 @@ namespace ElectricCarWCF
         void deleteStation(int id);
 
         [OperationContract]
-        List<Station> getNaborStations(int id);
+        List<NaborStation> getNaborStations(int id);
 
         [OperationContract]
-        bool addNaborStations(int id1, int id2, decimal distance);
+        void addNaborStation(int id1, int id2, decimal distance, decimal drivehour);
 
         [OperationContract]
-        bool updateNaborStations(int id1, int id2, decimal distance);
+        void updateNaborStation(int id1, int id2, decimal distance, decimal driveHour);
 
         [OperationContract]
-        bool deleteNaborStations(int id1, int id2);
+        void deleteNaborStation(int id1, int id2);
 
         [OperationContract]
         List<string> getStates();
