@@ -90,13 +90,13 @@
             <TabItem Header="Station">
                 <Grid Background="#FFE5E5E5">
                     <TabControl HorizontalAlignment="Left" Height="555" Margin="0,41,0,0" VerticalAlignment="Top" Width="976">
-                        <TabItem Header="Info">
+                        <TabItem Header="Information">
                             <Grid Background="#FFE5E5E5"/>
                         </TabItem>
                         <TabItem Header="BatteryStorage">
                             <Grid Background="#FFE5E5E5"/>
                         </TabItem>
-                        <TabItem Header="Battery">
+                        <TabItem Header="BatteryType">
                             <Grid Background="#FFE5E5E5"/>
                         </TabItem>
                         <TabItem Header="Employee">
