@@ -272,5 +272,20 @@ namespace ElectricCarGUI
             
         }
 
+        public int StationId { get; set; }
+
+        private void Button_Click(object sender, RoutedEventArgs e)
+        {
+            if (serviceObj.getStation(Convert.ToInt32(txtStationId.Text)) != null)
+            {
+                StationId = Convert.ToInt32(txtStationId.Text);
+            }
+            else
+            {
+                MessageBox.Show("Station does not exist, please input another one.");
+            }
+        }
+        
+
     }
 }

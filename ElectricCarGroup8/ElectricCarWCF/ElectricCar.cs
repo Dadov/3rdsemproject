@@ -39,7 +39,19 @@ namespace ElectricCarWCF
 
         public Station getStation(int id)
         {
-            throw new NotImplementedException();
+            StationCtr sCtr = new StationCtr();
+            MStation s = sCtr.getStation(id, false);
+            Station ns = new Station();
+            if (s != null)
+            {
+                ns.Id = s.Id;
+                ns.Name = s.name;
+                ns.State = s.state.ToString();
+                ns.Country = s.country;
+                ns.Address = s.address;
+            }
+            
+            return ns;
         }
 
         public void addStation(string name, string address, string country, string state)
