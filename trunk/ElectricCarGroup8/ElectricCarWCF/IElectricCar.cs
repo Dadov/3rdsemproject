@@ -17,8 +17,14 @@ namespace ElectricCarWCF
 
         #endregion 
 
-        #region Booking
+        #region Select path and Booking
+        //search paths
 
+        //add booking
+
+        //update booking
+
+        //delete booking
 
         #endregion
 

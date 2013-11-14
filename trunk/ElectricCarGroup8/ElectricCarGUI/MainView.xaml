@@ -5,7 +5,35 @@
     <Grid Background="#FFE5E5E5">
         <TabControl HorizontalAlignment="Left" Height="624" VerticalAlignment="Top" Width="982" Margin="0,45,0,0">
             <TabItem Header="Booking">
-                <Grid Background="#FFE5E5E5"/>
+                <Grid Background="#FFE5E5E5">
+                    <TextBox HorizontalAlignment="Left" Height="23" Margin="33,28,0,0" TextWrapping="Wrap" Text="TextBox" VerticalAlignment="Top" Width="332"/>
+                    <DataGrid HorizontalAlignment="Left" Margin="33,51,0,0" VerticalAlignment="Top" Height="535" Width="332"/>
+                    <Label Content="CustomerId: " HorizontalAlignment="Left" Margin="417,28,0,0" VerticalAlignment="Top" Width="105"/>
+                    <TextBox HorizontalAlignment="Left" Height="23" Margin="539,28,0,0" TextWrapping="Wrap" VerticalAlignment="Top" Width="120"/>
+                    <Label Content="CreateDate: " HorizontalAlignment="Left" Margin="692,28,0,0" VerticalAlignment="Top" Width="90"/>
+                    <TextBox HorizontalAlignment="Left" Height="23" Margin="803,28,0,0" TextWrapping="Wrap" VerticalAlignment="Top" Width="120"/>
+                    <Label Content="StartStationId: " HorizontalAlignment="Left" Margin="417,59,0,0" VerticalAlignment="Top" Width="105"/>
+                    <TextBox HorizontalAlignment="Left" Height="23" Margin="539,59,0,0" TextWrapping="Wrap" VerticalAlignment="Top" Width="120"/>
+                    <Label Content="EndStationId: " HorizontalAlignment="Left" Margin="692,59,0,0" VerticalAlignment="Top" Width="90"/>
+                    <TextBox HorizontalAlignment="Left" Height="23" Margin="803,59,0,0" TextWrapping="Wrap" VerticalAlignment="Top" Width="120"/>
+                    <Label Content="TripStart: " HorizontalAlignment="Left" Margin="417,90,0,0" VerticalAlignment="Top" Width="105"/>
+                    <TextBox HorizontalAlignment="Left" Height="23" Margin="539,90,0,0" TextWrapping="Wrap" VerticalAlignment="Top" Width="120"/>
+                    <Label Content="TripEnd: " HorizontalAlignment="Left" Margin="692,90,0,0" VerticalAlignment="Top" Width="90"/>
+                    <TextBox HorizontalAlignment="Left" Height="23" Margin="803,90,0,0" TextWrapping="Wrap" VerticalAlignment="Top" Width="120"/>
+                    <Label Content="TotalPrice: " HorizontalAlignment="Left" Margin="417,121,0,0" VerticalAlignment="Top" Width="105"/>
+                    <TextBox HorizontalAlignment="Left" Height="23" Margin="539,121,0,0" TextWrapping="Wrap" VerticalAlignment="Top" Width="120"/>
+                    <Label Content="PayStatus: " HorizontalAlignment="Left" Margin="692,121,0,0" VerticalAlignment="Top" Width="90"/>
+                    <TextBox HorizontalAlignment="Left" Height="23" Margin="803,121,0,0" TextWrapping="Wrap" VerticalAlignment="Top" Width="120"/>
+                    <DataGrid HorizontalAlignment="Left" Margin="423,187,0,0" VerticalAlignment="Top" Height="225" Width="164"/>
+                    <DataGrid HorizontalAlignment="Left" Margin="627,187,0,0" VerticalAlignment="Top" Height="225" Width="316"/>
+                    <Button Content="Add" HorizontalAlignment="Left" Margin="423,425,0,0" VerticalAlignment="Top" Width="75"/>
+                    <Button Content="Delete" HorizontalAlignment="Left" Margin="512,425,0,0" VerticalAlignment="Top" Width="75"/>
+                    <Button Content="Select Route" HorizontalAlignment="Left" Margin="840,424,0,0" VerticalAlignment="Top" Width="103"/>
+                    <Button Content="Add" HorizontalAlignment="Left" Margin="531,487,0,0" VerticalAlignment="Top" Width="75"/>
+                    <Button Content="Update" HorizontalAlignment="Left" Margin="611,487,0,0" VerticalAlignment="Top" Width="75"/>
+                    <Button Content="Delete" HorizontalAlignment="Left" Margin="691,487,0,0" VerticalAlignment="Top" Width="75"/>
+                    <Button Content="Clear" HorizontalAlignment="Left" Margin="771,487,0,0" VerticalAlignment="Top" Width="75"/>
+                </Grid>
             </TabItem>
             <TabItem Header="Stations">
                 <Grid Background="#FFE5E5E5">
