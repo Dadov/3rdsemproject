@@ -6,33 +6,68 @@
         <TabControl HorizontalAlignment="Left" Height="624" VerticalAlignment="Top" Width="982" Margin="0,45,0,0">
             <TabItem Header="Booking">
                 <Grid Background="#FFE5E5E5">
-                    <TextBox HorizontalAlignment="Left" Height="23" Margin="33,28,0,0" TextWrapping="Wrap" Text="TextBox" VerticalAlignment="Top" Width="332"/>
-                    <DataGrid HorizontalAlignment="Left" Margin="33,51,0,0" VerticalAlignment="Top" Height="535" Width="332"/>
-                    <Label Content="CustomerId: " HorizontalAlignment="Left" Margin="417,28,0,0" VerticalAlignment="Top" Width="105"/>
-                    <TextBox HorizontalAlignment="Left" Height="23" Margin="539,28,0,0" TextWrapping="Wrap" VerticalAlignment="Top" Width="120"/>
-                    <Label Content="CreateDate: " HorizontalAlignment="Left" Margin="692,28,0,0" VerticalAlignment="Top" Width="90"/>
-                    <TextBox HorizontalAlignment="Left" Height="23" Margin="803,28,0,0" TextWrapping="Wrap" VerticalAlignment="Top" Width="120"/>
-                    <Label Content="StartStationId: " HorizontalAlignment="Left" Margin="417,59,0,0" VerticalAlignment="Top" Width="105"/>
-                    <TextBox HorizontalAlignment="Left" Height="23" Margin="539,59,0,0" TextWrapping="Wrap" VerticalAlignment="Top" Width="120"/>
-                    <Label Content="EndStationId: " HorizontalAlignment="Left" Margin="692,59,0,0" VerticalAlignment="Top" Width="90"/>
-                    <TextBox HorizontalAlignment="Left" Height="23" Margin="803,59,0,0" TextWrapping="Wrap" VerticalAlignment="Top" Width="120"/>
-                    <Label Content="TripStart: " HorizontalAlignment="Left" Margin="417,90,0,0" VerticalAlignment="Top" Width="105"/>
-                    <TextBox HorizontalAlignment="Left" Height="23" Margin="539,90,0,0" TextWrapping="Wrap" VerticalAlignment="Top" Width="120"/>
-                    <Label Content="TripEnd: " HorizontalAlignment="Left" Margin="692,90,0,0" VerticalAlignment="Top" Width="90"/>
-                    <TextBox HorizontalAlignment="Left" Height="23" Margin="803,90,0,0" TextWrapping="Wrap" VerticalAlignment="Top" Width="120"/>
-                    <Label Content="TotalPrice: " HorizontalAlignment="Left" Margin="417,121,0,0" VerticalAlignment="Top" Width="105"/>
-                    <TextBox HorizontalAlignment="Left" Height="23" Margin="539,121,0,0" TextWrapping="Wrap" VerticalAlignment="Top" Width="120"/>
-                    <Label Content="PayStatus: " HorizontalAlignment="Left" Margin="692,121,0,0" VerticalAlignment="Top" Width="90"/>
-                    <TextBox HorizontalAlignment="Left" Height="23" Margin="803,121,0,0" TextWrapping="Wrap" VerticalAlignment="Top" Width="120"/>
-                    <DataGrid HorizontalAlignment="Left" Margin="423,187,0,0" VerticalAlignment="Top" Height="225" Width="164"/>
-                    <DataGrid HorizontalAlignment="Left" Margin="627,187,0,0" VerticalAlignment="Top" Height="225" Width="316"/>
-                    <Button Content="Add" HorizontalAlignment="Left" Margin="423,425,0,0" VerticalAlignment="Top" Width="75"/>
-                    <Button Content="Delete" HorizontalAlignment="Left" Margin="512,425,0,0" VerticalAlignment="Top" Width="75"/>
-                    <Button Content="Select Route" HorizontalAlignment="Left" Margin="840,424,0,0" VerticalAlignment="Top" Width="103"/>
-                    <Button Content="Add" HorizontalAlignment="Left" Margin="531,487,0,0" VerticalAlignment="Top" Width="75"/>
-                    <Button Content="Update" HorizontalAlignment="Left" Margin="611,487,0,0" VerticalAlignment="Top" Width="75"/>
-                    <Button Content="Delete" HorizontalAlignment="Left" Margin="691,487,0,0" VerticalAlignment="Top" Width="75"/>
-                    <Button Content="Clear" HorizontalAlignment="Left" Margin="771,487,0,0" VerticalAlignment="Top" Width="75"/>
+                    <Grid.ColumnDefinitions>
+                        <ColumnDefinition Width="69*"/>
+                        <ColumnDefinition Width="17*"/>
+                        <ColumnDefinition Width="890*"/>
+                    </Grid.ColumnDefinitions>
+                    <TextBox HorizontalAlignment="Left" Height="23" Margin="10,28,0,0" TextWrapping="Wrap" VerticalAlignment="Top" Width="377" Grid.ColumnSpan="3"/>
+
+                    <DataGrid x:Name="dgBookings"  CanUserAddRows="False" SelectedItem="{Binding Path=SelectedStation, Mode=TwoWay}" ScrollViewer.CanContentScroll="True" 
+                    ScrollViewer.VerticalScrollBarVisibility="Auto" AutoGenerateColumns="False" HorizontalAlignment="Left" Margin="10,51,0,0" VerticalAlignment="Top" Height="535" Width="377" Grid.ColumnSpan="3">
+                        <DataGrid.Columns>
+                            <DataGridTextColumn Binding="{Binding Id}" Header="Id" Width="0.2*" IsReadOnly="True" SortDirection="Ascending"/>
+                            <DataGridTextColumn Binding="{Binding CustomerId}" Header="CustId" Width="0.2*" IsReadOnly="True"/>
+                            <DataGridTextColumn Binding="{Binding StartStationId}" Header="StartStationId" Width="0.2*" IsReadOnly="True"/>
+                            <DataGridTextColumn Binding="{Binding TripStart}"  Header="TripStart" Width="0.2*" IsReadOnly="True"/>
+                            <DataGridTextColumn Binding="{Binding TotalPrice}" Header="TotalPrice" Width="0.2*" IsReadOnly="True"/>
+                            <DataGridTextColumn Binding="{Binding PayStatus}" Header="PayStatus" Width="0.2*" IsReadOnly="True"/>
+                        </DataGrid.Columns>
+                    </DataGrid>
+
+                    <Label Content="CustomerId: " HorizontalAlignment="Left" Margin="331,28,0,0" VerticalAlignment="Top" Width="105" Grid.Column="2"/>
+                    <TextBox HorizontalAlignment="Left" Height="23" Margin="453,28,0,0" TextWrapping="Wrap" VerticalAlignment="Top" Width="120" Grid.Column="2"/>
+                    <Label Content="CreateDate: " HorizontalAlignment="Left" Margin="606,28,0,0" VerticalAlignment="Top" Width="90" Grid.Column="2"/>
+                    <TextBox HorizontalAlignment="Left" Height="23" Margin="717,28,0,0" TextWrapping="Wrap" VerticalAlignment="Top" Width="120" Grid.Column="2"/>
+                    <Label Content="StartStationId: " HorizontalAlignment="Left" Margin="331,59,0,0" VerticalAlignment="Top" Width="105" Grid.Column="2"/>
+                    <TextBox HorizontalAlignment="Left" Height="23" Margin="453,59,0,0" TextWrapping="Wrap" VerticalAlignment="Top" Width="120" Grid.Column="2"/>
+                    <Label Content="EndStationId: " HorizontalAlignment="Left" Margin="606,59,0,0" VerticalAlignment="Top" Width="90" Grid.Column="2"/>
+                    <TextBox HorizontalAlignment="Left" Height="23" Margin="717,59,0,0" TextWrapping="Wrap" VerticalAlignment="Top" Width="120" Grid.Column="2"/>
+                    <Label Content="TripStart: " HorizontalAlignment="Left" Margin="331,90,0,0" VerticalAlignment="Top" Width="105" Grid.Column="2"/>
+                    <TextBox HorizontalAlignment="Left" Height="23" Margin="453,90,0,0" TextWrapping="Wrap" VerticalAlignment="Top" Width="120" Grid.Column="2"/>
+                    <Label Content="TripEnd: " HorizontalAlignment="Left" Margin="606,90,0,0" VerticalAlignment="Top" Width="90" Grid.Column="2"/>
+                    <TextBox HorizontalAlignment="Left" Height="23" Margin="717,90,0,0" TextWrapping="Wrap" VerticalAlignment="Top" Width="120" Grid.Column="2"/>
+                    <Label Content="TotalPrice: " HorizontalAlignment="Left" Margin="331,121,0,0" VerticalAlignment="Top" Width="105" Grid.Column="2"/>
+                    <TextBox HorizontalAlignment="Left" Height="23" Margin="453,121,0,0" TextWrapping="Wrap" VerticalAlignment="Top" Width="120" Grid.Column="2"/>
+                    <Label Content="PayStatus: " HorizontalAlignment="Left" Margin="606,121,0,0" VerticalAlignment="Top" Width="90" Grid.Column="2"/>
+                    <TextBox HorizontalAlignment="Left" Height="23" Margin="717,121,0,0" TextWrapping="Wrap" VerticalAlignment="Top" Width="120" Grid.Column="2"/>
+
+                    <DataGrid x:Name="dgBookingLine"  CanUserAddRows="False" SelectedItem="{Binding Path=SelectedStation, Mode=TwoWay}" ScrollViewer.CanContentScroll="True" 
+                    ScrollViewer.VerticalScrollBarVisibility="Auto" AutoGenerateColumns="False" HorizontalAlignment="Left" Margin="337,187,0,0" VerticalAlignment="Top" Height="225" Width="164" Grid.Column="2">
+                        <DataGrid.Columns>
+                            <DataGridTextColumn Binding="{Binding Id}" Header="Id" Width="0.1*" IsReadOnly="True" SortDirection="Ascending"/>
+                            <DataGridTextColumn Binding="{Binding BatteryType}" Header="BatteryType" Width="0.25*" IsReadOnly="True"/>
+                            <DataGridTextColumn Binding="{Binding Quantity}" Header="Quantity" Width="0.2*" IsReadOnly="True"/>
+                        </DataGrid.Columns>
+                    </DataGrid>
+
+                    <DataGrid x:Name="dgRoute"  CanUserAddRows="False" SelectedItem="{Binding Path=SelectedStation, Mode=TwoWay}" ScrollViewer.CanContentScroll="True" 
+                    ScrollViewer.VerticalScrollBarVisibility="Auto" AutoGenerateColumns="False" HorizontalAlignment="Left" Margin="525,187,0,0" VerticalAlignment="Top" Height="225" Width="332" Grid.Column="2">
+                        <DataGrid.Columns>
+                            <DataGridTextColumn Binding="{Binding Id}" Header="Id" Width="0.1*" IsReadOnly="True" SortDirection="Ascending"/>
+                            <DataGridTextColumn Binding="{Binding StationName}" Header="Station" Width="0.2*" IsReadOnly="True"/>
+                            <DataGridTextColumn Binding="{Binding StationAddress}" Header="Address" Width="0.4*" IsReadOnly="True"/>
+                            <DataGridTextColumn Binding="{Binding Time}" Header="Time" Width="0.2*" IsReadOnly="True"/>
+                        </DataGrid.Columns>
+                    </DataGrid>
+
+                    <Button Content="Add" HorizontalAlignment="Left" Margin="337,425,0,0" VerticalAlignment="Top" Width="75" Grid.Column="2"/>
+                    <Button Content="Delete" HorizontalAlignment="Left" Margin="426,425,0,0" VerticalAlignment="Top" Width="75" Grid.Column="2"/>
+                    <Button Content="Select Route" HorizontalAlignment="Left" Margin="638,425,0,0" VerticalAlignment="Top" Width="103" Grid.Column="2"/>
+                    <Button Content="Add" HorizontalAlignment="Left" Margin="445,487,0,0" VerticalAlignment="Top" Width="75" Grid.Column="2"/>
+                    <Button Content="Update" HorizontalAlignment="Left" Margin="525,487,0,0" VerticalAlignment="Top" Width="75" Grid.Column="2"/>
+                    <Button Content="Delete" HorizontalAlignment="Left" Margin="605,487,0,0" VerticalAlignment="Top" Width="75" Grid.Column="2"/>
+                    <Button Content="Clear" HorizontalAlignment="Left" Margin="685,487,0,0" VerticalAlignment="Top" Width="75" Grid.Column="2"/>
                 </Grid>
             </TabItem>
             <TabItem Header="Stations">
@@ -40,7 +75,7 @@
                     <TextBox x:Name="txtSearch" HorizontalAlignment="Left" Height="23" Margin="30,37,0,0" TextWrapping="Wrap" VerticalAlignment="Top" Width="454" KeyUp="smartSearch" />
 
                     <DataGrid x:Name="dgStations" CanUserAddRows="False" SelectedItem="{Binding Path=SelectedStation, Mode=TwoWay}" ScrollViewer.CanContentScroll="True" 
-                    ScrollViewer.VerticalScrollBarVisibility="Auto" HorizontalAlignment="Left" Margin="30,65,0,0" VerticalAlignment="Top" Height="233" Width="454" AutoGenerateColumns="False" SelectionChanged="rowSelected">
+                    ScrollViewer.VerticalScrollBarVisibility="Auto" HorizontalAlignment="Left" Margin="30,60,0,0" VerticalAlignment="Top" Height="238" Width="454" AutoGenerateColumns="False" SelectionChanged="rowSelected">
                         <DataGrid.Columns>
                             <DataGridTextColumn Binding="{Binding Id}" Header="Id" Width="0.2*" IsReadOnly="True" SortDirection="Ascending"/>
                             <DataGridTextColumn Binding="{Binding Name}" Header="Name" Width="0.2*" IsReadOnly="True"/>
