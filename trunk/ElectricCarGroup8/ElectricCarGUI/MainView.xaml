@@ -4,73 +4,11 @@
         Title="MainView" Height="700" Width="1000">
     <Grid Background="#FFE5E5E5">
         <TabControl HorizontalAlignment="Left" Height="624" VerticalAlignment="Top" Width="982" Margin="0,45,0,0">
-            <TabItem Header="Booking">
+            <TabItem x:Name="tabBooking" Header="Booking"  Loaded="addBookingCtr">
                 <Grid Background="#FFE5E5E5">
-                    <Grid.ColumnDefinitions>
-                        <ColumnDefinition Width="69*"/>
-                        <ColumnDefinition Width="17*"/>
-                        <ColumnDefinition Width="890*"/>
-                    </Grid.ColumnDefinitions>
-                    <TextBox HorizontalAlignment="Left" Height="23" Margin="10,28,0,0" TextWrapping="Wrap" VerticalAlignment="Top" Width="377" Grid.ColumnSpan="3"/>
-
-                    <DataGrid x:Name="dgBookings"  CanUserAddRows="False" SelectedItem="{Binding Path=SelectedStation, Mode=TwoWay}" ScrollViewer.CanContentScroll="True" 
-                    ScrollViewer.VerticalScrollBarVisibility="Auto" AutoGenerateColumns="False" HorizontalAlignment="Left" Margin="10,51,0,0" VerticalAlignment="Top" Height="535" Width="377" Grid.ColumnSpan="3">
-                        <DataGrid.Columns>
-                            <DataGridTextColumn Binding="{Binding Id}" Header="Id" Width="0.2*" IsReadOnly="True" SortDirection="Ascending"/>
-                            <DataGridTextColumn Binding="{Binding CustomerId}" Header="CustId" Width="0.2*" IsReadOnly="True"/>
-                            <DataGridTextColumn Binding="{Binding StartStationId}" Header="StartStationId" Width="0.2*" IsReadOnly="True"/>
-                            <DataGridTextColumn Binding="{Binding TripStart}"  Header="TripStart" Width="0.2*" IsReadOnly="True"/>
-                            <DataGridTextColumn Binding="{Binding TotalPrice}" Header="TotalPrice" Width="0.2*" IsReadOnly="True"/>
-                            <DataGridTextColumn Binding="{Binding PayStatus}" Header="PayStatus" Width="0.2*" IsReadOnly="True"/>
-                        </DataGrid.Columns>
-                    </DataGrid>
-
-                    <Label Content="CustomerId: " HorizontalAlignment="Left" Margin="331,28,0,0" VerticalAlignment="Top" Width="105" Grid.Column="2"/>
-                    <TextBox HorizontalAlignment="Left" Height="23" Margin="453,28,0,0" TextWrapping="Wrap" VerticalAlignment="Top" Width="120" Grid.Column="2"/>
-                    <Label Content="CreateDate: " HorizontalAlignment="Left" Margin="606,28,0,0" VerticalAlignment="Top" Width="90" Grid.Column="2"/>
-                    <TextBox HorizontalAlignment="Left" Height="23" Margin="717,28,0,0" TextWrapping="Wrap" VerticalAlignment="Top" Width="120" Grid.Column="2"/>
-                    <Label Content="StartStationId: " HorizontalAlignment="Left" Margin="331,59,0,0" VerticalAlignment="Top" Width="105" Grid.Column="2"/>
-                    <TextBox HorizontalAlignment="Left" Height="23" Margin="453,59,0,0" TextWrapping="Wrap" VerticalAlignment="Top" Width="120" Grid.Column="2"/>
-                    <Label Content="EndStationId: " HorizontalAlignment="Left" Margin="606,59,0,0" VerticalAlignment="Top" Width="90" Grid.Column="2"/>
-                    <TextBox HorizontalAlignment="Left" Height="23" Margin="717,59,0,0" TextWrapping="Wrap" VerticalAlignment="Top" Width="120" Grid.Column="2"/>
-                    <Label Content="TripStart: " HorizontalAlignment="Left" Margin="331,90,0,0" VerticalAlignment="Top" Width="105" Grid.Column="2"/>
-                    <TextBox HorizontalAlignment="Left" Height="23" Margin="453,90,0,0" TextWrapping="Wrap" VerticalAlignment="Top" Width="120" Grid.Column="2"/>
-                    <Label Content="TripEnd: " HorizontalAlignment="Left" Margin="606,90,0,0" VerticalAlignment="Top" Width="90" Grid.Column="2"/>
-                    <TextBox HorizontalAlignment="Left" Height="23" Margin="717,90,0,0" TextWrapping="Wrap" VerticalAlignment="Top" Width="120" Grid.Column="2"/>
-                    <Label Content="TotalPrice: " HorizontalAlignment="Left" Margin="331,121,0,0" VerticalAlignment="Top" Width="105" Grid.Column="2"/>
-                    <TextBox HorizontalAlignment="Left" Height="23" Margin="453,121,0,0" TextWrapping="Wrap" VerticalAlignment="Top" Width="120" Grid.Column="2"/>
-                    <Label Content="PayStatus: " HorizontalAlignment="Left" Margin="606,121,0,0" VerticalAlignment="Top" Width="90" Grid.Column="2"/>
-                    <TextBox HorizontalAlignment="Left" Height="23" Margin="717,121,0,0" TextWrapping="Wrap" VerticalAlignment="Top" Width="120" Grid.Column="2"/>
-
-                    <DataGrid x:Name="dgBookingLine"  CanUserAddRows="False" SelectedItem="{Binding Path=SelectedStation, Mode=TwoWay}" ScrollViewer.CanContentScroll="True" 
-                    ScrollViewer.VerticalScrollBarVisibility="Auto" AutoGenerateColumns="False" HorizontalAlignment="Left" Margin="337,187,0,0" VerticalAlignment="Top" Height="225" Width="164" Grid.Column="2">
-                        <DataGrid.Columns>
-                            <DataGridTextColumn Binding="{Binding Id}" Header="Id" Width="0.1*" IsReadOnly="True" SortDirection="Ascending"/>
-                            <DataGridTextColumn Binding="{Binding BatteryType}" Header="BatteryType" Width="0.25*" IsReadOnly="True"/>
-                            <DataGridTextColumn Binding="{Binding Quantity}" Header="Quantity" Width="0.2*" IsReadOnly="True"/>
-                        </DataGrid.Columns>
-                    </DataGrid>
-
-                    <DataGrid x:Name="dgRoute"  CanUserAddRows="False" SelectedItem="{Binding Path=SelectedStation, Mode=TwoWay}" ScrollViewer.CanContentScroll="True" 
-                    ScrollViewer.VerticalScrollBarVisibility="Auto" AutoGenerateColumns="False" HorizontalAlignment="Left" Margin="525,187,0,0" VerticalAlignment="Top" Height="225" Width="332" Grid.Column="2">
-                        <DataGrid.Columns>
-                            <DataGridTextColumn Binding="{Binding Id}" Header="Id" Width="0.1*" IsReadOnly="True" SortDirection="Ascending"/>
-                            <DataGridTextColumn Binding="{Binding StationName}" Header="Station" Width="0.2*" IsReadOnly="True"/>
-                            <DataGridTextColumn Binding="{Binding StationAddress}" Header="Address" Width="0.4*" IsReadOnly="True"/>
-                            <DataGridTextColumn Binding="{Binding Time}" Header="Time" Width="0.2*" IsReadOnly="True"/>
-                        </DataGrid.Columns>
-                    </DataGrid>
-
-                    <Button Content="Add" HorizontalAlignment="Left" Margin="337,425,0,0" VerticalAlignment="Top" Width="75" Grid.Column="2"/>
-                    <Button Content="Delete" HorizontalAlignment="Left" Margin="426,425,0,0" VerticalAlignment="Top" Width="75" Grid.Column="2"/>
-                    <Button Content="Select Route" HorizontalAlignment="Left" Margin="638,425,0,0" VerticalAlignment="Top" Width="103" Grid.Column="2"/>
-                    <Button Content="Add" HorizontalAlignment="Left" Margin="445,487,0,0" VerticalAlignment="Top" Width="75" Grid.Column="2"/>
-                    <Button Content="Update" HorizontalAlignment="Left" Margin="525,487,0,0" VerticalAlignment="Top" Width="75" Grid.Column="2"/>
-                    <Button Content="Delete" HorizontalAlignment="Left" Margin="605,487,0,0" VerticalAlignment="Top" Width="75" Grid.Column="2"/>
-                    <Button Content="Clear" HorizontalAlignment="Left" Margin="685,487,0,0" VerticalAlignment="Top" Width="75" Grid.Column="2"/>
-                </Grid>
+                    </Grid>
             </TabItem>
-            <TabItem Header="Stations">
+            <TabItem x:Name="tabStations" Header="Stations">
                 <Grid Background="#FFE5E5E5">
                     <TextBox x:Name="txtSearch" HorizontalAlignment="Left" Height="23" Margin="30,37,0,0" TextWrapping="Wrap" VerticalAlignment="Top" Width="454" KeyUp="smartSearch" />
 
@@ -125,7 +63,7 @@
             <TabItem Header="Station">
                 <Grid Background="#FFE5E5E5">
                     <TabControl HorizontalAlignment="Left" Height="555" Margin="0,41,0,0" VerticalAlignment="Top" Width="976">
-                        <TabItem Header="Information">
+                        <TabItem x:Name="tabStationiInfo" Header="Information" Loaded="addInfoControl">
                             <Grid Background="#FFE5E5E5"/>
                         </TabItem>
                         <TabItem Header="BatteryStorage">
