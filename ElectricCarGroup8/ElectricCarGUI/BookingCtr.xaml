@@ -12,7 +12,7 @@
         </Grid.ColumnDefinitions>
         <TextBox HorizontalAlignment="Left" Height="23" Margin="10,28,0,0" TextWrapping="Wrap" VerticalAlignment="Top" Width="377" Grid.ColumnSpan="3"/>
 
-        <DataGrid x:Name="dgBookings"  CanUserAddRows="False" SelectedItem="{Binding Path=SelectedBooking, Mode=TwoWay}" ScrollViewer.CanContentScroll="True" 
+        <DataGrid HeadersVisibility="Column" x:Name="dgBookings"  CanUserAddRows="False" SelectedItem="{Binding Path=SelectedBooking, Mode=TwoWay}" ScrollViewer.CanContentScroll="True" 
                     ScrollViewer.VerticalScrollBarVisibility="Auto" AutoGenerateColumns="False" HorizontalAlignment="Left" Margin="10,51,0,0" VerticalAlignment="Top" Height="535" Width="377" Grid.ColumnSpan="3" SelectionChanged="rowSelected">
             <DataGrid.Columns>
                 <DataGridTextColumn Binding="{Binding Id}" Header="Id" Width="0.2*" IsReadOnly="True" SortDirection="Ascending"/>
@@ -39,24 +39,24 @@
         <Label Content="TotalPrice: " HorizontalAlignment="Left" Margin="331,121,0,0" VerticalAlignment="Top" Width="105" Grid.Column="2"/>
         <TextBox x:Name="txtTotalPrice" HorizontalAlignment="Left" Height="23" Margin="453,121,0,0" TextWrapping="Wrap" VerticalAlignment="Top" Width="120" Grid.Column="2"/>
         <Label Content="PayStatus: " HorizontalAlignment="Left" Margin="606,121,0,0" VerticalAlignment="Top" Width="90" Grid.Column="2"/>
-        
 
-        <DataGrid x:Name="dgBookingLine"  CanUserAddRows="False" SelectedItem="{Binding Path=SelectedBookingLine, Mode=TwoWay}" ScrollViewer.CanContentScroll="True" 
+
+        <DataGrid HeadersVisibility="Column" x:Name="dgBookingLine"  CanUserAddRows="False" SelectedItem="{Binding Path=SelectedBookingLine, Mode=TwoWay}" ScrollViewer.CanContentScroll="True" 
                     ScrollViewer.VerticalScrollBarVisibility="Auto" AutoGenerateColumns="False" HorizontalAlignment="Left" Margin="337,187,0,0" VerticalAlignment="Top" Height="225" Width="164" Grid.Column="2">
             <DataGrid.Columns>
-                <DataGridTextColumn Binding="{Binding BatteryType.name}" Header="BatteryType" Width="0.2*" IsReadOnly="True" SortDirection="Ascending"/>
-                <DataGridTextColumn Binding="{Binding quantity}" Header="Quantity" Width="0.2*" IsReadOnly="True"/>
-                <DataGridTextColumn Binding="{Binding price}" Header="Price" Width="0.15*" IsReadOnly="True"/>
+                <DataGridTextColumn Binding="{Binding BatteryType.name}" Header="BatteryType" Width="0.35*" IsReadOnly="True" SortDirection="Ascending"/>
+                <DataGridTextColumn Binding="{Binding quantity}" Header="Quantity" Width="0.35*" IsReadOnly="True"/>
+                <DataGridTextColumn Binding="{Binding price}" Header="Price" Width="0.3*" IsReadOnly="True"/>
             </DataGrid.Columns>
         </DataGrid>
 
-        <DataGrid x:Name="dgRoute"  CanUserAddRows="False" SelectedItem="{Binding Path=SelectedBookingLine, Mode=TwoWay}" ScrollViewer.CanContentScroll="True" 
+        <DataGrid HeadersVisibility="Column" x:Name="dgRoute"  CanUserAddRows="False" SelectedItem="{Binding Path=SelectedBookingLine, Mode=TwoWay}" ScrollViewer.CanContentScroll="True" 
                     ScrollViewer.VerticalScrollBarVisibility="Auto" AutoGenerateColumns="False" HorizontalAlignment="Left" Margin="525,187,0,0" VerticalAlignment="Top" Height="225" Width="332" Grid.Column="2">
             <DataGrid.Columns>
                 <DataGridTextColumn Binding="{Binding station.Id}" Header="Id" Width="0.1*" IsReadOnly="True" SortDirection="Ascending"/>
-                <DataGridTextColumn Binding="{Binding station.Name}" Header="Station" Width="0.2*" IsReadOnly="True"/>
+                <DataGridTextColumn Binding="{Binding station.Name}" Header="Station" Width="0.15*" IsReadOnly="True"/>
                 <DataGridTextColumn Binding="{Binding station.Address}" Header="Address" Width="0.4*" IsReadOnly="True"/>
-                <DataGridTextColumn Binding="{Binding time}" Header="Time" Width="0.2*" IsReadOnly="True"/>
+                <DataGridTextColumn Binding="{Binding time}" Header="Time" Width="0.35*" IsReadOnly="True"/>
             </DataGrid.Columns>
         </DataGrid>
 
