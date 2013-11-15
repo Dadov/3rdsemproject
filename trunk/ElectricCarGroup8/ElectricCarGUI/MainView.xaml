@@ -12,7 +12,7 @@
                 <Grid Background="#FFE5E5E5">
                     <TextBox x:Name="txtSearch" HorizontalAlignment="Left" Height="23" Margin="30,37,0,0" TextWrapping="Wrap" VerticalAlignment="Top" Width="454" KeyUp="smartSearch" />
 
-                    <DataGrid x:Name="dgStations" CanUserAddRows="False" SelectedItem="{Binding Path=SelectedStation, Mode=TwoWay}" ScrollViewer.CanContentScroll="True" 
+                    <DataGrid HeadersVisibility="Column" x:Name="dgStations" CanUserAddRows="False" SelectedItem="{Binding Path=SelectedStation, Mode=TwoWay}" ScrollViewer.CanContentScroll="True" 
                     ScrollViewer.VerticalScrollBarVisibility="Auto" HorizontalAlignment="Left" Margin="30,60,0,0" VerticalAlignment="Top" Height="238" Width="454" AutoGenerateColumns="False" SelectionChanged="rowSelected">
                         <DataGrid.Columns>
                             <DataGridTextColumn Binding="{Binding Id}" Header="Id" Width="0.2*" IsReadOnly="True" SortDirection="Ascending"/>
@@ -38,7 +38,7 @@
                     <Button x:Name="btnDelete" Content="Delete" HorizontalAlignment="Left" Margin="731,240,0,0" VerticalAlignment="Top" Width="75" Click="btnDelete_Click"/>
                     <Button x:Name="btnCancel" Content="Clear" HorizontalAlignment="Left" Margin="811,240,0,0" VerticalAlignment="Top" Width="75" Click="btnCancel_Click"/>
                     <Label x:Name="lblNbStation" Content="Nabor stations" HorizontalAlignment="Left" Margin="30,303,0,0" VerticalAlignment="Top" Width="204"/>
-                    <DataGrid x:Name="dbNbStations" SelectionChanged="nbRowSelected" AutoGenerateColumns="False" CanUserAddRows="False" SelectedItem="{Binding Path=SelectedNaborStation, Mode=TwoWay}" ScrollViewer.CanContentScroll="True" 
+                    <DataGrid HeadersVisibility="Column" x:Name="dbNbStations" SelectionChanged="nbRowSelected" AutoGenerateColumns="False" CanUserAddRows="False" SelectedItem="{Binding Path=SelectedNaborStation, Mode=TwoWay}" ScrollViewer.CanContentScroll="True" 
                     ScrollViewer.VerticalScrollBarVisibility="Auto" HorizontalAlignment="Left" Margin="30,334,0,0" VerticalAlignment="Top" Height="252" Width="454">
                         <DataGrid.Columns>
                             <DataGridTextColumn Binding="{Binding Id}" Header="Id" Width="0.2*" IsReadOnly="True" SortDirection="Ascending"/>
