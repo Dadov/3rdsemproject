@@ -285,6 +285,18 @@ namespace ElectricCarGUI
                 MessageBox.Show("Station does not exist, please input another one.");
             }
         }
+
+        private void addInfoControl(object sender, RoutedEventArgs e)
+        {
+            StationInfoControl sInfoCtr = new StationInfoControl();
+            tabStationiInfo.Content = sInfoCtr;
+        }
+
+        private void addBookingCtr(object sender, RoutedEventArgs e)
+        {
+            BookingCtr bCtr = new BookingCtr();
+            tabBooking.Content = bCtr;
+        }
         
 
     }
