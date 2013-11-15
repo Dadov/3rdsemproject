@@ -51,7 +51,7 @@ namespace ElectricCarGUI
             string searchTerm = txtSearch.Text;
             List<Station> stations = serviceObj.getAllStations().ToList();
             dgStations.ItemsSource = stations;
-            if (searchTerm!=null)
+            if (searchTerm != null)
             {
                 var filter = new Predicate<object>(
                 s => ((Station)s).Id.ToString().ToLower().Contains(searchTerm)
@@ -59,9 +59,9 @@ namespace ElectricCarGUI
                 || ((Station)s).Address.ToLower().Contains(searchTerm));
                 dgStations.Items.Filter = filter;
             }
-            
-            
-            
+
+
+
         }
 
         private void btnCancel_Click(object sender, RoutedEventArgs e)
@@ -94,7 +94,7 @@ namespace ElectricCarGUI
                 //select nabor stations 
                 showNbStations(s.Id);
             }
-            
+
         }
 
         private void showNbStations(int sId)
@@ -106,7 +106,7 @@ namespace ElectricCarGUI
 
         private void nbRowSelected(object sender, SelectionChangedEventArgs e)
         {
-            if (dbNbStations.SelectedItem!=null)
+            if (dbNbStations.SelectedItem != null)
             {
                 NaborStation ns = (NaborStation)dbNbStations.SelectedItem;
                 txtNsId.Text = Convert.ToString(ns.Id);
@@ -118,7 +118,7 @@ namespace ElectricCarGUI
 
         private void btnDelete_Click(object sender, RoutedEventArgs e)
         {
-            if (txtId.Text !="")
+            if (txtId.Text != "")
             {
                 serviceObj.deleteStation(Convert.ToInt32(txtId.Text));
                 dgStations.SelectedItem = null;
@@ -135,7 +135,7 @@ namespace ElectricCarGUI
         {
             if (txtId.Text == "")
             {
-                if (txtName.Text!="" &&txtAddress.Text!="" &&txtCountry.Text!="")
+                if (txtName.Text != "" && txtAddress.Text != "" && txtCountry.Text != "")
                 {
                     serviceObj.addStation(txtName.Text, txtAddress.Text, txtCountry.Text, (string)cbbState.SelectedValue);
                     clearTextBoxes();
@@ -210,12 +210,12 @@ namespace ElectricCarGUI
             {
                 MessageBox.Show("Please select a station first before update nabor station");
             }
-            
+
         }
 
         private void btnNsAdd_Click(object sender, RoutedEventArgs e)
         {
-            if (txtId.Text!="")
+            if (txtId.Text != "")
             {
                 if (txtNsId.Text != "")
                 {
@@ -240,7 +240,7 @@ namespace ElectricCarGUI
             {
                 MessageBox.Show("Please select a station first before adding nabor station");
             }
-            
+
         }
 
         private void btnNsUpdate_Click(object sender, RoutedEventArgs e)
@@ -269,7 +269,7 @@ namespace ElectricCarGUI
             {
                 MessageBox.Show("Please select a station first before update nabor station");
             }
-            
+
         }
 
         public int StationId { get; set; }

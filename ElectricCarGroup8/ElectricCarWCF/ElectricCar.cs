@@ -20,6 +20,89 @@ namespace ElectricCarWCF
         }
         #endregion
 
+
+        public List<Booking> getAllBookings()
+        {
+            List<Booking> bookings = new List<Booking>();
+            BookingCtr bCtr = new BookingCtr();
+            List<MBooking> bs = bCtr.getAllBooking();
+            if (bs.Count != 0)
+            {
+                foreach (MBooking b in bs)
+                {
+                    Booking bk = new Booking();
+                    bk.Id = b.Id;
+                    bk.createDate = b.createDate.Value.ToShortTimeString();
+                    CustomerTest cust = new CustomerTest() { Id = b.customer.ID, name = b.customer.FName + " " + b.customer.LName };
+                    bk.customer = cust;
+                    bk.cId = b.customer.ID;
+                    bk.payStatus = b.creaditCard;
+                    bk.totalPrice = b.totalPrice.Value;
+                    bk.tripStart = b.tripStart.Value.ToShortTimeString();
+                    if (b.bookinglines.Count != 0)
+                    {
+                        foreach (MBookingLine bl in b.bookinglines)
+                        {
+                            BookingLine l = new BookingLine();
+                            l.price = bl.price.Value;
+                            l.quantity = bl.quantity.Value;
+                            l.time = bl.time.Value;
+                            bk.bookinglines.Add(l);
+                            BatteryTypeTest bt = new BatteryTypeTest();
+                            bt.Id = bl.BatteryType.id;
+                            bt.name = bl.BatteryType.name;
+                            l.BatteryType = bt;
+                            Station s = new Station();
+                            s.Id = bl.Station.Id;
+                            s.Name = bl.Station.name;
+                            s.Address = bl.Station.address;
+                            s.Country = bl.Station.country;
+                            l.station = s;
+
+                        }
+                        bk.startStationId = b.bookinglines.First().Station.Id;
+                    }
+                    bookings.Add(bk);
+                }
+            }
+
+            return bookings;
+        }
+
+        public Booking getBooking(int id)
+        {
+            Booking bk = new Booking();
+            BookingCtr bCtr = new BookingCtr();
+            MBooking b = bCtr.getBooking(id, true);
+            if (bk != null)
+            {
+                foreach (MBookingLine bl in b.bookinglines)
+                {
+                    BookingLine l = new BookingLine();
+                    l.price = bl.price.Value;
+                    l.quantity = bl.quantity.Value;
+                    l.time = bl.time.Value;
+                    bk.bookinglines.Add(l);
+
+                    BatteryTypeTest bt = new BatteryTypeTest();
+                    bt.Id = bl.BatteryType.id;
+                    bt.name = bl.BatteryType.name;
+                    l.BatteryType = bt;
+                    
+                    Station s = new Station();
+                    s.Id = bl.Station.Id;
+                    s.Name = bl.Station.name;
+                    s.Address = bl.Station.address;
+                    s.Country = bl.Station.country;
+                    l.station = s;
+
+                }
+                bk.startStationId = b.bookinglines.First().Station.Id;
+            }
+            return bk;
+        }
+
+
         #region Statons
         public List<Station> getAllStations()
         {
@@ -31,7 +114,7 @@ namespace ElectricCarWCF
                 {
                     Station s = new Station() { Id = item.Id, Name = item.name, Address = item.address, Country = item.country, State = item.state.ToString() };
                     ss.Add(s);
-                    
+
                 }
                 return ss;
             }
@@ -50,7 +133,7 @@ namespace ElectricCarWCF
                 ns.Country = s.country;
                 ns.Address = s.address;
             }
-            
+
             return ns;
         }
 

@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="utf-8"?>
-<ReferenceGroup xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:xsd="http://www.w3.org/2001/XMLSchema" ID="f0790320-ae4d-4224-bd32-73d3ffb98794" xmlns="urn:schemas-microsoft-com:xml-wcfservicemap">
+<ReferenceGroup xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:xsd="http://www.w3.org/2001/XMLSchema" ID="477b0151-4c9d-43a7-9493-8e0b5c0b7fdd" xmlns="urn:schemas-microsoft-com:xml-wcfservicemap">
   <ClientOptions>
     <GenerateAsynchronousMethods>false</GenerateAsynchronousMethods>
     <GenerateTaskBasedAsynchronousMethod>true</GenerateTaskBasedAsynchronousMethod>
@@ -19,14 +19,14 @@
     <ServiceContractMappings />
   </ClientOptions>
   <MetadataSources>
-    <MetadataSource Address="http://localhost:9000/Design_Time_Addresses/ElectricCarWCF/ElectricCar/mex" Protocol="mex" SourceId="1" />
+    <MetadataSource Address="http://localhost:9001/Design_Time_Addresses/ElectricCarWCF/ElectricCar/mex" Protocol="mex" SourceId="1" />
   </MetadataSources>
   <Metadata>
-    <MetadataFile FileName="service.wsdl" MetadataType="Wsdl" ID="4617f38b-816f-4841-accd-ca0b1c3ad099" SourceId="1" SourceUrl="http://localhost:9000/Design_Time_Addresses/ElectricCarWCF/ElectricCar/mex" />
-    <MetadataFile FileName="service.xsd" MetadataType="Schema" ID="ff17dfb8-2e34-435c-bee9-2aa0fff5ee76" SourceId="1" SourceUrl="http://localhost:9000/Design_Time_Addresses/ElectricCarWCF/ElectricCar/mex" />
-    <MetadataFile FileName="service1.xsd" MetadataType="Schema" ID="e2c1c960-8ef0-48af-8893-2d2ca0c954f0" SourceId="1" SourceUrl="http://localhost:9000/Design_Time_Addresses/ElectricCarWCF/ElectricCar/mex" />
-    <MetadataFile FileName="ElectricCarWCF.xsd" MetadataType="Schema" ID="2bb2e5ef-715f-46a0-abb5-94180a127fb7" SourceId="1" SourceUrl="http://localhost:9000/Design_Time_Addresses/ElectricCarWCF/ElectricCar/mex" />
-    <MetadataFile FileName="Arrays.xsd" MetadataType="Schema" ID="c741d629-9529-4b58-8b31-71c2eefab0f7" SourceId="1" SourceUrl="http://localhost:9000/Design_Time_Addresses/ElectricCarWCF/ElectricCar/mex" />
+    <MetadataFile FileName="service.wsdl" MetadataType="Wsdl" ID="01a9cc50-3a01-4a6e-bc18-58466001e493" SourceId="1" SourceUrl="http://localhost:9001/Design_Time_Addresses/ElectricCarWCF/ElectricCar/mex" />
+    <MetadataFile FileName="service.xsd" MetadataType="Schema" ID="7c5a4ca8-a249-4f77-b2fb-1c0aa5bc1710" SourceId="1" SourceUrl="http://localhost:9001/Design_Time_Addresses/ElectricCarWCF/ElectricCar/mex" />
+    <MetadataFile FileName="service1.xsd" MetadataType="Schema" ID="fef7d67e-7a42-4cd9-8bf9-a10e6670afc6" SourceId="1" SourceUrl="http://localhost:9001/Design_Time_Addresses/ElectricCarWCF/ElectricCar/mex" />
+    <MetadataFile FileName="ElectricCarWCF.xsd" MetadataType="Schema" ID="407a0caa-be82-48b6-9df0-e4d6243bfcef" SourceId="1" SourceUrl="http://localhost:9001/Design_Time_Addresses/ElectricCarWCF/ElectricCar/mex" />
+    <MetadataFile FileName="Arrays.xsd" MetadataType="Schema" ID="ae6ce538-61ae-4633-802d-51c8fd4b9d52" SourceId="1" SourceUrl="http://localhost:9001/Design_Time_Addresses/ElectricCarWCF/ElectricCar/mex" />
   </Metadata>
   <Extensions>
     <ExtensionFile FileName="configuration91.svcinfo" Name="configuration91.svcinfo" />

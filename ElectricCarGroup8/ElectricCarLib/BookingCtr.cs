@@ -9,7 +9,7 @@ using ElectricCarModelLayer;
 
 namespace ElectricCarLib
 {
-    class BookingCtr
+    public class BookingCtr
     {
         private DBooking dbBooking = new DBooking();
         private BookingLineCtr blCtr = new BookingLineCtr();
@@ -41,10 +41,15 @@ namespace ElectricCarLib
             }
         }
 
-
-        public MBooking getBooking(int id)
+        public List<MBooking> getAllBooking()
         {
-            MBooking b = dbBooking.getRecord(id, true);
+            List<MBooking> bs = dbBooking.getAllRecord(true);
+            return bs;
+        }
+
+        public MBooking getBooking(int id, bool association)
+        {
+            MBooking b = dbBooking.getRecord(id, association);
             return b;
         }
 
@@ -52,7 +57,7 @@ namespace ElectricCarLib
         {
             using (TransactionScope scope = new TransactionScope())
             {
-                MBooking b = getBooking(id);
+                MBooking b = getBooking(id, true);
                 foreach (MBookingLine item in b.bookinglines)
                 {
                     bsCtr.deleteBookingForStation(item.Station.Id, item.BatteryType.id, item.quantity.Value, item.time.Value);

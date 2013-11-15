@@ -15,6 +15,410 @@ namespace ElectricCarGUI.ElectricCarService {
     
     [System.Diagnostics.DebuggerStepThroughAttribute()]
     [System.CodeDom.Compiler.GeneratedCodeAttribute("System.Runtime.Serialization", "4.0.0.0")]
+    [System.Runtime.Serialization.DataContractAttribute(Name="Booking", Namespace="http://schemas.datacontract.org/2004/07/ElectricCarWCF")]
+    [System.SerializableAttribute()]
+    public partial class Booking : object, System.Runtime.Serialization.IExtensibleDataObject, System.ComponentModel.INotifyPropertyChanged {
+        
+        [System.NonSerializedAttribute()]
+        private System.Runtime.Serialization.ExtensionDataObject extensionDataField;
+        
+        [System.Runtime.Serialization.OptionalFieldAttribute()]
+        private int IdField;
+        
+        [System.Runtime.Serialization.OptionalFieldAttribute()]
+        private ElectricCarGUI.ElectricCarService.BookingLine[] bookinglinesField;
+        
+        [System.Runtime.Serialization.OptionalFieldAttribute()]
+        private int cIdField;
+        
+        [System.Runtime.Serialization.OptionalFieldAttribute()]
+        private string createDateField;
+        
+        [System.Runtime.Serialization.OptionalFieldAttribute()]
+        private ElectricCarGUI.ElectricCarService.CustomerTest customerField;
+        
+        [System.Runtime.Serialization.OptionalFieldAttribute()]
+        private string payStatusField;
+        
+        [System.Runtime.Serialization.OptionalFieldAttribute()]
+        private int startStationIdField;
+        
+        [System.Runtime.Serialization.OptionalFieldAttribute()]
+        private decimal totalPriceField;
+        
+        [System.Runtime.Serialization.OptionalFieldAttribute()]
+        private string tripStartField;
+        
+        [global::System.ComponentModel.BrowsableAttribute(false)]
+        public System.Runtime.Serialization.ExtensionDataObject ExtensionData {
+            get {
+                return this.extensionDataField;
+            }
+            set {
+                this.extensionDataField = value;
+            }
+        }
+        
+        [System.Runtime.Serialization.DataMemberAttribute()]
+        public int Id {
+            get {
+                return this.IdField;
+            }
+            set {
+                if ((this.IdField.Equals(value) != true)) {
+                    this.IdField = value;
+                    this.RaisePropertyChanged("Id");
+                }
+            }
+        }
+        
+        [System.Runtime.Serialization.DataMemberAttribute()]
+        public ElectricCarGUI.ElectricCarService.BookingLine[] bookinglines {
+            get {
+                return this.bookinglinesField;
+            }
+            set {
+                if ((object.ReferenceEquals(this.bookinglinesField, value) != true)) {
+                    this.bookinglinesField = value;
+                    this.RaisePropertyChanged("bookinglines");
+                }
+            }
+        }
+        
+        [System.Runtime.Serialization.DataMemberAttribute()]
+        public int cId {
+            get {
+                return this.cIdField;
+            }
+            set {
+                if ((this.cIdField.Equals(value) != true)) {
+                    this.cIdField = value;
+                    this.RaisePropertyChanged("cId");
+                }
+            }
+        }
+        
+        [System.Runtime.Serialization.DataMemberAttribute()]
+        public string createDate {
+            get {
+                return this.createDateField;
+            }
+            set {
+                if ((object.ReferenceEquals(this.createDateField, value) != true)) {
+                    this.createDateField = value;
+                    this.RaisePropertyChanged("createDate");
+                }
+            }
+        }
+        
+        [System.Runtime.Serialization.DataMemberAttribute()]
+        public ElectricCarGUI.ElectricCarService.CustomerTest customer {
+            get {
+                return this.customerField;
+            }
+            set {
+                if ((object.ReferenceEquals(this.customerField, value) != true)) {
+                    this.customerField = value;
+                    this.RaisePropertyChanged("customer");
+                }
+            }
+        }
+        
+        [System.Runtime.Serialization.DataMemberAttribute()]
+        public string payStatus {
+            get {
+                return this.payStatusField;
+            }
+            set {
+                if ((object.ReferenceEquals(this.payStatusField, value) != true)) {
+                    this.payStatusField = value;
+                    this.RaisePropertyChanged("payStatus");
+                }
+            }
+        }
+        
+        [System.Runtime.Serialization.DataMemberAttribute()]
+        public int startStationId {
+            get {
+                return this.startStationIdField;
+            }
+            set {
+                if ((this.startStationIdField.Equals(value) != true)) {
+                    this.startStationIdField = value;
+                    this.RaisePropertyChanged("startStationId");
+                }
+            }
+        }
+        
+        [System.Runtime.Serialization.DataMemberAttribute()]
+        public decimal totalPrice {
+            get {
+                return this.totalPriceField;
+            }
+            set {
+                if ((this.totalPriceField.Equals(value) != true)) {
+                    this.totalPriceField = value;
+                    this.RaisePropertyChanged("totalPrice");
+                }
+            }
+        }
+        
+        [System.Runtime.Serialization.DataMemberAttribute()]
+        public string tripStart {
+            get {
+                return this.tripStartField;
+            }
+            set {
+                if ((object.ReferenceEquals(this.tripStartField, value) != true)) {
+                    this.tripStartField = value;
+                    this.RaisePropertyChanged("tripStart");
+                }
+            }
+        }
+        
+        public event System.ComponentModel.PropertyChangedEventHandler PropertyChanged;
+        
+        protected void RaisePropertyChanged(string propertyName) {
+            System.ComponentModel.PropertyChangedEventHandler propertyChanged = this.PropertyChanged;
+            if ((propertyChanged != null)) {
+                propertyChanged(this, new System.ComponentModel.PropertyChangedEventArgs(propertyName));
+            }
+        }
+    }
+    
+    [System.Diagnostics.DebuggerStepThroughAttribute()]
+    [System.CodeDom.Compiler.GeneratedCodeAttribute("System.Runtime.Serialization", "4.0.0.0")]
+    [System.Runtime.Serialization.DataContractAttribute(Name="CustomerTest", Namespace="http://schemas.datacontract.org/2004/07/ElectricCarWCF")]
+    [System.SerializableAttribute()]
+    public partial class CustomerTest : object, System.Runtime.Serialization.IExtensibleDataObject, System.ComponentModel.INotifyPropertyChanged {
+        
+        [System.NonSerializedAttribute()]
+        private System.Runtime.Serialization.ExtensionDataObject extensionDataField;
+        
+        [System.Runtime.Serialization.OptionalFieldAttribute()]
+        private int IdField;
+        
+        [System.Runtime.Serialization.OptionalFieldAttribute()]
+        private string nameField;
+        
+        [global::System.ComponentModel.BrowsableAttribute(false)]
+        public System.Runtime.Serialization.ExtensionDataObject ExtensionData {
+            get {
+                return this.extensionDataField;
+            }
+            set {
+                this.extensionDataField = value;
+            }
+        }
+        
+        [System.Runtime.Serialization.DataMemberAttribute()]
+        public int Id {
+            get {
+                return this.IdField;
+            }
+            set {
+                if ((this.IdField.Equals(value) != true)) {
+                    this.IdField = value;
+                    this.RaisePropertyChanged("Id");
+                }
+            }
+        }
+        
+        [System.Runtime.Serialization.DataMemberAttribute()]
+        public string name {
+            get {
+                return this.nameField;
+            }
+            set {
+                if ((object.ReferenceEquals(this.nameField, value) != true)) {
+                    this.nameField = value;
+                    this.RaisePropertyChanged("name");
+                }
+            }
+        }
+        
+        public event System.ComponentModel.PropertyChangedEventHandler PropertyChanged;
+        
+        protected void RaisePropertyChanged(string propertyName) {
+            System.ComponentModel.PropertyChangedEventHandler propertyChanged = this.PropertyChanged;
+            if ((propertyChanged != null)) {
+                propertyChanged(this, new System.ComponentModel.PropertyChangedEventArgs(propertyName));
+            }
+        }
+    }
+    
+    [System.Diagnostics.DebuggerStepThroughAttribute()]
+    [System.CodeDom.Compiler.GeneratedCodeAttribute("System.Runtime.Serialization", "4.0.0.0")]
+    [System.Runtime.Serialization.DataContractAttribute(Name="BookingLine", Namespace="http://schemas.datacontract.org/2004/07/ElectricCarWCF")]
+    [System.SerializableAttribute()]
+    public partial class BookingLine : object, System.Runtime.Serialization.IExtensibleDataObject, System.ComponentModel.INotifyPropertyChanged {
+        
+        [System.NonSerializedAttribute()]
+        private System.Runtime.Serialization.ExtensionDataObject extensionDataField;
+        
+        [System.Runtime.Serialization.OptionalFieldAttribute()]
+        private ElectricCarGUI.ElectricCarService.BatteryTypeTest BatteryTypeField;
+        
+        [System.Runtime.Serialization.OptionalFieldAttribute()]
+        private decimal priceField;
+        
+        [System.Runtime.Serialization.OptionalFieldAttribute()]
+        private int quantityField;
+        
+        [System.Runtime.Serialization.OptionalFieldAttribute()]
+        private ElectricCarGUI.ElectricCarService.Station stationField;
+        
+        [System.Runtime.Serialization.OptionalFieldAttribute()]
+        private System.DateTime timeField;
+        
+        [global::System.ComponentModel.BrowsableAttribute(false)]
+        public System.Runtime.Serialization.ExtensionDataObject ExtensionData {
+            get {
+                return this.extensionDataField;
+            }
+            set {
+                this.extensionDataField = value;
+            }
+        }
+        
+        [System.Runtime.Serialization.DataMemberAttribute()]
+        public ElectricCarGUI.ElectricCarService.BatteryTypeTest BatteryType {
+            get {
+                return this.BatteryTypeField;
+            }
+            set {
+                if ((object.ReferenceEquals(this.BatteryTypeField, value) != true)) {
+                    this.BatteryTypeField = value;
+                    this.RaisePropertyChanged("BatteryType");
+                }
+            }
+        }
+        
+        [System.Runtime.Serialization.DataMemberAttribute()]
+        public decimal price {
+            get {
+                return this.priceField;
+            }
+            set {
+                if ((this.priceField.Equals(value) != true)) {
+                    this.priceField = value;
+                    this.RaisePropertyChanged("price");
+                }
+            }
+        }
+        
+        [System.Runtime.Serialization.DataMemberAttribute()]
+        public int quantity {
+            get {
+                return this.quantityField;
+            }
+            set {
+                if ((this.quantityField.Equals(value) != true)) {
+                    this.quantityField = value;
+                    this.RaisePropertyChanged("quantity");
+                }
+            }
+        }
+        
+        [System.Runtime.Serialization.DataMemberAttribute()]
+        public ElectricCarGUI.ElectricCarService.Station station {
+            get {
+                return this.stationField;
+            }
+            set {
+                if ((object.ReferenceEquals(this.stationField, value) != true)) {
+                    this.stationField = value;
+                    this.RaisePropertyChanged("station");
+                }
+            }
+        }
+        
+        [System.Runtime.Serialization.DataMemberAttribute()]
+        public System.DateTime time {
+            get {
+                return this.timeField;
+            }
+            set {
+                if ((this.timeField.Equals(value) != true)) {
+                    this.timeField = value;
+                    this.RaisePropertyChanged("time");
+                }
+            }
+        }
+        
+        public event System.ComponentModel.PropertyChangedEventHandler PropertyChanged;
+        
+        protected void RaisePropertyChanged(string propertyName) {
+            System.ComponentModel.PropertyChangedEventHandler propertyChanged = this.PropertyChanged;
+            if ((propertyChanged != null)) {
+                propertyChanged(this, new System.ComponentModel.PropertyChangedEventArgs(propertyName));
+            }
+        }
+    }
+    
+    [System.Diagnostics.DebuggerStepThroughAttribute()]
+    [System.CodeDom.Compiler.GeneratedCodeAttribute("System.Runtime.Serialization", "4.0.0.0")]
+    [System.Runtime.Serialization.DataContractAttribute(Name="BatteryTypeTest", Namespace="http://schemas.datacontract.org/2004/07/ElectricCarWCF")]
+    [System.SerializableAttribute()]
+    public partial class BatteryTypeTest : object, System.Runtime.Serialization.IExtensibleDataObject, System.ComponentModel.INotifyPropertyChanged {
+        
+        [System.NonSerializedAttribute()]
+        private System.Runtime.Serialization.ExtensionDataObject extensionDataField;
+        
+        [System.Runtime.Serialization.OptionalFieldAttribute()]
+        private int IdField;
+        
+        [System.Runtime.Serialization.OptionalFieldAttribute()]
+        private string nameField;
+        
+        [global::System.ComponentModel.BrowsableAttribute(false)]
+        public System.Runtime.Serialization.ExtensionDataObject ExtensionData {
+            get {
+                return this.extensionDataField;
+            }
+            set {
+                this.extensionDataField = value;
+            }
+        }
+        
+        [System.Runtime.Serialization.DataMemberAttribute()]
+        public int Id {
+            get {
+                return this.IdField;
+            }
+            set {
+                if ((this.IdField.Equals(value) != true)) {
+                    this.IdField = value;
+                    this.RaisePropertyChanged("Id");
+                }
+            }
+        }
+        
+        [System.Runtime.Serialization.DataMemberAttribute()]
+        public string name {
+            get {
+                return this.nameField;
+            }
+            set {
+                if ((object.ReferenceEquals(this.nameField, value) != true)) {
+                    this.nameField = value;
+                    this.RaisePropertyChanged("name");
+                }
+            }
+        }
+        
+        public event System.ComponentModel.PropertyChangedEventHandler PropertyChanged;
+        
+        protected void RaisePropertyChanged(string propertyName) {
+            System.ComponentModel.PropertyChangedEventHandler propertyChanged = this.PropertyChanged;
+            if ((propertyChanged != null)) {
+                propertyChanged(this, new System.ComponentModel.PropertyChangedEventArgs(propertyName));
+            }
+        }
+    }
+    
+    [System.Diagnostics.DebuggerStepThroughAttribute()]
+    [System.CodeDom.Compiler.GeneratedCodeAttribute("System.Runtime.Serialization", "4.0.0.0")]
     [System.Runtime.Serialization.DataContractAttribute(Name="Station", Namespace="http://schemas.datacontract.org/2004/07/ElectricCarWCF")]
     [System.SerializableAttribute()]
     public partial class Station : object, System.Runtime.Serialization.IExtensibleDataObject, System.ComponentModel.INotifyPropertyChanged {
@@ -241,6 +645,18 @@ namespace ElectricCarGUI.ElectricCarService {
         [System.ServiceModel.OperationContractAttribute(Action="http://tempuri.org/IElectricCar/getME", ReplyAction="http://tempuri.org/IElectricCar/getMEResponse")]
         System.Threading.Tasks.Task<string> getMEAsync();
         
+        [System.ServiceModel.OperationContractAttribute(Action="http://tempuri.org/IElectricCar/getAllBookings", ReplyAction="http://tempuri.org/IElectricCar/getAllBookingsResponse")]
+        ElectricCarGUI.ElectricCarService.Booking[] getAllBookings();
+        
+        [System.ServiceModel.OperationContractAttribute(Action="http://tempuri.org/IElectricCar/getAllBookings", ReplyAction="http://tempuri.org/IElectricCar/getAllBookingsResponse")]
+        System.Threading.Tasks.Task<ElectricCarGUI.ElectricCarService.Booking[]> getAllBookingsAsync();
+        
+        [System.ServiceModel.OperationContractAttribute(Action="http://tempuri.org/IElectricCar/getBooking", ReplyAction="http://tempuri.org/IElectricCar/getBookingResponse")]
+        ElectricCarGUI.ElectricCarService.Booking getBooking(int id);
+        
+        [System.ServiceModel.OperationContractAttribute(Action="http://tempuri.org/IElectricCar/getBooking", ReplyAction="http://tempuri.org/IElectricCar/getBookingResponse")]
+        System.Threading.Tasks.Task<ElectricCarGUI.ElectricCarService.Booking> getBookingAsync(int id);
+        
         [System.ServiceModel.OperationContractAttribute(Action="http://tempuri.org/IElectricCar/getAllStations", ReplyAction="http://tempuri.org/IElectricCar/getAllStationsResponse")]
         ElectricCarGUI.ElectricCarService.Station[] getAllStations();
         
@@ -335,6 +751,22 @@ namespace ElectricCarGUI.ElectricCarService {
         
         public System.Threading.Tasks.Task<string> getMEAsync() {
             return base.Channel.getMEAsync();
+        }
+        
+        public ElectricCarGUI.ElectricCarService.Booking[] getAllBookings() {
+            return base.Channel.getAllBookings();
+        }
+        
+        public System.Threading.Tasks.Task<ElectricCarGUI.ElectricCarService.Booking[]> getAllBookingsAsync() {
+            return base.Channel.getAllBookingsAsync();
+        }
+        
+        public ElectricCarGUI.ElectricCarService.Booking getBooking(int id) {
+            return base.Channel.getBooking(id);
+        }
+        
+        public System.Threading.Tasks.Task<ElectricCarGUI.ElectricCarService.Booking> getBookingAsync(int id) {
+            return base.Channel.getBookingAsync(id);
         }
         
         public ElectricCarGUI.ElectricCarService.Station[] getAllStations() {

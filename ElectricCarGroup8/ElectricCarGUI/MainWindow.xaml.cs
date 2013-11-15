@@ -32,7 +32,7 @@ namespace ElectricCarGUI
             if (e.Key == Key.Return)
             {
                 //TODO Evaluate login name and password, get employee position
-                position = "Admin"; 
+                position = "Admin";
                 success = true;
 
             }

@@ -72,7 +72,7 @@ namespace ElectricCarLibTest
             DateTime createTime = DateTime.Now;
             DateTime trip = createTime.AddDays(60);
             //refactor the code when customer and person class is created
-            int bookingId = dbBooking.addRecord(1, 100, createTime, trip, "1234456");
+            int bookingId = dbBooking.addRecord(1, 100, createTime, trip, "Payed");
             try
             {
                 MBooking booking = dbBooking.getRecord(bookingId, false);
