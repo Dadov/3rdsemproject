@@ -26,7 +26,15 @@ namespace ElectricCarDB
                     
                     using (ElectricCarEntities context = new ElectricCarEntities())
                     {
-                        newid = context.Bookings.Count() + 1;
+                        if (context.Bookings.Count() == 0)
+                        {
+                            newid = 1;
+                        }
+                        else
+                        {
+                            newid = context.Bookings.Max(x => x.Id) + 1;
+                        }
+                        
                         context.Bookings.Add(new Booking()
                         {
                         Id = newid,
@@ -60,8 +68,8 @@ namespace ElectricCarDB
                     MBooking booking = buildBooking(b);
                     if (getAssociation)
                     {
-                        dbBL.getBookingLinesForBooking(id, true);
-                        //dbCustomer.getRecord(b.cId, true); //TODO wait for completion of DCustomer
+                        booking.bookinglines = dbBL.getBookingLinesForBooking(id, true);
+                        booking.customer = dbCustomer.getRecord(b.cId.Value, false);
                     }
                     return booking;
                 }
@@ -126,8 +134,8 @@ namespace ElectricCarDB
                     MBooking booking = buildBooking(b);
                     if (getAssociation)
                     {
-                        dbBL.getBookingLinesForBooking(b.Id, true);
-                        //dbCustomer.getRecord(b.cId, true);
+                        booking.bookinglines = dbBL.getBookingLinesForBooking(b.Id, true);
+                        booking.customer = dbCustomer.getRecord(b.cId.Value, false);
                     }
                     bookings.Add(booking);
                 }
@@ -140,6 +148,7 @@ namespace ElectricCarDB
             MBooking booking = new MBooking()
             {
                 Id = b.Id,
+                cId = b.cId.Value,
                 customer = new MCustomer(){ID = b.cId.Value},
                 totalPrice = b.totalPrice,
                 creaditCard = b.creaditCard,

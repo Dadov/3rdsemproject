@@ -25,7 +25,14 @@ namespace ElectricCarDB
                     int newid = -1;
                     using (ElectricCarEntities context = new ElectricCarEntities())
                     {
-                        newid = context.Stations.Count() + 1;  //read and lock station table
+                        if (context.Stations.Count() == 0)
+                        {
+                            newid = 1;
+                        }
+                        else
+                        {
+                            newid = context.Stations.Max(x => x.Id) + 1;
+                        } 
                         context.Stations.Add(new Station()
                         {
                             Id = newid,

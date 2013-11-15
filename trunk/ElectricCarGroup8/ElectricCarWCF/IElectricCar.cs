@@ -18,6 +18,11 @@ namespace ElectricCarWCF
         #endregion 
 
         #region Select path and Booking
+        [OperationContract]
+        List<Booking> getAllBookings();
+
+        [OperationContract]
+        Booking getBooking(int id);
         //search paths
 
         //add booking
