@@ -14,10 +14,117 @@ namespace ElectricCarWCF
     {
         #region People
 
-        public string getME()
+        #region Employees
+
+        public void addEmployee()
         {
             throw new NotImplementedException();
         }
+
+        public Employee getEmployee()
+        {
+            throw new NotImplementedException();
+        }
+
+        public List<Employee> getAllEmployees()
+        {
+            throw new NotImplementedException();
+        }
+
+        public void updateEmployee()
+        {
+            throw new NotImplementedException();
+        }
+
+        public void deleteEmployee()
+        {
+            throw new NotImplementedException();
+        }
+
+        #endregion
+
+        #region Customers
+
+        public void addCustomer()
+        {
+            throw new NotImplementedException();
+        }
+
+        public Customer getCustomer()
+        {
+            throw new NotImplementedException();
+        }
+
+        public List<Customer> getAllCustomers()
+        {
+            throw new NotImplementedException();
+        }
+
+        public void updateCustomer()
+        {
+            throw new NotImplementedException();
+        }
+
+        public void deleteCustomer()
+        {
+            throw new NotImplementedException();
+        }
+
+        #endregion
+
+        #region Log Infos
+
+        public void addLogInfo()
+        {
+            throw new NotImplementedException();
+        }
+
+        public List<LogInfo> getPersonLogInfos()
+        {
+            throw new NotImplementedException();
+        }
+
+        public void updateLogInfo()
+        {
+            throw new NotImplementedException();
+        }
+
+        public void deleteLogInfo()
+        {
+            throw new NotImplementedException();
+        }
+
+        #endregion
+
+        #region Discount Groups
+
+        public void addDiscountGroup()
+        {
+            throw new NotImplementedException();
+        }
+
+        public DiscountGroup getDiscoutGroup()
+        {
+            throw new NotImplementedException();
+        }
+
+        public List<DiscountGroup> getAllDiscountGroups()
+        {
+            throw new NotImplementedException();
+        }
+
+        public void updateDiscountGroup()
+        {
+            throw new NotImplementedException();
+        }
+
+        public void deleteDiscountGroup()
+        {
+            throw new NotImplementedException();
+        }
+
+        #endregion
+
         #endregion
 
         #region Booking

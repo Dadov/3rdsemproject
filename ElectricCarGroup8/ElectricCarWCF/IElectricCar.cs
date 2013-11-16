@@ -13,10 +13,80 @@ namespace ElectricCarWCF
     {
         #region People
 
-        [OperationContract]
-        string getME();
+        #region Employees
 
-        #endregion 
+        [OperationContract]
+        void addEmployee();
+
+        [OperationContract]
+        Employee getEmployee();
+
+        [OperationContract]
+        List<Employee> getAllEmployees();
+
+        [OperationContract]
+        void updateEmployee();
+
+        [OperationContract]
+        void deleteEmployee();
+
+        #endregion
+
+        #region Customers
+
+        [OperationContract]
+        void addCustomer();
+
+        [OperationContract]
+        Customer getCustomer();
+
+        [OperationContract]
+        List<Customer> getAllCustomers();
+
+        [OperationContract]
+        void updateCustomer();
+
+        [OperationContract]
+        void deleteCustomer();
+
+        #endregion
+
+        #region Log Infos
+
+        [OperationContract]
+        void addLogInfo();
+
+        [OperationContract]
+        List<LogInfo> getPersonLogInfos();
+
+        [OperationContract]
+        void updateLogInfo();
+
+        [OperationContract]
+        void deleteLogInfo();
+
+        #endregion
+
+        #region Discount Groups
+
+        [OperationContract]
+        void addDiscountGroup();
+
+        [OperationContract]
+        DiscountGroup getDiscoutGroup();
+
+        [OperationContract]
+        List<DiscountGroup> getAllDiscountGroups();
+
+        [OperationContract]
+        void updateDiscountGroup();
+
+        [OperationContract]
+        void deleteDiscountGroup();
+
+        #endregion
+
+        #endregion
 
         #region Select path and Booking
         [OperationContract]
