@@ -98,7 +98,7 @@ namespace ElectricCarWCF
         int addNewStorage(int btID, int sID);
         
         [OperationContract]
-         public BatteryStorage getStorage(int id);
+        BatteryStorage getStorage(int id);
       
         [OperationContract]
         void deleteStorage(int id);

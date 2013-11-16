@@ -8,7 +8,7 @@ using System.Threading.Tasks;
 namespace ElectricCarWCF
 {
     [DataContract]
-    class BatteryStorage
+    public class BatteryStorage
     {
         [DataMember]
         public int ID;
