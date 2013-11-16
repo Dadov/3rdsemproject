@@ -328,10 +328,20 @@ namespace ElectricCarWCF
             sCtr.updateRecord(id, btid, sID);
         }
 
-        public List<MBatteryStorage> getAllRecord()
+        public List<BatteryStorage> getAllRecord()
         {
             BatteryStorageCtr sCtr = new BatteryStorageCtr();
-            return sCtr.getAllRecord(true);
+            List<MBatteryStorage> storages = sCtr.getAllRecord(true);
+            List<BatteryStorage> bss = new List<BatteryStorage>();
+            foreach (MBatteryStorage storage in storages)
+            {
+                BatteryStorage bs = new BatteryStorage();
+                bs.ID = storage.id;
+                bs.typeID = storage.type.id;
+                bs.periods = getStoragePeriods(bs.ID);
+                bss.Add(bs);
+            }
+            return bss;
         }
 
         public List<string> getAllInfo()

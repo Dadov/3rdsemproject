@@ -69,7 +69,7 @@
                         <TabItem Header="BatteryStorage">
                             <Grid Background="#FFE5E5E5">
                                 <TextBox HorizontalAlignment="Left" Height="23" Margin="30,37,0,0" TextWrapping="Wrap" VerticalAlignment="Top" Width="454" KeyUp="smartSearch"/>
-                                <DataGrid HorizontalAlignment="Left" VerticalAlignment="Top" Height="172" Width="454" Margin="30,60,0,0">
+                                <DataGrid x:Name="dgStorage" HorizontalAlignment="Left" VerticalAlignment="Top" Height="172" Width="454" Margin="30,60,0,0">
                                     <DataGrid.Columns>
                                         <DataGridTextColumn Binding="{Binding ID}" Header="ID" Width="0.2*" IsReadOnly="True" SortDirection="Ascending"/>
                                         <DataGridTextColumn Binding="{Binding Type ID}" Header="Type ID" Width="0.2*" IsReadOnly="True"/>
@@ -129,7 +129,7 @@
                             <Button x:Name="tbtnCancel" Content="Clear" HorizontalAlignment="Left" Margin="811,260,0,0" VerticalAlignment="Top" Width="75" Click="tbtnCancel_Click"/>
                                 <Label Content="Insert:" HorizontalAlignment="Left" Margin="30,260,0,0" VerticalAlignment="Top"/>
                                 <TextBox HorizontalAlignment="Left" Height="23" Margin="77,260,0,0" TextWrapping="Wrap" Text="0" VerticalAlignment="Top" Width="25"/>
-                                <Label Content="Batteries" HorizontalAlignment="Left" Margin="107,260,0,0" VerticalAlignment="Top"/>
+                                <Label Content="Batteries to selected battery type" HorizontalAlignment="Left" Margin="107,260,0,0" VerticalAlignment="Top"/>
                                 <Button x:Name="tbBtnInsert"  Content="Insert" HorizontalAlignment="Left" Margin="409,260,0,0" VerticalAlignment="Top" Width="75" Click="tbBtnInsert_Click"/>
                             </Grid>
                             </TabItem>
