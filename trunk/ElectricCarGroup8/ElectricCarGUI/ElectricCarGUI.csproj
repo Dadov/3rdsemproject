@@ -133,11 +133,20 @@
     <None Include="Service References\ElectricCarService\ElectricCarGUI.ElectricCarService.Booking.datasource">
       <DependentUpon>Reference.svcmap</DependentUpon>
     </None>
+    <None Include="Service References\ElectricCarService\ElectricCarGUI.ElectricCarService.MBatteryStorage1.datasource">
+      <DependentUpon>Reference.svcmap</DependentUpon>
+    </None>
+    <None Include="Service References\ElectricCarService\ElectricCarGUI.ElectricCarService.MBatteryType1.datasource">
+      <DependentUpon>Reference.svcmap</DependentUpon>
+    </None>
     <None Include="Service References\ElectricCarService\ElectricCarGUI.ElectricCarService.NaborStation.datasource">
       <DependentUpon>Reference.svcmap</DependentUpon>
     </None>
     <None Include="Service References\ElectricCarService\ElectricCarGUI.ElectricCarService.Station.datasource">
       <DependentUpon>Reference.svcmap</DependentUpon>
+    </None>
+    <None Include="Service References\ElectricCarService\ElectricCarModelLayer.xsd">
+      <SubType>Designer</SubType>
     </None>
     <None Include="Service References\ElectricCarService\ElectricCarWCF.xsd">
       <SubType>Designer</SubType>

@@ -27,9 +27,9 @@ namespace ElectricCarGUI
         public MainView(string name, string position)
         {
             InitializeComponent();
-            lblName.Content = name;
-            addStateStringToCbb();
-            showStations();
+            //lblName.Content = name;
+            //addStateStringToCbb();
+            //showStations();
         }
 
         private void addStateStringToCbb()
@@ -279,11 +279,50 @@ namespace ElectricCarGUI
             if (serviceObj.getStation(Convert.ToInt32(txtStationId.Text)) != null)
             {
                 StationId = Convert.ToInt32(txtStationId.Text);
+                fillStorageTable(StationId);
+                fillTypeTable(StationId);
             }
             else
             {
                 MessageBox.Show("Station does not exist, please input another one.");
             }
+        }
+
+        private void tbBtnInsert_Click(object sender, RoutedEventArgs e)
+        {
+
+        }
+
+        private void tbtnCreate_Click(object sender, RoutedEventArgs e)
+        {
+
+        }
+
+        private void tbtnUpdate_Click(object sender, RoutedEventArgs e)
+        {
+
+        }
+
+        private void tbtnDelete_Click(object sender, RoutedEventArgs e)
+        {
+
+        }
+
+        private void tbtnCancel_Click(object sender, RoutedEventArgs e)
+        {
+
+        }
+
+        private void fillStorageTable(int StationID)
+        {
+            List<BatteryStorage> storages = serviceObj.getAllRecord().ToList();
+             dgStorage.ItemsSource = storages;
+        }
+
+        private void fillTypeTable(int StationID)
+        {
+            List<BatteryType> types = serviceObj.getAllBatteryTypes().ToList();
+            dgStorage.ItemsSource = types;
         }
 
         private void addInfoControl(object sender, RoutedEventArgs e)
@@ -297,6 +336,7 @@ namespace ElectricCarGUI
             BookingCtr bCtr = new BookingCtr();
             tabBooking.Content = bCtr;
         }
+        
         
 
     }
