@@ -14,6 +14,10 @@ namespace ElectricCarWCF
         public int Id { get; set; }
         [DataMember]
         public string name { get; set; }
+        [DataMember]
+        public int quantity { get; set; }
+        [DataMember]
+        public double price { get; set; }
         
     }
 }

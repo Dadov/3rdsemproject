@@ -31,6 +31,10 @@ namespace ElectricCarWCF
 
         //delete booking
 
+        [OperationContract]
+        List<BatteryTypeTest> getAllBatteryType();
+
+
         #endregion
 
         #region Stations

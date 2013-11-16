@@ -55,6 +55,9 @@
       <Generator>MSBuild:Compile</Generator>
       <SubType>Designer</SubType>
     </ApplicationDefinition>
+    <Compile Include="AddBatteryTypeWindow.xaml.cs">
+      <DependentUpon>AddBatteryTypeWindow.xaml</DependentUpon>
+    </Compile>
     <Compile Include="BookingCtr.xaml.cs">
       <DependentUpon>BookingCtr.xaml</DependentUpon>
     </Compile>
@@ -69,6 +72,10 @@
     <Compile Include="StationInfoCtr.xaml.cs">
       <DependentUpon>StationInfoCtr.xaml</DependentUpon>
     </Compile>
+    <Page Include="AddBatteryTypeWindow.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
     <Page Include="BookingCtr.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
@@ -119,6 +126,9 @@
     <AppDesigner Include="Properties\" />
     <None Include="Service References\ElectricCarService\Arrays.xsd">
       <SubType>Designer</SubType>
+    </None>
+    <None Include="Service References\ElectricCarService\ElectricCarGUI.ElectricCarService.BatteryTypeTest.datasource">
+      <DependentUpon>Reference.svcmap</DependentUpon>
     </None>
     <None Include="Service References\ElectricCarService\ElectricCarGUI.ElectricCarService.Booking.datasource">
       <DependentUpon>Reference.svcmap</DependentUpon>

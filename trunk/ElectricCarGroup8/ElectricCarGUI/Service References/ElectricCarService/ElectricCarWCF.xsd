@@ -40,6 +40,8 @@
     <xs:sequence>
       <xs:element minOccurs="0" name="Id" type="xs:int" />
       <xs:element minOccurs="0" name="name" nillable="true" type="xs:string" />
+      <xs:element minOccurs="0" name="price" type="xs:double" />
+      <xs:element minOccurs="0" name="quantity" type="xs:int" />
     </xs:sequence>
   </xs:complexType>
   <xs:element name="BatteryTypeTest" nillable="true" type="tns:BatteryTypeTest" />
@@ -60,6 +62,12 @@
     </xs:sequence>
   </xs:complexType>
   <xs:element name="CustomerTest" nillable="true" type="tns:CustomerTest" />
+  <xs:complexType name="ArrayOfBatteryTypeTest">
+    <xs:sequence>
+      <xs:element minOccurs="0" maxOccurs="unbounded" name="BatteryTypeTest" nillable="true" type="tns:BatteryTypeTest" />
+    </xs:sequence>
+  </xs:complexType>
+  <xs:element name="ArrayOfBatteryTypeTest" nillable="true" type="tns:ArrayOfBatteryTypeTest" />
   <xs:complexType name="ArrayOfStation">
     <xs:sequence>
       <xs:element minOccurs="0" maxOccurs="unbounded" name="Station" nillable="true" type="tns:Station" />

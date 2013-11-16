@@ -20,7 +20,7 @@ namespace ElectricCarWCF
         }
         #endregion
 
-
+        #region Booking
         public List<Booking> getAllBookings()
         {
             List<Booking> bookings = new List<Booking>();
@@ -102,6 +102,27 @@ namespace ElectricCarWCF
             return bk;
         }
 
+        public List<BatteryTypeTest> getAllBatteryType()
+        {
+            List<BatteryTypeTest> bts = new List<BatteryTypeTest>();
+            BatteryTypeCtr btCtr = new BatteryTypeCtr();
+            List<MBatteryType> bt = btCtr.getAllRecord(false);
+            if (bt.Count !=0)
+            {
+                foreach (MBatteryType b in bt)
+                {
+                    BatteryTypeTest btt = new BatteryTypeTest();
+                    btt.Id = b.id;
+                    btt.name = b.name;
+                    btt.price = Convert.ToDouble(b.exchangeCost);
+                    bts.Add(btt);
+                }
+            }
+
+            return bts;
+        }
+
+        #endregion
 
         #region Statons
         public List<Station> getAllStations()

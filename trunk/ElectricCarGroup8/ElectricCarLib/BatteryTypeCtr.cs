@@ -12,7 +12,7 @@ using ElectricCarModelLayer;
 
 namespace ElectricCarLib
 {
-    class BatteryTypeCtr:IDisposable
+    public class BatteryTypeCtr:IDisposable
     {
 
         public int addNewRecord(string name, string producer, decimal capacity, decimal exchangeCost, int storageNumber)
@@ -43,7 +43,7 @@ namespace ElectricCarLib
         public List<MBatteryType> getAllRecord(Boolean getAssociation)
         {
             IDBatteryType dbBatteryType = new DBatteryType();
-            return dbBatteryType.getAllRecord(true); 
+            return dbBatteryType.getAllRecord(getAssociation); 
         }
 
         public List<string> getAllInfo()

@@ -371,6 +371,12 @@ namespace ElectricCarGUI.ElectricCarService {
         [System.Runtime.Serialization.OptionalFieldAttribute()]
         private string nameField;
         
+        [System.Runtime.Serialization.OptionalFieldAttribute()]
+        private double priceField;
+        
+        [System.Runtime.Serialization.OptionalFieldAttribute()]
+        private int quantityField;
+        
         [global::System.ComponentModel.BrowsableAttribute(false)]
         public System.Runtime.Serialization.ExtensionDataObject ExtensionData {
             get {
@@ -403,6 +409,32 @@ namespace ElectricCarGUI.ElectricCarService {
                 if ((object.ReferenceEquals(this.nameField, value) != true)) {
                     this.nameField = value;
                     this.RaisePropertyChanged("name");
+                }
+            }
+        }
+        
+        [System.Runtime.Serialization.DataMemberAttribute()]
+        public double price {
+            get {
+                return this.priceField;
+            }
+            set {
+                if ((this.priceField.Equals(value) != true)) {
+                    this.priceField = value;
+                    this.RaisePropertyChanged("price");
+                }
+            }
+        }
+        
+        [System.Runtime.Serialization.DataMemberAttribute()]
+        public int quantity {
+            get {
+                return this.quantityField;
+            }
+            set {
+                if ((this.quantityField.Equals(value) != true)) {
+                    this.quantityField = value;
+                    this.RaisePropertyChanged("quantity");
                 }
             }
         }
@@ -657,6 +689,12 @@ namespace ElectricCarGUI.ElectricCarService {
         [System.ServiceModel.OperationContractAttribute(Action="http://tempuri.org/IElectricCar/getBooking", ReplyAction="http://tempuri.org/IElectricCar/getBookingResponse")]
         System.Threading.Tasks.Task<ElectricCarGUI.ElectricCarService.Booking> getBookingAsync(int id);
         
+        [System.ServiceModel.OperationContractAttribute(Action="http://tempuri.org/IElectricCar/getAllBatteryType", ReplyAction="http://tempuri.org/IElectricCar/getAllBatteryTypeResponse")]
+        ElectricCarGUI.ElectricCarService.BatteryTypeTest[] getAllBatteryType();
+        
+        [System.ServiceModel.OperationContractAttribute(Action="http://tempuri.org/IElectricCar/getAllBatteryType", ReplyAction="http://tempuri.org/IElectricCar/getAllBatteryTypeResponse")]
+        System.Threading.Tasks.Task<ElectricCarGUI.ElectricCarService.BatteryTypeTest[]> getAllBatteryTypeAsync();
+        
         [System.ServiceModel.OperationContractAttribute(Action="http://tempuri.org/IElectricCar/getAllStations", ReplyAction="http://tempuri.org/IElectricCar/getAllStationsResponse")]
         ElectricCarGUI.ElectricCarService.Station[] getAllStations();
         
@@ -767,6 +805,14 @@ namespace ElectricCarGUI.ElectricCarService {
         
         public System.Threading.Tasks.Task<ElectricCarGUI.ElectricCarService.Booking> getBookingAsync(int id) {
             return base.Channel.getBookingAsync(id);
+        }
+        
+        public ElectricCarGUI.ElectricCarService.BatteryTypeTest[] getAllBatteryType() {
+            return base.Channel.getAllBatteryType();
+        }
+        
+        public System.Threading.Tasks.Task<ElectricCarGUI.ElectricCarService.BatteryTypeTest[]> getAllBatteryTypeAsync() {
+            return base.Channel.getAllBatteryTypeAsync();
         }
         
         public ElectricCarGUI.ElectricCarService.Station[] getAllStations() {
