@@ -4,6 +4,7 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 using System.ServiceModel;
+using ElectricCarModelLayer;
 
 namespace ElectricCarWCF
 {
@@ -71,6 +72,58 @@ namespace ElectricCarWCF
         #endregion
 
         #region Batteries
+
+        #region BatteryType
+        [OperationContract]
+        int addBatteryType(string name, string producer, decimal capacity, decimal exchangeCost, int storageNumber);
+
+        [OperationContract]
+        BatteryType getBatteryType(int id);
+
+        [OperationContract]
+        void deleteBatteryType(int id);
+
+        [OperationContract]
+        void updateBatteryType(int id, string name, string producer, decimal capacity, decimal exchangeCost, int storageNumber);
+
+        [OperationContract]
+        List<BatteryType> getAllBatteryTypes();
+
+        [OperationContract]
+        List<string> getAllInfoTypes();
+        #endregion
+
+        #region BatteryStorage
+        [OperationContract]
+        int addNewStorage(int btID, int sID);
+        
+        [OperationContract]
+         public BatteryStorage getStorage(int id);
+      
+        [OperationContract]
+        void deleteStorage(int id);
+
+        [OperationContract]
+        void updateStorage(int id, int btid, int sID);
+
+        [OperationContract]
+        List<BatteryStorage> getAllRecord();
+
+        [OperationContract]
+        List<string> getAllInfo();
+        #endregion
+
+        #region Period
+        [OperationContract]
+        Period getPeriod(int bsID, DateTime time);
+
+        [OperationContract]
+        List<Period> getAllPeriods();
+
+        [OperationContract]
+        List<Period> getStoragePeriods(int bsID);
+
+        #endregion
 
         #endregion
     }

@@ -30,6 +30,16 @@ namespace ElectricCarLib
             return init;
         }
 
+        public void createFirstPeriod(int storageID)
+        {
+            MBatteryStorage storage = dbStorage.getRecord(storageID, true);
+            MPeriod period = new MPeriod();
+            period.bookedBatteryNumber = 0;
+            period.initBatteryNumber = getInitNumber(storage);
+            period.time = DateTime.Today.AddDays(1);
+            dbPeriod.addNewRecord(storage.id, period.time, period.initBatteryNumber, period.bookedBatteryNumber);
+        }
+
         public MPeriod createPeriod(MBatteryStorage storage)
         {
             storage = dbStorage.getRecord(storage.id, true);
