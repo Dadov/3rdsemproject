@@ -8,7 +8,7 @@ using ElectricCarDB;
 
 namespace ElectricCarLib
 {
-    class PeriodCtr:IDisposable
+    public class PeriodCtr:IDisposable
     {
         public int addNewRecord(int bsID, DateTime time)
         {
@@ -45,6 +45,12 @@ namespace ElectricCarLib
         {
             IDPeriod dbPeriod = new DBPeriod();
             return dbPeriod.getAllRecord(true);
+        }
+
+        public List<MPeriod> getStoragePeriods(int bsID)
+        {
+            IDPeriod dbPeriod = new DBPeriod();
+            return dbPeriod.getStoragePeriods(bsID, true);
         }
 
         public List<string> getAllInfo()

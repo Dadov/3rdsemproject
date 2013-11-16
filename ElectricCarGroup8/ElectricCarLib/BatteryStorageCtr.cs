@@ -14,6 +14,8 @@ namespace ElectricCarLib
         {
             IDBBatteryStorage dbStorage = new DBBatteryStorage();
             int id = dbStorage.addNewRecord(btID,sID);
+            PeriodCalculator pCalc = new PeriodCalculator();
+            pCalc.createFirstPeriod(id);
             return id;
         }
 
@@ -40,6 +42,7 @@ namespace ElectricCarLib
             IDBBatteryStorage dbStorage = new DBBatteryStorage();
             return dbStorage.getAllRecord(true);
         }
+
 
         public List<string> getAllInfo()
         {

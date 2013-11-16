@@ -228,5 +228,178 @@ namespace ElectricCarWCF
         }
 
         #endregion
+
+        #region Battery
+
+        #region BatteryType
+        public int addBatteryType(string name, string producer, decimal capacity, decimal exchangeCost, int storageNumber)
+        {
+            BatteryTypeCtr tCtr = new BatteryTypeCtr();
+            return tCtr.addNewRecord(name, producer, capacity, exchangeCost, storageNumber);
+        }
+
+        public BatteryType getBatteryType(int id)
+        {
+            BatteryTypeCtr tCtr = new BatteryTypeCtr();
+            MBatteryType type = tCtr.getRecord(id, true);
+            BatteryType bt = new BatteryType();
+            if (type != null)
+            {
+                bt.ID = type.id;
+                bt.name = type.name;
+                bt.producer = type.producer;
+                bt.capacity = (int)type.capacity;
+                bt.exchangeCost = (int)type.exchangeCost;
+                bt.storageNumber = (int)type.storageNumber;
+            }
+            return bt;
+        }
+
+        public void deleteBatteryType(int id)
+        {
+            BatteryTypeCtr tCtr = new BatteryTypeCtr();
+            tCtr.deleteRecord(id);
+        }
+
+        public void updateBatteryType(int id, string name, string producer, decimal capacity, decimal exchangeCost, int storageNumber)
+        {
+            BatteryTypeCtr tCtr = new BatteryTypeCtr();
+            tCtr.updateRecord(id, name, producer, capacity, exchangeCost, storageNumber);
+        }
+
+        public List<BatteryType> getAllBatteryTypes()
+        {
+            BatteryTypeCtr tCtr = new BatteryTypeCtr();
+            List<MBatteryType> types = tCtr.getAllRecord(true);
+            List<BatteryType> bts = new List<BatteryType>();
+            foreach (MBatteryType type in types)
+            {
+                BatteryType bt = new BatteryType();
+                bt.ID = type.id;
+                bt.name = type.name;
+                bt.producer = type.producer;
+                bt.capacity = (int)type.capacity;
+                bt.exchangeCost = (int)type.exchangeCost;
+                bt.storageNumber = (int)type.storageNumber;
+                bts.Add(bt);
+            }
+            return bts;
+        }
+
+        public List<string> getAllInfoTypes()
+        {
+            BatteryTypeCtr tCtr = new BatteryTypeCtr();
+            return tCtr.getAllInfo();
+        }
+        #endregion
+
+        #region BatteryStorage
+
+        public int addNewStorage(int btID, int sID)
+        {
+            BatteryStorageCtr sCtr = new BatteryStorageCtr();
+            return sCtr.addNewRecord(btID, sID);
+        }
+
+        public BatteryStorage getStorage(int id)
+        {
+            BatteryStorageCtr sCtr = new BatteryStorageCtr();
+            PeriodCtr pCtr = new PeriodCtr();
+            MBatteryStorage storage = sCtr.getRecord(id, true);
+            BatteryStorage s = new BatteryStorage();
+            if (storage != null)
+            {
+                s.ID = storage.id;
+                s.typeID = storage.type.id;
+                s.periods = getStoragePeriods(id);
+            }
+            return s;
+        }
+
+        public void deleteStorage(int id)
+        {
+            BatteryStorageCtr sCtr = new BatteryStorageCtr();
+            sCtr.deleteRecord(id);
+        }
+
+        public void updateStorage(int id, int btid, int sID)
+        {
+            BatteryStorageCtr sCtr = new BatteryStorageCtr();
+            sCtr.updateRecord(id, btid, sID);
+        }
+
+        public List<MBatteryStorage> getAllRecord()
+        {
+            BatteryStorageCtr sCtr = new BatteryStorageCtr();
+            return sCtr.getAllRecord(true);
+        }
+
+        public List<string> getAllInfo()
+        {
+            BatteryStorageCtr sCtr = new BatteryStorageCtr();
+            return sCtr.getAllInfo();
+        }
+
+
+        #endregion
+
+        #region Period
+
+        public Period getPeriod(int bsID, DateTime time)
+        {
+            PeriodCtr pCtr = new PeriodCtr();
+            MPeriod period = pCtr.getRecord(bsID, time, true);
+            Period p = new Period();
+            if (period != null)
+            {
+                p.bsID = bsID;
+                p.availNumber = period.initBatteryNumber;
+                p.bookedNumber = period.bookedBatteryNumber;
+                p.time = period.time;
+            }
+            return p;
+        }
+
+
+        public List<Period> getAllPeriods()
+        {
+            PeriodCtr pCtr = new PeriodCtr();
+            List<MPeriod> periods = pCtr.getAllRecord(true);
+            List<Period> ps = new List<Period>();
+            foreach (MPeriod period in periods)
+            {
+                Period p = new Period();
+                p.availNumber = period.initBatteryNumber;
+                p.bookedNumber = period.bookedBatteryNumber;
+                p.time = period.time;
+            }
+            return ps;
+        }
+
+        public List<Period> getStoragePeriods(int bsID)
+        {
+            PeriodCtr pCtr = new PeriodCtr();
+            List<MPeriod> periods = pCtr.getStoragePeriods(bsID);
+            List<Period> ps = new List<Period>();
+            foreach (MPeriod period in periods)
+            {
+                Period p = new Period();
+                p.availNumber = period.initBatteryNumber;
+                p.bookedNumber = period.bookedBatteryNumber;
+                p.time = period.time;
+            }
+            return ps;
+        }
+
+        #endregion
+        #endregion
+
+
+
+
+
+
+
+       
     }
 }
