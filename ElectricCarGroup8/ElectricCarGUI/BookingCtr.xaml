@@ -25,7 +25,7 @@
         </DataGrid>
 
         <Label Content="Id: " HorizontalAlignment="Left" Margin="331,28,0,0" VerticalAlignment="Top" Width="105" Grid.Column="2"/>
-        <TextBox x:Name="txtBId" HorizontalAlignment="Left" Height="23" Margin="453,28,0,0" TextWrapping="Wrap" VerticalAlignment="Top" Width="120" Grid.Column="2"/>
+        <TextBox x:Name="txtBId" HorizontalAlignment="Left" Height="23" Margin="453,28,0,0" TextWrapping="Wrap" VerticalAlignment="Top" Width="120" Grid.Column="2" IsReadOnly="True"/>
         <Label Content="CustomerId: " HorizontalAlignment="Left" Margin="606,28,0,0" VerticalAlignment="Top" Width="90" Grid.Column="2"/>
         <TextBox x:Name="txtCId" HorizontalAlignment="Left" Height="23" Margin="717,28,0,0" TextWrapping="Wrap" VerticalAlignment="Top" Width="120" Grid.Column="2"/>
         <Label Content="StartStationId: " HorizontalAlignment="Left" Margin="331,59,0,0" VerticalAlignment="Top" Width="105" Grid.Column="2"/>
@@ -60,8 +60,8 @@
             </DataGrid.Columns>
         </DataGrid>
 
-        <Button Content="Add" HorizontalAlignment="Left" Margin="337,425,0,0" VerticalAlignment="Top" Width="75" Grid.Column="2"/>
-        <Button Content="Delete" HorizontalAlignment="Left" Margin="426,425,0,0" VerticalAlignment="Top" Width="75" Grid.Column="2"/>
+        <Button x:Name="btnAddBT" Content="Add" HorizontalAlignment="Left" Margin="337,425,0,0" VerticalAlignment="Top" Width="75" Grid.Column="2" Click="btnAddBT_Click"/>
+        <Button x:Name="btnDeleteBT" Content="Delete" HorizontalAlignment="Left" Margin="426,425,0,0" VerticalAlignment="Top" Width="75" Grid.Column="2" Click="btnDeleteBT_Click"/>
         <Button Content="Select Route" HorizontalAlignment="Left" Margin="593,425,0,0" VerticalAlignment="Top" Width="87" Grid.Column="2"/>
         <Button Content="Add" HorizontalAlignment="Left" Margin="445,487,0,0" VerticalAlignment="Top" Width="75" Grid.Column="2"/>
         <Button Content="Update" HorizontalAlignment="Left" Margin="525,487,0,0" VerticalAlignment="Top" Width="75" Grid.Column="2"/>

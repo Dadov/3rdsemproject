@@ -86,5 +86,26 @@ namespace ElectricCarGUI
             txtBId.Text = txtCId.Text = txtCreateDate.Text = txtEId.Text = txtSId.Text = txtTotalPrice.Text = txtTripStart.Text = "";
             cbbPayStatus.SelectedIndex = 0;
         }
+
+        private BatteryTypeTest bt = new BatteryTypeTest();
+        private void btnAddBT_Click(object sender, RoutedEventArgs e)
+        {
+            if (dgBookingLine.ItemsSource==null)
+            {
+                AddBatteryTypeWindow btWin = new AddBatteryTypeWindow(this);
+                btWin.Visibility = Visibility.Visible;
+            }
+            else
+            {
+                MessageBox.Show("Only one battery type is allowed to added. Please delete the old one before adding.");
+            }
+            
+        }
+
+        private void btnDeleteBT_Click(object sender, RoutedEventArgs e)
+        {
+            bt = new BatteryTypeTest();
+            dgBookingLine.ItemsSource = null;
+        }
     }
 }
