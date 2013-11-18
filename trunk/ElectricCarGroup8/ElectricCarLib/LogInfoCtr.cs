@@ -33,6 +33,11 @@ namespace ElectricCarLib
             dbLogInfo.updateRecord(id, loginName, password, personId);
         }
 
+        public void update(int id, string loginName, string password)
+        {
+            dbLogInfo.updateRecord(id, loginName, password);
+        }
+
         public List<MLogInfo> getAll()
         {
             return dbLogInfo.getAllRecord();

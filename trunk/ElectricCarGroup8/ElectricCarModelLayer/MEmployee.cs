@@ -17,8 +17,8 @@ namespace ElectricCarModelLayer
             StationId = sId;
         }
 
-        int StationId { get; set; }
-        EmployeePosition Position { get; set; }
+        public int StationId { get; set; }
+        public EmployeePosition Position { get; set; }
     }
 
     public enum EmployeePosition

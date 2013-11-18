@@ -8,6 +8,11 @@ namespace ElectricCarModelLayer
 {
     public class MLogInfo
     {
+        public MLogInfo()
+        {
+            //
+        }
+
         public MLogInfo(int id, string loginName, string password)
         {
             ID = id;

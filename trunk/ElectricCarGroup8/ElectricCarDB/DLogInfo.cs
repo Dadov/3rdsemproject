@@ -145,6 +145,37 @@ namespace ElectricCarDB
             }
         }
 
+        public void updateRecord(int id, string loginName, string password)
+        {
+            using (TransactionScope transaction = new TransactionScope((TransactionScopeOption.Required)))
+            {
+                try
+                {
+                    using (ElectricCarEntities context = new ElectricCarEntities())
+                    {
+                        try
+                        {
+                            LoginInfo li = context.LoginInfoes.Find(id);
+                            li.name = loginName;
+                            li.password = password;
+                            context.SaveChanges();
+                        }
+                        catch (Exception e)
+                        {
+                            throw new SystemException("Cannot update Login Info " + id + " record " +
+                                " with an error " + e.Message);
+                        }
+                    }
+                    transaction.Complete();
+                }
+                catch (TransactionAbortedException e)
+                {
+                    throw new SystemException("Cannot finish transaction for updating Login Info " +
+                       " with an error " + e.Message);
+                }
+            }
+        }
+
         public List<MLogInfo> getAllRecord()
         {
             using (ElectricCarEntities context = new ElectricCarEntities())

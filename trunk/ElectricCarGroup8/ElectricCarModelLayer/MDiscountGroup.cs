@@ -8,6 +8,11 @@ namespace ElectricCarModelLayer
 {
     public class MDiscountGroup
     {
+        public MDiscountGroup()
+        {
+            //
+        }
+
         public MDiscountGroup(int id, string name, Nullable<decimal> discount) 
         {
             ID = id;

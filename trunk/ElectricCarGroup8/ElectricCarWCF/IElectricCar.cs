@@ -16,73 +16,100 @@ namespace ElectricCarWCF
         #region Employees
 
         [OperationContract]
-        void addEmployee();
+        void addEmployee(string fname, string lname, string address, string country, string phone,
+            string email, string password, int stationId, string position);
 
         [OperationContract]
-        Employee getEmployee();
+        Employee getEmployee(int id);
 
         [OperationContract]
         List<Employee> getAllEmployees();
 
+        /*
         [OperationContract]
-        void updateEmployee();
-
+        void updateEmployee(int id, string fname, string lname, string address, string country,
+            string phone, string email, List<LogInfo> logInfos, int stationId, string position);
+        */
         [OperationContract]
-        void deleteEmployee();
+        void updateEmployee(Employee employee);
+        
+        [OperationContract]
+        void deleteEmployee(int id);
 
         #endregion
 
         #region Customers
 
         [OperationContract]
-        void addCustomer();
+        void addCustomer(string fname, string lname, string address, string country, string phone,
+            string email, string password, string payStatus, DiscountGroup discountGroup);
+
+        /*
+        [OperationContract]
+        void addCustomer(Customer customer);
+        */
 
         [OperationContract]
-        Customer getCustomer();
+        Customer getCustomer(int id);
 
         [OperationContract]
         List<Customer> getAllCustomers();
 
+        /*
         [OperationContract]
-        void updateCustomer();
+        void updateCustomer(int id, string fname, string lname, string address, string country,
+            string phone, string email, string password, List<LogInfos> logInfos, string payStatus, 
+            DiscountGroup discountGroup);
+        */
 
         [OperationContract]
-        void deleteCustomer();
+        void updateCustomer(Customer customer);
+
+        [OperationContract]
+        void deleteCustomer(int id);
 
         #endregion
 
         #region Log Infos
 
         [OperationContract]
-        void addLogInfo();
+        void addLogInfo(string loginName, string password, int personId);
 
         [OperationContract]
-        List<LogInfo> getPersonLogInfos();
+        List<LogInfo> getPersonLogInfos(int id);
+
+        /*
+        [OperationContract]
+        void updateLogInfo(int id, string loginName, string password);
+        */
+        [OperationContract]
+        void updateLogInfo(LogInfo logInfo);
 
         [OperationContract]
-        void updateLogInfo();
-
-        [OperationContract]
-        void deleteLogInfo();
+        void deleteLogInfo(int id);
 
         #endregion
 
         #region Discount Groups
 
         [OperationContract]
-        void addDiscountGroup();
+        void addDiscountGroup(string name, decimal discount);
 
         [OperationContract]
-        DiscountGroup getDiscoutGroup();
+        DiscountGroup getDiscoutGroup(int id);
 
         [OperationContract]
         List<DiscountGroup> getAllDiscountGroups();
 
+        /*
         [OperationContract]
-        void updateDiscountGroup();
+        void updateDiscountGroup(int id, string name, decimal discount);
+        */
+        [OperationContract]
+        void updateDiscountGroup(DiscountGroup discountGroup);
 
         [OperationContract]
-        void deleteDiscountGroup();
+        void deleteDiscountGroup(int id);
 
         #endregion
 
