@@ -179,11 +179,21 @@
     <None Include="Service References\ElectricCarService\ElectricCarWCF.xsd">
       <SubType>Designer</SubType>
     </None>
+    <None Include="Service References\ElectricCarService\ElectricCarWCF2.xsd">
+      <SubType>Designer</SubType>
+    </None>
     <None Include="Service References\ElectricCarService\service.wsdl" />
     <None Include="Service References\ElectricCarService\service.xsd">
       <SubType>Designer</SubType>
     </None>
     <None Include="Service References\ElectricCarService\service1.xsd">
+      <SubType>Designer</SubType>
+    </None>
+    <None Include="Service References\ElectricCarService\service2.wsdl" />
+    <None Include="Service References\ElectricCarService\service3.xsd">
+      <SubType>Designer</SubType>
+    </None>
+    <None Include="Service References\ElectricCarService\service4.xsd">
       <SubType>Designer</SubType>
     </None>
   </ItemGroup>

@@ -130,7 +130,7 @@ namespace ElectricCarDB
                     }
                         catch(Exception)
                         {
-                            throw new System.NullReferenceException("Can not find battery type");
+                            throw new System.NullReferenceException("Can not delete battery storage. Delete battery type first.");
                             //throw new SystemException("Can not find battery type");
                         }
                         if (success)
