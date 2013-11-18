@@ -1,5 +1,53 @@
 ﻿<?xml version="1.0" encoding="utf-8"?>
 <xs:schema xmlns:tns="http://schemas.datacontract.org/2004/07/ElectricCarWCF" elementFormDefault="qualified" targetNamespace="http://schemas.datacontract.org/2004/07/ElectricCarWCF" xmlns:xs="http://www.w3.org/2001/XMLSchema">
+  <xs:complexType name="Employee">
+    <xs:sequence />
+  </xs:complexType>
+  <xs:element name="Employee" nillable="true" type="tns:Employee" />
+  <xs:complexType name="ArrayOfEmployee">
+    <xs:sequence>
+      <xs:element minOccurs="0" maxOccurs="unbounded" name="Employee" nillable="true" type="tns:Employee" />
+    </xs:sequence>
+  </xs:complexType>
+  <xs:element name="ArrayOfEmployee" nillable="true" type="tns:ArrayOfEmployee" />
+  <xs:complexType name="Customer">
+    <xs:sequence />
+  </xs:complexType>
+  <xs:element name="Customer" nillable="true" type="tns:Customer" />
+  <xs:complexType name="ArrayOfCustomer">
+    <xs:sequence>
+      <xs:element minOccurs="0" maxOccurs="unbounded" name="Customer" nillable="true" type="tns:Customer" />
+    </xs:sequence>
+  </xs:complexType>
+  <xs:element name="ArrayOfCustomer" nillable="true" type="tns:ArrayOfCustomer" />
+  <xs:complexType name="ArrayOfLogInfo">
+    <xs:sequence>
+      <xs:element minOccurs="0" maxOccurs="unbounded" name="LogInfo" nillable="true" type="tns:LogInfo" />
+    </xs:sequence>
+  </xs:complexType>
+  <xs:element name="ArrayOfLogInfo" nillable="true" type="tns:ArrayOfLogInfo" />
+  <xs:complexType name="LogInfo">
+    <xs:sequence>
+      <xs:element minOccurs="0" name="ID" type="xs:int" />
+      <xs:element minOccurs="0" name="LoginName" nillable="true" type="xs:string" />
+      <xs:element minOccurs="0" name="Password" nillable="true" type="xs:string" />
+    </xs:sequence>
+  </xs:complexType>
+  <xs:element name="LogInfo" nillable="true" type="tns:LogInfo" />
+  <xs:complexType name="DiscountGroup">
+    <xs:sequence>
+      <xs:element minOccurs="0" name="Discount" type="xs:decimal" />
+      <xs:element minOccurs="0" name="ID" type="xs:int" />
+      <xs:element minOccurs="0" name="Name" nillable="true" type="xs:string" />
+    </xs:sequence>
+  </xs:complexType>
+  <xs:element name="DiscountGroup" nillable="true" type="tns:DiscountGroup" />
+  <xs:complexType name="ArrayOfDiscountGroup">
+    <xs:sequence>
+      <xs:element minOccurs="0" maxOccurs="unbounded" name="DiscountGroup" nillable="true" type="tns:DiscountGroup" />
+    </xs:sequence>
+  </xs:complexType>
+  <xs:element name="ArrayOfDiscountGroup" nillable="true" type="tns:ArrayOfDiscountGroup" />
   <xs:complexType name="ArrayOfBooking">
     <xs:sequence>
       <xs:element minOccurs="0" maxOccurs="unbounded" name="Booking" nillable="true" type="tns:Booking" />
@@ -90,4 +138,50 @@
     </xs:sequence>
   </xs:complexType>
   <xs:element name="NaborStation" nillable="true" type="tns:NaborStation" />
+  <xs:complexType name="BatteryType">
+    <xs:sequence>
+      <xs:element minOccurs="0" name="ID" type="xs:int" />
+      <xs:element minOccurs="0" name="capacity" type="xs:int" />
+      <xs:element minOccurs="0" name="exchangeCost" type="xs:int" />
+      <xs:element minOccurs="0" name="name" nillable="true" type="xs:string" />
+      <xs:element minOccurs="0" name="producer" nillable="true" type="xs:string" />
+      <xs:element minOccurs="0" name="storageNumber" type="xs:int" />
+    </xs:sequence>
+  </xs:complexType>
+  <xs:element name="BatteryType" nillable="true" type="tns:BatteryType" />
+  <xs:complexType name="ArrayOfBatteryType">
+    <xs:sequence>
+      <xs:element minOccurs="0" maxOccurs="unbounded" name="BatteryType" nillable="true" type="tns:BatteryType" />
+    </xs:sequence>
+  </xs:complexType>
+  <xs:element name="ArrayOfBatteryType" nillable="true" type="tns:ArrayOfBatteryType" />
+  <xs:complexType name="BatteryStorage">
+    <xs:sequence>
+      <xs:element minOccurs="0" name="ID" type="xs:int" />
+      <xs:element minOccurs="0" name="periods" nillable="true" type="tns:ArrayOfPeriod" />
+      <xs:element minOccurs="0" name="typeID" type="xs:int" />
+    </xs:sequence>
+  </xs:complexType>
+  <xs:element name="BatteryStorage" nillable="true" type="tns:BatteryStorage" />
+  <xs:complexType name="ArrayOfPeriod">
+    <xs:sequence>
+      <xs:element minOccurs="0" maxOccurs="unbounded" name="Period" nillable="true" type="tns:Period" />
+    </xs:sequence>
+  </xs:complexType>
+  <xs:element name="ArrayOfPeriod" nillable="true" type="tns:ArrayOfPeriod" />
+  <xs:complexType name="Period">
+    <xs:sequence>
+      <xs:element minOccurs="0" name="availNumber" type="xs:int" />
+      <xs:element minOccurs="0" name="bookedNumber" type="xs:int" />
+      <xs:element minOccurs="0" name="bsID" type="xs:int" />
+      <xs:element minOccurs="0" name="time" type="xs:dateTime" />
+    </xs:sequence>
+  </xs:complexType>
+  <xs:element name="Period" nillable="true" type="tns:Period" />
+  <xs:complexType name="ArrayOfBatteryStorage">
+    <xs:sequence>
+      <xs:element minOccurs="0" maxOccurs="unbounded" name="BatteryStorage" nillable="true" type="tns:BatteryStorage" />
+    </xs:sequence>
+  </xs:complexType>
+  <xs:element name="ArrayOfBatteryStorage" nillable="true" type="tns:ArrayOfBatteryStorage" />
 </xs:schema>

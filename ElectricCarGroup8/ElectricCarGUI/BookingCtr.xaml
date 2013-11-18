@@ -62,12 +62,12 @@
 
         <Button x:Name="btnAddBT" Content="Add" HorizontalAlignment="Left" Margin="337,425,0,0" VerticalAlignment="Top" Width="75" Grid.Column="2" Click="btnAddBT_Click"/>
         <Button x:Name="btnDeleteBT" Content="Delete" HorizontalAlignment="Left" Margin="426,425,0,0" VerticalAlignment="Top" Width="75" Grid.Column="2" Click="btnDeleteBT_Click"/>
-        <Button Content="Select Route" HorizontalAlignment="Left" Margin="593,425,0,0" VerticalAlignment="Top" Width="87" Grid.Column="2"/>
+        <Button x:Name="btnSelectRoute" Content="Select Route" HorizontalAlignment="Left" Margin="593,425,0,0" VerticalAlignment="Top" Width="87" Grid.Column="2" Click="btnSelectRoute_Click"/>
         <Button Content="Add" HorizontalAlignment="Left" Margin="445,487,0,0" VerticalAlignment="Top" Width="75" Grid.Column="2"/>
         <Button Content="Update" HorizontalAlignment="Left" Margin="525,487,0,0" VerticalAlignment="Top" Width="75" Grid.Column="2"/>
         <Button Content="Delete" HorizontalAlignment="Left" Margin="605,487,0,0" VerticalAlignment="Top" Width="75" Grid.Column="2"/>
         <Button Content="Clear" HorizontalAlignment="Left" Margin="685,487,0,0" VerticalAlignment="Top" Width="75" Grid.Column="2" Click="Button_Click"/>
-        <Button Content="Delete Route" Grid.Column="2" HorizontalAlignment="Left" Margin="698,425,0,0" VerticalAlignment="Top" Width="87"/>
+        <Button x:Name="btnDeleteRoute" Content="Delete Route" Grid.Column="2" HorizontalAlignment="Left" Margin="698,425,0,0" VerticalAlignment="Top" Width="87" Click="btnDeleteRoute_Click"/>
         <ComboBox x:Name="cbbPayStatus" Grid.Column="2" HorizontalAlignment="Left" Margin="717,121,0,0" VerticalAlignment="Top" Width="120"/>
 
     </Grid>
