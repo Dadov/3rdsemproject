@@ -58,6 +58,9 @@
     <Compile Include="AddBatteryTypeWindow.xaml.cs">
       <DependentUpon>AddBatteryTypeWindow.xaml</DependentUpon>
     </Compile>
+    <Compile Include="AddRouteWindow.xaml.cs">
+      <DependentUpon>AddRouteWindow.xaml</DependentUpon>
+    </Compile>
     <Compile Include="BookingCtr.xaml.cs">
       <DependentUpon>BookingCtr.xaml</DependentUpon>
     </Compile>
@@ -73,6 +76,10 @@
       <DependentUpon>StationInfoCtr.xaml</DependentUpon>
     </Compile>
     <Page Include="AddBatteryTypeWindow.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="AddRouteWindow.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>
@@ -127,10 +134,28 @@
     <None Include="Service References\ElectricCarService\Arrays.xsd">
       <SubType>Designer</SubType>
     </None>
+    <None Include="Service References\ElectricCarService\ElectricCarGUI.ElectricCarService.BatteryStorage.datasource">
+      <DependentUpon>Reference.svcmap</DependentUpon>
+    </None>
+    <None Include="Service References\ElectricCarService\ElectricCarGUI.ElectricCarService.BatteryType.datasource">
+      <DependentUpon>Reference.svcmap</DependentUpon>
+    </None>
     <None Include="Service References\ElectricCarService\ElectricCarGUI.ElectricCarService.BatteryTypeTest.datasource">
       <DependentUpon>Reference.svcmap</DependentUpon>
     </None>
     <None Include="Service References\ElectricCarService\ElectricCarGUI.ElectricCarService.Booking.datasource">
+      <DependentUpon>Reference.svcmap</DependentUpon>
+    </None>
+    <None Include="Service References\ElectricCarService\ElectricCarGUI.ElectricCarService.Customer.datasource">
+      <DependentUpon>Reference.svcmap</DependentUpon>
+    </None>
+    <None Include="Service References\ElectricCarService\ElectricCarGUI.ElectricCarService.DiscountGroup.datasource">
+      <DependentUpon>Reference.svcmap</DependentUpon>
+    </None>
+    <None Include="Service References\ElectricCarService\ElectricCarGUI.ElectricCarService.Employee.datasource">
+      <DependentUpon>Reference.svcmap</DependentUpon>
+    </None>
+    <None Include="Service References\ElectricCarService\ElectricCarGUI.ElectricCarService.LogInfo.datasource">
       <DependentUpon>Reference.svcmap</DependentUpon>
     </None>
     <None Include="Service References\ElectricCarService\ElectricCarGUI.ElectricCarService.MBatteryStorage1.datasource">
@@ -140,6 +165,9 @@
       <DependentUpon>Reference.svcmap</DependentUpon>
     </None>
     <None Include="Service References\ElectricCarService\ElectricCarGUI.ElectricCarService.NaborStation.datasource">
+      <DependentUpon>Reference.svcmap</DependentUpon>
+    </None>
+    <None Include="Service References\ElectricCarService\ElectricCarGUI.ElectricCarService.Period.datasource">
       <DependentUpon>Reference.svcmap</DependentUpon>
     </None>
     <None Include="Service References\ElectricCarService\ElectricCarGUI.ElectricCarService.Station.datasource">

@@ -107,5 +107,16 @@ namespace ElectricCarGUI
             bt = new BatteryTypeTest();
             dgBookingLine.ItemsSource = null;
         }
+
+        private void btnSelectRoute_Click(object sender, RoutedEventArgs e)
+        {
+            AddRouoteWindow routeWin = new AddRouoteWindow(this);
+
+        }
+
+        private void btnDeleteRoute_Click(object sender, RoutedEventArgs e)
+        {
+            dgRoute.ItemsSource = null;
+        }
     }
 }

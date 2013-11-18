@@ -27,9 +27,9 @@ namespace ElectricCarGUI
         public MainView(string name, string position)
         {
             InitializeComponent();
-            //lblName.Content = name;
-            //addStateStringToCbb();
-            //showStations();
+            lblName.Content = name;
+            addStateStringToCbb();
+            showStations();
         }
 
         private void addStateStringToCbb()
@@ -51,7 +51,7 @@ namespace ElectricCarGUI
             string searchTerm = txtSearch.Text;
             List<Station> stations = serviceObj.getAllStations().ToList();
             dgStations.ItemsSource = stations;
-            if (searchTerm != null)
+            if (searchTerm != null && stations.Count != 0)
             {
                 var filter = new Predicate<object>(
                 s => ((Station)s).Id.ToString().ToLower().Contains(searchTerm)
