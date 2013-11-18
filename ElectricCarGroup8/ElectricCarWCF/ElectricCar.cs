@@ -435,7 +435,7 @@ namespace ElectricCarWCF
             sCtr.updateRecord(id, btid, sID);
         }
 
-        public List<BatteryStorage> getAllRecord()
+        public List<BatteryStorage> getAllStorages()
         {
             BatteryStorageCtr sCtr = new BatteryStorageCtr();
             List<MBatteryStorage> storages = sCtr.getAllRecord(true);
@@ -451,7 +451,7 @@ namespace ElectricCarWCF
             return bss;
         }
 
-        public List<string> getAllInfo()
+        public List<string> getAllStorageInfo()
         {
             BatteryStorageCtr sCtr = new BatteryStorageCtr();
             return sCtr.getAllInfo();
@@ -489,6 +489,7 @@ namespace ElectricCarWCF
                 p.availNumber = period.initBatteryNumber;
                 p.bookedNumber = period.bookedBatteryNumber;
                 p.time = period.time;
+                ps.Add(p);
             }
             return ps;
         }
@@ -504,6 +505,7 @@ namespace ElectricCarWCF
                 p.availNumber = period.initBatteryNumber;
                 p.bookedNumber = period.bookedBatteryNumber;
                 p.time = period.time;
+                ps.Add(p);
             }
             return ps;
         }

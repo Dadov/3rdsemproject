@@ -177,10 +177,10 @@ namespace ElectricCarWCF
         void updateStorage(int id, int btid, int sID);
 
         [OperationContract]
-        List<BatteryStorage> getAllRecord();
+        List<BatteryStorage> getAllStorages();
 
         [OperationContract]
-        List<string> getAllInfo();
+        List<string> getAllStorageInfo();
         #endregion
 
         #region Period

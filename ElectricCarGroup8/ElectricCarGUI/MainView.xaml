@@ -68,46 +68,45 @@
                         </TabItem>
                         <TabItem Header="BatteryStorage">
                             <Grid Background="#FFE5E5E5">
-                                <TextBox HorizontalAlignment="Left" Height="23" Margin="30,37,0,0" TextWrapping="Wrap" VerticalAlignment="Top" Width="454" KeyUp="smartSearch"/>
-                                <DataGrid x:Name="dgStorage" HorizontalAlignment="Left" VerticalAlignment="Top" Height="172" Width="454" Margin="30,60,0,0">
+                                <TextBox x:Name="bsSearch" HorizontalAlignment="Left" Height="23" Margin="30,37,0,0" TextWrapping="Wrap" VerticalAlignment="Top" Width="454" KeyUp="bsSearch_KeyUp"/>
+                                <DataGrid x:Name="dgStorage" HorizontalAlignment="Left" VerticalAlignment="Top" Height="172" Width="454" Margin="30,60,0,0" SelectionChanged="dgStorage_SelectionChanged">
                                     <DataGrid.Columns>
                                         <DataGridTextColumn Binding="{Binding ID}" Header="ID" Width="0.2*" IsReadOnly="True" SortDirection="Ascending"/>
-                                        <DataGridTextColumn Binding="{Binding Type ID}" Header="Type ID" Width="0.2*" IsReadOnly="True"/>
-                                        <DataGridTextColumn Binding="{Binding Period}" Header="Period" Width="0.2*" IsReadOnly="True"/>
+                                        <DataGridTextColumn Binding="{Binding typeID}" Header="Type ID" Width="0.2*" IsReadOnly="True"/>
                                     </DataGrid.Columns>
                                 </DataGrid>
                                 <Label Content="ID: " HorizontalAlignment="Left" Margin="571,48,0,0" VerticalAlignment="Top" Width="59"/>
-                                <Label Content="Type: " HorizontalAlignment="Left" Margin="571,79,0,0" VerticalAlignment="Top" Width="59"/>
+                                <Label Content="Type ID: " HorizontalAlignment="Left" Margin="571,79,0,0" VerticalAlignment="Top" Width="59"/>
                                 <Label Content="Station: " HorizontalAlignment="Left" Margin="571,110,0,0" VerticalAlignment="Top" Width="59"/>
                                 <TextBox x:Name="bsID" HorizontalAlignment="Left" Height="23" Margin="669,48,0,0" TextWrapping="Wrap" Text="" VerticalAlignment="Top" Width="189" IsReadOnly="True" />
                                 <TextBox x:Name="bsType" HorizontalAlignment="Left" Height="23" Margin="669,79,0,0" TextWrapping="Wrap" Text="" VerticalAlignment="Top" Width="189"/>
                                 <TextBox x:Name="bsStation" HorizontalAlignment="Left" Height="23" Margin="669,110,0,0" TextWrapping="Wrap" Text="" VerticalAlignment="Top" Width="189" IsReadOnly="True"/>
-                                <Button x:Name="sbtnCreate" Content="Add" HorizontalAlignment="Left" Margin="571,180,0,0" VerticalAlignment="Top" Width="75" Click="btnCreate_Click"/>
-                                <Button x:Name="sbtnUpdate" Content="Update" HorizontalAlignment="Left" Margin="651,180,0,0" VerticalAlignment="Top" Width="75" Click="btnUpdate_Click"/>
-                                <Button x:Name="sbtnDelete" Content="Delete" HorizontalAlignment="Left" Margin="731,180,0,0" VerticalAlignment="Top" Width="75" Click="btnDelete_Click"/>
-                                <Button x:Name="sbtnCancel" Content="Clear" HorizontalAlignment="Left" Margin="811,180,0,0" VerticalAlignment="Top" Width="75" Click="btnCancel_Click"/>
-                                <Calendar HorizontalAlignment="Left" Margin="571,278,0,0" VerticalAlignment="Top" Height="167" Width="315"/>
-                                <DataGrid HorizontalAlignment="Left" VerticalAlignment="Top" Height="167" Width="454" RenderTransformOrigin="0.517,0.521" Margin="30,278,0,0">
+                                <Button x:Name="sbtnCreate" Content="Add" HorizontalAlignment="Left" Margin="571,180,0,0" VerticalAlignment="Top" Width="75" Click="sbtnCreate_Click"/>
+                                <Button x:Name="sbtnUpdate" Content="Update" HorizontalAlignment="Left" Margin="651,180,0,0" VerticalAlignment="Top" Width="75" Click="sbtnUpdate_Click"/>
+                                <Button x:Name="sbtnDelete" Content="Delete" HorizontalAlignment="Left" Margin="731,180,0,0" VerticalAlignment="Top" Width="75" Click="sbtnDelete_Click"/>
+                                <Button x:Name="sbtnCancel" Content="Clear" HorizontalAlignment="Left" Margin="811,180,0,0" VerticalAlignment="Top" Width="75" Click="sbtnCancel_Click"/>
+                                <Calendar x:Name="calendar" HorizontalAlignment="Left" Margin="571,278,0,0" VerticalAlignment="Top" Height="167" Width="315" SelectedDatesChanged="calendar_SelectedDatesChanged"/>
+                                <DataGrid x:Name="dgPeriods" HorizontalAlignment="Left" VerticalAlignment="Top" Height="167" Width="454" RenderTransformOrigin="0.517,0.521" Margin="30,278,0,0">
                                     <DataGrid.Columns>
-                                        <DataGridTextColumn Binding="{Binding Time}" Header="Time" Width="0.2*" IsReadOnly="True"/>
-                                        <DataGridTextColumn Binding="{Binding Available Batteries}" Header="Available Batteries" Width="0.2*" IsReadOnly="True"/>
-                                        <DataGridTextColumn Binding="{Binding Booked Batteries}" Header="Booked Batteries" Width="0.2*" IsReadOnly="True"/>
+                                        <DataGridTextColumn Binding="{Binding bsID}" Header="Storage ID" Width="0.2*" IsReadOnly="True"/>
+                                        <DataGridTextColumn Binding="{Binding time}" Header="Time" Width="0.2*" IsReadOnly="True"/>
+                                        <DataGridTextColumn Binding="{Binding availNumber}" Header="Available Batteries" Width="0.2*" IsReadOnly="True"/>
+                                        <DataGridTextColumn Binding="{Binding bookedNumber}" Header="Booked Batteries" Width="0.2*" IsReadOnly="True"/>
                                     </DataGrid.Columns>
                                 </DataGrid>
                             </Grid>
                         </TabItem>
                         <TabItem Header="BatteryType">
                             <Grid Background="#FFE5E5E5">
-                            <TextBox HorizontalAlignment="Left" Height="23" Margin="30,37,0,0" TextWrapping="Wrap" VerticalAlignment="Top" Width="454" KeyUp="smartSearch"/>
-                            <DataGrid HorizontalAlignment="Left" VerticalAlignment="Top" Height="172" Width="454" Margin="30,60,0,0">
+                            <TextBox x:Name="btSearch" HorizontalAlignment="Left" Height="23" Margin="30,37,0,0" TextWrapping="Wrap" VerticalAlignment="Top" Width="454" KeyUp="btSearch_KeyUp"/>
+                            <DataGrid x:Name="dgType" HorizontalAlignment="Left" VerticalAlignment="Top" Height="172" Width="454" Margin="30,60,0,0" SelectionChanged="dgType_SelectionChanged">
                                 <DataGrid.Columns>
                                     <DataGridTextColumn Binding="{Binding ID}" Header="ID" Width="0.2*" IsReadOnly="True" SortDirection="Ascending"/>
-                                    <DataGridTextColumn Binding="{Binding Storage ID}" Header="Storage ID" Width="0.22*" IsReadOnly="True"/>
-                                    <DataGridTextColumn Binding="{Binding Name}" Header="Name" Width="0.2*" IsReadOnly="True"/>
-                                        <DataGridTextColumn Binding="{Binding Producer}" Header="Producer" Width="0.2*" IsReadOnly="True"/>
-                                        <DataGridTextColumn Binding="{Binding Capacity}" Header="Capacity" Width="0.2*" IsReadOnly="True"/>
-                                        <DataGridTextColumn Binding="{Binding ExchangeCost}" Header="Cost" Width="0.2*" IsReadOnly="True"/>
-                                        <DataGridTextColumn Binding="{Binding StorageNumber}" Header="Amount" Width="0.2*" IsReadOnly="True"/>
+                                    <DataGridTextColumn Binding="{Binding name}" Header="Name" Width="0.2*" IsReadOnly="True"/>
+                                        <DataGridTextColumn Binding="{Binding producer}" Header="Producer" Width="0.2*" IsReadOnly="True"/>
+                                        <DataGridTextColumn Binding="{Binding capacity}" Header="Capacity" Width="0.2*" IsReadOnly="True"/>
+                                        <DataGridTextColumn Binding="{Binding exchangeCost}" Header="Cost" Width="0.2*" IsReadOnly="True"/>
+                                        <DataGridTextColumn Binding="{Binding storageNumber}" Header="Amount" Width="0.2*" IsReadOnly="True"/>
                                     </DataGrid.Columns>
                             </DataGrid>
                             <Label Content="ID: " HorizontalAlignment="Left" Margin="571,48,0,0" VerticalAlignment="Top" Width="59"/>
@@ -117,18 +116,18 @@
                             <Label Content="Exchange Cost: " HorizontalAlignment="Left" Margin="571,172,0,0" VerticalAlignment="Top" Width="89"/>
                             <Label Content="Storage Number: " HorizontalAlignment="Left" Margin="571,203,0,0" VerticalAlignment="Top" Width="auto"/>
                             <TextBox x:Name="btID" HorizontalAlignment="Left" Height="23" Margin="669,48,0,0" TextWrapping="Wrap" Text="" VerticalAlignment="Top" Width="189" IsReadOnly="True" />
-                            <TextBox x:Name="bt" HorizontalAlignment="Left" Height="23" Margin="669,79,0,0" TextWrapping="Wrap" Text="" VerticalAlignment="Top" Width="189"/>
-                            <TextBox x:Name="btx" HorizontalAlignment="Left" Height="23" Margin="669,110,0,0" TextWrapping="Wrap" Text="" VerticalAlignment="Top" Width="189" IsReadOnly="True"/>
-                                <TextBox x:Name="btCap" HorizontalAlignment="Left" Height="23" Margin="669,141,0,0" TextWrapping="Wrap" Text="" VerticalAlignment="Top" Width="189" IsReadOnly="True" />
-                                <TextBox x:Name="btExc" HorizontalAlignment="Left" Height="23" Margin="669,172,0,0" TextWrapping="Wrap" Text="" VerticalAlignment="Top" Width="189" IsReadOnly="True" />
-                                <TextBox x:Name="btStor" HorizontalAlignment="Left" Height="23" Margin="669,203,0,0" TextWrapping="Wrap" Text="" VerticalAlignment="Top" Width="189" IsReadOnly="True" />
+                            <TextBox x:Name="btName" HorizontalAlignment="Left" Height="23" Margin="669,79,0,0" TextWrapping="Wrap" Text="" VerticalAlignment="Top" Width="189"/>
+                            <TextBox x:Name="btProd" HorizontalAlignment="Left" Height="23" Margin="669,110,0,0" TextWrapping="Wrap" Text="" VerticalAlignment="Top" Width="189"/>
+                                <TextBox x:Name="btCap" HorizontalAlignment="Left" Height="23" Margin="669,141,0,0" TextWrapping="Wrap" Text="" VerticalAlignment="Top" Width="189"  />
+                                <TextBox x:Name="btExc" HorizontalAlignment="Left" Height="23" Margin="669,172,0,0" TextWrapping="Wrap" Text="" VerticalAlignment="Top" Width="189"  />
+                                <TextBox x:Name="btStor" HorizontalAlignment="Left" Height="23" Margin="669,203,0,0" TextWrapping="Wrap" Text="" VerticalAlignment="Top" Width="189" />
 
                                 <Button x:Name="tbtnCreate" Content="Add" HorizontalAlignment="Left" Margin="571,260,0,0" VerticalAlignment="Top" Width="75" Click="tbtnCreate_Click"/>
                             <Button x:Name="tbtnUpdate" Content="Update" HorizontalAlignment="Left" Margin="651,260,0,0" VerticalAlignment="Top" Width="75" Click="tbtnUpdate_Click"/>
                             <Button x:Name="tbtnDelete" Content="Delete" HorizontalAlignment="Left" Margin="731,260,0,0" VerticalAlignment="Top" Width="75" Click="tbtnDelete_Click"/>
                             <Button x:Name="tbtnCancel" Content="Clear" HorizontalAlignment="Left" Margin="811,260,0,0" VerticalAlignment="Top" Width="75" Click="tbtnCancel_Click"/>
                                 <Label Content="Insert:" HorizontalAlignment="Left" Margin="30,260,0,0" VerticalAlignment="Top"/>
-                                <TextBox HorizontalAlignment="Left" Height="23" Margin="77,260,0,0" TextWrapping="Wrap" Text="0" VerticalAlignment="Top" Width="25"/>
+                                <TextBox x:Name="btAmount" HorizontalAlignment="Left" Height="23" Margin="77,260,0,0" TextWrapping="Wrap" Text="0" VerticalAlignment="Top" Width="25"/>
                                 <Label Content="Batteries to selected battery type" HorizontalAlignment="Left" Margin="107,260,0,0" VerticalAlignment="Top"/>
                                 <Button x:Name="tbBtnInsert"  Content="Insert" HorizontalAlignment="Left" Margin="409,260,0,0" VerticalAlignment="Top" Width="75" Click="tbBtnInsert_Click"/>
                             </Grid>

@@ -206,10 +206,6 @@ namespace ElectricCarDB
                 foreach (Period p in context.Periods)
                 {
                     MPeriod period = buildPeriod(p);
-                    if (getAssociation)
-                    {
-                        //TODO
-                    }
                     periods.Add(period);
                 }
             }
