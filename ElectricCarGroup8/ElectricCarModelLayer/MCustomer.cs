@@ -19,7 +19,7 @@ namespace ElectricCarModelLayer
             PaymentStatus = payStatus;
         }
 
-        string PaymentStatus { get; set; }
-        MDiscountGroup DiscountGroup { get; set; }
+        public string PaymentStatus { get; set; }
+        public MDiscountGroup DiscountGroup { get; set; }
     }
 }

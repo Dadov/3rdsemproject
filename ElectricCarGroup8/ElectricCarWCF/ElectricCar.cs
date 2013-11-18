@@ -16,111 +16,397 @@ namespace ElectricCarWCF
 
         #region Employees
 
-        public void addEmployee()
+        public void addEmployee(string fname, string lname, string address, string country, string phone,
+            string email, string password, int stationId, string position)
         {
-            throw new NotImplementedException();
+            EmployeeCtr empCtr = new EmployeeCtr();
+            int newEmp = empCtr.add(fname, lname, address, country, phone, email, stationId,
+                (EmployeePosition)Enum.Parse(typeof(EmployeePosition), position));
+            LogInfoCtr logInfoCtr = new LogInfoCtr();
+            // email is used as login name for everyone
+            logInfoCtr.add(email, password, newEmp);
         }
+        // TODO: change to accept one Employee employee argument
+        // public void addEmployee(Employee employee)
 
-        public Employee getEmployee()
+        public Employee getEmployee(int id)
         {
-            throw new NotImplementedException();
+            EmployeeCtr empCtr = new EmployeeCtr();
+            MEmployee mEmp = empCtr.get(id, false);
+            List<LogInfo> logInfos = new List<LogInfo>();
+            foreach (MLogInfo logInfo in mEmp.LogInfos)
+            {
+                logInfos.Add(new LogInfo
+                {
+                    ID = logInfo.ID,
+                    LoginName = logInfo.LoginName,
+                    Password = logInfo.Password
+                });
+            }
+            if (mEmp != null)
+            {
+                Employee emp = new Employee()
+                {
+                    ID = mEmp.ID,
+                    FName = mEmp.FName,
+                    LName = mEmp.LName,
+                    Address = mEmp.Address,
+                    Country = mEmp.Country,
+                    Phone = mEmp.Phone,
+                    Email = mEmp.Email,
+                    LogInfos = logInfos,
+                    Position = mEmp.Position.ToString(),
+                    StationID = mEmp.StationId
+                };
+                return emp;
+            }
+            throw new SystemException("No Employee model was returned.");
         }
 
         public List<Employee> getAllEmployees()
         {
-            throw new NotImplementedException();
+            EmployeeCtr empCtr = new EmployeeCtr();
+            List<MEmployee> mEmps = empCtr.getAll();
+            List<Employee> emps = new List<Employee>();
+            foreach (MEmployee mEmp in mEmps)
+            {
+                List<LogInfo> logInfos = new List<LogInfo>();
+                foreach (MLogInfo mLogInfo in mEmp.LogInfos)
+                {
+                    logInfos.Add(new LogInfo
+                    {
+                        ID = mLogInfo.ID,
+                        LoginName = mLogInfo.LoginName,
+                        Password = mLogInfo.Password
+                    });
+                }
+                Employee emp = new Employee()
+                {
+                    ID = mEmp.ID,
+                    FName = mEmp.FName,
+                    LName = mEmp.LName,
+                    Address = mEmp.Address,
+                    Country = mEmp.Country,
+                    Phone = mEmp.Phone,
+                    Email = mEmp.Email,
+                    LogInfos = logInfos,
+                    Position = mEmp.Position.ToString(),
+                    StationID = mEmp.StationId
+                };
+                emps.Add(emp);
+            }
+            return emps;
         }
 
-        public void updateEmployee()
+        /*
+        public void updateEmployee(int id, string fname, string lname, string address, string country,
+            string phone, string email, string password LogInfo logInfo, int stationId, string position)
         {
             throw new NotImplementedException();
         }
+        */
 
-        public void deleteEmployee()
+        public void updateEmployee(Employee employee)
         {
-            throw new NotImplementedException();
+            /*
+            MEmployee mEmp = new MEmployee()
+            {
+                ID = employee.ID,
+                FName = employee.FName,
+                LName = employee.LName,
+                Address = employee.Address,
+                Country = employee.Country,
+                Phone = employee.Phone,
+                Email = employee.Email,
+                // logInfos
+                PersonType = (PType) Enum.Parse(typeof(PType),  employee.GetType(),
+                Position = (EmployeePosition) Enum.Parse(typeof(EmployeePosition), employee.Position),
+                StationId = employee.StationID
+            };
+            */
+            
+            EmployeeCtr empCtr = new EmployeeCtr();
+            List<MLogInfo> mLogInfos = new List<MLogInfo>();
+            foreach (LogInfo logInfo in employee.LogInfos)
+            {
+                mLogInfos.Add(new MLogInfo
+                {
+                    ID = logInfo.ID,
+                    LoginName = logInfo.LoginName,
+                    Password = logInfo.Password
+                });
+
+            }
+            empCtr.update(employee.ID, employee.FName, employee.LName, employee.Address, employee.Country,
+                employee.Phone, employee.Email, mLogInfos, employee.StationID,
+                (EmployeePosition)Enum.Parse(typeof(EmployeePosition), employee.Position));
+        }
+
+        public void deleteEmployee(int id)
+        {
+            EmployeeCtr empCtr = new EmployeeCtr();
+            empCtr.delete(id);
         }
 
         #endregion
 
         #region Customers
 
-        public void addCustomer()
+        public void addCustomer(string fname, string lname, string address, string country, string phone,
+            string email, string password, string payStatus, DiscountGroup discountGroup)
         {
-            throw new NotImplementedException();
+            CustomerCtr custCtr = new CustomerCtr();
+            int newCust = custCtr.add(fname, lname, address, country, phone, email, discountGroup.ID, payStatus);
+            LogInfoCtr logInfoCtr = new LogInfoCtr();
+            // email is used as login name for everyone
+            logInfoCtr.add(email, password, newCust);
         }
-
-        public Customer getCustomer()
+        /*
+        public void addCustmer(Customer customer)
         {
-            throw new NotImplementedException();
+            CustomerCtr custCtr = new CustomerCtr();
+            int newCust = custCtr.add(customer.FName, customer.LName, customer.Address, customer.Country, customer.Phone,
+                customer.Email, customer.DiscountGroup.ID, customer.PaymentStatus);
+            LogInfoCtr logInfoCtr = new LogInfoCtr();
+            // email is used as login name for everyone
+            
+            logInfoCtr.add(customer.Email, customer.LogInfo.Password, newCust);
+        }
+        */
+
+        public Customer getCustomer(int id)
+        {
+            CustomerCtr custCtr = new CustomerCtr();
+            MCustomer mCust = custCtr.get(id, false);
+            List<LogInfo> logInfos = new List<LogInfo>();
+            foreach (MLogInfo mLogInfo in mCust.LogInfos)
+            {
+                logInfos.Add(new LogInfo
+                {
+                    ID = mLogInfo.ID,
+                    LoginName = mLogInfo.LoginName,
+                    Password = mLogInfo.Password
+                });
+            }
+            DiscountGroup discoGroup = new DiscountGroup
+            {
+                ID = mCust.DiscountGroup.ID,
+                Name = mCust.DiscountGroup.Name,
+                Discount = mCust.DiscountGroup.Discount
+            };
+            if (mCust != null)
+            {
+                Customer cust = new Customer()
+                {
+                    ID = mCust.ID,
+                    FName = mCust.FName,
+                    LName = mCust.LName,
+                    Address = mCust.Address,
+                    Country = mCust.Country,
+                    Phone = mCust.Phone,
+                    Email = mCust.Email,
+                    LogInfos = logInfos,
+                    PaymentStatus = mCust.PaymentStatus,
+                    DiscountGroup = discoGroup
+                };
+                return cust;
+            }
+            throw new SystemException("No Customer model was returned.");
         }
 
         public List<Customer> getAllCustomers()
         {
-            throw new NotImplementedException();
+            CustomerCtr custCtr = new CustomerCtr();
+            List<MCustomer> mCusts = custCtr.getAll();
+            List<Customer> custs = new List<Customer>();
+            foreach (MCustomer mCust in mCusts)
+            {
+                List<LogInfo> logInfos = new List<LogInfo>();
+                foreach (MLogInfo mLogInfo in mCust.LogInfos)
+                {
+                    logInfos.Add(new LogInfo
+                    {
+                        ID = mLogInfo.ID,
+                        LoginName = mLogInfo.LoginName,
+                        Password = mLogInfo.Password
+                    });
+                }
+                DiscountGroup discoGroup = new DiscountGroup
+                {
+                    ID = mCust.DiscountGroup.ID,
+                    Name = mCust.DiscountGroup.Name,
+                    Discount = mCust.DiscountGroup.Discount
+                };
+                Customer cust = new Customer()
+                {
+                    ID = mCust.ID,
+                    FName = mCust.FName,
+                    LName = mCust.LName,
+                    Address = mCust.Address,
+                    Country = mCust.Country,
+                    Phone = mCust.Phone,
+                    Email = mCust.Email,
+                    LogInfos = logInfos,
+                    PaymentStatus = mCust.PaymentStatus,
+                    DiscountGroup = discoGroup
+                };
+                custs.Add(cust);
+            }
+            return custs;
         }
 
-        public void updateCustomer()
+        /*
+        public void updateCustomer(int id, string fname, string lname, string address, string country,
+            string phone, string email, LogInfo logInfo, string payStatus, DiscountGroup discountGroup)
         {
             throw new NotImplementedException();
         }
-
-        public void deleteCustomer()
+        */
+        public void updateCustomer(Customer customer)
         {
-            throw new NotImplementedException();
+            CustomerCtr custCtr = new CustomerCtr();
+            List<MLogInfo> mLogInfos = new List<MLogInfo>();
+            foreach (LogInfo logInfo in customer.LogInfos)
+            {
+                mLogInfos.Add(new MLogInfo
+                {
+                    ID = logInfo.ID,
+                    LoginName = logInfo.LoginName,
+                    Password = logInfo.Password
+                });
+            }
+            custCtr.update(customer.ID, customer.FName, customer.LName, customer.Address, customer.Country,
+                customer.Phone, customer.Email, mLogInfos, customer.DiscountGroup.ID, customer.PaymentStatus);
+        }
+
+        public void deleteCustomer(int id)
+        {
+            CustomerCtr custCtr = new CustomerCtr();
+            custCtr.delete(id);
         }
 
         #endregion
 
         #region Log Infos
 
-        public void addLogInfo()
+        public void addLogInfo(string loginName, string password, int personId)
+        {
+            LogInfoCtr liCtr = new LogInfoCtr();
+            int newLi = liCtr.add(loginName, password, personId);
+        }
+
+        public List<LogInfo> getPersonLogInfos(int id)
+        {
+            CustomerCtr custCtr = new CustomerCtr();
+            MCustomer mCust = custCtr.get(id, false);
+            if (mCust != null)
+            {
+                List<LogInfo> logInfos = new List<LogInfo>();
+                foreach (MLogInfo mLogInfo in mCust.LogInfos)
+                {
+                    logInfos.Add(new LogInfo
+                    {
+                        ID = mLogInfo.ID,
+                        LoginName = mLogInfo.LoginName,
+                        Password = mLogInfo.Password
+                    });
+                }
+                return logInfos;
+                
+            }
+            EmployeeCtr empCtr = new EmployeeCtr();
+            MEmployee mEmp = empCtr.get(id, false);
+            if (mEmp != null)
+            {
+                List<LogInfo> logInfos = new List<LogInfo>();
+                foreach (MLogInfo mLogInfo in mEmp.LogInfos)
+                {
+                    logInfos.Add(new LogInfo
+                    {
+                        ID = mLogInfo.ID,
+                        LoginName = mLogInfo.LoginName,
+                        Password = mLogInfo.Password
+                    });
+                }
+                return logInfos;
+            }
+            throw new SystemException("Nor Employee or Customer was found with given ID.");
+        }
+
+        /*
+        public void updateLogInfo(int id, string loginName, string password)
         {
             throw new NotImplementedException();
         }
-
-        public List<LogInfo> getPersonLogInfos()
+        */
+        public void updateLogInfo(LogInfo logInfo)
         {
-            throw new NotImplementedException();
+            LogInfoCtr liCtr = new LogInfoCtr();
+            liCtr.update(logInfo.ID, logInfo.LoginName, logInfo.Password);
         }
 
-        public void updateLogInfo()
+        public void deleteLogInfo(int id)
         {
-            throw new NotImplementedException();
-        }
-
-        public void deleteLogInfo()
-        {
-            throw new NotImplementedException();
+            LogInfoCtr liCtr = new LogInfoCtr();
+            liCtr.delete(id);
         }
 
         #endregion
 
         #region Discount Groups
 
-        public void addDiscountGroup()
+        public void addDiscountGroup(string name, decimal discount)
         {
-            throw new NotImplementedException();
+            DiscountGroupCtr discoCtr = new DiscountGroupCtr();
+            int newDiscoGrp = discoCtr.add(name, discount);
         }
 
-        public DiscountGroup getDiscoutGroup()
+        public DiscountGroup getDiscoutGroup(int id)
         {
-            throw new NotImplementedException();
+            DiscountGroupCtr discoCtr = new DiscountGroupCtr();
+            MDiscountGroup mDiscoGrp = discoCtr.get(id, false);
+            DiscountGroup discoGrp = new DiscountGroup
+            {
+                ID = mDiscoGrp.ID,
+                Name = mDiscoGrp.Name,
+                Discount = mDiscoGrp.Discount
+            };
+            return discoGrp;
         }
 
         public List<DiscountGroup> getAllDiscountGroups()
         {
-            throw new NotImplementedException();
+            DiscountGroupCtr discoCtr = new DiscountGroupCtr();
+            List<MDiscountGroup> mDiscoGrps = discoCtr.getAll();
+            List<DiscountGroup> discoGrps = new List<DiscountGroup>();
+            foreach (MDiscountGroup mDiscoGrp in mDiscoGrps)
+            {
+                discoGrps.Add(new DiscountGroup
+                {
+                    ID = mDiscoGrp.ID,
+                    Name = mDiscoGrp.Name,
+                    Discount = mDiscoGrp.Discount
+                });
+            }
+            return discoGrps;
         }
 
-        public void updateDiscountGroup()
+        /*
+        public void updateDiscountGroup(int id, string name, decimal discount)
         {
             throw new NotImplementedException();
         }
-
-        public void deleteDiscountGroup()
+        */
+        public void updateDiscountGroup(DiscountGroup discountGroup)
         {
-            throw new NotImplementedException();
+            DiscountGroupCtr discoCtr = new DiscountGroupCtr();
+            discoCtr.update(discountGroup.ID, discountGroup.Name, (decimal) discountGroup.Discount);
+        }
+
+        public void deleteDiscountGroup(int id)
+        {
+            DiscountGroupCtr discoCtr = new DiscountGroupCtr();
+            discoCtr.delete(id);
         }
 
         #endregion

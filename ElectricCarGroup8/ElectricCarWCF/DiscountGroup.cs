@@ -17,6 +17,6 @@ namespace ElectricCarWCF
         public string Name { get; set; }
 
         [DataMember]
-        public decimal Discount { get; set; }
+        public Nullable<decimal> Discount { get; set; }
     }
 }

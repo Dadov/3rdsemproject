@@ -13,6 +13,7 @@ namespace ElectricCarDB
         MLogInfo getRecord(int id, bool retrieveAssociation);
         void deleteRecord(int id);
         void updateRecord(int id, string loginName, string password, int personId);
+        void updateRecord(int id, string loginName, string password);
         List<MLogInfo> getAllRecord();
         List<string> getAllInfo();
     }
