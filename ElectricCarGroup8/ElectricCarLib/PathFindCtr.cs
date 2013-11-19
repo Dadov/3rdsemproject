@@ -7,9 +7,43 @@ using ElectricCarModelLayer;
 
 namespace ElectricCarLib
 {
-    class PathFindCtr
+    public class PathFindCtr
     {
         private StationCtr sCtr = new StationCtr();
+        private static int numberOfPaths = 10;
+        
+        public List<List <PathStop>> findRoutes(int sId1, int sId2, DateTime startTime, decimal batteryLimit)
+        {
+            List<List<PathStop>> paths = new List<List<PathStop>>();
+            Dictionary<int, Dictionary<int, decimal>> adjListInLimit = sCtr.getAdjListWithBatteryLimitForDistance(batteryLimit);
+
+            paths = PathFind.getKShortestPath(adjListInLimit, sId1, sId2, numberOfPaths);
+            if (paths.Count!=0)
+            {
+                foreach (List <PathStop> p in paths)
+                {
+                    DateTime time = startTime;
+                    for (int i = 0; i < p.Count; i++)
+                    {
+                        if (i == 0)
+                        {
+                            p[i].distance = 0;
+                            p[i].driveHour = 0;
+                        }
+                        else
+                        {
+                            p[i].distance = adjListInLimit[p[i - 1].stationID][p[i].stationID];
+                            p[i].driveHour = Convert.ToDecimal(EstimateTime.driveHourForDistance(p[i].distance));
+                            
+                        }
+                        p[i].station = sCtr.getStation(p[i].stationID, false);
+                        
+                    }
+                }
+            }
+            return paths;
+        }
+
         public List<Dictionary<MStation, DateTime>> findRoutes(int sId1, int sId2, DateTime startTime)
         {
             List<Dictionary<MStation, DateTime>> route = new List<Dictionary<MStation, DateTime>>();

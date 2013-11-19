@@ -22,6 +22,36 @@ namespace ElectricCarGUI.ElectricCarService {
         [System.NonSerializedAttribute()]
         private System.Runtime.Serialization.ExtensionDataObject extensionDataField;
         
+        [System.Runtime.Serialization.OptionalFieldAttribute()]
+        private string AddressField;
+        
+        [System.Runtime.Serialization.OptionalFieldAttribute()]
+        private string CountryField;
+        
+        [System.Runtime.Serialization.OptionalFieldAttribute()]
+        private string EmailField;
+        
+        [System.Runtime.Serialization.OptionalFieldAttribute()]
+        private string FNameField;
+        
+        [System.Runtime.Serialization.OptionalFieldAttribute()]
+        private int IDField;
+        
+        [System.Runtime.Serialization.OptionalFieldAttribute()]
+        private string LNameField;
+        
+        [System.Runtime.Serialization.OptionalFieldAttribute()]
+        private ElectricCarGUI.ElectricCarService.LogInfo[] LogInfosField;
+        
+        [System.Runtime.Serialization.OptionalFieldAttribute()]
+        private string PhoneField;
+        
+        [System.Runtime.Serialization.OptionalFieldAttribute()]
+        private string PositionField;
+        
+        [System.Runtime.Serialization.OptionalFieldAttribute()]
+        private int StationIDField;
+        
         [global::System.ComponentModel.BrowsableAttribute(false)]
         public System.Runtime.Serialization.ExtensionDataObject ExtensionData {
             get {
@@ -32,32 +62,133 @@ namespace ElectricCarGUI.ElectricCarService {
             }
         }
         
-        public event System.ComponentModel.PropertyChangedEventHandler PropertyChanged;
-        
-        protected void RaisePropertyChanged(string propertyName) {
-            System.ComponentModel.PropertyChangedEventHandler propertyChanged = this.PropertyChanged;
-            if ((propertyChanged != null)) {
-                propertyChanged(this, new System.ComponentModel.PropertyChangedEventArgs(propertyName));
-            }
-        }
-    }
-    
-    [System.Diagnostics.DebuggerStepThroughAttribute()]
-    [System.CodeDom.Compiler.GeneratedCodeAttribute("System.Runtime.Serialization", "4.0.0.0")]
-    [System.Runtime.Serialization.DataContractAttribute(Name="Customer", Namespace="http://schemas.datacontract.org/2004/07/ElectricCarWCF")]
-    [System.SerializableAttribute()]
-    public partial class Customer : object, System.Runtime.Serialization.IExtensibleDataObject, System.ComponentModel.INotifyPropertyChanged {
-        
-        [System.NonSerializedAttribute()]
-        private System.Runtime.Serialization.ExtensionDataObject extensionDataField;
-        
-        [global::System.ComponentModel.BrowsableAttribute(false)]
-        public System.Runtime.Serialization.ExtensionDataObject ExtensionData {
+        [System.Runtime.Serialization.DataMemberAttribute()]
+        public string Address {
             get {
-                return this.extensionDataField;
+                return this.AddressField;
             }
             set {
-                this.extensionDataField = value;
+                if ((object.ReferenceEquals(this.AddressField, value) != true)) {
+                    this.AddressField = value;
+                    this.RaisePropertyChanged("Address");
+                }
+            }
+        }
+        
+        [System.Runtime.Serialization.DataMemberAttribute()]
+        public string Country {
+            get {
+                return this.CountryField;
+            }
+            set {
+                if ((object.ReferenceEquals(this.CountryField, value) != true)) {
+                    this.CountryField = value;
+                    this.RaisePropertyChanged("Country");
+                }
+            }
+        }
+        
+        [System.Runtime.Serialization.DataMemberAttribute()]
+        public string Email {
+            get {
+                return this.EmailField;
+            }
+            set {
+                if ((object.ReferenceEquals(this.EmailField, value) != true)) {
+                    this.EmailField = value;
+                    this.RaisePropertyChanged("Email");
+                }
+            }
+        }
+        
+        [System.Runtime.Serialization.DataMemberAttribute()]
+        public string FName {
+            get {
+                return this.FNameField;
+            }
+            set {
+                if ((object.ReferenceEquals(this.FNameField, value) != true)) {
+                    this.FNameField = value;
+                    this.RaisePropertyChanged("FName");
+                }
+            }
+        }
+        
+        [System.Runtime.Serialization.DataMemberAttribute()]
+        public int ID {
+            get {
+                return this.IDField;
+            }
+            set {
+                if ((this.IDField.Equals(value) != true)) {
+                    this.IDField = value;
+                    this.RaisePropertyChanged("ID");
+                }
+            }
+        }
+        
+        [System.Runtime.Serialization.DataMemberAttribute()]
+        public string LName {
+            get {
+                return this.LNameField;
+            }
+            set {
+                if ((object.ReferenceEquals(this.LNameField, value) != true)) {
+                    this.LNameField = value;
+                    this.RaisePropertyChanged("LName");
+                }
+            }
+        }
+        
+        [System.Runtime.Serialization.DataMemberAttribute()]
+        public ElectricCarGUI.ElectricCarService.LogInfo[] LogInfos {
+            get {
+                return this.LogInfosField;
+            }
+            set {
+                if ((object.ReferenceEquals(this.LogInfosField, value) != true)) {
+                    this.LogInfosField = value;
+                    this.RaisePropertyChanged("LogInfos");
+                }
+            }
+        }
+        
+        [System.Runtime.Serialization.DataMemberAttribute()]
+        public string Phone {
+            get {
+                return this.PhoneField;
+            }
+            set {
+                if ((object.ReferenceEquals(this.PhoneField, value) != true)) {
+                    this.PhoneField = value;
+                    this.RaisePropertyChanged("Phone");
+                }
+            }
+        }
+        
+        [System.Runtime.Serialization.DataMemberAttribute()]
+        public string Position {
+            get {
+                return this.PositionField;
+            }
+            set {
+                if ((object.ReferenceEquals(this.PositionField, value) != true)) {
+                    this.PositionField = value;
+                    this.RaisePropertyChanged("Position");
+                }
+            }
+        }
+        
+        [System.Runtime.Serialization.DataMemberAttribute()]
+        public int StationID {
+            get {
+                return this.StationIDField;
+            }
+            set {
+                if ((this.StationIDField.Equals(value) != true)) {
+                    this.StationIDField = value;
+                    this.RaisePropertyChanged("StationID");
+                }
             }
         }
         
@@ -158,7 +289,7 @@ namespace ElectricCarGUI.ElectricCarService {
         private System.Runtime.Serialization.ExtensionDataObject extensionDataField;
         
         [System.Runtime.Serialization.OptionalFieldAttribute()]
-        private decimal DiscountField;
+        private System.Nullable<decimal> DiscountField;
         
         [System.Runtime.Serialization.OptionalFieldAttribute()]
         private int IDField;
@@ -177,7 +308,7 @@ namespace ElectricCarGUI.ElectricCarService {
         }
         
         [System.Runtime.Serialization.DataMemberAttribute()]
-        public decimal Discount {
+        public System.Nullable<decimal> Discount {
             get {
                 return this.DiscountField;
             }
@@ -211,6 +342,195 @@ namespace ElectricCarGUI.ElectricCarService {
                 if ((object.ReferenceEquals(this.NameField, value) != true)) {
                     this.NameField = value;
                     this.RaisePropertyChanged("Name");
+                }
+            }
+        }
+        
+        public event System.ComponentModel.PropertyChangedEventHandler PropertyChanged;
+        
+        protected void RaisePropertyChanged(string propertyName) {
+            System.ComponentModel.PropertyChangedEventHandler propertyChanged = this.PropertyChanged;
+            if ((propertyChanged != null)) {
+                propertyChanged(this, new System.ComponentModel.PropertyChangedEventArgs(propertyName));
+            }
+        }
+    }
+    
+    [System.Diagnostics.DebuggerStepThroughAttribute()]
+    [System.CodeDom.Compiler.GeneratedCodeAttribute("System.Runtime.Serialization", "4.0.0.0")]
+    [System.Runtime.Serialization.DataContractAttribute(Name="Customer", Namespace="http://schemas.datacontract.org/2004/07/ElectricCarWCF")]
+    [System.SerializableAttribute()]
+    public partial class Customer : object, System.Runtime.Serialization.IExtensibleDataObject, System.ComponentModel.INotifyPropertyChanged {
+        
+        [System.NonSerializedAttribute()]
+        private System.Runtime.Serialization.ExtensionDataObject extensionDataField;
+        
+        [System.Runtime.Serialization.OptionalFieldAttribute()]
+        private string AddressField;
+        
+        [System.Runtime.Serialization.OptionalFieldAttribute()]
+        private string CountryField;
+        
+        [System.Runtime.Serialization.OptionalFieldAttribute()]
+        private ElectricCarGUI.ElectricCarService.DiscountGroup DiscountGroupField;
+        
+        [System.Runtime.Serialization.OptionalFieldAttribute()]
+        private string EmailField;
+        
+        [System.Runtime.Serialization.OptionalFieldAttribute()]
+        private string FNameField;
+        
+        [System.Runtime.Serialization.OptionalFieldAttribute()]
+        private int IDField;
+        
+        [System.Runtime.Serialization.OptionalFieldAttribute()]
+        private string LNameField;
+        
+        [System.Runtime.Serialization.OptionalFieldAttribute()]
+        private ElectricCarGUI.ElectricCarService.LogInfo[] LogInfosField;
+        
+        [System.Runtime.Serialization.OptionalFieldAttribute()]
+        private string PaymentStatusField;
+        
+        [System.Runtime.Serialization.OptionalFieldAttribute()]
+        private string PhoneField;
+        
+        [global::System.ComponentModel.BrowsableAttribute(false)]
+        public System.Runtime.Serialization.ExtensionDataObject ExtensionData {
+            get {
+                return this.extensionDataField;
+            }
+            set {
+                this.extensionDataField = value;
+            }
+        }
+        
+        [System.Runtime.Serialization.DataMemberAttribute()]
+        public string Address {
+            get {
+                return this.AddressField;
+            }
+            set {
+                if ((object.ReferenceEquals(this.AddressField, value) != true)) {
+                    this.AddressField = value;
+                    this.RaisePropertyChanged("Address");
+                }
+            }
+        }
+        
+        [System.Runtime.Serialization.DataMemberAttribute()]
+        public string Country {
+            get {
+                return this.CountryField;
+            }
+            set {
+                if ((object.ReferenceEquals(this.CountryField, value) != true)) {
+                    this.CountryField = value;
+                    this.RaisePropertyChanged("Country");
+                }
+            }
+        }
+        
+        [System.Runtime.Serialization.DataMemberAttribute()]
+        public ElectricCarGUI.ElectricCarService.DiscountGroup DiscountGroup {
+            get {
+                return this.DiscountGroupField;
+            }
+            set {
+                if ((object.ReferenceEquals(this.DiscountGroupField, value) != true)) {
+                    this.DiscountGroupField = value;
+                    this.RaisePropertyChanged("DiscountGroup");
+                }
+            }
+        }
+        
+        [System.Runtime.Serialization.DataMemberAttribute()]
+        public string Email {
+            get {
+                return this.EmailField;
+            }
+            set {
+                if ((object.ReferenceEquals(this.EmailField, value) != true)) {
+                    this.EmailField = value;
+                    this.RaisePropertyChanged("Email");
+                }
+            }
+        }
+        
+        [System.Runtime.Serialization.DataMemberAttribute()]
+        public string FName {
+            get {
+                return this.FNameField;
+            }
+            set {
+                if ((object.ReferenceEquals(this.FNameField, value) != true)) {
+                    this.FNameField = value;
+                    this.RaisePropertyChanged("FName");
+                }
+            }
+        }
+        
+        [System.Runtime.Serialization.DataMemberAttribute()]
+        public int ID {
+            get {
+                return this.IDField;
+            }
+            set {
+                if ((this.IDField.Equals(value) != true)) {
+                    this.IDField = value;
+                    this.RaisePropertyChanged("ID");
+                }
+            }
+        }
+        
+        [System.Runtime.Serialization.DataMemberAttribute()]
+        public string LName {
+            get {
+                return this.LNameField;
+            }
+            set {
+                if ((object.ReferenceEquals(this.LNameField, value) != true)) {
+                    this.LNameField = value;
+                    this.RaisePropertyChanged("LName");
+                }
+            }
+        }
+        
+        [System.Runtime.Serialization.DataMemberAttribute()]
+        public ElectricCarGUI.ElectricCarService.LogInfo[] LogInfos {
+            get {
+                return this.LogInfosField;
+            }
+            set {
+                if ((object.ReferenceEquals(this.LogInfosField, value) != true)) {
+                    this.LogInfosField = value;
+                    this.RaisePropertyChanged("LogInfos");
+                }
+            }
+        }
+        
+        [System.Runtime.Serialization.DataMemberAttribute()]
+        public string PaymentStatus {
+            get {
+                return this.PaymentStatusField;
+            }
+            set {
+                if ((object.ReferenceEquals(this.PaymentStatusField, value) != true)) {
+                    this.PaymentStatusField = value;
+                    this.RaisePropertyChanged("PaymentStatus");
+                }
+            }
+        }
+        
+        [System.Runtime.Serialization.DataMemberAttribute()]
+        public string Phone {
+            get {
+                return this.PhoneField;
+            }
+            set {
+                if ((object.ReferenceEquals(this.PhoneField, value) != true)) {
+                    this.PhoneField = value;
+                    this.RaisePropertyChanged("Phone");
                 }
             }
         }
@@ -581,6 +901,9 @@ namespace ElectricCarGUI.ElectricCarService {
         private int IdField;
         
         [System.Runtime.Serialization.OptionalFieldAttribute()]
+        private decimal capacityField;
+        
+        [System.Runtime.Serialization.OptionalFieldAttribute()]
         private string nameField;
         
         [System.Runtime.Serialization.OptionalFieldAttribute()]
@@ -608,6 +931,19 @@ namespace ElectricCarGUI.ElectricCarService {
                 if ((this.IdField.Equals(value) != true)) {
                     this.IdField = value;
                     this.RaisePropertyChanged("Id");
+                }
+            }
+        }
+        
+        [System.Runtime.Serialization.DataMemberAttribute()]
+        public decimal capacity {
+            get {
+                return this.capacityField;
+            }
+            set {
+                if ((this.capacityField.Equals(value) != true)) {
+                    this.capacityField = value;
+                    this.RaisePropertyChanged("capacity");
                 }
             }
         }
@@ -756,6 +1092,115 @@ namespace ElectricCarGUI.ElectricCarService {
                 if ((object.ReferenceEquals(this.StateField, value) != true)) {
                     this.StateField = value;
                     this.RaisePropertyChanged("State");
+                }
+            }
+        }
+        
+        public event System.ComponentModel.PropertyChangedEventHandler PropertyChanged;
+        
+        protected void RaisePropertyChanged(string propertyName) {
+            System.ComponentModel.PropertyChangedEventHandler propertyChanged = this.PropertyChanged;
+            if ((propertyChanged != null)) {
+                propertyChanged(this, new System.ComponentModel.PropertyChangedEventArgs(propertyName));
+            }
+        }
+    }
+    
+    [System.Diagnostics.DebuggerStepThroughAttribute()]
+    [System.CodeDom.Compiler.GeneratedCodeAttribute("System.Runtime.Serialization", "4.0.0.0")]
+    [System.Runtime.Serialization.DataContractAttribute(Name="RouteStop", Namespace="http://schemas.datacontract.org/2004/07/ElectricCarWCF")]
+    [System.SerializableAttribute()]
+    public partial class RouteStop : object, System.Runtime.Serialization.IExtensibleDataObject, System.ComponentModel.INotifyPropertyChanged {
+        
+        [System.NonSerializedAttribute()]
+        private System.Runtime.Serialization.ExtensionDataObject extensionDataField;
+        
+        [System.Runtime.Serialization.OptionalFieldAttribute()]
+        private decimal distanceField;
+        
+        [System.Runtime.Serialization.OptionalFieldAttribute()]
+        private decimal driveHourField;
+        
+        [System.Runtime.Serialization.OptionalFieldAttribute()]
+        private ElectricCarGUI.ElectricCarService.Station stationField;
+        
+        [System.Runtime.Serialization.OptionalFieldAttribute()]
+        private int stationIDField;
+        
+        [System.Runtime.Serialization.OptionalFieldAttribute()]
+        private System.DateTime timeField;
+        
+        [global::System.ComponentModel.BrowsableAttribute(false)]
+        public System.Runtime.Serialization.ExtensionDataObject ExtensionData {
+            get {
+                return this.extensionDataField;
+            }
+            set {
+                this.extensionDataField = value;
+            }
+        }
+        
+        [System.Runtime.Serialization.DataMemberAttribute()]
+        public decimal distance {
+            get {
+                return this.distanceField;
+            }
+            set {
+                if ((this.distanceField.Equals(value) != true)) {
+                    this.distanceField = value;
+                    this.RaisePropertyChanged("distance");
+                }
+            }
+        }
+        
+        [System.Runtime.Serialization.DataMemberAttribute()]
+        public decimal driveHour {
+            get {
+                return this.driveHourField;
+            }
+            set {
+                if ((this.driveHourField.Equals(value) != true)) {
+                    this.driveHourField = value;
+                    this.RaisePropertyChanged("driveHour");
+                }
+            }
+        }
+        
+        [System.Runtime.Serialization.DataMemberAttribute()]
+        public ElectricCarGUI.ElectricCarService.Station station {
+            get {
+                return this.stationField;
+            }
+            set {
+                if ((object.ReferenceEquals(this.stationField, value) != true)) {
+                    this.stationField = value;
+                    this.RaisePropertyChanged("station");
+                }
+            }
+        }
+        
+        [System.Runtime.Serialization.DataMemberAttribute()]
+        public int stationID {
+            get {
+                return this.stationIDField;
+            }
+            set {
+                if ((this.stationIDField.Equals(value) != true)) {
+                    this.stationIDField = value;
+                    this.RaisePropertyChanged("stationID");
+                }
+            }
+        }
+        
+        [System.Runtime.Serialization.DataMemberAttribute()]
+        public System.DateTime time {
+            get {
+                return this.timeField;
+            }
+            set {
+                if ((this.timeField.Equals(value) != true)) {
+                    this.timeField = value;
+                    this.RaisePropertyChanged("time");
                 }
             }
         }
@@ -1179,16 +1624,16 @@ namespace ElectricCarGUI.ElectricCarService {
     public interface IElectricCar {
         
         [System.ServiceModel.OperationContractAttribute(Action="http://tempuri.org/IElectricCar/addEmployee", ReplyAction="http://tempuri.org/IElectricCar/addEmployeeResponse")]
-        void addEmployee();
+        void addEmployee(string fname, string lname, string address, string country, string phone, string email, string password, int stationId, string position);
         
         [System.ServiceModel.OperationContractAttribute(Action="http://tempuri.org/IElectricCar/addEmployee", ReplyAction="http://tempuri.org/IElectricCar/addEmployeeResponse")]
-        System.Threading.Tasks.Task addEmployeeAsync();
+        System.Threading.Tasks.Task addEmployeeAsync(string fname, string lname, string address, string country, string phone, string email, string password, int stationId, string position);
         
         [System.ServiceModel.OperationContractAttribute(Action="http://tempuri.org/IElectricCar/getEmployee", ReplyAction="http://tempuri.org/IElectricCar/getEmployeeResponse")]
-        ElectricCarGUI.ElectricCarService.Employee getEmployee();
+        ElectricCarGUI.ElectricCarService.Employee getEmployee(int id);
         
         [System.ServiceModel.OperationContractAttribute(Action="http://tempuri.org/IElectricCar/getEmployee", ReplyAction="http://tempuri.org/IElectricCar/getEmployeeResponse")]
-        System.Threading.Tasks.Task<ElectricCarGUI.ElectricCarService.Employee> getEmployeeAsync();
+        System.Threading.Tasks.Task<ElectricCarGUI.ElectricCarService.Employee> getEmployeeAsync(int id);
         
         [System.ServiceModel.OperationContractAttribute(Action="http://tempuri.org/IElectricCar/getAllEmployees", ReplyAction="http://tempuri.org/IElectricCar/getAllEmployeesResponse")]
         ElectricCarGUI.ElectricCarService.Employee[] getAllEmployees();
@@ -1197,28 +1642,28 @@ namespace ElectricCarGUI.ElectricCarService {
         System.Threading.Tasks.Task<ElectricCarGUI.ElectricCarService.Employee[]> getAllEmployeesAsync();
         
         [System.ServiceModel.OperationContractAttribute(Action="http://tempuri.org/IElectricCar/updateEmployee", ReplyAction="http://tempuri.org/IElectricCar/updateEmployeeResponse")]
-        void updateEmployee();
+        void updateEmployee(ElectricCarGUI.ElectricCarService.Employee employee);
         
         [System.ServiceModel.OperationContractAttribute(Action="http://tempuri.org/IElectricCar/updateEmployee", ReplyAction="http://tempuri.org/IElectricCar/updateEmployeeResponse")]
-        System.Threading.Tasks.Task updateEmployeeAsync();
+        System.Threading.Tasks.Task updateEmployeeAsync(ElectricCarGUI.ElectricCarService.Employee employee);
         
         [System.ServiceModel.OperationContractAttribute(Action="http://tempuri.org/IElectricCar/deleteEmployee", ReplyAction="http://tempuri.org/IElectricCar/deleteEmployeeResponse")]
-        void deleteEmployee();
+        void deleteEmployee(int id);
         
         [System.ServiceModel.OperationContractAttribute(Action="http://tempuri.org/IElectricCar/deleteEmployee", ReplyAction="http://tempuri.org/IElectricCar/deleteEmployeeResponse")]
-        System.Threading.Tasks.Task deleteEmployeeAsync();
+        System.Threading.Tasks.Task deleteEmployeeAsync(int id);
         
         [System.ServiceModel.OperationContractAttribute(Action="http://tempuri.org/IElectricCar/addCustomer", ReplyAction="http://tempuri.org/IElectricCar/addCustomerResponse")]
-        void addCustomer();
+        void addCustomer(string fname, string lname, string address, string country, string phone, string email, string password, string payStatus, ElectricCarGUI.ElectricCarService.DiscountGroup discountGroup);
         
         [System.ServiceModel.OperationContractAttribute(Action="http://tempuri.org/IElectricCar/addCustomer", ReplyAction="http://tempuri.org/IElectricCar/addCustomerResponse")]
-        System.Threading.Tasks.Task addCustomerAsync();
+        System.Threading.Tasks.Task addCustomerAsync(string fname, string lname, string address, string country, string phone, string email, string password, string payStatus, ElectricCarGUI.ElectricCarService.DiscountGroup discountGroup);
         
         [System.ServiceModel.OperationContractAttribute(Action="http://tempuri.org/IElectricCar/getCustomer", ReplyAction="http://tempuri.org/IElectricCar/getCustomerResponse")]
-        ElectricCarGUI.ElectricCarService.Customer getCustomer();
+        ElectricCarGUI.ElectricCarService.Customer getCustomer(int id);
         
         [System.ServiceModel.OperationContractAttribute(Action="http://tempuri.org/IElectricCar/getCustomer", ReplyAction="http://tempuri.org/IElectricCar/getCustomerResponse")]
-        System.Threading.Tasks.Task<ElectricCarGUI.ElectricCarService.Customer> getCustomerAsync();
+        System.Threading.Tasks.Task<ElectricCarGUI.ElectricCarService.Customer> getCustomerAsync(int id);
         
         [System.ServiceModel.OperationContractAttribute(Action="http://tempuri.org/IElectricCar/getAllCustomers", ReplyAction="http://tempuri.org/IElectricCar/getAllCustomersResponse")]
         ElectricCarGUI.ElectricCarService.Customer[] getAllCustomers();
@@ -1227,52 +1672,52 @@ namespace ElectricCarGUI.ElectricCarService {
         System.Threading.Tasks.Task<ElectricCarGUI.ElectricCarService.Customer[]> getAllCustomersAsync();
         
         [System.ServiceModel.OperationContractAttribute(Action="http://tempuri.org/IElectricCar/updateCustomer", ReplyAction="http://tempuri.org/IElectricCar/updateCustomerResponse")]
-        void updateCustomer();
+        void updateCustomer(ElectricCarGUI.ElectricCarService.Customer customer);
         
         [System.ServiceModel.OperationContractAttribute(Action="http://tempuri.org/IElectricCar/updateCustomer", ReplyAction="http://tempuri.org/IElectricCar/updateCustomerResponse")]
-        System.Threading.Tasks.Task updateCustomerAsync();
+        System.Threading.Tasks.Task updateCustomerAsync(ElectricCarGUI.ElectricCarService.Customer customer);
         
         [System.ServiceModel.OperationContractAttribute(Action="http://tempuri.org/IElectricCar/deleteCustomer", ReplyAction="http://tempuri.org/IElectricCar/deleteCustomerResponse")]
-        void deleteCustomer();
+        void deleteCustomer(int id);
         
         [System.ServiceModel.OperationContractAttribute(Action="http://tempuri.org/IElectricCar/deleteCustomer", ReplyAction="http://tempuri.org/IElectricCar/deleteCustomerResponse")]
-        System.Threading.Tasks.Task deleteCustomerAsync();
+        System.Threading.Tasks.Task deleteCustomerAsync(int id);
         
         [System.ServiceModel.OperationContractAttribute(Action="http://tempuri.org/IElectricCar/addLogInfo", ReplyAction="http://tempuri.org/IElectricCar/addLogInfoResponse")]
-        void addLogInfo();
+        void addLogInfo(string loginName, string password, int personId);
         
         [System.ServiceModel.OperationContractAttribute(Action="http://tempuri.org/IElectricCar/addLogInfo", ReplyAction="http://tempuri.org/IElectricCar/addLogInfoResponse")]
-        System.Threading.Tasks.Task addLogInfoAsync();
+        System.Threading.Tasks.Task addLogInfoAsync(string loginName, string password, int personId);
         
         [System.ServiceModel.OperationContractAttribute(Action="http://tempuri.org/IElectricCar/getPersonLogInfos", ReplyAction="http://tempuri.org/IElectricCar/getPersonLogInfosResponse")]
-        ElectricCarGUI.ElectricCarService.LogInfo[] getPersonLogInfos();
+        ElectricCarGUI.ElectricCarService.LogInfo[] getPersonLogInfos(int id);
         
         [System.ServiceModel.OperationContractAttribute(Action="http://tempuri.org/IElectricCar/getPersonLogInfos", ReplyAction="http://tempuri.org/IElectricCar/getPersonLogInfosResponse")]
-        System.Threading.Tasks.Task<ElectricCarGUI.ElectricCarService.LogInfo[]> getPersonLogInfosAsync();
+        System.Threading.Tasks.Task<ElectricCarGUI.ElectricCarService.LogInfo[]> getPersonLogInfosAsync(int id);
         
         [System.ServiceModel.OperationContractAttribute(Action="http://tempuri.org/IElectricCar/updateLogInfo", ReplyAction="http://tempuri.org/IElectricCar/updateLogInfoResponse")]
-        void updateLogInfo();
+        void updateLogInfo(ElectricCarGUI.ElectricCarService.LogInfo logInfo);
         
         [System.ServiceModel.OperationContractAttribute(Action="http://tempuri.org/IElectricCar/updateLogInfo", ReplyAction="http://tempuri.org/IElectricCar/updateLogInfoResponse")]
-        System.Threading.Tasks.Task updateLogInfoAsync();
+        System.Threading.Tasks.Task updateLogInfoAsync(ElectricCarGUI.ElectricCarService.LogInfo logInfo);
         
         [System.ServiceModel.OperationContractAttribute(Action="http://tempuri.org/IElectricCar/deleteLogInfo", ReplyAction="http://tempuri.org/IElectricCar/deleteLogInfoResponse")]
-        void deleteLogInfo();
+        void deleteLogInfo(int id);
         
         [System.ServiceModel.OperationContractAttribute(Action="http://tempuri.org/IElectricCar/deleteLogInfo", ReplyAction="http://tempuri.org/IElectricCar/deleteLogInfoResponse")]
-        System.Threading.Tasks.Task deleteLogInfoAsync();
+        System.Threading.Tasks.Task deleteLogInfoAsync(int id);
         
         [System.ServiceModel.OperationContractAttribute(Action="http://tempuri.org/IElectricCar/addDiscountGroup", ReplyAction="http://tempuri.org/IElectricCar/addDiscountGroupResponse")]
-        void addDiscountGroup();
+        void addDiscountGroup(string name, decimal discount);
         
         [System.ServiceModel.OperationContractAttribute(Action="http://tempuri.org/IElectricCar/addDiscountGroup", ReplyAction="http://tempuri.org/IElectricCar/addDiscountGroupResponse")]
-        System.Threading.Tasks.Task addDiscountGroupAsync();
+        System.Threading.Tasks.Task addDiscountGroupAsync(string name, decimal discount);
         
         [System.ServiceModel.OperationContractAttribute(Action="http://tempuri.org/IElectricCar/getDiscoutGroup", ReplyAction="http://tempuri.org/IElectricCar/getDiscoutGroupResponse")]
-        ElectricCarGUI.ElectricCarService.DiscountGroup getDiscoutGroup();
+        ElectricCarGUI.ElectricCarService.DiscountGroup getDiscoutGroup(int id);
         
         [System.ServiceModel.OperationContractAttribute(Action="http://tempuri.org/IElectricCar/getDiscoutGroup", ReplyAction="http://tempuri.org/IElectricCar/getDiscoutGroupResponse")]
-        System.Threading.Tasks.Task<ElectricCarGUI.ElectricCarService.DiscountGroup> getDiscoutGroupAsync();
+        System.Threading.Tasks.Task<ElectricCarGUI.ElectricCarService.DiscountGroup> getDiscoutGroupAsync(int id);
         
         [System.ServiceModel.OperationContractAttribute(Action="http://tempuri.org/IElectricCar/getAllDiscountGroups", ReplyAction="http://tempuri.org/IElectricCar/getAllDiscountGroupsResponse")]
         ElectricCarGUI.ElectricCarService.DiscountGroup[] getAllDiscountGroups();
@@ -1281,16 +1726,16 @@ namespace ElectricCarGUI.ElectricCarService {
         System.Threading.Tasks.Task<ElectricCarGUI.ElectricCarService.DiscountGroup[]> getAllDiscountGroupsAsync();
         
         [System.ServiceModel.OperationContractAttribute(Action="http://tempuri.org/IElectricCar/updateDiscountGroup", ReplyAction="http://tempuri.org/IElectricCar/updateDiscountGroupResponse")]
-        void updateDiscountGroup();
+        void updateDiscountGroup(ElectricCarGUI.ElectricCarService.DiscountGroup discountGroup);
         
         [System.ServiceModel.OperationContractAttribute(Action="http://tempuri.org/IElectricCar/updateDiscountGroup", ReplyAction="http://tempuri.org/IElectricCar/updateDiscountGroupResponse")]
-        System.Threading.Tasks.Task updateDiscountGroupAsync();
+        System.Threading.Tasks.Task updateDiscountGroupAsync(ElectricCarGUI.ElectricCarService.DiscountGroup discountGroup);
         
         [System.ServiceModel.OperationContractAttribute(Action="http://tempuri.org/IElectricCar/deleteDiscountGroup", ReplyAction="http://tempuri.org/IElectricCar/deleteDiscountGroupResponse")]
-        void deleteDiscountGroup();
+        void deleteDiscountGroup(int id);
         
         [System.ServiceModel.OperationContractAttribute(Action="http://tempuri.org/IElectricCar/deleteDiscountGroup", ReplyAction="http://tempuri.org/IElectricCar/deleteDiscountGroupResponse")]
-        System.Threading.Tasks.Task deleteDiscountGroupAsync();
+        System.Threading.Tasks.Task deleteDiscountGroupAsync(int id);
         
         [System.ServiceModel.OperationContractAttribute(Action="http://tempuri.org/IElectricCar/getAllBookings", ReplyAction="http://tempuri.org/IElectricCar/getAllBookingsResponse")]
         ElectricCarGUI.ElectricCarService.Booking[] getAllBookings();
@@ -1303,6 +1748,18 @@ namespace ElectricCarGUI.ElectricCarService {
         
         [System.ServiceModel.OperationContractAttribute(Action="http://tempuri.org/IElectricCar/getBooking", ReplyAction="http://tempuri.org/IElectricCar/getBookingResponse")]
         System.Threading.Tasks.Task<ElectricCarGUI.ElectricCarService.Booking> getBookingAsync(int id);
+        
+        [System.ServiceModel.OperationContractAttribute(Action="http://tempuri.org/IElectricCar/getRoutes", ReplyAction="http://tempuri.org/IElectricCar/getRoutesResponse")]
+        ElectricCarGUI.ElectricCarService.RouteStop[][] getRoutes(int startSId, int endSIdint, System.DateTime tripStart, decimal batteryLimit);
+        
+        [System.ServiceModel.OperationContractAttribute(Action="http://tempuri.org/IElectricCar/getRoutes", ReplyAction="http://tempuri.org/IElectricCar/getRoutesResponse")]
+        System.Threading.Tasks.Task<ElectricCarGUI.ElectricCarService.RouteStop[][]> getRoutesAsync(int startSId, int endSIdint, System.DateTime tripStart, decimal batteryLimit);
+        
+        [System.ServiceModel.OperationContractAttribute(Action="http://tempuri.org/IElectricCar/convertCapacityToDistance", ReplyAction="http://tempuri.org/IElectricCar/convertCapacityToDistanceResponse")]
+        decimal convertCapacityToDistance(decimal capacity);
+        
+        [System.ServiceModel.OperationContractAttribute(Action="http://tempuri.org/IElectricCar/convertCapacityToDistance", ReplyAction="http://tempuri.org/IElectricCar/convertCapacityToDistanceResponse")]
+        System.Threading.Tasks.Task<decimal> convertCapacityToDistanceAsync(decimal capacity);
         
         [System.ServiceModel.OperationContractAttribute(Action="http://tempuri.org/IElectricCar/getAllBatteryType", ReplyAction="http://tempuri.org/IElectricCar/getAllBatteryTypeResponse")]
         ElectricCarGUI.ElectricCarService.BatteryTypeTest[] getAllBatteryType();
@@ -1430,17 +1887,17 @@ namespace ElectricCarGUI.ElectricCarService {
         [System.ServiceModel.OperationContractAttribute(Action="http://tempuri.org/IElectricCar/updateStorage", ReplyAction="http://tempuri.org/IElectricCar/updateStorageResponse")]
         System.Threading.Tasks.Task updateStorageAsync(int id, int btid, int sID);
         
-        [System.ServiceModel.OperationContractAttribute(Action="http://tempuri.org/IElectricCar/getAllRecord", ReplyAction="http://tempuri.org/IElectricCar/getAllRecordResponse")]
-        ElectricCarGUI.ElectricCarService.BatteryStorage[] getAllRecord();
+        [System.ServiceModel.OperationContractAttribute(Action="http://tempuri.org/IElectricCar/getAllStorages", ReplyAction="http://tempuri.org/IElectricCar/getAllStoragesResponse")]
+        ElectricCarGUI.ElectricCarService.BatteryStorage[] getAllStorages();
         
-        [System.ServiceModel.OperationContractAttribute(Action="http://tempuri.org/IElectricCar/getAllRecord", ReplyAction="http://tempuri.org/IElectricCar/getAllRecordResponse")]
-        System.Threading.Tasks.Task<ElectricCarGUI.ElectricCarService.BatteryStorage[]> getAllRecordAsync();
+        [System.ServiceModel.OperationContractAttribute(Action="http://tempuri.org/IElectricCar/getAllStorages", ReplyAction="http://tempuri.org/IElectricCar/getAllStoragesResponse")]
+        System.Threading.Tasks.Task<ElectricCarGUI.ElectricCarService.BatteryStorage[]> getAllStoragesAsync();
         
-        [System.ServiceModel.OperationContractAttribute(Action="http://tempuri.org/IElectricCar/getAllInfo", ReplyAction="http://tempuri.org/IElectricCar/getAllInfoResponse")]
-        string[] getAllInfo();
+        [System.ServiceModel.OperationContractAttribute(Action="http://tempuri.org/IElectricCar/getAllStorageInfo", ReplyAction="http://tempuri.org/IElectricCar/getAllStorageInfoResponse")]
+        string[] getAllStorageInfo();
         
-        [System.ServiceModel.OperationContractAttribute(Action="http://tempuri.org/IElectricCar/getAllInfo", ReplyAction="http://tempuri.org/IElectricCar/getAllInfoResponse")]
-        System.Threading.Tasks.Task<string[]> getAllInfoAsync();
+        [System.ServiceModel.OperationContractAttribute(Action="http://tempuri.org/IElectricCar/getAllStorageInfo", ReplyAction="http://tempuri.org/IElectricCar/getAllStorageInfoResponse")]
+        System.Threading.Tasks.Task<string[]> getAllStorageInfoAsync();
         
         [System.ServiceModel.OperationContractAttribute(Action="http://tempuri.org/IElectricCar/getPeriod", ReplyAction="http://tempuri.org/IElectricCar/getPeriodResponse")]
         ElectricCarGUI.ElectricCarService.Period getPeriod(int bsID, System.DateTime time);
@@ -1488,20 +1945,20 @@ namespace ElectricCarGUI.ElectricCarService {
                 base(binding, remoteAddress) {
         }
         
-        public void addEmployee() {
-            base.Channel.addEmployee();
+        public void addEmployee(string fname, string lname, string address, string country, string phone, string email, string password, int stationId, string position) {
+            base.Channel.addEmployee(fname, lname, address, country, phone, email, password, stationId, position);
         }
         
-        public System.Threading.Tasks.Task addEmployeeAsync() {
-            return base.Channel.addEmployeeAsync();
+        public System.Threading.Tasks.Task addEmployeeAsync(string fname, string lname, string address, string country, string phone, string email, string password, int stationId, string position) {
+            return base.Channel.addEmployeeAsync(fname, lname, address, country, phone, email, password, stationId, position);
         }
         
-        public ElectricCarGUI.ElectricCarService.Employee getEmployee() {
-            return base.Channel.getEmployee();
+        public ElectricCarGUI.ElectricCarService.Employee getEmployee(int id) {
+            return base.Channel.getEmployee(id);
         }
         
-        public System.Threading.Tasks.Task<ElectricCarGUI.ElectricCarService.Employee> getEmployeeAsync() {
-            return base.Channel.getEmployeeAsync();
+        public System.Threading.Tasks.Task<ElectricCarGUI.ElectricCarService.Employee> getEmployeeAsync(int id) {
+            return base.Channel.getEmployeeAsync(id);
         }
         
         public ElectricCarGUI.ElectricCarService.Employee[] getAllEmployees() {
@@ -1512,36 +1969,36 @@ namespace ElectricCarGUI.ElectricCarService {
             return base.Channel.getAllEmployeesAsync();
         }
         
-        public void updateEmployee() {
-            base.Channel.updateEmployee();
+        public void updateEmployee(ElectricCarGUI.ElectricCarService.Employee employee) {
+            base.Channel.updateEmployee(employee);
         }
         
-        public System.Threading.Tasks.Task updateEmployeeAsync() {
-            return base.Channel.updateEmployeeAsync();
+        public System.Threading.Tasks.Task updateEmployeeAsync(ElectricCarGUI.ElectricCarService.Employee employee) {
+            return base.Channel.updateEmployeeAsync(employee);
         }
         
-        public void deleteEmployee() {
-            base.Channel.deleteEmployee();
+        public void deleteEmployee(int id) {
+            base.Channel.deleteEmployee(id);
         }
         
-        public System.Threading.Tasks.Task deleteEmployeeAsync() {
-            return base.Channel.deleteEmployeeAsync();
+        public System.Threading.Tasks.Task deleteEmployeeAsync(int id) {
+            return base.Channel.deleteEmployeeAsync(id);
         }
         
-        public void addCustomer() {
-            base.Channel.addCustomer();
+        public void addCustomer(string fname, string lname, string address, string country, string phone, string email, string password, string payStatus, ElectricCarGUI.ElectricCarService.DiscountGroup discountGroup) {
+            base.Channel.addCustomer(fname, lname, address, country, phone, email, password, payStatus, discountGroup);
         }
         
-        public System.Threading.Tasks.Task addCustomerAsync() {
-            return base.Channel.addCustomerAsync();
+        public System.Threading.Tasks.Task addCustomerAsync(string fname, string lname, string address, string country, string phone, string email, string password, string payStatus, ElectricCarGUI.ElectricCarService.DiscountGroup discountGroup) {
+            return base.Channel.addCustomerAsync(fname, lname, address, country, phone, email, password, payStatus, discountGroup);
         }
         
-        public ElectricCarGUI.ElectricCarService.Customer getCustomer() {
-            return base.Channel.getCustomer();
+        public ElectricCarGUI.ElectricCarService.Customer getCustomer(int id) {
+            return base.Channel.getCustomer(id);
         }
         
-        public System.Threading.Tasks.Task<ElectricCarGUI.ElectricCarService.Customer> getCustomerAsync() {
-            return base.Channel.getCustomerAsync();
+        public System.Threading.Tasks.Task<ElectricCarGUI.ElectricCarService.Customer> getCustomerAsync(int id) {
+            return base.Channel.getCustomerAsync(id);
         }
         
         public ElectricCarGUI.ElectricCarService.Customer[] getAllCustomers() {
@@ -1552,68 +2009,68 @@ namespace ElectricCarGUI.ElectricCarService {
             return base.Channel.getAllCustomersAsync();
         }
         
-        public void updateCustomer() {
-            base.Channel.updateCustomer();
+        public void updateCustomer(ElectricCarGUI.ElectricCarService.Customer customer) {
+            base.Channel.updateCustomer(customer);
         }
         
-        public System.Threading.Tasks.Task updateCustomerAsync() {
-            return base.Channel.updateCustomerAsync();
+        public System.Threading.Tasks.Task updateCustomerAsync(ElectricCarGUI.ElectricCarService.Customer customer) {
+            return base.Channel.updateCustomerAsync(customer);
         }
         
-        public void deleteCustomer() {
-            base.Channel.deleteCustomer();
+        public void deleteCustomer(int id) {
+            base.Channel.deleteCustomer(id);
         }
         
-        public System.Threading.Tasks.Task deleteCustomerAsync() {
-            return base.Channel.deleteCustomerAsync();
+        public System.Threading.Tasks.Task deleteCustomerAsync(int id) {
+            return base.Channel.deleteCustomerAsync(id);
         }
         
-        public void addLogInfo() {
-            base.Channel.addLogInfo();
+        public void addLogInfo(string loginName, string password, int personId) {
+            base.Channel.addLogInfo(loginName, password, personId);
         }
         
-        public System.Threading.Tasks.Task addLogInfoAsync() {
-            return base.Channel.addLogInfoAsync();
+        public System.Threading.Tasks.Task addLogInfoAsync(string loginName, string password, int personId) {
+            return base.Channel.addLogInfoAsync(loginName, password, personId);
         }
         
-        public ElectricCarGUI.ElectricCarService.LogInfo[] getPersonLogInfos() {
-            return base.Channel.getPersonLogInfos();
+        public ElectricCarGUI.ElectricCarService.LogInfo[] getPersonLogInfos(int id) {
+            return base.Channel.getPersonLogInfos(id);
         }
         
-        public System.Threading.Tasks.Task<ElectricCarGUI.ElectricCarService.LogInfo[]> getPersonLogInfosAsync() {
-            return base.Channel.getPersonLogInfosAsync();
+        public System.Threading.Tasks.Task<ElectricCarGUI.ElectricCarService.LogInfo[]> getPersonLogInfosAsync(int id) {
+            return base.Channel.getPersonLogInfosAsync(id);
         }
         
-        public void updateLogInfo() {
-            base.Channel.updateLogInfo();
+        public void updateLogInfo(ElectricCarGUI.ElectricCarService.LogInfo logInfo) {
+            base.Channel.updateLogInfo(logInfo);
         }
         
-        public System.Threading.Tasks.Task updateLogInfoAsync() {
-            return base.Channel.updateLogInfoAsync();
+        public System.Threading.Tasks.Task updateLogInfoAsync(ElectricCarGUI.ElectricCarService.LogInfo logInfo) {
+            return base.Channel.updateLogInfoAsync(logInfo);
         }
         
-        public void deleteLogInfo() {
-            base.Channel.deleteLogInfo();
+        public void deleteLogInfo(int id) {
+            base.Channel.deleteLogInfo(id);
         }
         
-        public System.Threading.Tasks.Task deleteLogInfoAsync() {
-            return base.Channel.deleteLogInfoAsync();
+        public System.Threading.Tasks.Task deleteLogInfoAsync(int id) {
+            return base.Channel.deleteLogInfoAsync(id);
         }
         
-        public void addDiscountGroup() {
-            base.Channel.addDiscountGroup();
+        public void addDiscountGroup(string name, decimal discount) {
+            base.Channel.addDiscountGroup(name, discount);
         }
         
-        public System.Threading.Tasks.Task addDiscountGroupAsync() {
-            return base.Channel.addDiscountGroupAsync();
+        public System.Threading.Tasks.Task addDiscountGroupAsync(string name, decimal discount) {
+            return base.Channel.addDiscountGroupAsync(name, discount);
         }
         
-        public ElectricCarGUI.ElectricCarService.DiscountGroup getDiscoutGroup() {
-            return base.Channel.getDiscoutGroup();
+        public ElectricCarGUI.ElectricCarService.DiscountGroup getDiscoutGroup(int id) {
+            return base.Channel.getDiscoutGroup(id);
         }
         
-        public System.Threading.Tasks.Task<ElectricCarGUI.ElectricCarService.DiscountGroup> getDiscoutGroupAsync() {
-            return base.Channel.getDiscoutGroupAsync();
+        public System.Threading.Tasks.Task<ElectricCarGUI.ElectricCarService.DiscountGroup> getDiscoutGroupAsync(int id) {
+            return base.Channel.getDiscoutGroupAsync(id);
         }
         
         public ElectricCarGUI.ElectricCarService.DiscountGroup[] getAllDiscountGroups() {
@@ -1624,20 +2081,20 @@ namespace ElectricCarGUI.ElectricCarService {
             return base.Channel.getAllDiscountGroupsAsync();
         }
         
-        public void updateDiscountGroup() {
-            base.Channel.updateDiscountGroup();
+        public void updateDiscountGroup(ElectricCarGUI.ElectricCarService.DiscountGroup discountGroup) {
+            base.Channel.updateDiscountGroup(discountGroup);
         }
         
-        public System.Threading.Tasks.Task updateDiscountGroupAsync() {
-            return base.Channel.updateDiscountGroupAsync();
+        public System.Threading.Tasks.Task updateDiscountGroupAsync(ElectricCarGUI.ElectricCarService.DiscountGroup discountGroup) {
+            return base.Channel.updateDiscountGroupAsync(discountGroup);
         }
         
-        public void deleteDiscountGroup() {
-            base.Channel.deleteDiscountGroup();
+        public void deleteDiscountGroup(int id) {
+            base.Channel.deleteDiscountGroup(id);
         }
         
-        public System.Threading.Tasks.Task deleteDiscountGroupAsync() {
-            return base.Channel.deleteDiscountGroupAsync();
+        public System.Threading.Tasks.Task deleteDiscountGroupAsync(int id) {
+            return base.Channel.deleteDiscountGroupAsync(id);
         }
         
         public ElectricCarGUI.ElectricCarService.Booking[] getAllBookings() {
@@ -1654,6 +2111,22 @@ namespace ElectricCarGUI.ElectricCarService {
         
         public System.Threading.Tasks.Task<ElectricCarGUI.ElectricCarService.Booking> getBookingAsync(int id) {
             return base.Channel.getBookingAsync(id);
+        }
+        
+        public ElectricCarGUI.ElectricCarService.RouteStop[][] getRoutes(int startSId, int endSIdint, System.DateTime tripStart, decimal batteryLimit) {
+            return base.Channel.getRoutes(startSId, endSIdint, tripStart, batteryLimit);
+        }
+        
+        public System.Threading.Tasks.Task<ElectricCarGUI.ElectricCarService.RouteStop[][]> getRoutesAsync(int startSId, int endSIdint, System.DateTime tripStart, decimal batteryLimit) {
+            return base.Channel.getRoutesAsync(startSId, endSIdint, tripStart, batteryLimit);
+        }
+        
+        public decimal convertCapacityToDistance(decimal capacity) {
+            return base.Channel.convertCapacityToDistance(capacity);
+        }
+        
+        public System.Threading.Tasks.Task<decimal> convertCapacityToDistanceAsync(decimal capacity) {
+            return base.Channel.convertCapacityToDistanceAsync(capacity);
         }
         
         public ElectricCarGUI.ElectricCarService.BatteryTypeTest[] getAllBatteryType() {
@@ -1824,20 +2297,20 @@ namespace ElectricCarGUI.ElectricCarService {
             return base.Channel.updateStorageAsync(id, btid, sID);
         }
         
-        public ElectricCarGUI.ElectricCarService.BatteryStorage[] getAllRecord() {
-            return base.Channel.getAllRecord();
+        public ElectricCarGUI.ElectricCarService.BatteryStorage[] getAllStorages() {
+            return base.Channel.getAllStorages();
         }
         
-        public System.Threading.Tasks.Task<ElectricCarGUI.ElectricCarService.BatteryStorage[]> getAllRecordAsync() {
-            return base.Channel.getAllRecordAsync();
+        public System.Threading.Tasks.Task<ElectricCarGUI.ElectricCarService.BatteryStorage[]> getAllStoragesAsync() {
+            return base.Channel.getAllStoragesAsync();
         }
         
-        public string[] getAllInfo() {
-            return base.Channel.getAllInfo();
+        public string[] getAllStorageInfo() {
+            return base.Channel.getAllStorageInfo();
         }
         
-        public System.Threading.Tasks.Task<string[]> getAllInfoAsync() {
-            return base.Channel.getAllInfoAsync();
+        public System.Threading.Tasks.Task<string[]> getAllStorageInfoAsync() {
+            return base.Channel.getAllStorageInfoAsync();
         }
         
         public ElectricCarGUI.ElectricCarService.Period getPeriod(int bsID, System.DateTime time) {

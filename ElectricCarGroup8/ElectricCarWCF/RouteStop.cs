@@ -8,18 +8,17 @@ using System.Runtime.Serialization;
 namespace ElectricCarWCF
 {
     [DataContract]
-    public class BatteryTypeTest
+    public class RouteStop
     {
         [DataMember]
-        public int Id { get; set; }
+        public int stationID { get; set; }
         [DataMember]
-        public string name { get; set; }
+        public decimal driveHour { get; set; }
         [DataMember]
-        public int quantity { get; set; }
+        public Station station { get; set; }
         [DataMember]
-        public double price { get; set; }
+        public decimal distance { get; set; }
         [DataMember]
-        public decimal capacity { get; set; }
-        
+        public DateTime time { get; set; }
     }
 }

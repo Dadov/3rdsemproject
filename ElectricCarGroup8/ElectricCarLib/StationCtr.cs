@@ -62,6 +62,13 @@ namespace ElectricCarLib
             dbConnection.updateRecord(sId1, sId2, distance, driveHour);
         }
 
+        public Dictionary<int, Dictionary<int, decimal>> getAdjListWithBatteryLimitForDistance(decimal batteryLimit)
+        {
+            Dictionary<int, Dictionary<int, decimal>> adjList = dbStation.getAdjListWithBatteryLimitForDistance(batteryLimit);
+            return adjList;
+
+        }
+
         public Dictionary<MStation, Dictionary<MStation, decimal>> adjListWithWeight()
         {
             Dictionary<MStation, Dictionary<MStation, decimal>> adjList = new Dictionary<MStation, Dictionary<MStation, decimal>>();

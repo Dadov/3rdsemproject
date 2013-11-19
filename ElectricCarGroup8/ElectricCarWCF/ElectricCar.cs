@@ -414,6 +414,50 @@ namespace ElectricCarWCF
         #endregion
 
         #region Booking
+
+        public List<List<RouteStop>> getRoutes(int startSId, int endSIdint, DateTime tripStart, decimal batteryLimit)
+        {
+            List<List<RouteStop>> paths = new List<List<RouteStop>>();
+            List<List<PathStop>> routes = new List<List<PathStop>>();
+            PathFindCtr pfCtr = new PathFindCtr();
+            routes = pfCtr.findRoutes(startSId, endSIdint, tripStart, batteryLimit);
+            if (routes != null)
+            {
+                foreach (List<PathStop> r in routes)
+                {
+                    List<RouteStop> x = new List<RouteStop>();
+                    for (int i = 0; i < r.Count; i++)
+                    {
+                        //translate path to route
+                        RouteStop rs = new RouteStop();
+                        rs.stationID = r[i].stationID;
+                        Station s = new Station();
+                        s.Id = r[i].station.Id;
+                        s.Name = r[i].station.name;
+                        s.Address = r[i].station.address;
+                        rs.station = s;
+                        if (i != 0)
+                        {
+                            rs.distance = r[i].distance + r[i - 1].distance;
+                            rs.driveHour = r[i].driveHour + r[i - 1].driveHour;
+                            rs.time = tripStart.AddHours(Convert.ToDouble(rs.driveHour));
+                        }
+                        else
+                        {
+                            rs.distance = r[i].distance;
+                            rs.driveHour = r[i].driveHour;
+                            rs.time = tripStart;
+                        }
+                        x.Add(rs);
+                    }
+                    paths.Add(x);
+                }
+            }
+            
+            
+            return paths;
+        }
+
         public List<Booking> getAllBookings()
         {
             List<Booking> bookings = new List<Booking>();
@@ -493,6 +537,11 @@ namespace ElectricCarWCF
                 bk.startStationId = b.bookinglines.First().Station.Id;
             }
             return bk;
+        }
+
+        public decimal convertCapacityToDistance(decimal capacity)
+        {
+            return 200; //TODO convert capacity to distance with a formular
         }
 
         public List<BatteryTypeTest> getAllBatteryType()

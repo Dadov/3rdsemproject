@@ -9,6 +9,7 @@ namespace ElectricCarModelLayer
     public class PathStop
     {
         public int stationID { get; set; }
+        public decimal distance { get; set; }
         public decimal driveHour { get; set; }
         public MStation station { get; set; }
         

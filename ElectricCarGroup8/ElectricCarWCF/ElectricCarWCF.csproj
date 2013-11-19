@@ -66,6 +66,7 @@
     <Compile Include="NaborStation.cs" />
     <Compile Include="Period.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
+    <Compile Include="RouteStop.cs" />
     <Compile Include="Station.cs" />
   </ItemGroup>
   <ItemGroup>

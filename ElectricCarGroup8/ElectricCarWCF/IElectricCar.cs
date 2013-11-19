@@ -122,7 +122,11 @@ namespace ElectricCarWCF
         [OperationContract]
         Booking getBooking(int id);
         //search paths
+        [OperationContract]
+        List<List<RouteStop>> getRoutes(int startSId, int endSIdint, DateTime tripStart, decimal batteryLimit);
 
+        [OperationContract]
+        decimal convertCapacityToDistance(decimal capacity);
         //add booking
 
         //update booking
