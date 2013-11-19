@@ -23,7 +23,7 @@ namespace ElectricCarGUI
     public partial class BookingCtr : UserControl
     {
         static ElectricCarService.IElectricCar serviceObj = new ElectricCarService.ElectricCarClient();
-        string[] payStates = { "UnPay", "Payed" };
+        string[] payStates = { "UnPayed", "Payed" };
         public BookingCtr()
         {
             InitializeComponent();
@@ -44,7 +44,8 @@ namespace ElectricCarGUI
             {
                 dgBookings.ItemsSource = bookings;
             }
-
+            txtCreateDate.Text = DateTime.Now.ToLongTimeString();
+            txtTripStart.Text = DateTime.Now.ToLongTimeString(); //TODO modify it 
 
         }
 
@@ -85,38 +86,72 @@ namespace ElectricCarGUI
         {
             txtBId.Text = txtCId.Text = txtCreateDate.Text = txtEId.Text = txtSId.Text = txtTotalPrice.Text = txtTripStart.Text = "";
             cbbPayStatus.SelectedIndex = 0;
+            dgRoute.ItemsSource = null;
+            dgBookingLine.ItemsSource = null;
         }
 
         private BatteryTypeTest bt = new BatteryTypeTest();
         private void btnAddBT_Click(object sender, RoutedEventArgs e)
         {
-            if (dgBookingLine.ItemsSource==null)
+            if (txtBId.Text == "")
             {
-                AddBatteryTypeWindow btWin = new AddBatteryTypeWindow(this);
-                btWin.Visibility = Visibility.Visible;
+                if (dgBookingLine.ItemsSource == null)
+                {
+                    AddBatteryTypeWindow btWin = new AddBatteryTypeWindow(this);
+                    btWin.Visibility = Visibility.Visible;
+                }
+                else
+                {
+                    MessageBox.Show("Only one battery type is allowed to added. Please delete the old one before adding.");
+                }
             }
             else
             {
-                MessageBox.Show("Only one battery type is allowed to added. Please delete the old one before adding.");
+                MessageBox.Show("Battery type can not be edited after placing the booking.");
             }
             
         }
 
         private void btnDeleteBT_Click(object sender, RoutedEventArgs e)
         {
-            bt = new BatteryTypeTest();
-            dgBookingLine.ItemsSource = null;
+            if (txtBId.Text=="")
+            {
+                bt = new BatteryTypeTest();
+                dgBookingLine.ItemsSource = null;
+            }
+            else
+            {
+                MessageBox.Show("Battery type can not be edited after placing the booking.");
+            }
+            
         }
 
         private void btnSelectRoute_Click(object sender, RoutedEventArgs e)
         {
-            AddRouoteWindow routeWin = new AddRouoteWindow(this);
+            if (txtBId.Text=="")
+            {
+                AddRouoteWindow routeWin = new AddRouoteWindow(this);
+                routeWin.Visibility = Visibility.Visible;
+            }
+            else
+            {
+                MessageBox.Show("Route can not be edited after placing the booking.");
+            }
+            
 
         }
 
         private void btnDeleteRoute_Click(object sender, RoutedEventArgs e)
         {
-            dgRoute.ItemsSource = null;
+            if (txtBId.Text == "")
+            {
+                dgRoute.ItemsSource = null;
+            }
+            else
+            {
+                MessageBox.Show("Route can not be edited after placing the booking.");
+            }
+            
         }
     }
 }

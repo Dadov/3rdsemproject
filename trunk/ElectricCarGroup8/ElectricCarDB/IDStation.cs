@@ -17,6 +17,7 @@ namespace ElectricCarDB
         Dictionary<MStation, decimal> getNaborStationsWithDriveHour(int id);
         LinkedList<MStation> getNaborStationsWithoutDriveHour(int id);
         List<MConnection> getNaborStations(int id);
+        Dictionary<int, Dictionary<int, decimal>> getAdjListWithBatteryLimitForDistance(decimal batteryLimit);
        
     }
 }

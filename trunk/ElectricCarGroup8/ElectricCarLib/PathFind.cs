@@ -75,7 +75,7 @@ namespace ElectricCarLib
 
                             if (!removedEdges.Keys.Contains(p[i+1].stationID))
 	                        {
-		                         Dictionary<int, decimal> edge2 = new Dictionary<int,decimal>();
+		                         Dictionary<int, decimal> edge2 = new Dictionary<int,decimal>(); 
                                  edge2.Add(p[i].stationID, adjListWithWeight[p[i + 1].stationID][p[i].stationID]);
                                  removedEdges.Add(p[i+1].stationID, edge2);
 	                        } else

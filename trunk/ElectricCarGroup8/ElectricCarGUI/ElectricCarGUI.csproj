@@ -170,6 +170,9 @@
     <None Include="Service References\ElectricCarService\ElectricCarGUI.ElectricCarService.Period.datasource">
       <DependentUpon>Reference.svcmap</DependentUpon>
     </None>
+    <None Include="Service References\ElectricCarService\ElectricCarGUI.ElectricCarService.RouteStop.datasource">
+      <DependentUpon>Reference.svcmap</DependentUpon>
+    </None>
     <None Include="Service References\ElectricCarService\ElectricCarGUI.ElectricCarService.Station.datasource">
       <DependentUpon>Reference.svcmap</DependentUpon>
     </None>

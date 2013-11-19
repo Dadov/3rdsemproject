@@ -7,15 +7,15 @@ using ElectricCarModelLayer;
 
 namespace ElectricCarLib
 {
-    class TimeEstimate
+    public class EstimateTime
     {
         private static decimal carAveSpeed = 70; //km/h
         private ConnectionCtr cCtr = new ConnectionCtr();
 
-        public double driveHourForDistance(decimal distance) 
+        public static double driveHourForDistance(decimal distance) 
         {
-            decimal driveHour = distance / carAveSpeed;
-            return Convert.ToDouble(driveHour.ToString("C2"));
+            decimal driveHour = distance / carAveSpeed; //driveHour.ToString("C2")
+            return Convert.ToDouble(driveHour);
         }
 
         //TODO test and can take other argument as parameters

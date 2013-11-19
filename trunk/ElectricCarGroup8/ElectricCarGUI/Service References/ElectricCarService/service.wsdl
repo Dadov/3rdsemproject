@@ -894,6 +894,82 @@
       </wsp:All>
     </wsp:ExactlyOne>
   </wsp:Policy>
+  <wsp:Policy wsu:Id="WSHttpBinding_IElectricCar_getRoutes_Input_policy">
+    <wsp:ExactlyOne>
+      <wsp:All>
+        <sp:SignedParts xmlns:sp="http://schemas.xmlsoap.org/ws/2005/07/securitypolicy">
+          <sp:Body />
+          <sp:Header Name="To" Namespace="http://www.w3.org/2005/08/addressing" />
+          <sp:Header Name="From" Namespace="http://www.w3.org/2005/08/addressing" />
+          <sp:Header Name="FaultTo" Namespace="http://www.w3.org/2005/08/addressing" />
+          <sp:Header Name="ReplyTo" Namespace="http://www.w3.org/2005/08/addressing" />
+          <sp:Header Name="MessageID" Namespace="http://www.w3.org/2005/08/addressing" />
+          <sp:Header Name="RelatesTo" Namespace="http://www.w3.org/2005/08/addressing" />
+          <sp:Header Name="Action" Namespace="http://www.w3.org/2005/08/addressing" />
+        </sp:SignedParts>
+        <sp:EncryptedParts xmlns:sp="http://schemas.xmlsoap.org/ws/2005/07/securitypolicy">
+          <sp:Body />
+        </sp:EncryptedParts>
+      </wsp:All>
+    </wsp:ExactlyOne>
+  </wsp:Policy>
+  <wsp:Policy wsu:Id="WSHttpBinding_IElectricCar_getRoutes_output_policy">
+    <wsp:ExactlyOne>
+      <wsp:All>
+        <sp:SignedParts xmlns:sp="http://schemas.xmlsoap.org/ws/2005/07/securitypolicy">
+          <sp:Body />
+          <sp:Header Name="To" Namespace="http://www.w3.org/2005/08/addressing" />
+          <sp:Header Name="From" Namespace="http://www.w3.org/2005/08/addressing" />
+          <sp:Header Name="FaultTo" Namespace="http://www.w3.org/2005/08/addressing" />
+          <sp:Header Name="ReplyTo" Namespace="http://www.w3.org/2005/08/addressing" />
+          <sp:Header Name="MessageID" Namespace="http://www.w3.org/2005/08/addressing" />
+          <sp:Header Name="RelatesTo" Namespace="http://www.w3.org/2005/08/addressing" />
+          <sp:Header Name="Action" Namespace="http://www.w3.org/2005/08/addressing" />
+        </sp:SignedParts>
+        <sp:EncryptedParts xmlns:sp="http://schemas.xmlsoap.org/ws/2005/07/securitypolicy">
+          <sp:Body />
+        </sp:EncryptedParts>
+      </wsp:All>
+    </wsp:ExactlyOne>
+  </wsp:Policy>
+  <wsp:Policy wsu:Id="WSHttpBinding_IElectricCar_convertCapacityToDistance_Input_policy">
+    <wsp:ExactlyOne>
+      <wsp:All>
+        <sp:SignedParts xmlns:sp="http://schemas.xmlsoap.org/ws/2005/07/securitypolicy">
+          <sp:Body />
+          <sp:Header Name="To" Namespace="http://www.w3.org/2005/08/addressing" />
+          <sp:Header Name="From" Namespace="http://www.w3.org/2005/08/addressing" />
+          <sp:Header Name="FaultTo" Namespace="http://www.w3.org/2005/08/addressing" />
+          <sp:Header Name="ReplyTo" Namespace="http://www.w3.org/2005/08/addressing" />
+          <sp:Header Name="MessageID" Namespace="http://www.w3.org/2005/08/addressing" />
+          <sp:Header Name="RelatesTo" Namespace="http://www.w3.org/2005/08/addressing" />
+          <sp:Header Name="Action" Namespace="http://www.w3.org/2005/08/addressing" />
+        </sp:SignedParts>
+        <sp:EncryptedParts xmlns:sp="http://schemas.xmlsoap.org/ws/2005/07/securitypolicy">
+          <sp:Body />
+        </sp:EncryptedParts>
+      </wsp:All>
+    </wsp:ExactlyOne>
+  </wsp:Policy>
+  <wsp:Policy wsu:Id="WSHttpBinding_IElectricCar_convertCapacityToDistance_output_policy">
+    <wsp:ExactlyOne>
+      <wsp:All>
+        <sp:SignedParts xmlns:sp="http://schemas.xmlsoap.org/ws/2005/07/securitypolicy">
+          <sp:Body />
+          <sp:Header Name="To" Namespace="http://www.w3.org/2005/08/addressing" />
+          <sp:Header Name="From" Namespace="http://www.w3.org/2005/08/addressing" />
+          <sp:Header Name="FaultTo" Namespace="http://www.w3.org/2005/08/addressing" />
+          <sp:Header Name="ReplyTo" Namespace="http://www.w3.org/2005/08/addressing" />
+          <sp:Header Name="MessageID" Namespace="http://www.w3.org/2005/08/addressing" />
+          <sp:Header Name="RelatesTo" Namespace="http://www.w3.org/2005/08/addressing" />
+          <sp:Header Name="Action" Namespace="http://www.w3.org/2005/08/addressing" />
+        </sp:SignedParts>
+        <sp:EncryptedParts xmlns:sp="http://schemas.xmlsoap.org/ws/2005/07/securitypolicy">
+          <sp:Body />
+        </sp:EncryptedParts>
+      </wsp:All>
+    </wsp:ExactlyOne>
+  </wsp:Policy>
   <wsp:Policy wsu:Id="WSHttpBinding_IElectricCar_getAllBatteryType_Input_policy">
     <wsp:ExactlyOne>
       <wsp:All>
@@ -1692,7 +1768,7 @@
       </wsp:All>
     </wsp:ExactlyOne>
   </wsp:Policy>
-  <wsp:Policy wsu:Id="WSHttpBinding_IElectricCar_getAllRecord_Input_policy">
+  <wsp:Policy wsu:Id="WSHttpBinding_IElectricCar_getAllStorages_Input_policy">
     <wsp:ExactlyOne>
       <wsp:All>
         <sp:SignedParts xmlns:sp="http://schemas.xmlsoap.org/ws/2005/07/securitypolicy">
@@ -1711,7 +1787,7 @@
       </wsp:All>
     </wsp:ExactlyOne>
   </wsp:Policy>
-  <wsp:Policy wsu:Id="WSHttpBinding_IElectricCar_getAllRecord_output_policy">
+  <wsp:Policy wsu:Id="WSHttpBinding_IElectricCar_getAllStorages_output_policy">
     <wsp:ExactlyOne>
       <wsp:All>
         <sp:SignedParts xmlns:sp="http://schemas.xmlsoap.org/ws/2005/07/securitypolicy">
@@ -1730,7 +1806,7 @@
       </wsp:All>
     </wsp:ExactlyOne>
   </wsp:Policy>
-  <wsp:Policy wsu:Id="WSHttpBinding_IElectricCar_getAllInfo_Input_policy">
+  <wsp:Policy wsu:Id="WSHttpBinding_IElectricCar_getAllStorageInfo_Input_policy">
     <wsp:ExactlyOne>
       <wsp:All>
         <sp:SignedParts xmlns:sp="http://schemas.xmlsoap.org/ws/2005/07/securitypolicy">
@@ -1749,7 +1825,7 @@
       </wsp:All>
     </wsp:ExactlyOne>
   </wsp:Policy>
-  <wsp:Policy wsu:Id="WSHttpBinding_IElectricCar_getAllInfo_output_policy">
+  <wsp:Policy wsu:Id="WSHttpBinding_IElectricCar_getAllStorageInfo_output_policy">
     <wsp:ExactlyOne>
       <wsp:All>
         <sp:SignedParts xmlns:sp="http://schemas.xmlsoap.org/ws/2005/07/securitypolicy">
@@ -2016,6 +2092,18 @@
   <wsdl:message name="IElectricCar_getBooking_OutputMessage">
     <wsdl:part name="parameters" element="tns:getBookingResponse" />
   </wsdl:message>
+  <wsdl:message name="IElectricCar_getRoutes_InputMessage">
+    <wsdl:part name="parameters" element="tns:getRoutes" />
+  </wsdl:message>
+  <wsdl:message name="IElectricCar_getRoutes_OutputMessage">
+    <wsdl:part name="parameters" element="tns:getRoutesResponse" />
+  </wsdl:message>
+  <wsdl:message name="IElectricCar_convertCapacityToDistance_InputMessage">
+    <wsdl:part name="parameters" element="tns:convertCapacityToDistance" />
+  </wsdl:message>
+  <wsdl:message name="IElectricCar_convertCapacityToDistance_OutputMessage">
+    <wsdl:part name="parameters" element="tns:convertCapacityToDistanceResponse" />
+  </wsdl:message>
   <wsdl:message name="IElectricCar_getAllBatteryType_InputMessage">
     <wsdl:part name="parameters" element="tns:getAllBatteryType" />
   </wsdl:message>
@@ -2142,17 +2230,17 @@
   <wsdl:message name="IElectricCar_updateStorage_OutputMessage">
     <wsdl:part name="parameters" element="tns:updateStorageResponse" />
   </wsdl:message>
-  <wsdl:message name="IElectricCar_getAllRecord_InputMessage">
-    <wsdl:part name="parameters" element="tns:getAllRecord" />
+  <wsdl:message name="IElectricCar_getAllStorages_InputMessage">
+    <wsdl:part name="parameters" element="tns:getAllStorages" />
   </wsdl:message>
-  <wsdl:message name="IElectricCar_getAllRecord_OutputMessage">
-    <wsdl:part name="parameters" element="tns:getAllRecordResponse" />
+  <wsdl:message name="IElectricCar_getAllStorages_OutputMessage">
+    <wsdl:part name="parameters" element="tns:getAllStoragesResponse" />
   </wsdl:message>
-  <wsdl:message name="IElectricCar_getAllInfo_InputMessage">
-    <wsdl:part name="parameters" element="tns:getAllInfo" />
+  <wsdl:message name="IElectricCar_getAllStorageInfo_InputMessage">
+    <wsdl:part name="parameters" element="tns:getAllStorageInfo" />
   </wsdl:message>
-  <wsdl:message name="IElectricCar_getAllInfo_OutputMessage">
-    <wsdl:part name="parameters" element="tns:getAllInfoResponse" />
+  <wsdl:message name="IElectricCar_getAllStorageInfo_OutputMessage">
+    <wsdl:part name="parameters" element="tns:getAllStorageInfoResponse" />
   </wsdl:message>
   <wsdl:message name="IElectricCar_getPeriod_InputMessage">
     <wsdl:part name="parameters" element="tns:getPeriod" />
@@ -2257,6 +2345,14 @@
       <wsdl:input wsaw:Action="http://tempuri.org/IElectricCar/getBooking" message="tns:IElectricCar_getBooking_InputMessage" />
       <wsdl:output wsaw:Action="http://tempuri.org/IElectricCar/getBookingResponse" message="tns:IElectricCar_getBooking_OutputMessage" />
     </wsdl:operation>
+    <wsdl:operation name="getRoutes">
+      <wsdl:input wsaw:Action="http://tempuri.org/IElectricCar/getRoutes" message="tns:IElectricCar_getRoutes_InputMessage" />
+      <wsdl:output wsaw:Action="http://tempuri.org/IElectricCar/getRoutesResponse" message="tns:IElectricCar_getRoutes_OutputMessage" />
+    </wsdl:operation>
+    <wsdl:operation name="convertCapacityToDistance">
+      <wsdl:input wsaw:Action="http://tempuri.org/IElectricCar/convertCapacityToDistance" message="tns:IElectricCar_convertCapacityToDistance_InputMessage" />
+      <wsdl:output wsaw:Action="http://tempuri.org/IElectricCar/convertCapacityToDistanceResponse" message="tns:IElectricCar_convertCapacityToDistance_OutputMessage" />
+    </wsdl:operation>
     <wsdl:operation name="getAllBatteryType">
       <wsdl:input wsaw:Action="http://tempuri.org/IElectricCar/getAllBatteryType" message="tns:IElectricCar_getAllBatteryType_InputMessage" />
       <wsdl:output wsaw:Action="http://tempuri.org/IElectricCar/getAllBatteryTypeResponse" message="tns:IElectricCar_getAllBatteryType_OutputMessage" />
@@ -2341,13 +2437,13 @@
       <wsdl:input wsaw:Action="http://tempuri.org/IElectricCar/updateStorage" message="tns:IElectricCar_updateStorage_InputMessage" />
       <wsdl:output wsaw:Action="http://tempuri.org/IElectricCar/updateStorageResponse" message="tns:IElectricCar_updateStorage_OutputMessage" />
     </wsdl:operation>
-    <wsdl:operation name="getAllRecord">
-      <wsdl:input wsaw:Action="http://tempuri.org/IElectricCar/getAllRecord" message="tns:IElectricCar_getAllRecord_InputMessage" />
-      <wsdl:output wsaw:Action="http://tempuri.org/IElectricCar/getAllRecordResponse" message="tns:IElectricCar_getAllRecord_OutputMessage" />
+    <wsdl:operation name="getAllStorages">
+      <wsdl:input wsaw:Action="http://tempuri.org/IElectricCar/getAllStorages" message="tns:IElectricCar_getAllStorages_InputMessage" />
+      <wsdl:output wsaw:Action="http://tempuri.org/IElectricCar/getAllStoragesResponse" message="tns:IElectricCar_getAllStorages_OutputMessage" />
     </wsdl:operation>
-    <wsdl:operation name="getAllInfo">
-      <wsdl:input wsaw:Action="http://tempuri.org/IElectricCar/getAllInfo" message="tns:IElectricCar_getAllInfo_InputMessage" />
-      <wsdl:output wsaw:Action="http://tempuri.org/IElectricCar/getAllInfoResponse" message="tns:IElectricCar_getAllInfo_OutputMessage" />
+    <wsdl:operation name="getAllStorageInfo">
+      <wsdl:input wsaw:Action="http://tempuri.org/IElectricCar/getAllStorageInfo" message="tns:IElectricCar_getAllStorageInfo_InputMessage" />
+      <wsdl:output wsaw:Action="http://tempuri.org/IElectricCar/getAllStorageInfoResponse" message="tns:IElectricCar_getAllStorageInfo_OutputMessage" />
     </wsdl:operation>
     <wsdl:operation name="getPeriod">
       <wsdl:input wsaw:Action="http://tempuri.org/IElectricCar/getPeriod" message="tns:IElectricCar_getPeriod_InputMessage" />
@@ -2596,6 +2692,28 @@
         <soap12:body use="literal" />
       </wsdl:output>
     </wsdl:operation>
+    <wsdl:operation name="getRoutes">
+      <soap12:operation soapAction="http://tempuri.org/IElectricCar/getRoutes" style="document" />
+      <wsdl:input>
+        <wsp:PolicyReference URI="#WSHttpBinding_IElectricCar_getRoutes_Input_policy" />
+        <soap12:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <wsp:PolicyReference URI="#WSHttpBinding_IElectricCar_getRoutes_output_policy" />
+        <soap12:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="convertCapacityToDistance">
+      <soap12:operation soapAction="http://tempuri.org/IElectricCar/convertCapacityToDistance" style="document" />
+      <wsdl:input>
+        <wsp:PolicyReference URI="#WSHttpBinding_IElectricCar_convertCapacityToDistance_Input_policy" />
+        <soap12:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <wsp:PolicyReference URI="#WSHttpBinding_IElectricCar_convertCapacityToDistance_output_policy" />
+        <soap12:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
     <wsdl:operation name="getAllBatteryType">
       <soap12:operation soapAction="http://tempuri.org/IElectricCar/getAllBatteryType" style="document" />
       <wsdl:input>
@@ -2827,25 +2945,25 @@
         <soap12:body use="literal" />
       </wsdl:output>
     </wsdl:operation>
-    <wsdl:operation name="getAllRecord">
-      <soap12:operation soapAction="http://tempuri.org/IElectricCar/getAllRecord" style="document" />
+    <wsdl:operation name="getAllStorages">
+      <soap12:operation soapAction="http://tempuri.org/IElectricCar/getAllStorages" style="document" />
       <wsdl:input>
-        <wsp:PolicyReference URI="#WSHttpBinding_IElectricCar_getAllRecord_Input_policy" />
+        <wsp:PolicyReference URI="#WSHttpBinding_IElectricCar_getAllStorages_Input_policy" />
         <soap12:body use="literal" />
       </wsdl:input>
       <wsdl:output>
-        <wsp:PolicyReference URI="#WSHttpBinding_IElectricCar_getAllRecord_output_policy" />
+        <wsp:PolicyReference URI="#WSHttpBinding_IElectricCar_getAllStorages_output_policy" />
         <soap12:body use="literal" />
       </wsdl:output>
     </wsdl:operation>
-    <wsdl:operation name="getAllInfo">
-      <soap12:operation soapAction="http://tempuri.org/IElectricCar/getAllInfo" style="document" />
+    <wsdl:operation name="getAllStorageInfo">
+      <soap12:operation soapAction="http://tempuri.org/IElectricCar/getAllStorageInfo" style="document" />
       <wsdl:input>
-        <wsp:PolicyReference URI="#WSHttpBinding_IElectricCar_getAllInfo_Input_policy" />
+        <wsp:PolicyReference URI="#WSHttpBinding_IElectricCar_getAllStorageInfo_Input_policy" />
         <soap12:body use="literal" />
       </wsdl:input>
       <wsdl:output>
-        <wsp:PolicyReference URI="#WSHttpBinding_IElectricCar_getAllInfo_output_policy" />
+        <wsp:PolicyReference URI="#WSHttpBinding_IElectricCar_getAllStorageInfo_output_policy" />
         <soap12:body use="literal" />
       </wsdl:output>
     </wsdl:operation>

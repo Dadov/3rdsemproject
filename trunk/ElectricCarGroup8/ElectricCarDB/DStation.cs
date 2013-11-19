@@ -165,6 +165,41 @@ namespace ElectricCarDB
             return connections;
         }
 
+        public Dictionary<int, Dictionary<int, decimal>> getAdjListWithBatteryLimitForDistance(decimal batteryLimit)
+        {
+            Dictionary<int, Dictionary<int, decimal>> adjList = new Dictionary<int,Dictionary<int,decimal>>();
+            //return id adjList with limit of batteryLimit
+            using (ElectricCarEntities context = new ElectricCarEntities())
+            {
+                var connections = from c in context.Connections where c.distance<= batteryLimit select c;
+                foreach (var c in connections)
+                {
+                    if (!adjList.Keys.Contains(c.sId1))
+                    {
+                        Dictionary<int, decimal> list = new Dictionary<int, decimal>();
+                        list.Add(c.sId2, c.distance.Value);
+                        adjList.Add(c.sId1, list);
+                    }
+                    else
+                    {
+                        adjList[c.sId1].Add(c.sId2, c.distance.Value);
+                    }
+                    if (!adjList.Keys.Contains(c.sId2))
+                    {
+                        Dictionary<int, decimal> list = new Dictionary<int, decimal>();
+                        list.Add(c.sId1, c.distance.Value);
+                        adjList.Add(c.sId2, list);
+                    }
+                    else
+                    {
+                        adjList[c.sId2].Add(c.sId1, c.distance.Value);
+                    }
+
+                }
+            }
+            return adjList;
+        }
+
         public Dictionary<MStation, decimal> getNaborStationsWithDriveHour(int id)
         {
             Dictionary<MStation, decimal> nStations = new Dictionary<MStation, decimal>();
