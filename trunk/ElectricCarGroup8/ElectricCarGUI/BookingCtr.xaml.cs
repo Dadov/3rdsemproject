@@ -44,8 +44,7 @@ namespace ElectricCarGUI
             {
                 dgBookings.ItemsSource = bookings;
             }
-            txtCreateDate.Text = DateTime.Now.ToLongTimeString();
-            txtTripStart.Text = DateTime.Now.ToLongTimeString(); //TODO modify it 
+            setTimeToTxtBox();
 
         }
 
@@ -88,7 +87,15 @@ namespace ElectricCarGUI
             cbbPayStatus.SelectedIndex = 0;
             dgRoute.ItemsSource = null;
             dgBookingLine.ItemsSource = null;
+            setTimeToTxtBox();
         }
+
+        private void setTimeToTxtBox()
+        {
+            txtTripStart.Text = DateTime.Now.ToLongTimeString();
+            txtCreateDate.Text = DateTime.Now.ToLongTimeString();
+        }
+        
 
         private BatteryTypeTest bt = new BatteryTypeTest();
         private void btnAddBT_Click(object sender, RoutedEventArgs e)

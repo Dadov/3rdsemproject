@@ -68,12 +68,14 @@ namespace ElectricCarGUI
             bt.Id = name_Id[(string)cbbBT.SelectedValue];
             bt.name = (string)cbbBT.SelectedValue;
             bl.quantity = Convert.ToInt32(cbbQuantity.SelectedValue);
+            
             double cost = 0;
             for (int i = 0; i < bts.Count; i++)
 			{
 			    if (bts[i].name == (string)cbbBT.SelectedValue)
 	            {
 		            cost = bts[i].price;
+                    bt.price = cost;
                     break;
 	            }
 			}
