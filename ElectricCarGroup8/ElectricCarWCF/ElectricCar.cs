@@ -541,7 +541,7 @@ namespace ElectricCarWCF
 
         public decimal convertCapacityToDistance(decimal capacity)
         {
-            return 200; //TODO convert capacity to distance with a formular
+            return 350; //TODO convert capacity to distance with a formular
         }
 
         public List<BatteryTypeTest> getAllBatteryType()

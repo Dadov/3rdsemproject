@@ -21,18 +21,26 @@ namespace ElectricCarGUI
     public partial class AddRouoteWindow : Window
     {
         private BookingCtr bCtr;
-        private string[] sort = { "Distance", "Time", "Price" };
+        private string[] sort = { "Distance", "Price" };
         static ElectricCarService.IElectricCar serviceObj = new ElectricCarService.ElectricCarClient();
         public AddRouoteWindow(BookingCtr bookingCtr)
         {
             InitializeComponent();
             bCtr = bookingCtr;
+            addCbbSort();
+            showRoute();
+                
+        }
+
+        private void addCbbSort()
+        {
             cbbSort.ItemsSource = sort;
+            cbbSort.SelectedIndex = 0;
         }
 
         private void btnCancel_Click(object sender, RoutedEventArgs e)
         {
-            Close();
+            Close(); 
         }
 
         private void showRoute()
@@ -41,9 +49,39 @@ namespace ElectricCarGUI
             BookingLine bl = (BookingLine)bCtr.dgBookingLine.Items.GetItemAt(0);
             decimal batteryLimit = serviceObj.convertCapacityToDistance(bl.BatteryType.capacity);
             RouteStop[][] routes = serviceObj.getRoutes(Convert.ToInt32(bCtr.txtSId.Text), Convert.ToInt32(bCtr.txtEId.Text), Convert.ToDateTime(bCtr.txtTripStart.Text), batteryLimit);
-            if (routes.Count() != 0)
+            
+            if (routes.Count() >= 1) //TODO need to change
             {
-                //TODO show routes
+                //show routes
+                List<List<RouteStop>> rs = new List<List<RouteStop>>();
+                Dictionary<int, List<RouteStop>> rWithId = new Dictionary<int, List<RouteStop>>();
+                List<RouteInfoHolder> rInfos = new List<RouteInfoHolder>();
+                for (int i = 0; i < routes.Length; i++)
+                {
+                    List<RouteStop> n = new List<RouteStop>();
+                    RouteInfoHolder rInfo = new RouteInfoHolder();
+                    string info = " ";
+                    decimal totalDistance = 0;
+                    for (int j = 0; j < routes[i].Length; j++)
+                    {
+                        n.Add(routes[i][j]);
+                        info += routes[i][j].station.Name + " " + routes[i][j].time.ToLongTimeString() + " | ";
+                        if (j == routes[i].Length-1)
+                        {
+                            totalDistance = routes[i][j].distance;
+                        }
+                        
+                    }
+                    rs.Add(n);
+                    rWithId.Add(i, n);
+                    rInfo.Info = info;
+                    rInfo.Id = i;
+                    rInfo.TotalDistance = totalDistance;
+                    rInfo.TotalPrice = bl.BatteryType.price * bl.quantity * routes[i].Length;
+                    rInfos.Add(rInfo);
+                }
+                dgRoutes.ItemsSource = rInfos;
+                
             }
             else
             {
