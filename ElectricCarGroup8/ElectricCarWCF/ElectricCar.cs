@@ -469,13 +469,13 @@ namespace ElectricCarWCF
                 {
                     Booking bk = new Booking();
                     bk.Id = b.Id;
-                    bk.createDate = b.createDate.Value.ToShortTimeString();
+                    bk.createDate = b.createDate.Value.ToString("MM/dd/yyyy HH:mm");
                     CustomerTest cust = new CustomerTest() { Id = b.customer.ID, name = b.customer.FName + " " + b.customer.LName };
                     bk.customer = cust;
                     bk.cId = b.customer.ID;
                     bk.payStatus = b.creaditCard;
                     bk.totalPrice = b.totalPrice.Value;
-                    bk.tripStart = b.tripStart.Value.ToShortTimeString();
+                    bk.tripStart = b.tripStart.Value.ToString("MM/dd/yyyy HH:mm");
                     if (b.bookinglines.Count != 0)
                     {
                         foreach (MBookingLine bl in b.bookinglines)
@@ -537,6 +537,21 @@ namespace ElectricCarWCF
                 bk.startStationId = b.bookinglines.First().Station.Id;
             }
             return bk;
+        }
+
+        public void addBooking(Booking b)
+        {
+            //TODO
+        }
+
+        public void updateBooking(Booking b)
+        {
+            //TODO
+        }
+
+        public void deleteBooking(int bId)
+        {
+            //TODO
         }
 
         public decimal convertCapacityToDistance(decimal capacity)

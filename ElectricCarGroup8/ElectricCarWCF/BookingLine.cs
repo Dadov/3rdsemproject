@@ -10,6 +10,11 @@ namespace ElectricCarWCF
     [DataContract]
     public class BookingLine
     {
+        public BookingLine()
+        {
+            station = new Station();
+            BatteryType = new BatteryTypeTest();
+        }
         [DataMember]
         public Station station { get; set; }
         [DataMember]

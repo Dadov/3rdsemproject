@@ -50,8 +50,8 @@
             </DataGrid.Columns>
         </DataGrid>
 
-        <DataGrid HeadersVisibility="Column" x:Name="dgRoute"  CanUserAddRows="False" SelectedItem="{Binding Path=SelectedBookingLine, Mode=TwoWay}" ScrollViewer.CanContentScroll="True" 
-                    ScrollViewer.VerticalScrollBarVisibility="Auto" AutoGenerateColumns="False" HorizontalAlignment="Left" Margin="525,187,0,0" VerticalAlignment="Top" Height="225" Width="332" Grid.Column="2">
+        <DataGrid HeadersVisibility="Column" x:Name="dgRoute"  CanUserAddRows="False" SelectedItem="{Binding Path=SelectedRouteStop, Mode=TwoWay}" ScrollViewer.CanContentScroll="True" 
+                    ScrollViewer.VerticalScrollBarVisibility="Auto" AutoGenerateColumns="False" HorizontalAlignment="Left" Margin="525,187,0,0" VerticalAlignment="Top" Height="225" Width="338" Grid.Column="2">
             <DataGrid.Columns>
                 <DataGridTextColumn Binding="{Binding station.Id}" Header="Id" Width="0.1*" IsReadOnly="True" SortDirection="Ascending"/>
                 <DataGridTextColumn Binding="{Binding station.Name}" Header="Station" Width="0.15*" IsReadOnly="True"/>
@@ -63,12 +63,14 @@
         <Button x:Name="btnAddBT" Content="Add" HorizontalAlignment="Left" Margin="337,425,0,0" VerticalAlignment="Top" Width="75" Grid.Column="2" Click="btnAddBT_Click"/>
         <Button x:Name="btnDeleteBT" Content="Delete" HorizontalAlignment="Left" Margin="426,425,0,0" VerticalAlignment="Top" Width="75" Grid.Column="2" Click="btnDeleteBT_Click"/>
         <Button x:Name="btnSelectRoute" Content="Select Route" HorizontalAlignment="Left" Margin="593,425,0,0" VerticalAlignment="Top" Width="87" Grid.Column="2" Click="btnSelectRoute_Click"/>
-        <Button x:Name="btnBAdd" Content="Add" HorizontalAlignment="Left" Margin="445,487,0,0" VerticalAlignment="Top" Width="75" Grid.Column="2"/>
-        <Button x:Name="btnBUpdate" Content="Update" HorizontalAlignment="Left" Margin="525,487,0,0" VerticalAlignment="Top" Width="75" Grid.Column="2"/>
-        <Button x:Name="btnBDelete" Content="Delete" HorizontalAlignment="Left" Margin="605,487,0,0" VerticalAlignment="Top" Width="75" Grid.Column="2"/>
+        <Button x:Name="btnBAdd" Content="Add" HorizontalAlignment="Left" Margin="445,487,0,0" VerticalAlignment="Top" Width="75" Grid.Column="2" Click="btnBAdd_Click"/>
+        <Button x:Name="btnBUpdate" Content="Update" HorizontalAlignment="Left" Margin="525,487,0,0" VerticalAlignment="Top" Width="75" Grid.Column="2" Click="btnBUpdate_Click"/>
+        <Button x:Name="btnBDelete" Content="Delete" HorizontalAlignment="Left" Margin="605,487,0,0" VerticalAlignment="Top" Width="75" Grid.Column="2" Click="btnBDelete_Click"/>
         <Button Content="Clear" HorizontalAlignment="Left" Margin="685,487,0,0" VerticalAlignment="Top" Width="75" Grid.Column="2" Click="Button_Click"/>
         <Button x:Name="btnDeleteRoute" Content="Delete Route" Grid.Column="2" HorizontalAlignment="Left" Margin="698,425,0,0" VerticalAlignment="Top" Width="87" Click="btnDeleteRoute_Click"/>
         <ComboBox x:Name="cbbPayStatus" Grid.Column="2" HorizontalAlignment="Left" Margin="717,121,0,0" VerticalAlignment="Top" Width="120"/>
+        <Label Content="Step 1: " Grid.Column="2" HorizontalAlignment="Left" Margin="337,161,0,0" VerticalAlignment="Top" Width="75"/>
+        <Label Content="Step 2:" Grid.Column="2" HorizontalAlignment="Left" Margin="525,161,0,0" VerticalAlignment="Top" Width="75"/>
 
     </Grid>
 </UserControl>

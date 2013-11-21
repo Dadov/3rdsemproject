@@ -1761,6 +1761,24 @@ namespace ElectricCarGUI.ElectricCarService {
         [System.ServiceModel.OperationContractAttribute(Action="http://tempuri.org/IElectricCar/convertCapacityToDistance", ReplyAction="http://tempuri.org/IElectricCar/convertCapacityToDistanceResponse")]
         System.Threading.Tasks.Task<decimal> convertCapacityToDistanceAsync(decimal capacity);
         
+        [System.ServiceModel.OperationContractAttribute(Action="http://tempuri.org/IElectricCar/addBooking", ReplyAction="http://tempuri.org/IElectricCar/addBookingResponse")]
+        void addBooking(ElectricCarGUI.ElectricCarService.Booking b);
+        
+        [System.ServiceModel.OperationContractAttribute(Action="http://tempuri.org/IElectricCar/addBooking", ReplyAction="http://tempuri.org/IElectricCar/addBookingResponse")]
+        System.Threading.Tasks.Task addBookingAsync(ElectricCarGUI.ElectricCarService.Booking b);
+        
+        [System.ServiceModel.OperationContractAttribute(Action="http://tempuri.org/IElectricCar/updateBooking", ReplyAction="http://tempuri.org/IElectricCar/updateBookingResponse")]
+        void updateBooking(ElectricCarGUI.ElectricCarService.Booking b);
+        
+        [System.ServiceModel.OperationContractAttribute(Action="http://tempuri.org/IElectricCar/updateBooking", ReplyAction="http://tempuri.org/IElectricCar/updateBookingResponse")]
+        System.Threading.Tasks.Task updateBookingAsync(ElectricCarGUI.ElectricCarService.Booking b);
+        
+        [System.ServiceModel.OperationContractAttribute(Action="http://tempuri.org/IElectricCar/deleteBooking", ReplyAction="http://tempuri.org/IElectricCar/deleteBookingResponse")]
+        void deleteBooking(int bId);
+        
+        [System.ServiceModel.OperationContractAttribute(Action="http://tempuri.org/IElectricCar/deleteBooking", ReplyAction="http://tempuri.org/IElectricCar/deleteBookingResponse")]
+        System.Threading.Tasks.Task deleteBookingAsync(int bId);
+        
         [System.ServiceModel.OperationContractAttribute(Action="http://tempuri.org/IElectricCar/getAllBatteryType", ReplyAction="http://tempuri.org/IElectricCar/getAllBatteryTypeResponse")]
         ElectricCarGUI.ElectricCarService.BatteryTypeTest[] getAllBatteryType();
         
@@ -2127,6 +2145,30 @@ namespace ElectricCarGUI.ElectricCarService {
         
         public System.Threading.Tasks.Task<decimal> convertCapacityToDistanceAsync(decimal capacity) {
             return base.Channel.convertCapacityToDistanceAsync(capacity);
+        }
+        
+        public void addBooking(ElectricCarGUI.ElectricCarService.Booking b) {
+            base.Channel.addBooking(b);
+        }
+        
+        public System.Threading.Tasks.Task addBookingAsync(ElectricCarGUI.ElectricCarService.Booking b) {
+            return base.Channel.addBookingAsync(b);
+        }
+        
+        public void updateBooking(ElectricCarGUI.ElectricCarService.Booking b) {
+            base.Channel.updateBooking(b);
+        }
+        
+        public System.Threading.Tasks.Task updateBookingAsync(ElectricCarGUI.ElectricCarService.Booking b) {
+            return base.Channel.updateBookingAsync(b);
+        }
+        
+        public void deleteBooking(int bId) {
+            base.Channel.deleteBooking(bId);
+        }
+        
+        public System.Threading.Tasks.Task deleteBookingAsync(int bId) {
+            return base.Channel.deleteBookingAsync(bId);
         }
         
         public ElectricCarGUI.ElectricCarService.BatteryTypeTest[] getAllBatteryType() {
