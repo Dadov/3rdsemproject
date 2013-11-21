@@ -23,6 +23,8 @@ namespace ElectricCarGUI
         private BookingCtr bCtr;
         private string[] sort = { "Distance", "Price" };
         static ElectricCarService.IElectricCar serviceObj = new ElectricCarService.ElectricCarClient();
+        private Dictionary<int, List<RouteStop>> rWithId = new Dictionary<int, List<RouteStop>>();
+        List<RouteInfoHolder> rInfos = new List<RouteInfoHolder>();
         public AddRouoteWindow(BookingCtr bookingCtr)
         {
             InitializeComponent();
@@ -54,8 +56,6 @@ namespace ElectricCarGUI
             {
                 //show routes
                 List<List<RouteStop>> rs = new List<List<RouteStop>>();
-                Dictionary<int, List<RouteStop>> rWithId = new Dictionary<int, List<RouteStop>>();
-                List<RouteInfoHolder> rInfos = new List<RouteInfoHolder>();
                 for (int i = 0; i < routes.Length; i++)
                 {
                     List<RouteStop> n = new List<RouteStop>();
@@ -65,7 +65,7 @@ namespace ElectricCarGUI
                     for (int j = 0; j < routes[i].Length; j++)
                     {
                         n.Add(routes[i][j]);
-                        info += routes[i][j].station.Name + " " + routes[i][j].time.ToLongTimeString() + " | ";
+                        info += routes[i][j].station.Name + " " + routes[i][j].time.ToString("MM/dd/yyyy HH:mm") + " | ";
                         if (j == routes[i].Length-1)
                         {
                             totalDistance = routes[i][j].distance;
@@ -90,5 +90,30 @@ namespace ElectricCarGUI
             }
             
         }
+
+        private void btnAdd_Click(object sender, RoutedEventArgs e)
+        {
+            RouteInfoHolder selectedRoute = (RouteInfoHolder)dgRoutes.SelectedItem;
+            int id = selectedRoute.Id;
+            List<RouteStop> r = rWithId[id];
+            bCtr.dgRoute.ItemsSource = r;
+            bCtr.txtTotalPrice.Text = Convert.ToString(selectedRoute.TotalPrice);
+            Close();
+        }
+
+        private void sortHandle(object sender, SelectionChangedEventArgs e)
+        {
+            if (cbbSort.SelectedIndex == 0)
+            {
+                rInfos.OrderBy(x => x.TotalDistance);
+            }
+            else
+            {
+                rInfos.OrderBy(x => x.TotalPrice);
+            }
+            dgRoutes.ItemsSource = rInfos;
+        }
+
+        
     }
 }

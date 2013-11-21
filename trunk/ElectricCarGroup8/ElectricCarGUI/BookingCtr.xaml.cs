@@ -92,8 +92,8 @@ namespace ElectricCarGUI
 
         private void setTimeToTxtBox()
         {
-            txtTripStart.Text = DateTime.Now.ToLongTimeString();
-            txtCreateDate.Text = DateTime.Now.ToLongTimeString();
+            txtTripStart.Text = DateTime.Now.ToString("MM/dd/yyyy HH:mm");
+            txtCreateDate.Text = DateTime.Now.ToString("MM/dd/yyyy HH:mm");
         }
         
 
@@ -160,5 +160,60 @@ namespace ElectricCarGUI
             }
             
         }
+
+        private void btnBAdd_Click(object sender, RoutedEventArgs e)
+        {
+            Booking bk = new Booking();
+            bk.cId = Convert.ToInt32(txtCId.Text);
+            bk.createDate = txtCreateDate.Text;
+            bk.tripStart = txtTripStart.Text;
+            bk.payStatus = (string)cbbPayStatus.SelectedValue;
+            bk.totalPrice = Convert.ToDecimal(txtTotalPrice.Text);
+            bk.startStationId = Convert.ToInt32(txtSId.Text);
+
+            List<RouteStop> rs = (List<RouteStop>)dgRoute.Items.OfType<RouteStop>();
+            List<BookingLine> bls = new List<BookingLine>();
+            BookingLine blForBatteryType = (BookingLine)dgBookingLine.Items.GetItemAt(0);
+            decimal price = blForBatteryType.price;
+            int quantity = blForBatteryType.quantity;
+            int btId = blForBatteryType.BatteryType.Id;
+            for (int i = 0; i < rs.Count; i++)
+            {
+                BookingLine bl = new BookingLine();
+                bl.station.Id = rs[i].station.Id;
+                bl.time = rs[i].time;
+                bl.quantity = quantity;
+                bl.price = price;
+                bl.BatteryType.Id = btId;
+                bls.Add(bl);
+            }
+
+            serviceObj.addBooking(bk);
+        }
+
+        private void btnBUpdate_Click(object sender, RoutedEventArgs e)
+        {
+            Booking bk = new Booking();
+            bk.cId = Convert.ToInt32(txtCId.Text);
+            bk.createDate = txtCreateDate.Text;
+            bk.payStatus = (string)cbbPayStatus.SelectedValue;
+            bk.totalPrice = Convert.ToDecimal(txtTotalPrice.Text);
+            serviceObj.updateBooking(bk);
+        }
+
+        private void btnBDelete_Click(object sender, RoutedEventArgs e)
+        {
+            if (txtBId.Text!="")
+            {
+                serviceObj.deleteBooking(Convert.ToInt32(txtBId.Text));
+            }
+            else
+            {
+                MessageBox.Show("Please select a booking.");
+            }
+            
+        }
+
+
     }
 }

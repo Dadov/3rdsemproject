@@ -128,10 +128,14 @@ namespace ElectricCarWCF
         [OperationContract]
         decimal convertCapacityToDistance(decimal capacity);
         //add booking
-
+        [OperationContract]
+        void addBooking(Booking b);
         //update booking
-
+        [OperationContract]
+        void updateBooking(Booking b);
         //delete booking
+        [OperationContract]
+        void deleteBooking(int bId);
 
         [OperationContract]
         List<BatteryTypeTest> getAllBatteryType();
