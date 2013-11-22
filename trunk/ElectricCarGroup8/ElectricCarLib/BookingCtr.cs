@@ -74,19 +74,19 @@ namespace ElectricCarLib
             using (TransactionScope scope = new TransactionScope())
             {
                 //validate whether update is valid
-                foreach (MBookingLine item in booking.bookinglines)
-                {
-                    if (!bsCtr.validateUpdateBookingForStation(item.Station.Id, item.BatteryType.id, item.quantity.Value, item.time.Value))
-                    {
-                        throw new SystemException("Update booking fail because one of the stations is fully booked");
-                    }
-                }
+                //foreach (MBookingLine item in booking.bookinglines)
+                //{
+                //    if (!bsCtr.validateUpdateBookingForStation(item.Station.Id, item.BatteryType.id, item.quantity.Value, item.time.Value))
+                //    {
+                //        throw new SystemException("Update booking fail because one of the stations is fully booked");
+                //    }
+                //}
                 updateBookingRecord(booking.Id, booking.cId.Value, booking.totalPrice.Value, booking.createDate.Value, booking.tripStart.Value, booking.creaditCard);
-                foreach (MBookingLine item in booking.bookinglines)
-                {
-                    bsCtr.updateBookingForStation(item.Station.Id, item.BatteryType.id, item.quantity.Value, item.time.Value);
-                }
-                blCtr.updateAllBLForBooking(booking.Id, booking.bookinglines);
+                //foreach (MBookingLine item in booking.bookinglines)
+                //{
+                //    bsCtr.updateBookingForStation(item.Station.Id, item.BatteryType.id, item.quantity.Value, item.time.Value);
+                //}
+                //blCtr.updateAllBLForBooking(booking.Id, booking.bookinglines);
                 scope.Complete();
             }
         }

@@ -274,11 +274,16 @@ namespace ElectricCarGUI
 
         public int StationId { get; set; }
 
-        private void Button_Click(object sender, RoutedEventArgs e)
+        private void btnEnter_Click(object sender, RoutedEventArgs e)
         {
-            if (serviceObj.getStation(Convert.ToInt32(txtStationId.Text)) != null)
+            Station station = serviceObj.getStation(Convert.ToInt32(txtStationId.Text)) ;
+            if (station != null)
             {
                 StationId = Convert.ToInt32(txtStationId.Text);
+                sInfoCtr.station = station;
+                sInfoCtr.sId = StationId;
+                sInfoCtr.mv = this;
+                sInfoCtr.fillInfo(StationId);
                 fillStorageTable(StationId);
                 fillTypeTable(StationId);
                 fillPeriodTable();
@@ -474,10 +479,11 @@ namespace ElectricCarGUI
             fillStorageTable(StationId);
         }
 #endregion
-  
+
+        private StationInfoControl sInfoCtr;
         private void addInfoControl(object sender, RoutedEventArgs e)
         {
-            StationInfoControl sInfoCtr = new StationInfoControl();
+            sInfoCtr = new StationInfoControl();
             tabStationiInfo.Content = sInfoCtr;
         }
 

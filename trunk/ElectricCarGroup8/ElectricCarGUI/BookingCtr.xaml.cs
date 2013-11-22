@@ -74,6 +74,7 @@ namespace ElectricCarGUI
                 {
                     cbbPayStatus.SelectedIndex = 0;
                 }
+                dgBookings.SelectedItem = null;
             }
         }
 
@@ -88,6 +89,7 @@ namespace ElectricCarGUI
             dgRoute.ItemsSource = null;
             dgBookingLine.ItemsSource = null;
             setTimeToTxtBox();
+            dgBookings.SelectedItem = null;
         }
 
         private void setTimeToTxtBox()
@@ -171,7 +173,7 @@ namespace ElectricCarGUI
             bk.totalPrice = Convert.ToDecimal(txtTotalPrice.Text);
             bk.startStationId = Convert.ToInt32(txtSId.Text);
 
-            List<RouteStop> rs = (List<RouteStop>)dgRoute.Items.OfType<RouteStop>();
+            List<RouteStop> rs = dgRoute.Items.OfType<RouteStop>().ToList<RouteStop>();
             List<BookingLine> bls = new List<BookingLine>();
             BookingLine blForBatteryType = (BookingLine)dgBookingLine.Items.GetItemAt(0);
             decimal price = blForBatteryType.price;
@@ -180,6 +182,10 @@ namespace ElectricCarGUI
             for (int i = 0; i < rs.Count; i++)
             {
                 BookingLine bl = new BookingLine();
+                Station s = new Station();
+                BatteryTypeTest bt = new BatteryTypeTest();
+                bl.station = s;
+                bl.BatteryType = bt;
                 bl.station.Id = rs[i].station.Id;
                 bl.time = rs[i].time;
                 bl.quantity = quantity;
@@ -187,8 +193,10 @@ namespace ElectricCarGUI
                 bl.BatteryType.Id = btId;
                 bls.Add(bl);
             }
-
+            bk.bookinglines = bls.ToArray<BookingLine>();
             serviceObj.addBooking(bk);
+            showBookings();
+            clearTextBox();
         }
 
         private void btnBUpdate_Click(object sender, RoutedEventArgs e)
@@ -199,6 +207,8 @@ namespace ElectricCarGUI
             bk.payStatus = (string)cbbPayStatus.SelectedValue;
             bk.totalPrice = Convert.ToDecimal(txtTotalPrice.Text);
             serviceObj.updateBooking(bk);
+            showBookings();
+            clearTextBox();
         }
 
         private void btnBDelete_Click(object sender, RoutedEventArgs e)
@@ -206,6 +216,8 @@ namespace ElectricCarGUI
             if (txtBId.Text!="")
             {
                 serviceObj.deleteBooking(Convert.ToInt32(txtBId.Text));
+                showBookings();
+                clearTextBox();
             }
             else
             {
