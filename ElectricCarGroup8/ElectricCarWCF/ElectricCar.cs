@@ -541,17 +541,44 @@ namespace ElectricCarWCF
 
         public void addBooking(Booking b)
         {
-            //TODO
+            MBooking bk = new MBooking();
+            bk.cId = b.cId;
+            bk.createDate = Convert.ToDateTime(b.createDate);
+            bk.creaditCard = b.payStatus;
+            bk.tripStart = Convert.ToDateTime(b.tripStart);
+            bk.totalPrice = b.totalPrice;
+            List<MBookingLine> bkls = new List<MBookingLine>();
+            List<BookingLine> bls = b.bookinglines.ToList<BookingLine>();
+            for (int i = 0; i < bls.Count; i++)
+			{
+                MBookingLine bl = new MBookingLine();
+                bl.price = bls[i].price;
+                bl.quantity = bls[i].quantity;
+                bl.Station.Id = bls[i].station.Id;
+                bl.time = bls[i].time;
+                bl.BatteryType.id = bls[i].BatteryType.Id;
+                bkls.Add(bl);
+			}
+            bk.bookinglines = bkls;
+            BookingCtr bCtr = new BookingCtr();
+            bCtr.addBooking(bk);
         }
 
         public void updateBooking(Booking b)
         {
-            //TODO
+            MBooking bk = new MBooking();
+            bk.cId = b.cId;
+            bk.createDate = Convert.ToDateTime(b.createDate);
+            bk.creaditCard = b.payStatus;
+            bk.totalPrice = b.totalPrice;
+            BookingCtr bCtr = new BookingCtr();
+            bCtr.updateBooking(bk);
         }
 
         public void deleteBooking(int bId)
         {
-            //TODO
+            BookingCtr bCtr = new BookingCtr();
+            bCtr.deleteBooking(bId);
         }
 
         public decimal convertCapacityToDistance(decimal capacity)

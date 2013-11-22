@@ -8,6 +8,11 @@ namespace ElectricCarModelLayer
 {
     public class MBookingLine
     {
+        public MBookingLine()
+        {
+            BatteryType = new MBatteryType();
+            Station = new MStation();
+        }
         
         public Nullable<int> quantity { get; set; }
         public Nullable<decimal> price { get; set; }
