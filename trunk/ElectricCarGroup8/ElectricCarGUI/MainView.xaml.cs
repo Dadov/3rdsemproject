@@ -350,7 +350,7 @@ namespace ElectricCarGUI
         {
             string searchTerm = btSearch.Text; 
             dgType.Items.Clear();
-            List<BatteryType> types = serviceObj.getAllBatteryTypes().ToList();
+            List<BatteryType> types = serviceObj.getAllBatteryTypes().ToList(); 
             foreach (BatteryType type in types)
             {
                 dgType.Items.Add(type);

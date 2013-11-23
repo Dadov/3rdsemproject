@@ -55,8 +55,8 @@
             <DataGrid.Columns>
                 <DataGridTextColumn Binding="{Binding station.Id}" Header="Id" Width="0.1*" IsReadOnly="True" SortDirection="Ascending"/>
                 <DataGridTextColumn Binding="{Binding station.Name}" Header="Station" Width="0.15*" IsReadOnly="True"/>
-                <DataGridTextColumn Binding="{Binding station.Address}" Header="Address" Width="0.4*" IsReadOnly="True"/>
-                <DataGridTextColumn Binding="{Binding time}" Header="Time" Width="0.35*" IsReadOnly="True"/>
+                <DataGridTextColumn Binding="{Binding station.Address}" Header="Address" Width="0.35*" IsReadOnly="True"/>
+                <DataGridTextColumn Binding="{Binding time}" Header="Time" Width="0.5*" IsReadOnly="True"/>
             </DataGrid.Columns>
         </DataGrid>
 

@@ -29,15 +29,7 @@ namespace ElectricCarGUI
         {
             InitializeComponent();
             bCtr = bookingCtr;
-            addCbbSort();
             showRoute();
-                
-        }
-
-        private void addCbbSort()
-        {
-            cbbSort.ItemsSource = sort;
-            cbbSort.SelectedIndex = 0;
         }
 
         private void btnCancel_Click(object sender, RoutedEventArgs e)
@@ -101,18 +93,7 @@ namespace ElectricCarGUI
             Close();
         }
 
-        private void sortHandle(object sender, SelectionChangedEventArgs e)
-        {
-            if (cbbSort.SelectedIndex == 0)
-            {
-                rInfos.OrderBy(x => x.TotalDistance);
-            }
-            else
-            {
-                rInfos.OrderBy(x => x.TotalPrice);
-            }
-            dgRoutes.ItemsSource = rInfos;
-        }
+        
 
         
     }
