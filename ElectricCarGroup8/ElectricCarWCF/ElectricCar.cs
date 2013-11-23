@@ -438,8 +438,8 @@ namespace ElectricCarWCF
                         rs.station = s;
                         if (i != 0)
                         {
-                            rs.distance = r[i].distance + r[i - 1].distance;
-                            rs.driveHour = r[i].driveHour + r[i - 1].driveHour;
+                            rs.distance = r[i].distance + x[i - 1].distance;
+                            rs.driveHour = r[i].driveHour + x[i - 1].driveHour;
                             rs.time = tripStart.AddHours(Convert.ToDouble(rs.driveHour));
                         }
                         else
