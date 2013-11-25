@@ -9,10 +9,10 @@ namespace ElectricCarDB
 {
     public interface IDBatteryType
     {
-        int addNewRecord(string name, string producer, decimal capacity, decimal exchangeCost, int storageNumber);
+        int addNewRecord(string name, string producer, decimal capacity, decimal exchangeCost);
         MBatteryType getRecord(int id, Boolean getAssociation);
         void deleteRecord(int id);
-        void updateRecord(int id, string name, string producer, decimal capacity, decimal exchangeCost, int storageNumber);
+        void updateRecord(int id, string name, string producer, decimal capacity, decimal exchangeCost);
         List<MBatteryType> getAllRecord(Boolean getAssociation);
         List<string> getAllInfo();
     }

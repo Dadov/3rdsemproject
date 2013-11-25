@@ -72,10 +72,10 @@ namespace ElectricCarLibTest
         {
             int id1 = dbStation.addNewRecord("BoholmStation", "Boholm", "Denmark", "Open");
             int id2 = dbStation.addNewRecord("AalborgStation", "Aalborg", "Denmark", "Open");
-            int id3 = dbBT.addNewRecord("SmallBattery", "TODB", 8, 30, 1);
+            int id3 = dbBT.addNewRecord("SmallBattery", "TODB", 8, 30);
             
             dbConnection.addNewRecord(id1, id2, 300, 7);
-            int id4 = dbBS.addNewRecord(id3, id1);
+            int id4 = dbBS.addNewRecord(id3, id1, 1);
 
             try
             {
@@ -103,7 +103,6 @@ namespace ElectricCarLibTest
                 Assert.AreEqual("TODB", station.storages[0].type.producer);
                 Assert.AreEqual(8, Convert.ToInt32(station.storages[0].type.capacity));
                 Assert.AreEqual(30, Convert.ToInt32(station.storages[0].type.exchangeCost));
-                Assert.AreEqual(1, Convert.ToInt32(station.storages[0].type.storageNumber));
             }
             catch
             {

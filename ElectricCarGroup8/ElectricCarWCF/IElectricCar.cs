@@ -185,7 +185,7 @@ namespace ElectricCarWCF
 
         #region BatteryType
         [OperationContract]
-        int addBatteryType(string name, string producer, decimal capacity, decimal exchangeCost, int storageNumber);
+        int addBatteryType(string name, string producer, decimal capacity, decimal exchangeCost);
 
         [OperationContract]
         BatteryType getBatteryType(int id);
@@ -194,7 +194,7 @@ namespace ElectricCarWCF
         void deleteBatteryType(int id);
 
         [OperationContract]
-        void updateBatteryType(int id, string name, string producer, decimal capacity, decimal exchangeCost, int storageNumber);
+        void updateBatteryType(int id, string name, string producer, decimal capacity, decimal exchangeCost);
 
         [OperationContract]
         List<BatteryType> getAllBatteryTypes();
@@ -205,7 +205,7 @@ namespace ElectricCarWCF
 
         #region BatteryStorage
         [OperationContract]
-        int addNewStorage(int btID, int sID);
+        int addNewStorage(int btID, int sID, int storageNumber);
         
         [OperationContract]
         BatteryStorage getStorage(int id);
@@ -217,7 +217,7 @@ namespace ElectricCarWCF
         void deleteStorageByType(int btID);
 
         [OperationContract]
-        void updateStorage(int id, int btid, int sID);
+        void updateStorage(int id, int btid, int sID, int storageNumber);
 
         [OperationContract]
         List<BatteryStorage> getStationStorages(int sID);

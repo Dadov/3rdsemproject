@@ -15,8 +15,7 @@ namespace ElectricCarDB
                 " name: " + name +
                 " producer: " + producer +
                 " capacity:" + Convert.ToString(capacity) +
-                " exchnage cost: " + Convert.ToString(exchangeCost) +
-                " storage number: " + Convert.ToString(storageNumber);
+                " exchnage cost: " + Convert.ToString(exchangeCost);
         }
     }
 }

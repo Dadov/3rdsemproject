@@ -13,6 +13,5 @@ namespace ElectricCarModelLayer
         public string producer { get; set; }
         public Nullable<decimal> capacity { get; set; }
         public Nullable<decimal> exchangeCost { get; set; }
-        public int storageNumber { get; set; }
     }
 }

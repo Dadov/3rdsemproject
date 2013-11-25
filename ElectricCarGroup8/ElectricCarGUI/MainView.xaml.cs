@@ -307,9 +307,10 @@ namespace ElectricCarGUI
         private void tbBtnInsert_Click(object sender, RoutedEventArgs e)
         {
             try { 
-            BatteryType bt = (BatteryType)dgType.SelectedItem;
-            serviceObj.updateBatteryType(bt.ID, bt.name, bt.producer, bt.capacity, bt.exchangeCost, bt.storageNumber + int.Parse(btAmount.Text));
-            fillTypeTable(typeIDs);
+            BatteryStorage bt = (BatteryStorage)dgStorage.SelectedItem;
+            serviceObj.updateStorage(bt.ID,bt.typeID, StationId,bt.storageNumber + int.Parse(btAmount.Text));
+            fillStorageTable(StationId);
+            fillPeriodTable();
             }
             catch (Exception)
             {
@@ -321,7 +322,7 @@ namespace ElectricCarGUI
         {
             try
             {
-                int id = serviceObj.addBatteryType(btName.Text, btProd.Text, Decimal.Parse(btCap.Text), Decimal.Parse(btExc.Text), Int32.Parse(btStor.Text));
+                int id = serviceObj.addBatteryType(btName.Text, btProd.Text, Decimal.Parse(btCap.Text), Decimal.Parse(btExc.Text));
                 typeIDs.Add(id);
                 fillTypeTable(typeIDs);
             }
@@ -334,7 +335,7 @@ namespace ElectricCarGUI
         private void tbtnUpdate_Click(object sender, RoutedEventArgs e)
         {
             try { 
-            serviceObj.updateBatteryType(Int32.Parse(btID.Text), btName.Text, btProd.Text, Decimal.Parse(btCap.Text), Decimal.Parse(btExc.Text), Int32.Parse(btStor.Text));
+            serviceObj.updateBatteryType(Int32.Parse(btID.Text), btName.Text, btProd.Text, Decimal.Parse(btCap.Text), Decimal.Parse(btExc.Text));
             fillTypeTable(typeIDs);
             }
             catch (Exception)
@@ -374,7 +375,7 @@ namespace ElectricCarGUI
 
         private void clearBT()
         {
-            btID.Text = btName.Text = btExc.Text = btCap.Text = btStor.Text = btProd.Text = "";
+            btID.Text = btName.Text = btExc.Text = btCap.Text = btProd.Text = "";
 
         }
 
@@ -393,7 +394,8 @@ namespace ElectricCarGUI
             {
                 var filter = new Predicate<object>(
                 bs => ((BatteryStorage)bs).ID.ToString().ToLower().Contains(searchTerm)
-                || ((BatteryStorage)bs).typeID.ToString().ToLower().Contains(searchTerm));
+                || ((BatteryStorage)bs).typeID.ToString().ToLower().Contains(searchTerm)
+                || ((BatteryStorage)bs).storageNumber.ToString().ToLower().Contains(searchTerm));
                 dgStorage.Items.Filter = filter;
             }
             return typeIDs;
@@ -421,8 +423,7 @@ namespace ElectricCarGUI
                 || ((BatteryType)bt).name.ToLower().Contains(searchTerm)
                 || ((BatteryType)bt).producer.ToLower().Contains(searchTerm)
                 || ((BatteryType)bt).capacity.ToString().ToLower().Contains(searchTerm)
-                || ((BatteryType)bt).exchangeCost.ToString().ToLower().Contains(searchTerm)
-                || ((BatteryType)bt).storageNumber.ToString().ToLower().Contains(searchTerm));
+                || ((BatteryType)bt).exchangeCost.ToString().ToLower().Contains(searchTerm));
                 dgType.Items.Filter = filter;
             }
             
@@ -483,7 +484,7 @@ namespace ElectricCarGUI
         {
             try
             {
-                serviceObj.addNewStorage(Int32.Parse(bsType.Text), Int32.Parse(bsStation.Text));
+                serviceObj.addNewStorage(Int32.Parse(bsType.Text), Int32.Parse(bsStation.Text), Int32.Parse(btStor.Text));
                 fillStorageTable(StationId);
                 fillPeriodTable();
                 clearBS();
@@ -497,8 +498,9 @@ namespace ElectricCarGUI
         {
             try
             {
-                serviceObj.updateStorage(Int32.Parse(bsID.Text), Int32.Parse(bsType.Text), Int32.Parse(bsStation.Text));
+                serviceObj.updateStorage(Int32.Parse(bsID.Text), Int32.Parse(bsType.Text), Int32.Parse(bsStation.Text), Int32.Parse(btStor.Text));
                 fillStorageTable(StationId);
+                fillPeriodTable();
                 clearBS();
             }
             catch (Exception)
@@ -509,9 +511,13 @@ namespace ElectricCarGUI
 
         private void sbtnDelete_Click(object sender, RoutedEventArgs e)
         {
-            try { 
+            try {
+                BatteryStorage bs = serviceObj.getStorage(int.Parse(bsID.Text));
+                typeIDs.Remove(bs.typeID);
             serviceObj.deleteStorage(Int32.Parse(bsID.Text));
             fillStorageTable(StationId);
+            fillPeriodTable();
+            fillTypeTable(typeIDs);
             clearBS();
             }
             catch (Exception)
@@ -527,7 +533,7 @@ namespace ElectricCarGUI
 
         private void clearBS()
         {
-            bsID.Text = bsType.Text = "";
+            bsID.Text = bsType.Text = btStor.Text = "";
         }
 
 

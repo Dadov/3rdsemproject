@@ -62,7 +62,7 @@ namespace ElectricCarLibTest
         [TestMethod]
         public void addGetDeleteBattery()
         {
-            int btId = dbType.addNewRecord("newName", "newProducer", 10, 100, 20);
+            int btId = dbType.addNewRecord("newName", "newProducer", 10, 100);
             int id = dbBattery.addNewRecord("newState", btId);
             try
             {
@@ -80,8 +80,8 @@ namespace ElectricCarLibTest
         [TestMethod]
         public void updateBattery()
         {
-            int btId = dbType.addNewRecord("newName", "newProducer", 10, 100, 20);
-            int btId2 = dbType.addNewRecord("Update", "Update", 20, 200, 40);
+            int btId = dbType.addNewRecord("newName", "newProducer", 10, 100);
+            int btId2 = dbType.addNewRecord("Update", "Update", 20, 200);
             int id = dbBattery.addNewRecord("newState", btId);
             try
             {

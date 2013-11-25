@@ -25,9 +25,9 @@ namespace ElectricCarLibTest
         [TestMethod]
         public void TestGetTime()
         {
-            int btId = dbType.addNewRecord("newName", "newProducer", 10, 100, 20); //capacity equals 10 hours
+            int btId = dbType.addNewRecord("newName", "newProducer", 10, 100); //capacity equals 10 hours
             int sID = dbStation.addNewRecord("newName", "newAddress", "newCountry", "newState");
-            int bsID = dbStorage.addNewRecord(btId, sID);
+            int bsID = dbStorage.addNewRecord(btId, sID, 20);
             dbPeriod.addNewRecord(bsID, DateTime.Today, 10, 5); // initial =10 custom = 5 future = 1
             period = dbPeriod.getRecord(bsID, DateTime.Today, true);
             storage = dbStorage.getRecord(bsID, true);
@@ -47,9 +47,9 @@ namespace ElectricCarLibTest
         [TestMethod]
         public void TestGetInitNumber()
         {
-            int btId = dbType.addNewRecord("newName", "newProducer", 10, 100, 20); //capacity equals 10 hours
+            int btId = dbType.addNewRecord("newName", "newProducer", 10, 100); //capacity equals 10 hours
             int sID = dbStation.addNewRecord("newName", "newAddress", "newCountry", "newState");
-            int bsID = dbStorage.addNewRecord(btId, sID);
+            int bsID = dbStorage.addNewRecord(btId, sID, 20);
             dbPeriod.addNewRecord(bsID, DateTime.Today, 10, 5); // initial =10 custom = 5 future = 1
             period = dbPeriod.getRecord(bsID, DateTime.Today, true);
             storage = dbStorage.getRecord(bsID, true);
@@ -69,9 +69,9 @@ namespace ElectricCarLibTest
         [TestMethod]
         public void TestGetPeriod()
         {
-            int btId = dbType.addNewRecord("newName", "newProducer", 10, 100, 20); //capacity equals 10 hours
+            int btId = dbType.addNewRecord("newName", "newProducer", 10, 100); //capacity equals 10 hours
             int sID = dbStation.addNewRecord("newName", "newAddress", "newCountry", "newState");
-            int bsID = dbStorage.addNewRecord(btId, sID);
+            int bsID = dbStorage.addNewRecord(btId, sID, 20);
             dbPeriod.addNewRecord(bsID, DateTime.Today, 10, 5); // initial =10 custom = 5 future = 1
             period = dbPeriod.getRecord(bsID, DateTime.Today, true);
             storage = dbStorage.getRecord(bsID, true);
@@ -101,10 +101,10 @@ namespace ElectricCarLibTest
         public void testBookingPeriod()
         {
             
-            int btId = dbType.addNewRecord("newName", "newProducer", 10, 100, 20); //capacity equals 10 hours
+            int btId = dbType.addNewRecord("newName", "newProducer", 10, 100); //capacity equals 10 hours
             int bId = dbBattery.addNewRecord("Charged", btId);
             int sID = dbStation.addNewRecord("newName", "newAddress", "newCountry", "newState");
-            int bsID = dbStorage.addNewRecord(btId, sID);
+            int bsID = dbStorage.addNewRecord(btId, sID, 20);
             dbPeriod.addNewRecord(bsID, DateTime.Today, 10,5); // initial =10 custom = 5
             period = dbPeriod.getRecord(bsID, DateTime.Today, true);
             storage = dbStorage.getRecord(bsID, true);

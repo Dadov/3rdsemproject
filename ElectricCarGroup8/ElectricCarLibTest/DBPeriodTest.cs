@@ -67,9 +67,9 @@ namespace ElectricCarLibTest
         [TestMethod]
         public void addGetDeletePeriod()
         {
-            int btId = dbType.addNewRecord("newName", "newProducer", 10, 100, 20);
+            int btId = dbType.addNewRecord("newName", "newProducer", 10, 100);
             int sID = dbStation.addNewRecord("newName", "newAddress", "newCountry", "newState");
-            int bsID =  dbStorage.addNewRecord(btId,sID);
+            int bsID =  dbStorage.addNewRecord(btId,sID, 20);
             DateTime time = DateTime.Today;
             int id = dbPeriod.addNewRecord(bsID,time, 10, 5);
             try
@@ -92,9 +92,9 @@ namespace ElectricCarLibTest
         [TestMethod]
         public void updatePeriod()
         {
-            int btId = dbType.addNewRecord("newName", "newProducer", 10, 100, 20);
+            int btId = dbType.addNewRecord("newName", "newProducer", 10, 100);
             int sID = dbStation.addNewRecord("newName", "newAddress", "newCountry", "newState");
-            int bsID = dbStorage.addNewRecord(btId, sID);
+            int bsID = dbStorage.addNewRecord(btId, sID, 20);
             int id = dbPeriod.addNewRecord(bsID, DateTime.Today, 10, 5);
             DateTime time = DateTime.Today;
             try

@@ -95,6 +95,7 @@
           <Property Name="Id" Type="int" Nullable="false" />
           <Property Name="btId" Type="int" />
           <Property Name="sId" Type="int" />
+          <Property Name="storageNumber" Type="int" />
         </EntityType>
         <EntityType Name="BatteryType">
           <Key>
@@ -105,7 +106,6 @@
           <Property Name="producer" Type="varchar" MaxLength="50" />
           <Property Name="capacity" Type="decimal" />
           <Property Name="exchangeCost" Type="decimal" />
-          <Property Name="storageNumber" Type="int" />
         </EntityType>
         <EntityType Name="Booking">
           <Key>
@@ -475,6 +475,7 @@
           <NavigationProperty Name="BatteryType" Relationship="ElectricCarModel.FK_BatteryStorage_ToTable" FromRole="BatteryStorage" ToRole="BatteryType" />
           <NavigationProperty Name="Station" Relationship="ElectricCarModel.FK_BatteryStorage_ToTable_1" FromRole="BatteryStorage" ToRole="Station" />
           <NavigationProperty Name="Periods" Relationship="ElectricCarModel.FK_Period_ToTable" FromRole="BatteryStorage" ToRole="Period" />
+          <Property Type="Int32" Name="storageNumber" />
         </EntityType>
         <EntityType Name="BatteryType">
           <Key>
@@ -485,7 +486,6 @@
           <Property Name="producer" Type="String" MaxLength="50" Unicode="false" FixedLength="false" />
           <Property Name="capacity" Type="Decimal" Precision="18" Scale="0" />
           <Property Name="exchangeCost" Type="Decimal" Precision="18" Scale="0" />
-          <Property Name="storageNumber" Type="Int32" />
           <NavigationProperty Name="Batteries" Relationship="ElectricCarModel.FK_Battery_ToTable" FromRole="BatteryType" ToRole="Battery" />
           <NavigationProperty Name="BatteryStorages" Relationship="ElectricCarModel.FK_BatteryStorage_ToTable" FromRole="BatteryType" ToRole="BatteryStorage" />
           <NavigationProperty Name="BookingLines" Relationship="ElectricCarModel.FK_BookingLine_ToTable_1" FromRole="BatteryType" ToRole="BookingLine" />
@@ -775,6 +775,7 @@
           <EntitySetMapping Name="BatteryStorages">
             <EntityTypeMapping TypeName="ElectricCarModel.BatteryStorage">
               <MappingFragment StoreEntitySet="BatteryStorage">
+                <ScalarProperty Name="storageNumber" ColumnName="storageNumber" />
                 <ScalarProperty Name="Id" ColumnName="Id" />
                 <ScalarProperty Name="btId" ColumnName="btId" />
                 <ScalarProperty Name="sId" ColumnName="sId" />
@@ -789,7 +790,6 @@
                 <ScalarProperty Name="producer" ColumnName="producer" />
                 <ScalarProperty Name="capacity" ColumnName="capacity" />
                 <ScalarProperty Name="exchangeCost" ColumnName="exchangeCost" />
-                <ScalarProperty Name="storageNumber" ColumnName="storageNumber" />
               </MappingFragment>
             </EntityTypeMapping>
           </EntitySetMapping>

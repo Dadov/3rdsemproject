@@ -11,7 +11,7 @@ namespace ElectricCarLib
 {
     public class BatteryStorageCtr
     {
-        public int addNewRecord(int btID, int sID)
+        public int addNewRecord(int btID, int sID, int storageNumber)
         {
             IDBBatteryStorage dbStorage = new DBBatteryStorage();
             BatteryTypeCtr bCtr = new BatteryTypeCtr();
@@ -19,7 +19,7 @@ namespace ElectricCarLib
             int id = -1;
             if (stor == null)
             {
-                id = dbStorage.addNewRecord(btID, sID);
+                id = dbStorage.addNewRecord(btID, sID, storageNumber);
                 PeriodCalculator pCalc = new PeriodCalculator();
                 pCalc.createFirstPeriod(id);
             }
@@ -84,10 +84,13 @@ namespace ElectricCarLib
             }
         }
 
-        public void updateRecord(int id, int btid, int sID)
+        public void updateRecord(int id, int btid, int sID, int storageNumber)
         {
             IDBBatteryStorage dbStorage = new DBBatteryStorage();
-            dbStorage.updateRecord(id, btid, sID);
+            dbStorage.updateRecord(id, btid, sID, storageNumber);
+            IDPeriod dbPeriod = new DBPeriod();
+            PeriodCalculator pCalc = new PeriodCalculator();
+            dbPeriod.updateRecord(id, pCalc.getBookingPeriod(getRecord(id,true),DateTime.Now).time,pCalc.getInitNumber(getRecord(id,true)));
         }
 
         public List<MBatteryStorage> getStationStorages(int sID)
