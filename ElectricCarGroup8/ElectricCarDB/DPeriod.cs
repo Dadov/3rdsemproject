@@ -123,6 +123,47 @@ namespace ElectricCarDB
             }
         }
 
+        public void deleteRecord(int bsID)
+        {
+            using (ElectricCarEntities context = new ElectricCarEntities())
+            {
+                try
+                {
+                    bool success = false;
+                    using (TransactionScope scope = new TransactionScope())
+                    {
+                        try
+                        {
+                            do
+                            {
+                                context.Entry(context.Periods.Where(bs => bs.bsId == bsID).FirstOrDefault()).State = EntityState.Deleted;
+                                context.SaveChanges();
+                            }
+                            while (context.Periods.Where(bs => bs.bsId == bsID).Count() != 0);
+                            
+                            success = true;
+                        }
+                        catch (Exception)
+                        {
+                            throw new System.NullReferenceException("Can not find battery type");
+                            //throw new SystemException("Can not find battery type");
+                        }
+                        if (success)
+                        {
+                            scope.Complete();
+                        }
+
+                    }
+                }
+                catch (TransactionAbortedException e)
+                {
+                    throw new SystemException("Cannot finish transaction for deleting BatteryType " +
+                       " with an error " + e.Message);
+                }
+            }
+        }
+
+
         public void updateRecord(int bsID, DateTime time, int init)
         {
            using (ElectricCarEntities context = new ElectricCarEntities())

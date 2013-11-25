@@ -135,6 +135,9 @@
     <None Include="Service References\ElectricCarService\Arrays.xsd">
       <SubType>Designer</SubType>
     </None>
+    <None Include="Service References\ElectricCarService\Arrays3.xsd">
+      <SubType>Designer</SubType>
+    </None>
     <None Include="Service References\ElectricCarService\ElectricCarGUI.ElectricCarService.BatteryStorage.datasource">
       <DependentUpon>Reference.svcmap</DependentUpon>
     </None>

@@ -5,6 +5,7 @@ using System.Text;
 using System.Threading.Tasks;
 using ElectricCarDB;
 using ElectricCarModelLayer;
+using System.Transactions;
 
 namespace ElectricCarLib
 {
@@ -13,9 +14,16 @@ namespace ElectricCarLib
         public int addNewRecord(int btID, int sID)
         {
             IDBBatteryStorage dbStorage = new DBBatteryStorage();
-            int id = dbStorage.addNewRecord(btID,sID);
-            PeriodCalculator pCalc = new PeriodCalculator();
-            pCalc.createFirstPeriod(id);
+            BatteryTypeCtr bCtr = new BatteryTypeCtr();
+            MBatteryStorage stor = dbStorage.getRecordByType(btID, true);
+            int id = -1;
+            if (stor == null)
+            {
+                id = dbStorage.addNewRecord(btID, sID);
+                PeriodCalculator pCalc = new PeriodCalculator();
+                pCalc.createFirstPeriod(id);
+            }
+            else throw new SystemException("This type is already assigned to a storage");
             return id;
         }
 
@@ -28,13 +36,64 @@ namespace ElectricCarLib
         public void deleteRecord(int id)
         {
             IDBBatteryStorage dbStorage = new DBBatteryStorage();
-            dbStorage.deleteRecord(id);
+            IDPeriod dbPeriod = new DBPeriod();
+            bool success = false;
+            using (TransactionScope scope = new TransactionScope())
+            {
+                try
+                {
+                    dbPeriod.deleteRecord(id);
+                    dbStorage.deleteRecord(id);
+                    success = true;
+                }
+                catch (Exception)
+                {
+                    throw new System.NullReferenceException("Can not delete battery.");
+                    //throw new SystemException("Can not find battery type");
+                }
+                if (success)
+                {
+                    scope.Complete();
+                }
+            }
+        }
+
+        public void deleteRecordByType(int btID)
+        {
+            IDBBatteryStorage dbStorage = new DBBatteryStorage();
+            int bsID = dbStorage.getRecordByType(btID, true).id;
+            BatteryTypeCtr bCtr = new BatteryTypeCtr();
+            bool success = false;
+            using (TransactionScope scope = new TransactionScope())
+            {
+                try
+                {
+                    deleteRecord(bsID);
+                    bCtr.deleteRecord(btID);
+                    success = true;
+                }
+                catch (Exception)
+                {
+                    throw new System.NullReferenceException("Can not delete battery.");
+                    //throw new SystemException("Can not find battery type");
+                }
+                if (success)
+                {
+                    scope.Complete();
+                }
+            }
         }
 
         public void updateRecord(int id, int btid, int sID)
         {
             IDBBatteryStorage dbStorage = new DBBatteryStorage();
             dbStorage.updateRecord(id, btid, sID);
+        }
+
+        public List<MBatteryStorage> getStationStorages(int sID)
+        {
+            IDBBatteryStorage dbStorage = new DBBatteryStorage();
+            return dbStorage.getStationStorages(sID);
         }
 
         public List<MBatteryStorage> getAllRecord(Boolean getAssociation)

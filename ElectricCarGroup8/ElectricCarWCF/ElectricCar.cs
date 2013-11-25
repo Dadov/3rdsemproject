@@ -806,10 +806,32 @@ namespace ElectricCarWCF
             sCtr.deleteRecord(id);
         }
 
+        public void deleteStorageByType(int btID)
+        {
+            BatteryStorageCtr bCtr = new BatteryStorageCtr();
+            bCtr.deleteRecordByType(btID);
+        }
+
         public void updateStorage(int id, int btid, int sID)
         {
             BatteryStorageCtr sCtr = new BatteryStorageCtr();
             sCtr.updateRecord(id, btid, sID);
+        }
+
+        public List<BatteryStorage> getStationStorages(int sID)
+        {
+            BatteryStorageCtr sCtr = new BatteryStorageCtr();
+            List<MBatteryStorage> storages = sCtr.getStationStorages(sID);
+            List<BatteryStorage> bss = new List<BatteryStorage>();
+            foreach (MBatteryStorage storage in storages)
+            {
+                BatteryStorage bs = new BatteryStorage();
+                bs.ID = storage.id;
+                bs.typeID = storage.type.id;
+                bs.periods = getStoragePeriods(bs.ID);
+                bss.Add(bs);
+            }
+            return bss;
         }
 
         public List<BatteryStorage> getAllStorages()

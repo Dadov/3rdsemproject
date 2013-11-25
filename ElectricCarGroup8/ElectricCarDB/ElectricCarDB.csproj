@@ -142,6 +142,7 @@
       <Generator>EntityModelCodeGenerator</Generator>
       <LastGenOutput>ElectricCar.Designer.cs</LastGenOutput>
     </EntityDeploy>
+    <None Include="ClassDiagram1.cd" />
     <None Include="ElectricCar.Context.tt">
       <Generator>TextTemplatingFileGenerator</Generator>
       <DependentUpon>ElectricCar.edmx</DependentUpon>

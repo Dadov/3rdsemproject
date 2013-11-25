@@ -88,12 +88,13 @@
                                 <Calendar x:Name="calendar" HorizontalAlignment="Left" Margin="571,278,0,0" VerticalAlignment="Top" Height="167" Width="315" SelectedDatesChanged="calendar_SelectedDatesChanged"/>
                                 <DataGrid x:Name="dgPeriods" HorizontalAlignment="Left" VerticalAlignment="Top" Height="167" Width="454" RenderTransformOrigin="0.517,0.521" Margin="30,278,0,0">
                                     <DataGrid.Columns>
-                                        <DataGridTextColumn Binding="{Binding bsID}" Header="Storage ID" Width="0.2*" IsReadOnly="True"/>
-                                        <DataGridTextColumn Binding="{Binding time}" Header="Time" Width="0.2*" IsReadOnly="True"/>
+                                        <DataGridTextColumn Binding="{Binding bsID}" Header="Storage ID" Width="0.11*" IsReadOnly="True"/>
+                                        <DataGridTextColumn Binding="{Binding time}" Header="Time" Width="0.24*" IsReadOnly="True"/>
                                         <DataGridTextColumn Binding="{Binding availNumber}" Header="Available Batteries" Width="0.2*" IsReadOnly="True"/>
                                         <DataGridTextColumn Binding="{Binding bookedNumber}" Header="Booked Batteries" Width="0.2*" IsReadOnly="True"/>
                                     </DataGrid.Columns>
                                 </DataGrid>
+                                <Label Content="Select storage from the table above or pick a date to filter this table." HorizontalAlignment="Left" Margin="30,252,0,0" VerticalAlignment="Top"/>
                             </Grid>
                         </TabItem>
                         <TabItem Header="BatteryType">
@@ -127,8 +128,8 @@
                             <Button x:Name="tbtnDelete" Content="Delete" HorizontalAlignment="Left" Margin="731,260,0,0" VerticalAlignment="Top" Width="75" Click="tbtnDelete_Click"/>
                             <Button x:Name="tbtnCancel" Content="Clear" HorizontalAlignment="Left" Margin="811,260,0,0" VerticalAlignment="Top" Width="75" Click="tbtnCancel_Click"/>
                                 <Label Content="Insert:" HorizontalAlignment="Left" Margin="30,260,0,0" VerticalAlignment="Top"/>
-                                <TextBox x:Name="btAmount" HorizontalAlignment="Left" Height="23" Margin="77,260,0,0" TextWrapping="Wrap" Text="0" VerticalAlignment="Top" Width="25"/>
-                                <Label Content="Batteries to selected battery type" HorizontalAlignment="Left" Margin="107,260,0,0" VerticalAlignment="Top"/>
+                                <TextBox x:Name="btAmount" HorizontalAlignment="Left" Height="23" Margin="77,260,0,0" TextWrapping="Wrap" Text="0" VerticalAlignment="Top" Width="53"/>
+                                <Label Content="Batteries to selected battery type" HorizontalAlignment="Left" Margin="135,260,0,0" VerticalAlignment="Top"/>
                                 <Button x:Name="tbBtnInsert"  Content="Insert" HorizontalAlignment="Left" Margin="409,260,0,0" VerticalAlignment="Top" Width="75" Click="tbBtnInsert_Click"/>
                             </Grid>
                             </TabItem>
