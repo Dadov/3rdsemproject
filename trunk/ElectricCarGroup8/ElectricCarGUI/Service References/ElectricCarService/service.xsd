@@ -500,6 +500,35 @@
       </xs:sequence>
     </xs:complexType>
   </xs:element>
+  <xs:element name="getBookingLinesForStation">
+    <xs:complexType>
+      <xs:sequence>
+        <xs:element minOccurs="0" name="sId" type="xs:int" />
+      </xs:sequence>
+    </xs:complexType>
+  </xs:element>
+  <xs:element name="getBookingLinesForStationResponse">
+    <xs:complexType>
+      <xs:sequence>
+        <xs:element xmlns:q23="http://schemas.datacontract.org/2004/07/ElectricCarWCF" minOccurs="0" name="getBookingLinesForStationResult" nillable="true" type="q23:ArrayOfBookingLine" />
+      </xs:sequence>
+    </xs:complexType>
+  </xs:element>
+  <xs:element name="getBookingLinesForDateInStation">
+    <xs:complexType>
+      <xs:sequence>
+        <xs:element minOccurs="0" name="sId" type="xs:int" />
+        <xs:element minOccurs="0" name="date" type="xs:dateTime" />
+      </xs:sequence>
+    </xs:complexType>
+  </xs:element>
+  <xs:element name="getBookingLinesForDateInStationResponse">
+    <xs:complexType>
+      <xs:sequence>
+        <xs:element xmlns:q24="http://schemas.datacontract.org/2004/07/ElectricCarWCF" minOccurs="0" name="getBookingLinesForDateInStationResult" nillable="true" type="q24:ArrayOfBookingLine" />
+      </xs:sequence>
+    </xs:complexType>
+  </xs:element>
   <xs:element name="addBatteryType">
     <xs:complexType>
       <xs:sequence>
@@ -528,7 +557,7 @@
   <xs:element name="getBatteryTypeResponse">
     <xs:complexType>
       <xs:sequence>
-        <xs:element xmlns:q23="http://schemas.datacontract.org/2004/07/ElectricCarWCF" minOccurs="0" name="getBatteryTypeResult" nillable="true" type="q23:BatteryType" />
+        <xs:element xmlns:q25="http://schemas.datacontract.org/2004/07/ElectricCarWCF" minOccurs="0" name="getBatteryTypeResult" nillable="true" type="q25:BatteryType" />
       </xs:sequence>
     </xs:complexType>
   </xs:element>
@@ -569,7 +598,7 @@
   <xs:element name="getAllBatteryTypesResponse">
     <xs:complexType>
       <xs:sequence>
-        <xs:element xmlns:q24="http://schemas.datacontract.org/2004/07/ElectricCarWCF" minOccurs="0" name="getAllBatteryTypesResult" nillable="true" type="q24:ArrayOfBatteryType" />
+        <xs:element xmlns:q26="http://schemas.datacontract.org/2004/07/ElectricCarWCF" minOccurs="0" name="getAllBatteryTypesResult" nillable="true" type="q26:ArrayOfBatteryType" />
       </xs:sequence>
     </xs:complexType>
   </xs:element>
@@ -581,7 +610,7 @@
   <xs:element name="getAllInfoTypesResponse">
     <xs:complexType>
       <xs:sequence>
-        <xs:element xmlns:q25="http://schemas.microsoft.com/2003/10/Serialization/Arrays" minOccurs="0" name="getAllInfoTypesResult" nillable="true" type="q25:ArrayOfstring" />
+        <xs:element xmlns:q27="http://schemas.microsoft.com/2003/10/Serialization/Arrays" minOccurs="0" name="getAllInfoTypesResult" nillable="true" type="q27:ArrayOfstring" />
       </xs:sequence>
     </xs:complexType>
   </xs:element>
@@ -610,7 +639,7 @@
   <xs:element name="getStorageResponse">
     <xs:complexType>
       <xs:sequence>
-        <xs:element xmlns:q26="http://schemas.datacontract.org/2004/07/ElectricCarWCF" minOccurs="0" name="getStorageResult" nillable="true" type="q26:BatteryStorage" />
+        <xs:element xmlns:q28="http://schemas.datacontract.org/2004/07/ElectricCarWCF" minOccurs="0" name="getStorageResult" nillable="true" type="q28:BatteryStorage" />
       </xs:sequence>
     </xs:complexType>
   </xs:element>
@@ -622,6 +651,18 @@
     </xs:complexType>
   </xs:element>
   <xs:element name="deleteStorageResponse">
+    <xs:complexType>
+      <xs:sequence />
+    </xs:complexType>
+  </xs:element>
+  <xs:element name="deleteStorageByType">
+    <xs:complexType>
+      <xs:sequence>
+        <xs:element minOccurs="0" name="btID" type="xs:int" />
+      </xs:sequence>
+    </xs:complexType>
+  </xs:element>
+  <xs:element name="deleteStorageByTypeResponse">
     <xs:complexType>
       <xs:sequence />
     </xs:complexType>
@@ -640,6 +681,20 @@
       <xs:sequence />
     </xs:complexType>
   </xs:element>
+  <xs:element name="getStationStorages">
+    <xs:complexType>
+      <xs:sequence>
+        <xs:element minOccurs="0" name="sID" type="xs:int" />
+      </xs:sequence>
+    </xs:complexType>
+  </xs:element>
+  <xs:element name="getStationStoragesResponse">
+    <xs:complexType>
+      <xs:sequence>
+        <xs:element xmlns:q29="http://schemas.datacontract.org/2004/07/ElectricCarWCF" minOccurs="0" name="getStationStoragesResult" nillable="true" type="q29:ArrayOfBatteryStorage" />
+      </xs:sequence>
+    </xs:complexType>
+  </xs:element>
   <xs:element name="getAllStorages">
     <xs:complexType>
       <xs:sequence />
@@ -648,7 +703,7 @@
   <xs:element name="getAllStoragesResponse">
     <xs:complexType>
       <xs:sequence>
-        <xs:element xmlns:q27="http://schemas.datacontract.org/2004/07/ElectricCarWCF" minOccurs="0" name="getAllStoragesResult" nillable="true" type="q27:ArrayOfBatteryStorage" />
+        <xs:element xmlns:q30="http://schemas.datacontract.org/2004/07/ElectricCarWCF" minOccurs="0" name="getAllStoragesResult" nillable="true" type="q30:ArrayOfBatteryStorage" />
       </xs:sequence>
     </xs:complexType>
   </xs:element>
@@ -660,7 +715,7 @@
   <xs:element name="getAllStorageInfoResponse">
     <xs:complexType>
       <xs:sequence>
-        <xs:element xmlns:q28="http://schemas.microsoft.com/2003/10/Serialization/Arrays" minOccurs="0" name="getAllStorageInfoResult" nillable="true" type="q28:ArrayOfstring" />
+        <xs:element xmlns:q31="http://schemas.microsoft.com/2003/10/Serialization/Arrays" minOccurs="0" name="getAllStorageInfoResult" nillable="true" type="q31:ArrayOfstring" />
       </xs:sequence>
     </xs:complexType>
   </xs:element>
@@ -675,7 +730,7 @@
   <xs:element name="getPeriodResponse">
     <xs:complexType>
       <xs:sequence>
-        <xs:element xmlns:q29="http://schemas.datacontract.org/2004/07/ElectricCarWCF" minOccurs="0" name="getPeriodResult" nillable="true" type="q29:Period" />
+        <xs:element xmlns:q32="http://schemas.datacontract.org/2004/07/ElectricCarWCF" minOccurs="0" name="getPeriodResult" nillable="true" type="q32:Period" />
       </xs:sequence>
     </xs:complexType>
   </xs:element>
@@ -687,7 +742,7 @@
   <xs:element name="getAllPeriodsResponse">
     <xs:complexType>
       <xs:sequence>
-        <xs:element xmlns:q30="http://schemas.datacontract.org/2004/07/ElectricCarWCF" minOccurs="0" name="getAllPeriodsResult" nillable="true" type="q30:ArrayOfPeriod" />
+        <xs:element xmlns:q33="http://schemas.datacontract.org/2004/07/ElectricCarWCF" minOccurs="0" name="getAllPeriodsResult" nillable="true" type="q33:ArrayOfPeriod" />
       </xs:sequence>
     </xs:complexType>
   </xs:element>
@@ -701,7 +756,7 @@
   <xs:element name="getStoragePeriodsResponse">
     <xs:complexType>
       <xs:sequence>
-        <xs:element xmlns:q31="http://schemas.datacontract.org/2004/07/ElectricCarWCF" minOccurs="0" name="getStoragePeriodsResult" nillable="true" type="q31:ArrayOfPeriod" />
+        <xs:element xmlns:q34="http://schemas.datacontract.org/2004/07/ElectricCarWCF" minOccurs="0" name="getStoragePeriodsResult" nillable="true" type="q34:ArrayOfPeriod" />
       </xs:sequence>
     </xs:complexType>
   </xs:element>

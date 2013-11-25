@@ -792,6 +792,9 @@ namespace ElectricCarGUI.ElectricCarService {
         private ElectricCarGUI.ElectricCarService.BatteryTypeTest BatteryTypeField;
         
         [System.Runtime.Serialization.OptionalFieldAttribute()]
+        private int bIdField;
+        
+        [System.Runtime.Serialization.OptionalFieldAttribute()]
         private decimal priceField;
         
         [System.Runtime.Serialization.OptionalFieldAttribute()]
@@ -822,6 +825,19 @@ namespace ElectricCarGUI.ElectricCarService {
                 if ((object.ReferenceEquals(this.BatteryTypeField, value) != true)) {
                     this.BatteryTypeField = value;
                     this.RaisePropertyChanged("BatteryType");
+                }
+            }
+        }
+        
+        [System.Runtime.Serialization.DataMemberAttribute()]
+        public int bId {
+            get {
+                return this.bIdField;
+            }
+            set {
+                if ((this.bIdField.Equals(value) != true)) {
+                    this.bIdField = value;
+                    this.RaisePropertyChanged("bId");
                 }
             }
         }
@@ -1845,6 +1861,18 @@ namespace ElectricCarGUI.ElectricCarService {
         [System.ServiceModel.OperationContractAttribute(Action="http://tempuri.org/IElectricCar/getStates", ReplyAction="http://tempuri.org/IElectricCar/getStatesResponse")]
         System.Threading.Tasks.Task<string[]> getStatesAsync();
         
+        [System.ServiceModel.OperationContractAttribute(Action="http://tempuri.org/IElectricCar/getBookingLinesForStation", ReplyAction="http://tempuri.org/IElectricCar/getBookingLinesForStationResponse")]
+        ElectricCarGUI.ElectricCarService.BookingLine[] getBookingLinesForStation(int sId);
+        
+        [System.ServiceModel.OperationContractAttribute(Action="http://tempuri.org/IElectricCar/getBookingLinesForStation", ReplyAction="http://tempuri.org/IElectricCar/getBookingLinesForStationResponse")]
+        System.Threading.Tasks.Task<ElectricCarGUI.ElectricCarService.BookingLine[]> getBookingLinesForStationAsync(int sId);
+        
+        [System.ServiceModel.OperationContractAttribute(Action="http://tempuri.org/IElectricCar/getBookingLinesForDateInStation", ReplyAction="http://tempuri.org/IElectricCar/getBookingLinesForDateInStationResponse")]
+        ElectricCarGUI.ElectricCarService.BookingLine[] getBookingLinesForDateInStation(int sId, System.DateTime date);
+        
+        [System.ServiceModel.OperationContractAttribute(Action="http://tempuri.org/IElectricCar/getBookingLinesForDateInStation", ReplyAction="http://tempuri.org/IElectricCar/getBookingLinesForDateInStationResponse")]
+        System.Threading.Tasks.Task<ElectricCarGUI.ElectricCarService.BookingLine[]> getBookingLinesForDateInStationAsync(int sId, System.DateTime date);
+        
         [System.ServiceModel.OperationContractAttribute(Action="http://tempuri.org/IElectricCar/addBatteryType", ReplyAction="http://tempuri.org/IElectricCar/addBatteryTypeResponse")]
         int addBatteryType(string name, string producer, decimal capacity, decimal exchangeCost, int storageNumber);
         
@@ -1899,11 +1927,23 @@ namespace ElectricCarGUI.ElectricCarService {
         [System.ServiceModel.OperationContractAttribute(Action="http://tempuri.org/IElectricCar/deleteStorage", ReplyAction="http://tempuri.org/IElectricCar/deleteStorageResponse")]
         System.Threading.Tasks.Task deleteStorageAsync(int id);
         
+        [System.ServiceModel.OperationContractAttribute(Action="http://tempuri.org/IElectricCar/deleteStorageByType", ReplyAction="http://tempuri.org/IElectricCar/deleteStorageByTypeResponse")]
+        void deleteStorageByType(int btID);
+        
+        [System.ServiceModel.OperationContractAttribute(Action="http://tempuri.org/IElectricCar/deleteStorageByType", ReplyAction="http://tempuri.org/IElectricCar/deleteStorageByTypeResponse")]
+        System.Threading.Tasks.Task deleteStorageByTypeAsync(int btID);
+        
         [System.ServiceModel.OperationContractAttribute(Action="http://tempuri.org/IElectricCar/updateStorage", ReplyAction="http://tempuri.org/IElectricCar/updateStorageResponse")]
         void updateStorage(int id, int btid, int sID);
         
         [System.ServiceModel.OperationContractAttribute(Action="http://tempuri.org/IElectricCar/updateStorage", ReplyAction="http://tempuri.org/IElectricCar/updateStorageResponse")]
         System.Threading.Tasks.Task updateStorageAsync(int id, int btid, int sID);
+        
+        [System.ServiceModel.OperationContractAttribute(Action="http://tempuri.org/IElectricCar/getStationStorages", ReplyAction="http://tempuri.org/IElectricCar/getStationStoragesResponse")]
+        ElectricCarGUI.ElectricCarService.BatteryStorage[] getStationStorages(int sID);
+        
+        [System.ServiceModel.OperationContractAttribute(Action="http://tempuri.org/IElectricCar/getStationStorages", ReplyAction="http://tempuri.org/IElectricCar/getStationStoragesResponse")]
+        System.Threading.Tasks.Task<ElectricCarGUI.ElectricCarService.BatteryStorage[]> getStationStoragesAsync(int sID);
         
         [System.ServiceModel.OperationContractAttribute(Action="http://tempuri.org/IElectricCar/getAllStorages", ReplyAction="http://tempuri.org/IElectricCar/getAllStoragesResponse")]
         ElectricCarGUI.ElectricCarService.BatteryStorage[] getAllStorages();
@@ -2259,6 +2299,22 @@ namespace ElectricCarGUI.ElectricCarService {
             return base.Channel.getStatesAsync();
         }
         
+        public ElectricCarGUI.ElectricCarService.BookingLine[] getBookingLinesForStation(int sId) {
+            return base.Channel.getBookingLinesForStation(sId);
+        }
+        
+        public System.Threading.Tasks.Task<ElectricCarGUI.ElectricCarService.BookingLine[]> getBookingLinesForStationAsync(int sId) {
+            return base.Channel.getBookingLinesForStationAsync(sId);
+        }
+        
+        public ElectricCarGUI.ElectricCarService.BookingLine[] getBookingLinesForDateInStation(int sId, System.DateTime date) {
+            return base.Channel.getBookingLinesForDateInStation(sId, date);
+        }
+        
+        public System.Threading.Tasks.Task<ElectricCarGUI.ElectricCarService.BookingLine[]> getBookingLinesForDateInStationAsync(int sId, System.DateTime date) {
+            return base.Channel.getBookingLinesForDateInStationAsync(sId, date);
+        }
+        
         public int addBatteryType(string name, string producer, decimal capacity, decimal exchangeCost, int storageNumber) {
             return base.Channel.addBatteryType(name, producer, capacity, exchangeCost, storageNumber);
         }
@@ -2331,12 +2387,28 @@ namespace ElectricCarGUI.ElectricCarService {
             return base.Channel.deleteStorageAsync(id);
         }
         
+        public void deleteStorageByType(int btID) {
+            base.Channel.deleteStorageByType(btID);
+        }
+        
+        public System.Threading.Tasks.Task deleteStorageByTypeAsync(int btID) {
+            return base.Channel.deleteStorageByTypeAsync(btID);
+        }
+        
         public void updateStorage(int id, int btid, int sID) {
             base.Channel.updateStorage(id, btid, sID);
         }
         
         public System.Threading.Tasks.Task updateStorageAsync(int id, int btid, int sID) {
             return base.Channel.updateStorageAsync(id, btid, sID);
+        }
+        
+        public ElectricCarGUI.ElectricCarService.BatteryStorage[] getStationStorages(int sID) {
+            return base.Channel.getStationStorages(sID);
+        }
+        
+        public System.Threading.Tasks.Task<ElectricCarGUI.ElectricCarService.BatteryStorage[]> getStationStoragesAsync(int sID) {
+            return base.Channel.getStationStoragesAsync(sID);
         }
         
         public ElectricCarGUI.ElectricCarService.BatteryStorage[] getAllStorages() {

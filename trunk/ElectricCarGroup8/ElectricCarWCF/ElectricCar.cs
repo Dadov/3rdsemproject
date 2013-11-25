@@ -713,6 +713,49 @@ namespace ElectricCarWCF
 
         #endregion
 
+        #region Station
+        public List<BookingLine> getBookingLinesForStation(int sId)
+        {
+            List<BookingLine> bls = new List<BookingLine>();
+            BookingLineCtr blCtr = new BookingLineCtr();
+            List<MBookingLine> mbls = blCtr.getBookingLinesForStation(sId, false);
+            
+            foreach (MBookingLine bl in mbls)
+            {
+                BookingLine b = new BookingLine();
+                BatteryTypeTest bt = new BatteryTypeTest();
+                b.BatteryType = bt;
+                b.BatteryType.Id = bl.BatteryType.id;
+                b.quantity = bl.quantity.Value;
+                b.time = bl.time.Value;
+                b.price = bl.price.Value;
+                b.bId = bl.bId;
+                bls.Add(b);
+            }
+            return bls;
+        }
+
+        public List<BookingLine> getBookingLinesForDateInStation(int sId, DateTime date)
+        {
+            List<BookingLine> bls = new List<BookingLine>();
+            BookingLineCtr blCtr = new BookingLineCtr();
+            List<MBookingLine> mbls = blCtr.getBookingLinesForDateInStation(sId, date, false);
+
+            foreach (MBookingLine bl in mbls)
+            {
+                BookingLine b = new BookingLine();
+                BatteryTypeTest bt = new BatteryTypeTest();
+                b.BatteryType = bt;
+                b.BatteryType.Id = bl.BatteryType.id;
+                b.quantity = bl.quantity.Value;
+                b.time = bl.time.Value;
+                b.price = bl.price.Value;
+                b.bId = bl.bId;
+                bls.Add(b);
+            }
+            return bls;
+        }
+        #endregion
         #region Battery
 
         #region BatteryType

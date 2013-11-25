@@ -25,6 +25,8 @@ namespace ElectricCarWCF
         public DateTime time { get; set; }
         [DataMember]
         public BatteryTypeTest BatteryType { get; set; }
+        [DataMember]
+        public int bId { get; set; }
 
 
     }

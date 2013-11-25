@@ -99,6 +99,7 @@
   <xs:complexType name="BookingLine">
     <xs:sequence>
       <xs:element minOccurs="0" name="BatteryType" nillable="true" type="tns:BatteryTypeTest" />
+      <xs:element minOccurs="0" name="bId" type="xs:int" />
       <xs:element minOccurs="0" name="price" type="xs:decimal" />
       <xs:element minOccurs="0" name="quantity" type="xs:int" />
       <xs:element minOccurs="0" name="station" nillable="true" type="tns:Station" />

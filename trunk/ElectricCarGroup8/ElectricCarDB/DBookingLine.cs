@@ -104,9 +104,62 @@ namespace ElectricCarDB
                 Station = new MStation() { Id = bl.sId },
                 quantity = bl.quantity,
                 price = bl.price,
-                time = bl.time
+                time = bl.time,
+                bId = bl.bId
             };
             return b;
+        }
+
+        public List<MBookingLine> getBookingLinesForStation(int sId, bool getAssociation)
+        {
+            using (ElectricCarEntities context = new ElectricCarEntities())
+            {
+                List<MBookingLine> blForBooking = new List<MBookingLine>();
+                BookingLine[] bls;
+
+                var items = from item in context.BookingLines where item.sId == sId select item;
+                bls = items.ToArray<BookingLine>();
+
+                foreach (BookingLine bl in bls)
+                {
+                    MBookingLine boookingLine = buildBookingLine(bl);
+                    
+                    if (getAssociation)
+                    {
+                        boookingLine.BatteryType = dbBT.getRecord(bl.btId, true);
+                        boookingLine.Station = dbStation.getRecord(bl.sId, false);
+                    }
+                    blForBooking.Add(boookingLine);
+
+                }
+                return blForBooking;
+            }
+        }
+
+        public List<MBookingLine> getBookingLinesForDateInStation(int sId, DateTime date, bool association)
+        {
+            using (ElectricCarEntities context = new ElectricCarEntities())
+            {
+                List<MBookingLine> blForBooking = new List<MBookingLine>();
+                BookingLine[] bls;
+
+                var items = from item in context.BookingLines where item.time.Value.Year == date.Year && item.time.Value.Month == date.Month && item.time.Value.Day == date.Day select item;
+                bls = items.ToArray<BookingLine>();
+
+                foreach (BookingLine bl in bls)
+                {
+                    MBookingLine boookingLine = buildBookingLine(bl);
+
+                    if (association)
+                    {
+                        boookingLine.BatteryType = dbBT.getRecord(bl.btId, true);
+                        boookingLine.Station = dbStation.getRecord(bl.sId, false);
+                    }
+                    blForBooking.Add(boookingLine);
+
+                }
+                return blForBooking;
+            }
         }
 
         public List<MBookingLine> getBookingLinesForBooking(int bookingid, bool getAssociation)

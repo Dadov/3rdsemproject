@@ -288,6 +288,10 @@ namespace ElectricCarGUI
                 sInfoCtr.sId = StationId;
                 sInfoCtr.mv = this;
                 sInfoCtr.fillInfo(StationId);
+
+                sbCtr.sId = StationId;
+                sbCtr.showAllBookingLinesForStation(StationId);
+
                 fillStorageTable(StationId);
                 fillPeriodTable();
                 bsStation.Text = StationId.ToString();
@@ -578,7 +582,12 @@ namespace ElectricCarGUI
             tabBooking.Content = bCtr;
         }
 
-      
+        private StationBookingCtr sbCtr;
+        private void addBookingControl(object sender, RoutedEventArgs e)
+        {
+            sbCtr = new StationBookingCtr();
+            tabStationBooking.Content = sbCtr;
+        }
 
         
 
