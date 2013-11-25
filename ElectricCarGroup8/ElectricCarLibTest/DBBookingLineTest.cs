@@ -20,7 +20,7 @@ namespace ElectricCarLibTest
             DateTime createTime = DateTime.Now;
             DateTime trip = createTime.AddDays(60);
             DateTime sTime = createTime.AddDays(60);
-            int bId = dbBooking.addRecord(1, 100, createTime, trip, "Payed");
+            int bId = dbBooking.addRecord(3, 100, createTime, trip, "Payed");
             int btId = dbBT.addNewRecord("AAA", "BBB", 12, 100, 50);
             int sId = dbStation.addNewRecord("AStation", "Aalborg", "Denmark", "Open");
             try

@@ -173,6 +173,11 @@ namespace ElectricCarWCF
 
         [OperationContract]
         List<string> getStates();
+
+        [OperationContract]
+        List<BookingLine> getBookingLinesForStation(int sId);
+        [OperationContract]
+        List<BookingLine> getBookingLinesForDateInStation(int sId, DateTime date);
         
         #endregion
 

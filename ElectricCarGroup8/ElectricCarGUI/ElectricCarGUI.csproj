@@ -73,6 +73,9 @@
       <DesignTime>True</DesignTime>
       <DependentUpon>Reference.svcmap</DependentUpon>
     </Compile>
+    <Compile Include="StationBookingCtr.xaml.cs">
+      <DependentUpon>StationBookingCtr.xaml</DependentUpon>
+    </Compile>
     <Compile Include="StationInfoCtr.xaml.cs">
       <DependentUpon>StationInfoCtr.xaml</DependentUpon>
     </Compile>
@@ -104,6 +107,10 @@
       <DependentUpon>MainWindow.xaml</DependentUpon>
       <SubType>Code</SubType>
     </Compile>
+    <Page Include="StationBookingCtr.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
     <Page Include="StationInfoCtr.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
@@ -148,6 +155,9 @@
       <DependentUpon>Reference.svcmap</DependentUpon>
     </None>
     <None Include="Service References\ElectricCarService\ElectricCarGUI.ElectricCarService.Booking.datasource">
+      <DependentUpon>Reference.svcmap</DependentUpon>
+    </None>
+    <None Include="Service References\ElectricCarService\ElectricCarGUI.ElectricCarService.BookingLine.datasource">
       <DependentUpon>Reference.svcmap</DependentUpon>
     </None>
     <None Include="Service References\ElectricCarService\ElectricCarGUI.ElectricCarService.Customer.datasource">

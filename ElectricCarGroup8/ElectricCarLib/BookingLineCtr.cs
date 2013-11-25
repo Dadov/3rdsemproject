@@ -12,7 +12,7 @@ using System.Data.Entity;
 
 namespace ElectricCarLib
 {
-    class BookingLineCtr
+    public class BookingLineCtr
     {
         private DBookingLine dbBL = new DBookingLine();
         public void addBookingLine(int bId, int btId, int sId, int quantity, decimal price, DateTime time)
@@ -53,6 +53,16 @@ namespace ElectricCarLib
         public void insertAllBLForBooking(List<MBookingLine> bls)
         {
             dbBL.insertAllBookingLineForBooking(bls);
+        }
+
+        public List<MBookingLine> getBookingLinesForStation(int sId, bool association)
+        {
+            return dbBL.getBookingLinesForStation(sId, association);
+        }
+
+        public List<MBookingLine> getBookingLinesForDateInStation(int sId, DateTime date, bool association)
+        {
+            return dbBL.getBookingLinesForDateInStation(sId, date, association);
         }
     }
 }
