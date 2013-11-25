@@ -18,7 +18,6 @@ namespace ElectricCarDB
         public System.DateTime time { get; set; }
         public Nullable<int> avaiNumber { get; set; }
         public Nullable<int> custBookNumber { get; set; }
-        public Nullable<int> futureBookNumber { get; set; }
     
         public virtual BatteryStorage BatteryStorage { get; set; }
     }

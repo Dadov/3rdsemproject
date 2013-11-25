@@ -13,8 +13,7 @@ namespace ElectricCarDB
         {
             return "time: " + Convert.ToString(time) +
                "Initially available battery number: " + Convert.ToString(avaiNumber) +
-               "Number of batteries booked by customers: " + Convert.ToString(custBookNumber) +
-               "Number of future booked batteries: " + Convert.ToString(futureBookNumber);
+               "Number of batteries booked by customers: " + Convert.ToString(custBookNumber);
         }
     }
 }
