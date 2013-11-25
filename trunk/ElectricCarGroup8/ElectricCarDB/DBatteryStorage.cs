@@ -101,7 +101,7 @@ namespace ElectricCarDB
             {
                 try
                 {
-                    BatteryStorage s = context.BatteryStorages.Where(bs => bs.btId == btid && bs.sId == sid).FirstOrDefault();
+                    BatteryStorage s = context.BatteryStorages.Where(bs => bs.btId == btid && bs.sId==sid).FirstOrDefault();
                     MBatteryStorage storage = buildStorage(s);
                     return storage;
                 }
@@ -109,6 +109,24 @@ namespace ElectricCarDB
                 {
                     throw new System.NullReferenceException("Can not find battery storage", e);
                     //throw new SystemException("Can not find battery storage");
+                }
+            }
+        }
+
+        public MBatteryStorage getRecordByType(int btid, bool getAssociation)
+        {
+            using (ElectricCarEntities context = new ElectricCarEntities())
+            {
+                MBatteryStorage storage = new MBatteryStorage();
+                try
+                {
+                    BatteryStorage s = context.BatteryStorages.Where(bs => bs.btId == btid).FirstOrDefault();
+                    storage = buildStorage(s);
+                    return storage;
+                }
+                catch (Exception)
+                {
+                    return null;
                 }
             }
         }
@@ -147,6 +165,42 @@ namespace ElectricCarDB
                     }
                 }
             }
+
+        public void deleteRecordByType(int btID)
+        {
+            using (ElectricCarEntities context = new ElectricCarEntities())
+            {
+                try
+                {
+                    bool success = false;
+                    using (TransactionScope scope = new TransactionScope())
+                    {
+                        try
+                        {
+                            BatteryStorage storToDelete = (BatteryStorage) context.BatteryStorages.Where(bt=>btID==bt.btId).FirstOrDefault();
+                            context.Entry(storToDelete).State = EntityState.Deleted;
+                            context.SaveChanges();
+                            success = true;
+                        }
+                        catch (Exception)
+                        {
+                            throw new System.NullReferenceException("Can not delete battery storage. Delete battery type first.");
+                            //throw new SystemException("Can not find battery type");
+                        }
+                        if (success)
+                        {
+                            scope.Complete();
+                        }
+
+                    }
+                }
+                catch (TransactionAbortedException e)
+                {
+                    throw new SystemException("Cannot finish transaction for deleting BatteryType " +
+                       " with an error " + e.Message);
+                }
+            }
+        }
 
         public void updateRecord(int id, int btID, int sID)
         {

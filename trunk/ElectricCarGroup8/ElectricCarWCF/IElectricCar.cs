@@ -209,7 +209,13 @@ namespace ElectricCarWCF
         void deleteStorage(int id);
 
         [OperationContract]
+        void deleteStorageByType(int btID);
+
+        [OperationContract]
         void updateStorage(int id, int btid, int sID);
+
+        [OperationContract]
+        List<BatteryStorage> getStationStorages(int sID);
 
         [OperationContract]
         List<BatteryStorage> getAllStorages();

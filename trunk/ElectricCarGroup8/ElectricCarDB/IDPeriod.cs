@@ -12,6 +12,7 @@ namespace ElectricCarDB
         int addNewRecord(int bsID, DateTime time, int init, int cust);
         MPeriod getRecord(int bsID, DateTime time, Boolean getAssociation);
         void deleteRecord(int bsID, DateTime time);
+        void deleteRecord(int bsID);
         void updateRecord(int bsID, DateTime time, int init);
         void updateRecord(int bsID, DateTime time, int init, int cust);
         List<MPeriod> getAllRecord(Boolean getAssociation);

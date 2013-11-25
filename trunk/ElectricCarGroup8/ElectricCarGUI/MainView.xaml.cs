@@ -13,6 +13,7 @@ using System.Windows.Media.Imaging;
 using System.Windows.Shapes;
 using ElectricCarGUI.ElectricCarService;
 using System.Data;
+using System.ServiceModel;
 
 namespace ElectricCarGUI
 {
@@ -273,6 +274,7 @@ namespace ElectricCarGUI
         }
 
         public int StationId { get; set; }
+        public List<int> typeIDs { get; set; }
 
         private void btnEnter_Click(object sender, RoutedEventArgs e)
         {
@@ -280,12 +282,13 @@ namespace ElectricCarGUI
             if (station != null)
             {
                 StationId = Convert.ToInt32(txtStationId.Text);
+                List<int> typeIDs = fillStorageTable(StationId);
+                fillTypeTable(typeIDs);
                 sInfoCtr.station = station;
                 sInfoCtr.sId = StationId;
                 sInfoCtr.mv = this;
                 sInfoCtr.fillInfo(StationId);
                 fillStorageTable(StationId);
-                fillTypeTable(StationId);
                 fillPeriodTable();
                 bsStation.Text = StationId.ToString();
             }
@@ -299,42 +302,88 @@ namespace ElectricCarGUI
 
         private void tbBtnInsert_Click(object sender, RoutedEventArgs e)
         {
+            try { 
             BatteryType bt = (BatteryType)dgType.SelectedItem;
             serviceObj.updateBatteryType(bt.ID, bt.name, bt.producer, bt.capacity, bt.exchangeCost, bt.storageNumber + int.Parse(btAmount.Text));
-            fillTypeTable(StationId);
+            fillTypeTable(typeIDs);
+            }
+            catch (Exception)
+            {
+                MessageBox.Show("Can not insert batteries.", "Message", MessageBoxButton.OK, MessageBoxImage.Warning);
+            }
         }
 
         private void tbtnCreate_Click(object sender, RoutedEventArgs e)
         {
-            serviceObj.addBatteryType(btName.Text, btProd.Text, Decimal.Parse(btCap.Text), Decimal.Parse(btExc.Text), Int32.Parse(btStor.Text));
-            fillTypeTable(StationId);
+            try
+            {
+                int id = serviceObj.addBatteryType(btName.Text, btProd.Text, Decimal.Parse(btCap.Text), Decimal.Parse(btExc.Text), Int32.Parse(btStor.Text));
+                typeIDs.Add(id);
+                fillTypeTable(typeIDs);
+            }
+            catch (Exception)
+            {
+                MessageBox.Show("Fill the text boxes correctly. Battery type was not added","Warning",MessageBoxButton.OK,MessageBoxImage.Warning);
+            }
         }
 
         private void tbtnUpdate_Click(object sender, RoutedEventArgs e)
         {
+            try { 
             serviceObj.updateBatteryType(Int32.Parse(btID.Text), btName.Text, btProd.Text, Decimal.Parse(btCap.Text), Decimal.Parse(btExc.Text), Int32.Parse(btStor.Text));
-            fillTypeTable(StationId);
+            fillTypeTable(typeIDs);
+            }
+            catch (Exception)
+            {
+                MessageBox.Show("Fill the text boxes correctly. Battery type was not updated", "Warning", MessageBoxButton.OK, MessageBoxImage.Warning);
+            }
         }
 
         private void tbtnDelete_Click(object sender, RoutedEventArgs e)
         {
-            serviceObj.deleteBatteryType(Int32.Parse(btID.Text));
-            fillTypeTable(StationId);
+            try {
+            serviceObj.deleteStorageByType(Int32.Parse(btID.Text));
+            typeIDs.Remove(int.Parse(btID.Text));
+            fillTypeTable(typeIDs);
+            fillStorageTable(StationId);
+            fillPeriodTable();
+            clearBT();
+            }
+            catch (CommunicationObjectFaultedException)
+            {
+                MessageBox.Show("Delete dependant Battery storage.", "Message", MessageBoxButton.OK, MessageBoxImage.Warning);
+            }
+            catch (NullReferenceException)
+            {
+                MessageBox.Show("Delete dependant Battery storage.", "Message", MessageBoxButton.OK, MessageBoxImage.Warning);
+            }
+            catch (Exception)
+            {
+                MessageBox.Show("Battery type was not deleted.", "Message", MessageBoxButton.OK, MessageBoxImage.Warning);
+            }
         }
 
         private void tbtnCancel_Click(object sender, RoutedEventArgs e)
         {
-            btID.Text = btName.Text = btExc.Text = btCap.Text = btStor.Text = btProd.Text = "";
+            clearBT();
         }
 
-        private void fillStorageTable(int StationID)
+        private void clearBT()
+        {
+            btID.Text = btName.Text = btExc.Text = btCap.Text = btStor.Text = btProd.Text = "";
+
+        }
+
+        private List<int> fillStorageTable(int StationID)
         {
             string searchTerm = bsSearch.Text;
             dgStorage.Items.Clear();
-            List<BatteryStorage> storages = serviceObj.getAllStorages().ToList();
+            List<BatteryStorage> storages = serviceObj.getStationStorages(StationID).ToList();
+            typeIDs = new List<int>();
             foreach (BatteryStorage storage in storages)
             {
                 dgStorage.Items.Add(storage);
+                typeIDs.Add(storage.typeID);
             }
             if (searchTerm != null)
             {
@@ -343,14 +392,20 @@ namespace ElectricCarGUI
                 || ((BatteryStorage)bs).typeID.ToString().ToLower().Contains(searchTerm));
                 dgStorage.Items.Filter = filter;
             }
+            return typeIDs;
             
         }
 
-        private void fillTypeTable(int StationID)
+        private void fillTypeTable(List<int> typeIDs)
         {
             string searchTerm = btSearch.Text; 
             dgType.Items.Clear();
-            List<BatteryType> types = serviceObj.getAllBatteryTypes().ToList(); 
+            List<BatteryType> types = new List<BatteryType>();
+            foreach(int typeID in typeIDs)
+            {
+                types.Add(serviceObj.getBatteryType(typeID));
+            }
+
             foreach (BatteryType type in types)
             {
                 dgType.Items.Add(type);
@@ -387,7 +442,7 @@ namespace ElectricCarGUI
                 }
                 else
                 {
-                    List<BatteryStorage> storages = serviceObj.getAllStorages().ToList();
+                    List<BatteryStorage> storages = serviceObj.getStationStorages(StationId).ToList();
                     foreach (BatteryStorage bs in storages)
                     {
                         foreach (Period p in bs.periods)
@@ -422,25 +477,55 @@ namespace ElectricCarGUI
 
         private void sbtnCreate_Click(object sender, RoutedEventArgs e)
         {
-            serviceObj.addNewStorage(Int32.Parse(bsType.Text), Int32.Parse(bsStation.Text));
-            fillStorageTable(StationId);
+            try
+            {
+                serviceObj.addNewStorage(Int32.Parse(bsType.Text), Int32.Parse(bsStation.Text));
+                fillStorageTable(StationId);
+                fillPeriodTable();
+                clearBS();
+            }
+            catch (Exception)
+            {
+                MessageBox.Show("Can not add Battery storage.", "Message", MessageBoxButton.OK, MessageBoxImage.Warning);
+            }
         }
         private void sbtnUpdate_Click(object sender, RoutedEventArgs e)
         {
-            serviceObj.updateStorage(Int32.Parse(bsID.Text), Int32.Parse(bsType.Text), Int32.Parse(bsStation.Text));
-            fillStorageTable(StationId);
+            try
+            {
+                serviceObj.updateStorage(Int32.Parse(bsID.Text), Int32.Parse(bsType.Text), Int32.Parse(bsStation.Text));
+                fillStorageTable(StationId);
+                clearBS();
+            }
+            catch (Exception)
+            {
+                MessageBox.Show("Can not update Battery storage.", "Message", MessageBoxButton.OK, MessageBoxImage.Warning);
+            }
         }
 
         private void sbtnDelete_Click(object sender, RoutedEventArgs e)
         {
+            try { 
             serviceObj.deleteStorage(Int32.Parse(bsID.Text));
             fillStorageTable(StationId);
+            clearBS();
+            }
+            catch (Exception)
+            {
+                MessageBox.Show("Can not delete Battery storage.", "Message", MessageBoxButton.OK, MessageBoxImage.Warning);
+            }
         }
 
         private void sbtnCancel_Click(object sender, RoutedEventArgs e)
         {
-            bsID.Text = bsStation.Text = bsType.Text = "";
+            clearBS();
         }
+
+        private void clearBS()
+        {
+            bsID.Text = bsType.Text = "";
+        }
+
 
         private void dgStorage_SelectionChanged(object sender, SelectionChangedEventArgs e)
         {
@@ -471,7 +556,7 @@ namespace ElectricCarGUI
 
         private void btSearch_KeyUp(object sender, KeyEventArgs e)
         {
-            fillTypeTable(StationId);
+            fillTypeTable(typeIDs);
         }
 
         private void bsSearch_KeyUp(object sender, KeyEventArgs e)
