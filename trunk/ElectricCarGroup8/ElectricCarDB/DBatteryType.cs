@@ -14,7 +14,7 @@ namespace ElectricCarDB
 {
     public class DBatteryType : IDBatteryType
     {
-        public int addNewRecord(string name, string producer, decimal capacity, decimal exchangeCost, int storageNumber)
+        public int addNewRecord(string name, string producer, decimal capacity, decimal exchangeCost)
         {
          using (TransactionScope transaction = new TransactionScope((TransactionScopeOption.Required)))
             {
@@ -44,7 +44,6 @@ namespace ElectricCarDB
                                 producer = producer,
                                 capacity = capacity,
                                 exchangeCost = exchangeCost,
-                                storageNumber = storageNumber
                             });
                              context.SaveChanges();
                                 failed = false;
@@ -134,7 +133,7 @@ namespace ElectricCarDB
             }
         
 
-        public void updateRecord(int id, string name, string producer, decimal capacity, decimal exchangeCost, int storageNumber)
+        public void updateRecord(int id, string name, string producer, decimal capacity, decimal exchangeCost)
         {
             using (ElectricCarEntities context = new ElectricCarEntities())
             {
@@ -150,7 +149,6 @@ namespace ElectricCarDB
                             btToUpdate.producer = producer;
                             btToUpdate.capacity = capacity;
                             btToUpdate.exchangeCost = exchangeCost;
-                            btToUpdate.storageNumber = storageNumber;
                             context.SaveChanges();
                             success = true;
                         }
@@ -211,8 +209,7 @@ namespace ElectricCarDB
                 name = bt.name,
                 producer = bt.producer,
                 capacity = bt.capacity,
-                exchangeCost = bt.exchangeCost,
-                storageNumber = (int) bt.storageNumber
+                exchangeCost = bt.exchangeCost
             };
             return batteryType;
         }

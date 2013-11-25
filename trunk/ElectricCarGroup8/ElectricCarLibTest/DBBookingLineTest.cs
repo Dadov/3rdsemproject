@@ -21,7 +21,7 @@ namespace ElectricCarLibTest
             DateTime trip = createTime.AddDays(60);
             DateTime sTime = createTime.AddDays(60);
             int bId = dbBooking.addRecord(3, 100, createTime, trip, "Payed");
-            int btId = dbBT.addNewRecord("AAA", "BBB", 12, 100, 50);
+            int btId = dbBT.addNewRecord("AAA", "BBB", 12, 100);
             int sId = dbStation.addNewRecord("AStation", "Aalborg", "Denmark", "Open");
             try
             {
@@ -32,7 +32,6 @@ namespace ElectricCarLibTest
                 Assert.AreEqual("BBB", bl.BatteryType.producer);
                 Assert.AreEqual(12, Convert.ToInt32(bl.BatteryType.capacity));
                 Assert.AreEqual(100, Convert.ToInt32(bl.BatteryType.exchangeCost));
-                Assert.AreEqual(50, Convert.ToInt32(bl.BatteryType.storageNumber));
                 Assert.AreEqual(sId, bl.Station.Id);
                 Assert.AreEqual("AStation", bl.Station.name);
                 Assert.AreEqual("Aalborg", bl.Station.address);
@@ -64,7 +63,7 @@ namespace ElectricCarLibTest
             DateTime sTime = createTime.AddDays(60);
             DateTime sTime2 = createTime.AddDays(70);
             int bId = dbBooking.addRecord(1, 100, createTime, trip, "1234456");
-            int btId = dbBT.addNewRecord("AAA", "BBB", 12, 100, 50);
+            int btId = dbBT.addNewRecord("AAA", "BBB", 12, 100);
             int sId = dbStation.addNewRecord("BStation", "Aalborg", "Denmark", "Open");
             try
             {
@@ -98,7 +97,7 @@ namespace ElectricCarLibTest
             DateTime trip = createTime.AddDays(60);
             DateTime sTime = createTime.AddDays(60);
             int bId = dbBooking.addRecord(1, 100, createTime, trip, "1234456");
-            int btId = dbBT.addNewRecord("AAA", "BBB", 12, 100, 50);
+            int btId = dbBT.addNewRecord("AAA", "BBB", 12, 100);
             int sId = dbStation.addNewRecord("CStation", "Aalborg", "Denmark", "Open");
             try
             {
@@ -110,7 +109,6 @@ namespace ElectricCarLibTest
                 Assert.AreEqual("BBB", bls[0].BatteryType.producer);
                 Assert.AreEqual(12, Convert.ToInt32(bls[0].BatteryType.capacity));
                 Assert.AreEqual(100, Convert.ToInt32(bls[0].BatteryType.exchangeCost));
-                Assert.AreEqual(50, Convert.ToInt32(bls[0].BatteryType.storageNumber));
                 Assert.AreEqual(sId, bls[0].Station.Id);
                 Assert.AreEqual("CStation", bls[0].Station.name);
                 Assert.AreEqual("Aalborg", bls[0].Station.address);
@@ -139,7 +137,7 @@ namespace ElectricCarLibTest
             DateTime trip = createTime.AddDays(60);
             DateTime sTime = createTime.AddDays(60);
             int bId = dbBooking.addRecord(1, 100, createTime, trip, "1234456");
-            int btId = dbBT.addNewRecord("AAA", "BBB", 12, 100, 50);
+            int btId = dbBT.addNewRecord("AAA", "BBB", 12, 100);
             int sId = dbStation.addNewRecord("DStation", "Aalborg", "Denmark", "Open");
             try
             {
@@ -168,7 +166,7 @@ namespace ElectricCarLibTest
             DateTime trip = createTime.AddDays(60);
             DateTime sTime = createTime.AddDays(60);
             int bId = dbBooking.addRecord(1, 100, createTime, trip, "1234456");
-            int btId = dbBT.addNewRecord("AAA", "BBB", 12, 100, 50);
+            int btId = dbBT.addNewRecord("AAA", "BBB", 12, 100);
             int sId = dbStation.addNewRecord("AalborgStation", "Aalborg", "Denmark", "Open");
             try
             {

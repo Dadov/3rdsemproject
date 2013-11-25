@@ -15,10 +15,10 @@ namespace ElectricCarLib
     public class BatteryTypeCtr:IDisposable
     {
 
-        public int addNewRecord(string name, string producer, decimal capacity, decimal exchangeCost, int storageNumber)
+        public int addNewRecord(string name, string producer, decimal capacity, decimal exchangeCost)
         {
             IDBatteryType dbBatteryType = new DBatteryType();
-            return dbBatteryType.addNewRecord(name, producer, capacity, exchangeCost, storageNumber);
+            return dbBatteryType.addNewRecord(name, producer, capacity, exchangeCost);
 
         }
 
@@ -34,10 +34,10 @@ namespace ElectricCarLib
             dbBatteryType.deleteRecord(id);
         }
 
-        public void updateRecord(int id, string name, string producer, decimal capacity, decimal exchangeCost, int storageNumber)
+        public void updateRecord(int id, string name, string producer, decimal capacity, decimal exchangeCost)
         {
             IDBatteryType dbBatteryType = new DBatteryType();
-            dbBatteryType.updateRecord(id, name, producer, capacity, exchangeCost, storageNumber);
+            dbBatteryType.updateRecord(id, name, producer, capacity, exchangeCost);
         }
 
         public List<MBatteryType> getAllRecord(Boolean getAssociation)

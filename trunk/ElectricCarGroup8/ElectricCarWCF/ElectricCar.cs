@@ -759,10 +759,10 @@ namespace ElectricCarWCF
         #region Battery
 
         #region BatteryType
-        public int addBatteryType(string name, string producer, decimal capacity, decimal exchangeCost, int storageNumber)
+        public int addBatteryType(string name, string producer, decimal capacity, decimal exchangeCost)
         {
             BatteryTypeCtr tCtr = new BatteryTypeCtr();
-            return tCtr.addNewRecord(name, producer, capacity, exchangeCost, storageNumber);
+            return tCtr.addNewRecord(name, producer, capacity, exchangeCost);
         }
 
         public BatteryType getBatteryType(int id)
@@ -777,7 +777,6 @@ namespace ElectricCarWCF
                 bt.producer = type.producer;
                 bt.capacity = (int)type.capacity;
                 bt.exchangeCost = (int)type.exchangeCost;
-                bt.storageNumber = (int)type.storageNumber;
             }
             return bt;
         }
@@ -788,10 +787,10 @@ namespace ElectricCarWCF
             tCtr.deleteRecord(id);
         }
 
-        public void updateBatteryType(int id, string name, string producer, decimal capacity, decimal exchangeCost, int storageNumber)
+        public void updateBatteryType(int id, string name, string producer, decimal capacity, decimal exchangeCost)
         {
             BatteryTypeCtr tCtr = new BatteryTypeCtr();
-            tCtr.updateRecord(id, name, producer, capacity, exchangeCost, storageNumber);
+            tCtr.updateRecord(id, name, producer, capacity, exchangeCost);
         }
 
         public List<BatteryType> getAllBatteryTypes()
@@ -807,7 +806,6 @@ namespace ElectricCarWCF
                 bt.producer = type.producer;
                 bt.capacity = (int)type.capacity;
                 bt.exchangeCost = (int)type.exchangeCost;
-                bt.storageNumber = (int)type.storageNumber;
                 bts.Add(bt);
             }
             return bts;
@@ -822,10 +820,10 @@ namespace ElectricCarWCF
 
         #region BatteryStorage
 
-        public int addNewStorage(int btID, int sID)
+        public int addNewStorage(int btID, int sID, int storageNumber)
         {
             BatteryStorageCtr sCtr = new BatteryStorageCtr();
-            return sCtr.addNewRecord(btID, sID);
+            return sCtr.addNewRecord(btID, sID, storageNumber);
         }
 
         public BatteryStorage getStorage(int id)
@@ -839,6 +837,8 @@ namespace ElectricCarWCF
                 s.ID = storage.id;
                 s.typeID = storage.type.id;
                 s.periods = getStoragePeriods(id);
+                s.storageNumber = storage.storageNumber;
+
             }
             return s;
         }
@@ -855,10 +855,10 @@ namespace ElectricCarWCF
             bCtr.deleteRecordByType(btID);
         }
 
-        public void updateStorage(int id, int btid, int sID)
+        public void updateStorage(int id, int btid, int sID, int storageNumber)
         {
             BatteryStorageCtr sCtr = new BatteryStorageCtr();
-            sCtr.updateRecord(id, btid, sID);
+            sCtr.updateRecord(id, btid, sID, storageNumber);
         }
 
         public List<BatteryStorage> getStationStorages(int sID)
@@ -872,6 +872,7 @@ namespace ElectricCarWCF
                 bs.ID = storage.id;
                 bs.typeID = storage.type.id;
                 bs.periods = getStoragePeriods(bs.ID);
+                bs.storageNumber = storage.storageNumber;
                 bss.Add(bs);
             }
             return bss;
@@ -888,6 +889,8 @@ namespace ElectricCarWCF
                 bs.ID = storage.id;
                 bs.typeID = storage.type.id;
                 bs.periods = getStoragePeriods(bs.ID);
+                bs.storageNumber = storage.storageNumber;
+
                 bss.Add(bs);
             }
             return bss;

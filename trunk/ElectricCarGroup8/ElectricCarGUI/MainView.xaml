@@ -62,7 +62,7 @@
             </TabItem>
             <TabItem Header="Station">
                 <Grid Background="#FFE5E5E5">
-                    <TabControl HorizontalAlignment="Left" Height="555" Margin="0,41,0,0" VerticalAlignment="Top" Width="976">
+                    <TabControl HorizontalAlignment="Left" Height="555" Margin="0,42,-4,-5" VerticalAlignment="Top" Width="976">
                         <TabItem x:Name="tabStationiInfo" Header="Information" Loaded="addInfoControl">
                             <Grid Background="#FFE5E5E5"/>
                         </TabItem>
@@ -76,20 +76,27 @@
                                     <DataGrid.Columns>
                                         <DataGridTextColumn Binding="{Binding ID}" Header="ID" Width="0.2*" IsReadOnly="True" SortDirection="Ascending"/>
                                         <DataGridTextColumn Binding="{Binding typeID}" Header="Type ID" Width="0.2*" IsReadOnly="True"/>
+                                        <DataGridTextColumn Binding="{Binding storageNumber}" Header="Amount" Width="0.2*" IsReadOnly="True"/>
                                     </DataGrid.Columns>
                                 </DataGrid>
+                                <Label Content="Insert:" HorizontalAlignment="Left" Margin="30,240,0,0" VerticalAlignment="Top"/>
+                                <TextBox x:Name="btAmount" HorizontalAlignment="Left" Height="23" Margin="77,240,0,0" TextWrapping="Wrap" Text="0" VerticalAlignment="Top" Width="53"/>
+                                <Label Content="Batteries to selected battery type" HorizontalAlignment="Left" Margin="135,240,0,0" VerticalAlignment="Top"/>
+                                <Button x:Name="tbBtnInsert"  Content="Insert" HorizontalAlignment="Left" Margin="409,240,0,0" VerticalAlignment="Top" Width="75" Click="tbBtnInsert_Click"/>
                                 <Label Content="ID: " HorizontalAlignment="Left" Margin="571,48,0,0" VerticalAlignment="Top" Width="59"/>
                                 <Label Content="Type ID: " HorizontalAlignment="Left" Margin="571,79,0,0" VerticalAlignment="Top" Width="59"/>
                                 <Label Content="Station: " HorizontalAlignment="Left" Margin="571,110,0,0" VerticalAlignment="Top" Width="59"/>
+                                <Label Content="Storage Number: " HorizontalAlignment="Left" Margin="571,141,0,0" VerticalAlignment="Top" Width="auto"/>
                                 <TextBox x:Name="bsID" HorizontalAlignment="Left" Height="23" Margin="669,48,0,0" TextWrapping="Wrap" Text="" VerticalAlignment="Top" Width="189" IsReadOnly="True" />
                                 <TextBox x:Name="bsType" HorizontalAlignment="Left" Height="23" Margin="669,79,0,0" TextWrapping="Wrap" Text="" VerticalAlignment="Top" Width="189"/>
                                 <TextBox x:Name="bsStation" HorizontalAlignment="Left" Height="23" Margin="669,110,0,0" TextWrapping="Wrap" Text="" VerticalAlignment="Top" Width="189" IsReadOnly="True"/>
-                                <Button x:Name="sbtnCreate" Content="Add" HorizontalAlignment="Left" Margin="571,180,0,0" VerticalAlignment="Top" Width="75" Click="sbtnCreate_Click"/>
-                                <Button x:Name="sbtnUpdate" Content="Update" HorizontalAlignment="Left" Margin="651,180,0,0" VerticalAlignment="Top" Width="75" Click="sbtnUpdate_Click"/>
-                                <Button x:Name="sbtnDelete" Content="Delete" HorizontalAlignment="Left" Margin="731,180,0,0" VerticalAlignment="Top" Width="75" Click="sbtnDelete_Click"/>
-                                <Button x:Name="sbtnCancel" Content="Clear" HorizontalAlignment="Left" Margin="811,180,0,0" VerticalAlignment="Top" Width="75" Click="sbtnCancel_Click"/>
-                                <Calendar x:Name="calendar" HorizontalAlignment="Left" Margin="571,278,0,0" VerticalAlignment="Top" Height="167" Width="315" SelectedDatesChanged="calendar_SelectedDatesChanged"/>
-                                <DataGrid x:Name="dgPeriods" HorizontalAlignment="Left" VerticalAlignment="Top" Height="167" Width="454" RenderTransformOrigin="0.517,0.521" Margin="30,278,0,0">
+                                <TextBox x:Name="btStor" HorizontalAlignment="Left" Height="23" Margin="669,141,0,0" TextWrapping="Wrap" Text="" VerticalAlignment="Top" Width="189" />
+                                <Button x:Name="sbtnCreate" Content="Add" HorizontalAlignment="Left" Margin="571,211,0,0" VerticalAlignment="Top" Width="75" Click="sbtnCreate_Click"/>
+                                <Button x:Name="sbtnUpdate" Content="Update" HorizontalAlignment="Left" Margin="651,211,0,0" VerticalAlignment="Top" Width="75" Click="sbtnUpdate_Click"/>
+                                <Button x:Name="sbtnDelete" Content="Delete" HorizontalAlignment="Left" Margin="731,211,0,0" VerticalAlignment="Top" Width="75" Click="sbtnDelete_Click"/>
+                                <Button x:Name="sbtnCancel" Content="Clear" HorizontalAlignment="Left" Margin="811,211,0,0" VerticalAlignment="Top" Width="75" Click="sbtnCancel_Click"/>
+                                <Calendar x:Name="calendar" HorizontalAlignment="Left" Margin="571,300,0,0" VerticalAlignment="Top" Height="167" Width="315" SelectedDatesChanged="calendar_SelectedDatesChanged"/>
+                                <DataGrid x:Name="dgPeriods" HorizontalAlignment="Left" VerticalAlignment="Top" Height="167" Width="454" RenderTransformOrigin="0.517,0.521" Margin="30,300,0,0">
                                     <DataGrid.Columns>
                                         <DataGridTextColumn Binding="{Binding bsID}" Header="Storage ID" Width="0.11*" IsReadOnly="True"/>
                                         <DataGridTextColumn Binding="{Binding time}" Header="Time" Width="0.24*" IsReadOnly="True"/>
@@ -97,7 +104,7 @@
                                         <DataGridTextColumn Binding="{Binding bookedNumber}" Header="Booked Batteries" Width="0.2*" IsReadOnly="True"/>
                                     </DataGrid.Columns>
                                 </DataGrid>
-                                <Label Content="Select storage from the table above or pick a date to filter this table." HorizontalAlignment="Left" Margin="30,252,0,0" VerticalAlignment="Top"/>
+                                <Label Content="Select storage from the table above or pick a date to filter this table." HorizontalAlignment="Left" Margin="30,270,0,0" VerticalAlignment="Top"/>
                             </Grid>
                         </TabItem>
                         <TabItem Header="BatteryType">
@@ -110,30 +117,25 @@
                                         <DataGridTextColumn Binding="{Binding producer}" Header="Producer" Width="0.2*" IsReadOnly="True"/>
                                         <DataGridTextColumn Binding="{Binding capacity}" Header="Capacity" Width="0.2*" IsReadOnly="True"/>
                                         <DataGridTextColumn Binding="{Binding exchangeCost}" Header="Cost" Width="0.2*" IsReadOnly="True"/>
-                                        <DataGridTextColumn Binding="{Binding storageNumber}" Header="Amount" Width="0.2*" IsReadOnly="True"/>
                                     </DataGrid.Columns>
                             </DataGrid>
                             <Label Content="ID: " HorizontalAlignment="Left" Margin="571,48,0,0" VerticalAlignment="Top" Width="59"/>
                             <Label Content="Name: " HorizontalAlignment="Left" Margin="571,79,0,0" VerticalAlignment="Top" Width="59"/>
                             <Label Content="Producer: " HorizontalAlignment="Left" Margin="571,110,0,0" VerticalAlignment="Top" Width="59"/>
-                            <Label Content="Capacity: " HorizontalAlignment="Left" Margin="571,141,0,0" VerticalAlignment="Top" Width="59"/>                                <Label Content="Producer: " HorizontalAlignment="Left" Margin="571,110,0,0" VerticalAlignment="Top" Width="59"/>
+                            <Label Content="Capacity: " HorizontalAlignment="Left" Margin="571,141,0,0" VerticalAlignment="Top" Width="59"/>          
                             <Label Content="Exchange Cost: " HorizontalAlignment="Left" Margin="571,172,0,0" VerticalAlignment="Top" Width="89"/>
-                            <Label Content="Storage Number: " HorizontalAlignment="Left" Margin="571,203,0,0" VerticalAlignment="Top" Width="auto"/>
                             <TextBox x:Name="btID" HorizontalAlignment="Left" Height="23" Margin="669,48,0,0" TextWrapping="Wrap" Text="" VerticalAlignment="Top" Width="189" IsReadOnly="True" />
                             <TextBox x:Name="btName" HorizontalAlignment="Left" Height="23" Margin="669,79,0,0" TextWrapping="Wrap" Text="" VerticalAlignment="Top" Width="189"/>
                             <TextBox x:Name="btProd" HorizontalAlignment="Left" Height="23" Margin="669,110,0,0" TextWrapping="Wrap" Text="" VerticalAlignment="Top" Width="189"/>
                                 <TextBox x:Name="btCap" HorizontalAlignment="Left" Height="23" Margin="669,141,0,0" TextWrapping="Wrap" Text="" VerticalAlignment="Top" Width="189"  />
                                 <TextBox x:Name="btExc" HorizontalAlignment="Left" Height="23" Margin="669,172,0,0" TextWrapping="Wrap" Text="" VerticalAlignment="Top" Width="189"  />
-                                <TextBox x:Name="btStor" HorizontalAlignment="Left" Height="23" Margin="669,203,0,0" TextWrapping="Wrap" Text="" VerticalAlignment="Top" Width="189" />
+                                
 
-                                <Button x:Name="tbtnCreate" Content="Add" HorizontalAlignment="Left" Margin="571,260,0,0" VerticalAlignment="Top" Width="75" Click="tbtnCreate_Click"/>
-                            <Button x:Name="tbtnUpdate" Content="Update" HorizontalAlignment="Left" Margin="651,260,0,0" VerticalAlignment="Top" Width="75" Click="tbtnUpdate_Click"/>
-                            <Button x:Name="tbtnDelete" Content="Delete" HorizontalAlignment="Left" Margin="731,260,0,0" VerticalAlignment="Top" Width="75" Click="tbtnDelete_Click"/>
-                            <Button x:Name="tbtnCancel" Content="Clear" HorizontalAlignment="Left" Margin="811,260,0,0" VerticalAlignment="Top" Width="75" Click="tbtnCancel_Click"/>
-                                <Label Content="Insert:" HorizontalAlignment="Left" Margin="30,260,0,0" VerticalAlignment="Top"/>
-                                <TextBox x:Name="btAmount" HorizontalAlignment="Left" Height="23" Margin="77,260,0,0" TextWrapping="Wrap" Text="0" VerticalAlignment="Top" Width="53"/>
-                                <Label Content="Batteries to selected battery type" HorizontalAlignment="Left" Margin="135,260,0,0" VerticalAlignment="Top"/>
-                                <Button x:Name="tbBtnInsert"  Content="Insert" HorizontalAlignment="Left" Margin="409,260,0,0" VerticalAlignment="Top" Width="75" Click="tbBtnInsert_Click"/>
+                                <Button x:Name="tbtnCreate" Content="Add" HorizontalAlignment="Left" Margin="571,229,0,0" VerticalAlignment="Top" Width="75" Click="tbtnCreate_Click"/>
+                            <Button x:Name="tbtnUpdate" Content="Update" HorizontalAlignment="Left" Margin="651,229,0,0" VerticalAlignment="Top" Width="75" Click="tbtnUpdate_Click"/>
+                            <Button x:Name="tbtnDelete" Content="Delete" HorizontalAlignment="Left" Margin="731,229,0,0" VerticalAlignment="Top" Width="75" Click="tbtnDelete_Click"/>
+                            <Button x:Name="tbtnCancel" Content="Clear" HorizontalAlignment="Left" Margin="811,229,0,0" VerticalAlignment="Top" Width="75" Click="tbtnCancel_Click"/>
+                                
                             </Grid>
                             </TabItem>
                         <TabItem Header="Employee">

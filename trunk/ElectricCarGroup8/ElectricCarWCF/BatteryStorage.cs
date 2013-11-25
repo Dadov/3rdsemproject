@@ -18,5 +18,8 @@ namespace ElectricCarWCF
 
         [DataMember]
         public int typeID;
+
+        [DataMember]
+        public int storageNumber;
     }
 }

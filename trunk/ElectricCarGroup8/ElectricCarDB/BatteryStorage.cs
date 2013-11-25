@@ -22,6 +22,7 @@ namespace ElectricCarDB
         public int Id { get; set; }
         public Nullable<int> btId { get; set; }
         public Nullable<int> sId { get; set; }
+        public Nullable<int> storageNumber { get; set; }
     
         public virtual BatteryType BatteryType { get; set; }
         public virtual Station Station { get; set; }

@@ -26,7 +26,7 @@ namespace ElectricCarLib
         //This method will return number of batteries of given type for one storage
         public int getInitNumber(MBatteryStorage storage)
         {
-            int init = storage.type.storageNumber;
+            int init = storage.storageNumber;
             return init;
         }
 

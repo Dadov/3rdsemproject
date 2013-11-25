@@ -60,7 +60,7 @@ namespace ElectricCarLibTest
         [TestMethod]
         public void addGetDeleteBatteryType()
         {
-            int id = dbType.addNewRecord("newName", "newProducer", 10, 100, 20);
+            int id = dbType.addNewRecord("newName", "newProducer", 10, 10);
             try
             {
                 MBatteryType type = dbType.getRecord(id, false);
@@ -68,7 +68,6 @@ namespace ElectricCarLibTest
                 Assert.AreEqual("newProducer", type.producer);
                 Assert.AreEqual(10,type.capacity);
                 Assert.AreEqual(100, type.exchangeCost);
-                Assert.AreEqual(20, type.storageNumber);
             }
             catch
             {
@@ -82,16 +81,15 @@ namespace ElectricCarLibTest
         [TestMethod]
         public void updateBatteryType()
         {
-            int id = dbType.addNewRecord("newName", "newProducer", 10, 100, 20);
+            int id = dbType.addNewRecord("newName", "newProducer", 10, 100);
             try
             {
-                dbType.updateRecord(id, "Update", "Update", 20,200,40);
+                dbType.updateRecord(id, "Update", "Update", 20,200);
                 MBatteryType type = dbType .getRecord(id, false);
                 Assert.AreEqual("Update", type.name);
                 Assert.AreEqual("Update", type.producer);
                 Assert.AreEqual(20,type.capacity);
                 Assert.AreEqual(200, type.exchangeCost);
-                Assert.AreEqual(40, type.storageNumber);
             }
             catch
             {

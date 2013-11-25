@@ -17,7 +17,7 @@ namespace ElectricCarDB
         private DBPeriod dbPeriod = new DBPeriod();
         private DBatteryType dbType = new DBatteryType();
 
-        public int addNewRecord(int btID, int sID)
+        public int addNewRecord(int btID, int sID, int storageNumber)
         {
              // althought 'Required' is supposed to be default
             using (TransactionScope transaction = new TransactionScope((TransactionScopeOption.Required)))
@@ -45,7 +45,8 @@ namespace ElectricCarDB
                             {
                                 Id = newid,
                                 sId = sID,
-                                btId = btID
+                                btId = btID,
+                                storageNumber = storageNumber
                             });
                             context.SaveChanges();
                             failed = false;
@@ -202,7 +203,7 @@ namespace ElectricCarDB
             }
         }
 
-        public void updateRecord(int id, int btID, int sID)
+        public void updateRecord(int id, int btID, int sID, int storageNumber)
         {
              using (ElectricCarEntities context = new ElectricCarEntities())
             {
@@ -216,6 +217,8 @@ namespace ElectricCarDB
                     BatteryStorage storToUpdate = context.BatteryStorages.Find(id);
                        storToUpdate.btId = btID;
                        storToUpdate.sId = sID;
+                       storToUpdate.storageNumber = storageNumber;
+
                        context.SaveChanges();
                        success = true;
                         }
@@ -293,6 +296,7 @@ namespace ElectricCarDB
                 id = bs.Id,
                 type = new MBatteryType() { id = (int)bs.btId },
                 periods = dbPeriod.getStoragePeriods(bs.Id, true),
+                storageNumber = bs.storageNumber.Value,
             };
             return storage;
         }

@@ -69,8 +69,8 @@ namespace ElectricCarLibTest
             IDBBatteryStorage dbStorage = new DBBatteryStorage();
             IDPeriod dbPeriod = new DBPeriod();
             int sid = dbStation.addNewRecord("name", "address", "country", "state");
-            int btid = dbType.addNewRecord("name", "producer", 10, 10, 10);
-            int bsid = dbStorage.addNewRecord(btid, sid);
+            int btid = dbType.addNewRecord("name", "producer", 10, 10);
+            int bsid = dbStorage.addNewRecord(btid, sid, 10);
             MBatteryStorage storage = dbStorage.getRecord(bsid, true);
             try
             {
@@ -130,8 +130,8 @@ namespace ElectricCarLibTest
             IDBBatteryStorage dbStorage = new DBBatteryStorage();
             IDPeriod dbPeriod = new DBPeriod();
             int sid = dbStation.addNewRecord("name", "address", "country", "state");
-            int btid = dbType.addNewRecord("name", "producer", 10, 10, 10);
-            int bsid = dbStorage.addNewRecord(btid, sid);
+            int btid = dbType.addNewRecord("name", "producer", 10, 10);
+            int bsid = dbStorage.addNewRecord(btid, sid, 10);
             MBatteryStorage storage = dbStorage.getRecord(bsid, true);
             try
             {
@@ -191,8 +191,8 @@ namespace ElectricCarLibTest
             IDBBatteryStorage dbStorage = new DBBatteryStorage();
             IDPeriod dbPeriod = new DBPeriod();
             int sid = dbStation.addNewRecord("name", "address", "country", "state");
-            int btid = dbType.addNewRecord("name", "producer", 10, 10, 10);
-            int bsid = dbStorage.addNewRecord(btid, sid);
+            int btid = dbType.addNewRecord("name", "producer", 10, 10);
+            int bsid = dbStorage.addNewRecord(btid, sid, 10);
             MBatteryStorage storage = dbStorage.getRecord(bsid, true);
             try
             {
@@ -252,8 +252,8 @@ namespace ElectricCarLibTest
             IDBBatteryStorage dbStorage = new DBBatteryStorage();
             IDPeriod dbPeriod = new DBPeriod();
             int sid = dbStation.addNewRecord("name", "address", "country", "state");
-            int btid = dbType.addNewRecord("name", "producer", 10, 10, 10);
-            int bsid = dbStorage.addNewRecord(btid, sid);
+            int btid = dbType.addNewRecord("name", "producer", 10, 10);
+            int bsid = dbStorage.addNewRecord(btid, sid, 10);
             MBatteryStorage storage = dbStorage.getRecord(bsid, true);
             try
             {

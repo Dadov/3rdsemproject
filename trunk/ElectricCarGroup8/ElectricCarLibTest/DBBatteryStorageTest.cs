@@ -61,9 +61,9 @@ namespace ElectricCarLibTest
         [TestMethod]
         public void addGetDeleteStorage()
         {
-            int btId = dbType.addNewRecord("newName", "newProducer", 10, 100, 20);
+            int btId = dbType.addNewRecord("newName", "newProducer", 10, 100);
             int sID = dbStation.addNewRecord("newName", "newAddress", "newCountry", "newState");
-            int id = dbStorage.addNewRecord(btId,sID);
+            int id = dbStorage.addNewRecord(btId,sID, 20);
             try
             {
                 MBatteryStorage storage = dbStorage.getRecord(id, false);
@@ -80,14 +80,14 @@ namespace ElectricCarLibTest
         [TestMethod]
         public void updateStorage()
         {
-            int btId = dbType.addNewRecord("newName", "newProducer", 10, 100, 20);
-            int btId2 = dbType.addNewRecord("Update", "Update", 20, 200, 40);
+            int btId = dbType.addNewRecord("newName", "newProducer", 10, 100);
+            int btId2 = dbType.addNewRecord("Update", "Update", 20, 200);
             int sID = dbStation.addNewRecord("newName", "newAddress", "newCountry", "newState");
             int sID2 = dbStation.addNewRecord("Update", "Update", "Update", "Update");
-            int id = dbStorage.addNewRecord(btId,sID);
+            int id = dbStorage.addNewRecord(btId,sID, 20);
             try
             {
-                dbStorage.updateRecord(id,btId2,sID2);
+                dbStorage.updateRecord(id,btId2,sID2, 40);
                 MBatteryStorage storage = dbStorage.getRecord(id, false);
                 Assert.AreEqual(btId2, storage.type.id);
             }

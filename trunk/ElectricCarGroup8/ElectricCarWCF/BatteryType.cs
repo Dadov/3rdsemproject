@@ -25,7 +25,6 @@ namespace ElectricCarWCF
         [DataMember]
         public int exchangeCost;
 
-        [DataMember]
-        public int storageNumber;
+
     }
 }
