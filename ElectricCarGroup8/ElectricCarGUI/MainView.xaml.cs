@@ -282,8 +282,8 @@ namespace ElectricCarGUI
             if (station != null)
             {
                 StationId = Convert.ToInt32(txtStationId.Text);
-                List<int> typeIDs = fillStorageTable(StationId);
-                fillTypeTable(typeIDs);
+                fillStorageTable(StationId);
+                fillTypeTable();
                 sInfoCtr.station = station;
                 sInfoCtr.sId = StationId;
                 sInfoCtr.mv = this;
@@ -292,7 +292,6 @@ namespace ElectricCarGUI
                 sbCtr.sId = StationId;
                 sbCtr.showAllBookingLinesForStation(StationId);
 
-                fillStorageTable(StationId);
                 fillPeriodTable();
                 bsStation.Text = StationId.ToString();
             }
@@ -324,7 +323,7 @@ namespace ElectricCarGUI
             {
                 int id = serviceObj.addBatteryType(btName.Text, btProd.Text, Decimal.Parse(btCap.Text), Decimal.Parse(btExc.Text));
                 typeIDs.Add(id);
-                fillTypeTable(typeIDs);
+                fillTypeTable();
             }
             catch (Exception)
             {
@@ -336,7 +335,7 @@ namespace ElectricCarGUI
         {
             try { 
             serviceObj.updateBatteryType(Int32.Parse(btID.Text), btName.Text, btProd.Text, Decimal.Parse(btCap.Text), Decimal.Parse(btExc.Text));
-            fillTypeTable(typeIDs);
+            fillTypeTable();
             }
             catch (Exception)
             {
@@ -347,9 +346,15 @@ namespace ElectricCarGUI
         private void tbtnDelete_Click(object sender, RoutedEventArgs e)
         {
             try {
-            serviceObj.deleteStorageByType(Int32.Parse(btID.Text));
-            typeIDs.Remove(int.Parse(btID.Text));
-            fillTypeTable(typeIDs);
+                if (canDeleteType())
+                {
+                    serviceObj.deleteBatteryType(Int32.Parse(btID.Text));
+                }
+                else
+                {
+                    MessageBox.Show("Delete all dependant battery storages first!", "Message", MessageBoxButton.OK, MessageBoxImage.Error);
+                }
+                fillTypeTable();
             fillStorageTable(StationId);
             fillPeriodTable();
             clearBT();
@@ -368,6 +373,22 @@ namespace ElectricCarGUI
             }
         }
 
+        private bool canDeleteType()
+        {
+            List<BatteryStorage> storages = serviceObj.getAllStorages().ToList();
+            int i = 0;
+            while (i < storages.Count)
+            {
+                BatteryStorage storage = storages[i];
+                if (storage.typeID == Int32.Parse(btID.Text))
+                {
+                    return false;
+                }
+                else i++;
+            }
+            return true;
+        }
+
         private void tbtnCancel_Click(object sender, RoutedEventArgs e)
         {
             clearBT();
@@ -379,7 +400,7 @@ namespace ElectricCarGUI
 
         }
 
-        private List<int> fillStorageTable(int StationID)
+        private void fillStorageTable(int StationID)
         {
             string searchTerm = bsSearch.Text;
             dgStorage.Items.Clear();
@@ -388,7 +409,6 @@ namespace ElectricCarGUI
             foreach (BatteryStorage storage in storages)
             {
                 dgStorage.Items.Add(storage);
-                typeIDs.Add(storage.typeID);
             }
             if (searchTerm != null)
             {
@@ -398,19 +418,14 @@ namespace ElectricCarGUI
                 || ((BatteryStorage)bs).storageNumber.ToString().ToLower().Contains(searchTerm));
                 dgStorage.Items.Filter = filter;
             }
-            return typeIDs;
             
         }
 
-        private void fillTypeTable(List<int> typeIDs)
+        private void fillTypeTable()
         {
             string searchTerm = btSearch.Text; 
             dgType.Items.Clear();
-            List<BatteryType> types = new List<BatteryType>();
-            foreach(int typeID in typeIDs)
-            {
-                types.Add(serviceObj.getBatteryType(typeID));
-            }
+            List<BatteryType> types = serviceObj.getAllBatteryTypes().ToList();
 
             foreach (BatteryType type in types)
             {
@@ -517,7 +532,7 @@ namespace ElectricCarGUI
             serviceObj.deleteStorage(Int32.Parse(bsID.Text));
             fillStorageTable(StationId);
             fillPeriodTable();
-            fillTypeTable(typeIDs);
+            fillTypeTable();
             clearBS();
             }
             catch (Exception)
@@ -566,7 +581,7 @@ namespace ElectricCarGUI
 
         private void btSearch_KeyUp(object sender, KeyEventArgs e)
         {
-            fillTypeTable(typeIDs);
+            fillTypeTable();
         }
 
         private void bsSearch_KeyUp(object sender, KeyEventArgs e)

@@ -15,15 +15,9 @@ namespace ElectricCarLib
         {
             IDBBatteryStorage dbStorage = new DBBatteryStorage();
             BatteryTypeCtr bCtr = new BatteryTypeCtr();
-            MBatteryStorage stor = dbStorage.getRecordByType(btID, true);
-            int id = -1;
-            if (stor == null)
-            {
-                id = dbStorage.addNewRecord(btID, sID, storageNumber);
+            int id = dbStorage.addNewRecord(btID, sID, storageNumber);
                 PeriodCalculator pCalc = new PeriodCalculator();
                 pCalc.createFirstPeriod(id);
-            }
-            else throw new SystemException("This type is already assigned to a storage");
             return id;
         }
 
