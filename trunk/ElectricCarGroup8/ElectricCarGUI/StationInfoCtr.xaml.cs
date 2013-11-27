@@ -116,7 +116,18 @@ namespace ElectricCarGUI
 
         private void showNbStations(int id)
         {
-            dbNbStations.ItemsSource = serviceObj.getNaborStations(sId);
+            
+            string searchTerm = txtSearch.Text;
+            List<NaborStation> stations = serviceObj.getNaborStations(sId).ToList();
+            dbNbStations.ItemsSource = stations;
+            if (searchTerm != null && stations.Count != 0)
+            {
+                var filter = new Predicate<object>(
+                s => ((NaborStation)s).Id.ToString().ToLower().Contains(searchTerm)
+                || ((NaborStation)s).Name.ToLower().Contains(searchTerm)
+                || ((NaborStation)s).Address.ToLower().Contains(searchTerm));
+                dbNbStations.Items.Filter = filter;
+            }
         }
 
         private void btnDelete_Click(object sender, RoutedEventArgs e)
@@ -145,6 +156,11 @@ namespace ElectricCarGUI
                 txtDriveHour.Text = Convert.ToString(ns.DriveHour);
 
             }
+        }
+
+        private void search_handle(object sender, KeyEventArgs e)
+        {
+            showNbStations(sId);
         }
     }
 }

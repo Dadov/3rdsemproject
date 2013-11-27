@@ -34,16 +34,24 @@ namespace ElectricCarDB
                         {
                             newid = context.Bookings.Max(x => x.Id) + 1;
                         }
-                        
-                        context.Bookings.Add(new Booking()
-                        {
-                        Id = newid,
-                        cId = CId,
-                        totalPrice = TotalPrice,
-                        createDate = CreateDate,
-                        tripStart = TripStart,
-                        creaditCard = CreditCard
-                        });
+
+                        Booking b = new Booking();
+                        b.Id = newid;
+                        b.cId = CId;
+                        b.totalPrice = TotalPrice;
+                        b.createDate = CreateDate;
+                        b.tripStart = TripStart;
+                        b.creaditCard = CreditCard;
+                        context.Bookings.Add(b);
+                        //context.Bookings.Add(new Booking()
+                        //{
+                        //Id = newid,
+                        //cId = CId,
+                        //totalPrice = TotalPrice,
+                        //createDate = CreateDate,
+                        //tripStart = TripStart,
+                        //creaditCard = CreditCard
+                        //});
                     context.SaveChanges();
                     }
                     scope.Complete();

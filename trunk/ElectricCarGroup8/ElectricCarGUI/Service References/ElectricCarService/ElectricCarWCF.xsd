@@ -191,7 +191,6 @@
       <xs:element minOccurs="0" name="exchangeCost" type="xs:int" />
       <xs:element minOccurs="0" name="name" nillable="true" type="xs:string" />
       <xs:element minOccurs="0" name="producer" nillable="true" type="xs:string" />
-      <xs:element minOccurs="0" name="storageNumber" type="xs:int" />
     </xs:sequence>
   </xs:complexType>
   <xs:element name="BatteryType" nillable="true" type="tns:BatteryType" />
@@ -205,6 +204,7 @@
     <xs:sequence>
       <xs:element minOccurs="0" name="ID" type="xs:int" />
       <xs:element minOccurs="0" name="periods" nillable="true" type="tns:ArrayOfPeriod" />
+      <xs:element minOccurs="0" name="storageNumber" type="xs:int" />
       <xs:element minOccurs="0" name="typeID" type="xs:int" />
     </xs:sequence>
   </xs:complexType>

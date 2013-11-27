@@ -14,6 +14,7 @@ namespace ElectricCarDB
     
     public partial class Booking
     {
+        
         public Booking()
         {
             this.BookingLines = new HashSet<BookingLine>();

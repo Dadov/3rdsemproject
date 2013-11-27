@@ -10,7 +10,7 @@
             <ColumnDefinition Width="17*"/>
             <ColumnDefinition Width="890*"/>
         </Grid.ColumnDefinitions>
-        <TextBox HorizontalAlignment="Left" Height="23" Margin="10,28,0,0" TextWrapping="Wrap" VerticalAlignment="Top" Width="377" Grid.ColumnSpan="3"/>
+        <TextBox x:Name="txtSearch" HorizontalAlignment="Left" Height="23" Margin="10,28,0,0" TextWrapping="Wrap" VerticalAlignment="Top" Width="377" Grid.ColumnSpan="3" KeyUp="search_handle"/>
 
         <DataGrid HeadersVisibility="Column" x:Name="dgBookings"  CanUserAddRows="False" SelectedItem="{Binding Path=SelectedBooking, Mode=TwoWay}" ScrollViewer.CanContentScroll="True" 
                     ScrollViewer.VerticalScrollBarVisibility="Auto" AutoGenerateColumns="False" HorizontalAlignment="Left" Margin="10,51,0,0" VerticalAlignment="Top" Height="535" Width="377" Grid.ColumnSpan="3" SelectionChanged="rowSelected">
@@ -42,16 +42,16 @@
 
 
         <DataGrid HeadersVisibility="Column" x:Name="dgBookingLine"  CanUserAddRows="False" SelectedItem="{Binding Path=SelectedBookingLine, Mode=TwoWay}" ScrollViewer.CanContentScroll="True" 
-                    ScrollViewer.VerticalScrollBarVisibility="Auto" AutoGenerateColumns="False" HorizontalAlignment="Left" Margin="337,187,0,0" VerticalAlignment="Top" Height="225" Width="164" Grid.Column="2">
+                    ScrollViewer.VerticalScrollBarVisibility="Auto" AutoGenerateColumns="False" HorizontalAlignment="Left" Margin="331,187,0,0" VerticalAlignment="Top" Height="225" Width="170" Grid.Column="2">
             <DataGrid.Columns>
                 <DataGridTextColumn Binding="{Binding BatteryType.name}" Header="BatteryType" Width="0.35*" IsReadOnly="True" SortDirection="Ascending"/>
-                <DataGridTextColumn Binding="{Binding quantity}" Header="Quantity" Width="0.35*" IsReadOnly="True"/>
+                <DataGridTextColumn Binding="{Binding quantity}" Header="Q/Station" Width="0.35*" IsReadOnly="True"/>
                 <DataGridTextColumn Binding="{Binding price}" Header="Price" Width="0.3*" IsReadOnly="True"/>
             </DataGrid.Columns>
         </DataGrid>
 
         <DataGrid HeadersVisibility="Column" x:Name="dgRoute"  CanUserAddRows="False" SelectedItem="{Binding Path=SelectedRouteStop, Mode=TwoWay}" ScrollViewer.CanContentScroll="True" 
-                    ScrollViewer.VerticalScrollBarVisibility="Auto" AutoGenerateColumns="False" HorizontalAlignment="Left" Margin="525,187,0,0" VerticalAlignment="Top" Height="225" Width="338" Grid.Column="2">
+                    ScrollViewer.VerticalScrollBarVisibility="Auto" AutoGenerateColumns="False" HorizontalAlignment="Left" Margin="525,187,0,0" VerticalAlignment="Top" Height="225" Width="350" Grid.Column="2">
             <DataGrid.Columns>
                 <DataGridTextColumn Binding="{Binding station.Id}" Header="Id" Width="0.1*" IsReadOnly="True" SortDirection="Ascending"/>
                 <DataGridTextColumn Binding="{Binding station.Name}" Header="Station" Width="0.15*" IsReadOnly="True"/>
@@ -69,8 +69,8 @@
         <Button Content="Clear" HorizontalAlignment="Left" Margin="685,487,0,0" VerticalAlignment="Top" Width="75" Grid.Column="2" Click="Button_Click"/>
         <Button x:Name="btnDeleteRoute" Content="Delete Route" Grid.Column="2" HorizontalAlignment="Left" Margin="698,425,0,0" VerticalAlignment="Top" Width="87" Click="btnDeleteRoute_Click"/>
         <ComboBox x:Name="cbbPayStatus" Grid.Column="2" HorizontalAlignment="Left" Margin="717,121,0,0" VerticalAlignment="Top" Width="120"/>
-        <Label Content="Step 1: " Grid.Column="2" HorizontalAlignment="Left" Margin="337,161,0,0" VerticalAlignment="Top" Width="75"/>
-        <Label Content="Step 2:" Grid.Column="2" HorizontalAlignment="Left" Margin="525,161,0,0" VerticalAlignment="Top" Width="75"/>
+        <Label Content="Step 1: " Grid.Column="2" HorizontalAlignment="Left" Margin="331,161,0,0" VerticalAlignment="Top" Width="189"/>
+        <Label Content="Step 2: " Grid.Column="2" HorizontalAlignment="Left" Margin="525,161,0,0" VerticalAlignment="Top" Width="75"/>
 
     </Grid>
 </UserControl>

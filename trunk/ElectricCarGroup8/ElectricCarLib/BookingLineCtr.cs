@@ -50,9 +50,9 @@ namespace ElectricCarLib
             dbBL.deleteAllBookingLineForBooking(bId);
         }
 
-        public void insertAllBLForBooking(List<MBookingLine> bls)
+        public void insertAllBLForBooking(int bId, List<MBookingLine> bls)
         {
-            dbBL.insertAllBookingLineForBooking(bls);
+            dbBL.insertAllBookingLineForBooking(bId, bls);
         }
 
         public List<MBookingLine> getBookingLinesForStation(int sId, bool association)

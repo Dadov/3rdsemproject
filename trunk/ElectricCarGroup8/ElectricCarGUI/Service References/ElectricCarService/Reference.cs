@@ -1364,9 +1364,6 @@ namespace ElectricCarGUI.ElectricCarService {
         [System.Runtime.Serialization.OptionalFieldAttribute()]
         private string producerField;
         
-        [System.Runtime.Serialization.OptionalFieldAttribute()]
-        private int storageNumberField;
-        
         [global::System.ComponentModel.BrowsableAttribute(false)]
         public System.Runtime.Serialization.ExtensionDataObject ExtensionData {
             get {
@@ -1442,19 +1439,6 @@ namespace ElectricCarGUI.ElectricCarService {
             }
         }
         
-        [System.Runtime.Serialization.DataMemberAttribute()]
-        public int storageNumber {
-            get {
-                return this.storageNumberField;
-            }
-            set {
-                if ((this.storageNumberField.Equals(value) != true)) {
-                    this.storageNumberField = value;
-                    this.RaisePropertyChanged("storageNumber");
-                }
-            }
-        }
-        
         public event System.ComponentModel.PropertyChangedEventHandler PropertyChanged;
         
         protected void RaisePropertyChanged(string propertyName) {
@@ -1479,6 +1463,9 @@ namespace ElectricCarGUI.ElectricCarService {
         
         [System.Runtime.Serialization.OptionalFieldAttribute()]
         private ElectricCarGUI.ElectricCarService.Period[] periodsField;
+        
+        [System.Runtime.Serialization.OptionalFieldAttribute()]
+        private int storageNumberField;
         
         [System.Runtime.Serialization.OptionalFieldAttribute()]
         private int typeIDField;
@@ -1515,6 +1502,19 @@ namespace ElectricCarGUI.ElectricCarService {
                 if ((object.ReferenceEquals(this.periodsField, value) != true)) {
                     this.periodsField = value;
                     this.RaisePropertyChanged("periods");
+                }
+            }
+        }
+        
+        [System.Runtime.Serialization.DataMemberAttribute()]
+        public int storageNumber {
+            get {
+                return this.storageNumberField;
+            }
+            set {
+                if ((this.storageNumberField.Equals(value) != true)) {
+                    this.storageNumberField = value;
+                    this.RaisePropertyChanged("storageNumber");
                 }
             }
         }
@@ -1874,10 +1874,10 @@ namespace ElectricCarGUI.ElectricCarService {
         System.Threading.Tasks.Task<ElectricCarGUI.ElectricCarService.BookingLine[]> getBookingLinesForDateInStationAsync(int sId, System.DateTime date);
         
         [System.ServiceModel.OperationContractAttribute(Action="http://tempuri.org/IElectricCar/addBatteryType", ReplyAction="http://tempuri.org/IElectricCar/addBatteryTypeResponse")]
-        int addBatteryType(string name, string producer, decimal capacity, decimal exchangeCost, int storageNumber);
+        int addBatteryType(string name, string producer, decimal capacity, decimal exchangeCost);
         
         [System.ServiceModel.OperationContractAttribute(Action="http://tempuri.org/IElectricCar/addBatteryType", ReplyAction="http://tempuri.org/IElectricCar/addBatteryTypeResponse")]
-        System.Threading.Tasks.Task<int> addBatteryTypeAsync(string name, string producer, decimal capacity, decimal exchangeCost, int storageNumber);
+        System.Threading.Tasks.Task<int> addBatteryTypeAsync(string name, string producer, decimal capacity, decimal exchangeCost);
         
         [System.ServiceModel.OperationContractAttribute(Action="http://tempuri.org/IElectricCar/getBatteryType", ReplyAction="http://tempuri.org/IElectricCar/getBatteryTypeResponse")]
         ElectricCarGUI.ElectricCarService.BatteryType getBatteryType(int id);
@@ -1892,10 +1892,10 @@ namespace ElectricCarGUI.ElectricCarService {
         System.Threading.Tasks.Task deleteBatteryTypeAsync(int id);
         
         [System.ServiceModel.OperationContractAttribute(Action="http://tempuri.org/IElectricCar/updateBatteryType", ReplyAction="http://tempuri.org/IElectricCar/updateBatteryTypeResponse")]
-        void updateBatteryType(int id, string name, string producer, decimal capacity, decimal exchangeCost, int storageNumber);
+        void updateBatteryType(int id, string name, string producer, decimal capacity, decimal exchangeCost);
         
         [System.ServiceModel.OperationContractAttribute(Action="http://tempuri.org/IElectricCar/updateBatteryType", ReplyAction="http://tempuri.org/IElectricCar/updateBatteryTypeResponse")]
-        System.Threading.Tasks.Task updateBatteryTypeAsync(int id, string name, string producer, decimal capacity, decimal exchangeCost, int storageNumber);
+        System.Threading.Tasks.Task updateBatteryTypeAsync(int id, string name, string producer, decimal capacity, decimal exchangeCost);
         
         [System.ServiceModel.OperationContractAttribute(Action="http://tempuri.org/IElectricCar/getAllBatteryTypes", ReplyAction="http://tempuri.org/IElectricCar/getAllBatteryTypesResponse")]
         ElectricCarGUI.ElectricCarService.BatteryType[] getAllBatteryTypes();
@@ -1910,10 +1910,10 @@ namespace ElectricCarGUI.ElectricCarService {
         System.Threading.Tasks.Task<string[]> getAllInfoTypesAsync();
         
         [System.ServiceModel.OperationContractAttribute(Action="http://tempuri.org/IElectricCar/addNewStorage", ReplyAction="http://tempuri.org/IElectricCar/addNewStorageResponse")]
-        int addNewStorage(int btID, int sID);
+        int addNewStorage(int btID, int sID, int storageNumber);
         
         [System.ServiceModel.OperationContractAttribute(Action="http://tempuri.org/IElectricCar/addNewStorage", ReplyAction="http://tempuri.org/IElectricCar/addNewStorageResponse")]
-        System.Threading.Tasks.Task<int> addNewStorageAsync(int btID, int sID);
+        System.Threading.Tasks.Task<int> addNewStorageAsync(int btID, int sID, int storageNumber);
         
         [System.ServiceModel.OperationContractAttribute(Action="http://tempuri.org/IElectricCar/getStorage", ReplyAction="http://tempuri.org/IElectricCar/getStorageResponse")]
         ElectricCarGUI.ElectricCarService.BatteryStorage getStorage(int id);
@@ -1934,10 +1934,10 @@ namespace ElectricCarGUI.ElectricCarService {
         System.Threading.Tasks.Task deleteStorageByTypeAsync(int btID);
         
         [System.ServiceModel.OperationContractAttribute(Action="http://tempuri.org/IElectricCar/updateStorage", ReplyAction="http://tempuri.org/IElectricCar/updateStorageResponse")]
-        void updateStorage(int id, int btid, int sID);
+        void updateStorage(int id, int btid, int sID, int storageNumber);
         
         [System.ServiceModel.OperationContractAttribute(Action="http://tempuri.org/IElectricCar/updateStorage", ReplyAction="http://tempuri.org/IElectricCar/updateStorageResponse")]
-        System.Threading.Tasks.Task updateStorageAsync(int id, int btid, int sID);
+        System.Threading.Tasks.Task updateStorageAsync(int id, int btid, int sID, int storageNumber);
         
         [System.ServiceModel.OperationContractAttribute(Action="http://tempuri.org/IElectricCar/getStationStorages", ReplyAction="http://tempuri.org/IElectricCar/getStationStoragesResponse")]
         ElectricCarGUI.ElectricCarService.BatteryStorage[] getStationStorages(int sID);
@@ -2315,12 +2315,12 @@ namespace ElectricCarGUI.ElectricCarService {
             return base.Channel.getBookingLinesForDateInStationAsync(sId, date);
         }
         
-        public int addBatteryType(string name, string producer, decimal capacity, decimal exchangeCost, int storageNumber) {
-            return base.Channel.addBatteryType(name, producer, capacity, exchangeCost, storageNumber);
+        public int addBatteryType(string name, string producer, decimal capacity, decimal exchangeCost) {
+            return base.Channel.addBatteryType(name, producer, capacity, exchangeCost);
         }
         
-        public System.Threading.Tasks.Task<int> addBatteryTypeAsync(string name, string producer, decimal capacity, decimal exchangeCost, int storageNumber) {
-            return base.Channel.addBatteryTypeAsync(name, producer, capacity, exchangeCost, storageNumber);
+        public System.Threading.Tasks.Task<int> addBatteryTypeAsync(string name, string producer, decimal capacity, decimal exchangeCost) {
+            return base.Channel.addBatteryTypeAsync(name, producer, capacity, exchangeCost);
         }
         
         public ElectricCarGUI.ElectricCarService.BatteryType getBatteryType(int id) {
@@ -2339,12 +2339,12 @@ namespace ElectricCarGUI.ElectricCarService {
             return base.Channel.deleteBatteryTypeAsync(id);
         }
         
-        public void updateBatteryType(int id, string name, string producer, decimal capacity, decimal exchangeCost, int storageNumber) {
-            base.Channel.updateBatteryType(id, name, producer, capacity, exchangeCost, storageNumber);
+        public void updateBatteryType(int id, string name, string producer, decimal capacity, decimal exchangeCost) {
+            base.Channel.updateBatteryType(id, name, producer, capacity, exchangeCost);
         }
         
-        public System.Threading.Tasks.Task updateBatteryTypeAsync(int id, string name, string producer, decimal capacity, decimal exchangeCost, int storageNumber) {
-            return base.Channel.updateBatteryTypeAsync(id, name, producer, capacity, exchangeCost, storageNumber);
+        public System.Threading.Tasks.Task updateBatteryTypeAsync(int id, string name, string producer, decimal capacity, decimal exchangeCost) {
+            return base.Channel.updateBatteryTypeAsync(id, name, producer, capacity, exchangeCost);
         }
         
         public ElectricCarGUI.ElectricCarService.BatteryType[] getAllBatteryTypes() {
@@ -2363,12 +2363,12 @@ namespace ElectricCarGUI.ElectricCarService {
             return base.Channel.getAllInfoTypesAsync();
         }
         
-        public int addNewStorage(int btID, int sID) {
-            return base.Channel.addNewStorage(btID, sID);
+        public int addNewStorage(int btID, int sID, int storageNumber) {
+            return base.Channel.addNewStorage(btID, sID, storageNumber);
         }
         
-        public System.Threading.Tasks.Task<int> addNewStorageAsync(int btID, int sID) {
-            return base.Channel.addNewStorageAsync(btID, sID);
+        public System.Threading.Tasks.Task<int> addNewStorageAsync(int btID, int sID, int storageNumber) {
+            return base.Channel.addNewStorageAsync(btID, sID, storageNumber);
         }
         
         public ElectricCarGUI.ElectricCarService.BatteryStorage getStorage(int id) {
@@ -2395,12 +2395,12 @@ namespace ElectricCarGUI.ElectricCarService {
             return base.Channel.deleteStorageByTypeAsync(btID);
         }
         
-        public void updateStorage(int id, int btid, int sID) {
-            base.Channel.updateStorage(id, btid, sID);
+        public void updateStorage(int id, int btid, int sID, int storageNumber) {
+            base.Channel.updateStorage(id, btid, sID, storageNumber);
         }
         
-        public System.Threading.Tasks.Task updateStorageAsync(int id, int btid, int sID) {
-            return base.Channel.updateStorageAsync(id, btid, sID);
+        public System.Threading.Tasks.Task updateStorageAsync(int id, int btid, int sID, int storageNumber) {
+            return base.Channel.updateStorageAsync(id, btid, sID, storageNumber);
         }
         
         public ElectricCarGUI.ElectricCarService.BatteryStorage[] getStationStorages(int sID) {

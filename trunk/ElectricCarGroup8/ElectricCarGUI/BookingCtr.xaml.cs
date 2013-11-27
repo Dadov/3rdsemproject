@@ -40,9 +40,16 @@ namespace ElectricCarGUI
         private void showBookings()
         {
             List<Booking> bookings = serviceObj.getAllBookings().ToList();
-            if (bookings.Count!=0)
+            string searchTerm = txtSearch.Text;
+            dgBookings.ItemsSource = bookings;
+            if (searchTerm != null && bookings.Count != 0)
             {
-                dgBookings.ItemsSource = bookings;
+                var filter = new Predicate<object>(
+                s => ((Booking)s).Id.ToString().ToLower().Contains(searchTerm)
+                || ((Booking)s).createDate.ToLower().Contains(searchTerm)
+                || ((Booking)s).customer.Id.ToString().ToLower().Contains(searchTerm)
+                || ((Booking)s).tripStart.ToLower().Contains(searchTerm));
+                dgBookings.Items.Filter = filter;
             }
             setTimeToTxtBox();
 
@@ -59,9 +66,13 @@ namespace ElectricCarGUI
                 txtCreateDate.Text = b.createDate;
                 if (b.bookinglines != null)
                 {
+                    b.bookinglines = b.bookinglines.OrderBy(x => x.time).ToArray();
                     txtEId.Text = Convert.ToString(b.bookinglines.Last().station.Id);
                     txtSId.Text = Convert.ToString(b.bookinglines.First().station.Id);
-                    dgBookingLine.ItemsSource = b.bookinglines;
+                    BookingLine bl = new BookingLine() { price = b.bookinglines[0].price, quantity = b.bookinglines[0].quantity, BatteryType = b.bookinglines[0].BatteryType };
+                    List<BookingLine> list = new List<BookingLine>();
+                    list.Add(bl);
+                    dgBookingLine.ItemsSource = list;
                     dgRoute.ItemsSource = b.bookinglines;
                 }
                 txtTotalPrice.Text = Convert.ToString(b.totalPrice);
@@ -202,8 +213,10 @@ namespace ElectricCarGUI
         private void btnBUpdate_Click(object sender, RoutedEventArgs e)
         {
             Booking bk = new Booking();
+            bk.Id = Convert.ToInt32(txtBId.Text);
             bk.cId = Convert.ToInt32(txtCId.Text);
             bk.createDate = txtCreateDate.Text;
+            bk.tripStart = txtTripStart.Text;
             bk.payStatus = (string)cbbPayStatus.SelectedValue;
             bk.totalPrice = Convert.ToDecimal(txtTotalPrice.Text);
             serviceObj.updateBooking(bk);
@@ -224,6 +237,11 @@ namespace ElectricCarGUI
                 MessageBox.Show("Please select a booking.");
             }
             
+        }
+
+        private void search_handle(object sender, KeyEventArgs e)
+        {
+            showBookings();
         }
 
 
