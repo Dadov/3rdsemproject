@@ -536,7 +536,6 @@
         <xs:element minOccurs="0" name="producer" nillable="true" type="xs:string" />
         <xs:element minOccurs="0" name="capacity" type="xs:decimal" />
         <xs:element minOccurs="0" name="exchangeCost" type="xs:decimal" />
-        <xs:element minOccurs="0" name="storageNumber" type="xs:int" />
       </xs:sequence>
     </xs:complexType>
   </xs:element>
@@ -581,7 +580,6 @@
         <xs:element minOccurs="0" name="producer" nillable="true" type="xs:string" />
         <xs:element minOccurs="0" name="capacity" type="xs:decimal" />
         <xs:element minOccurs="0" name="exchangeCost" type="xs:decimal" />
-        <xs:element minOccurs="0" name="storageNumber" type="xs:int" />
       </xs:sequence>
     </xs:complexType>
   </xs:element>
@@ -619,6 +617,7 @@
       <xs:sequence>
         <xs:element minOccurs="0" name="btID" type="xs:int" />
         <xs:element minOccurs="0" name="sID" type="xs:int" />
+        <xs:element minOccurs="0" name="storageNumber" type="xs:int" />
       </xs:sequence>
     </xs:complexType>
   </xs:element>
@@ -673,6 +672,7 @@
         <xs:element minOccurs="0" name="id" type="xs:int" />
         <xs:element minOccurs="0" name="btid" type="xs:int" />
         <xs:element minOccurs="0" name="sID" type="xs:int" />
+        <xs:element minOccurs="0" name="storageNumber" type="xs:int" />
       </xs:sequence>
     </xs:complexType>
   </xs:element>

@@ -34,7 +34,7 @@ namespace ElectricCarLib
                     bsCtr.addBookingForStation(item.Station.Id, item.BatteryType.id, item.quantity.Value, item.time.Value);
                 }
                 
-                blCtr.insertAllBLForBooking(booking.bookinglines);
+                blCtr.insertAllBLForBooking(bId, booking.bookinglines);
 
                 scope.Complete();
 

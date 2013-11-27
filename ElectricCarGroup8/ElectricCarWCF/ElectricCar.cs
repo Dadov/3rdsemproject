@@ -567,10 +567,12 @@ namespace ElectricCarWCF
         public void updateBooking(Booking b)
         {
             MBooking bk = new MBooking();
+            bk.Id = b.Id;
             bk.cId = b.cId;
             bk.createDate = Convert.ToDateTime(b.createDate);
             bk.creaditCard = b.payStatus;
             bk.totalPrice = b.totalPrice;
+            bk.tripStart = Convert.ToDateTime(b.tripStart);
             BookingCtr bCtr = new BookingCtr();
             bCtr.updateBooking(bk);
         }

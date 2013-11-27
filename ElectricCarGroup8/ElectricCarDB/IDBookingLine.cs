@@ -18,7 +18,7 @@ namespace ElectricCarDB
         List<MBookingLine> getBookingLinesForDateInStation(int sId, DateTime date, bool association);
         void deleteAllBookingLineForBooking(int bookingid);
         void updateAllBookingLineForBooking(int bookingid, List<MBookingLine> bls);
-        void insertAllBookingLineForBooking(List<MBookingLine> bls);
+        void insertAllBookingLineForBooking(int bId, List<MBookingLine> bls);
         
     }
 }

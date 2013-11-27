@@ -20,6 +20,7 @@ namespace ElectricCarDB
         {
             using (ElectricCarEntities context = new ElectricCarEntities())
             {
+                
                 context.BookingLines.Add(new BookingLine()
                 {
                     bId = BId,
@@ -239,7 +240,7 @@ namespace ElectricCarDB
             }
         }
 
-        public void insertAllBookingLineForBooking(List<MBookingLine> bls)
+        public void insertAllBookingLineForBooking(int bId, List<MBookingLine> bls)
         {
             try
             {
@@ -247,7 +248,7 @@ namespace ElectricCarDB
                 {
                     foreach (MBookingLine bl in bls)
                     {
-                        addRecord(bl.Station.Id, bl.BatteryType.id, bl.Station.Id, bl.quantity.Value, bl.price.Value, bl.time.Value);
+                        addRecord(bId, bl.BatteryType.id, bl.Station.Id, bl.quantity.Value, bl.price.Value, bl.time.Value);
                     }
                     scope.Complete();
                 }
