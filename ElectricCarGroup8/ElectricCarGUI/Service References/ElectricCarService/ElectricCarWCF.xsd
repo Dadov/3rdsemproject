@@ -156,6 +156,12 @@
     </xs:sequence>
   </xs:complexType>
   <xs:element name="RouteStop" nillable="true" type="tns:RouteStop" />
+  <xs:complexType name="Error">
+    <xs:sequence>
+      <xs:element minOccurs="0" name="Info" nillable="true" type="xs:string" />
+    </xs:sequence>
+  </xs:complexType>
+  <xs:element name="Error" nillable="true" type="tns:Error" />
   <xs:complexType name="ArrayOfBatteryTypeTest">
     <xs:sequence>
       <xs:element minOccurs="0" maxOccurs="unbounded" name="BatteryTypeTest" nillable="true" type="tns:BatteryTypeTest" />

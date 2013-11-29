@@ -61,6 +61,7 @@
     <Compile Include="ElectricCar.cs" />
     <Compile Include="ElectricCarPeople.cs" />
     <Compile Include="Employee.cs" />
+    <Compile Include="Error.cs" />
     <Compile Include="IElectricCar.cs" />
     <Compile Include="LogInfo.cs" />
     <Compile Include="NaborStation.cs" />
