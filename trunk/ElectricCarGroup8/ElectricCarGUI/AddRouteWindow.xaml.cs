@@ -25,6 +25,8 @@ namespace ElectricCarGUI
         static ElectricCarService.IElectricCar serviceObj = new ElectricCarService.ElectricCarClient();
         private Dictionary<int, List<RouteStop>> rWithId = new Dictionary<int, List<RouteStop>>();
         List<RouteInfoHolder> rInfos = new List<RouteInfoHolder>();
+        RouteStop[][] routes;
+
         public AddRouoteWindow(BookingCtr bookingCtr)
         {
             InitializeComponent();
@@ -42,7 +44,7 @@ namespace ElectricCarGUI
             //get batteryLimit
             BookingLine bl = (BookingLine)bCtr.dgBookingLine.Items.GetItemAt(0);
             decimal batteryLimit = serviceObj.convertCapacityToDistance(bl.BatteryType.capacity);
-            RouteStop[][] routes = serviceObj.getRoutes(Convert.ToInt32(bCtr.txtSId.Text), Convert.ToInt32(bCtr.txtEId.Text), Convert.ToDateTime(bCtr.txtTripStart.Text), batteryLimit);
+            routes = serviceObj.getRoutes(Convert.ToInt32(bCtr.txtSId.Text), Convert.ToInt32(bCtr.txtEId.Text), Convert.ToDateTime(bCtr.txtTripStart.Text), batteryLimit);
             
             if (routes.Count() >= 1) //TODO need to change
             {
@@ -85,13 +87,23 @@ namespace ElectricCarGUI
 
         private void btnAdd_Click(object sender, RoutedEventArgs e)
         {
-            RouteInfoHolder selectedRoute = (RouteInfoHolder)dgRoutes.SelectedItem;
-            int id = selectedRoute.Id;
-            List<RouteStop> r = rWithId[id];
-            bCtr.dgRoute.ItemsSource = r;
-            bCtr.txtTotalPrice.Text = Convert.ToString(selectedRoute.TotalPrice);
-            Close();
+            if (dgRoutes.SelectedItem != null)
+            {
+                RouteInfoHolder selectedRoute = (RouteInfoHolder)dgRoutes.SelectedItem;
+                int id = selectedRoute.Id;
+                List<RouteStop> r = rWithId[id];
+                bCtr.dgRoute.ItemsSource = r;
+                bCtr.txtTotalPrice.Text = Convert.ToString(selectedRoute.TotalPrice);
+                Close();
+            }
+            else
+            {
+                MessageBox.Show("Please select a route.");
+            }
+            
         }
+
+        
 
         
 

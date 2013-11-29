@@ -13,7 +13,7 @@
                 <DataGridTextColumn Binding="{Binding TotalPrice}" Header="Price" Width="0.07*" IsReadOnly="True"/>
             </DataGrid.Columns>
         </DataGrid>
-        <CheckBox Content="With Breaks" HorizontalAlignment="Left" Margin="837,44,0,0" VerticalAlignment="Top"/>
+       
 
 
 

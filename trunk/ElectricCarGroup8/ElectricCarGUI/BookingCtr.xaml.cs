@@ -138,6 +138,8 @@ namespace ElectricCarGUI
             {
                 bt = new BatteryTypeTest();
                 dgBookingLine.ItemsSource = null;
+                dgRoute.ItemsSource = null;
+                txtTotalPrice.Text = "";
             }
             else
             {
@@ -150,8 +152,33 @@ namespace ElectricCarGUI
         {
             if (txtBId.Text=="")
             {
-                AddRouoteWindow routeWin = new AddRouoteWindow(this);
-                routeWin.Visibility = Visibility.Visible;
+                Station sStation = serviceObj.getStation(Convert.ToInt32(txtSId.Text));
+                Station eStation = serviceObj.getStation(Convert.ToInt32(txtEId.Text));
+                if (sStation.Id != 0)
+                {
+                    if (eStation.Id != 0)
+                    {
+                        if (dgBookingLine.Items.Count != 0 && txtTripStart.Text != "")
+                        {
+                            AddRouoteWindow routeWin = new AddRouoteWindow(this);
+                            routeWin.Visibility = Visibility.Visible;
+                        }
+                        else
+                        {
+                            MessageBox.Show("Please add valid trip start time and battery type");
+                        }
+                    }
+                    else
+                    {
+                        MessageBox.Show("Please input a valid end station Id.");
+                    }
+                }
+                else
+                {
+                    MessageBox.Show("Please input a valid start station Id.");
+                }
+                
+                
             }
             else
             {
@@ -166,6 +193,7 @@ namespace ElectricCarGUI
             if (txtBId.Text == "")
             {
                 dgRoute.ItemsSource = null;
+                txtTotalPrice.Text = "";
             }
             else
             {
@@ -176,38 +204,48 @@ namespace ElectricCarGUI
 
         private void btnBAdd_Click(object sender, RoutedEventArgs e)
         {
-            Booking bk = new Booking();
-            bk.cId = Convert.ToInt32(txtCId.Text);
-            bk.createDate = txtCreateDate.Text;
-            bk.tripStart = txtTripStart.Text;
-            bk.payStatus = (string)cbbPayStatus.SelectedValue;
-            bk.totalPrice = Convert.ToDecimal(txtTotalPrice.Text);
-            bk.startStationId = Convert.ToInt32(txtSId.Text);
+            Customer Customer = serviceObj.getCustomer(Convert.ToInt32(txtCId.Text));
 
-            List<RouteStop> rs = dgRoute.Items.OfType<RouteStop>().ToList<RouteStop>();
-            List<BookingLine> bls = new List<BookingLine>();
-            BookingLine blForBatteryType = (BookingLine)dgBookingLine.Items.GetItemAt(0);
-            decimal price = blForBatteryType.price;
-            int quantity = blForBatteryType.quantity;
-            int btId = blForBatteryType.BatteryType.Id;
-            for (int i = 0; i < rs.Count; i++)
+            if (Customer.ID != 0)
             {
-                BookingLine bl = new BookingLine();
-                Station s = new Station();
-                BatteryTypeTest bt = new BatteryTypeTest();
-                bl.station = s;
-                bl.BatteryType = bt;
-                bl.station.Id = rs[i].station.Id;
-                bl.time = rs[i].time;
-                bl.quantity = quantity;
-                bl.price = price;
-                bl.BatteryType.Id = btId;
-                bls.Add(bl);
+                Booking bk = new Booking();
+                bk.cId = Convert.ToInt32(txtCId.Text);
+                bk.createDate = txtCreateDate.Text;
+                bk.tripStart = txtTripStart.Text;
+                bk.payStatus = (string)cbbPayStatus.SelectedValue;
+                bk.totalPrice = Convert.ToDecimal(txtTotalPrice.Text);
+                bk.startStationId = Convert.ToInt32(txtSId.Text);
+
+                List<RouteStop> rs = dgRoute.Items.OfType<RouteStop>().ToList<RouteStop>();
+                List<BookingLine> bls = new List<BookingLine>();
+                BookingLine blForBatteryType = (BookingLine)dgBookingLine.Items.GetItemAt(0);
+                decimal price = blForBatteryType.price;
+                int quantity = blForBatteryType.quantity;
+                int btId = blForBatteryType.BatteryType.Id;
+                for (int i = 0; i < rs.Count; i++)
+                {
+                    BookingLine bl = new BookingLine();
+                    Station s = new Station();
+                    BatteryTypeTest bt = new BatteryTypeTest();
+                    bl.station = s;
+                    bl.BatteryType = bt;
+                    bl.station.Id = rs[i].station.Id;
+                    bl.time = rs[i].time;
+                    bl.quantity = quantity;
+                    bl.price = price;
+                    bl.BatteryType.Id = btId;
+                    bls.Add(bl);
+                }
+                bk.bookinglines = bls.ToArray<BookingLine>();
+                serviceObj.addBooking(bk);
+                showBookings();
+                clearTextBox();
             }
-            bk.bookinglines = bls.ToArray<BookingLine>();
-            serviceObj.addBooking(bk);
-            showBookings();
-            clearTextBox();
+            else
+            {
+                MessageBox.Show("Can not find customer. Please add a valid customer Id.");
+            }
+            
         }
 
         private void btnBUpdate_Click(object sender, RoutedEventArgs e)

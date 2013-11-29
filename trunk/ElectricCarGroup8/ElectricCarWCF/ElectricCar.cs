@@ -124,7 +124,7 @@ namespace ElectricCarWCF
                 StationId = employee.StationID
             };
             */
-            
+
             EmployeeCtr empCtr = new EmployeeCtr();
             List<MLogInfo> mLogInfos = new List<MLogInfo>();
             foreach (LogInfo logInfo in employee.LogInfos)
@@ -177,41 +177,50 @@ namespace ElectricCarWCF
         public Customer getCustomer(int id)
         {
             CustomerCtr custCtr = new CustomerCtr();
-            MCustomer mCust = custCtr.get(id, false);
-            List<LogInfo> logInfos = new List<LogInfo>();
-            foreach (MLogInfo mLogInfo in mCust.LogInfos)
+            MCustomer mCust = null;
+            try
             {
-                logInfos.Add(new LogInfo
-                {
-                    ID = mLogInfo.ID,
-                    LoginName = mLogInfo.LoginName,
-                    Password = mLogInfo.Password
-                });
+                mCust = custCtr.get(id, false);
             }
-            DiscountGroup discoGroup = new DiscountGroup
+            catch (NullReferenceException)
             {
-                ID = mCust.DiscountGroup.ID,
-                Name = mCust.DiscountGroup.Name,
-                Discount = mCust.DiscountGroup.Discount
-            };
+            }
+
+            
+            Customer cust = new Customer();
             if (mCust != null)
             {
-                Customer cust = new Customer()
+                List<LogInfo> logInfos = new List<LogInfo>();
+                foreach (MLogInfo mLogInfo in mCust.LogInfos)
                 {
-                    ID = mCust.ID,
-                    FName = mCust.FName,
-                    LName = mCust.LName,
-                    Address = mCust.Address,
-                    Country = mCust.Country,
-                    Phone = mCust.Phone,
-                    Email = mCust.Email,
-                    LogInfos = logInfos,
-                    PaymentStatus = mCust.PaymentStatus,
-                    DiscountGroup = discoGroup
+                    logInfos.Add(new LogInfo
+                    {
+                        ID = mLogInfo.ID,
+                        LoginName = mLogInfo.LoginName,
+                        Password = mLogInfo.Password
+                    });
+                }
+                DiscountGroup discoGroup = new DiscountGroup
+                {
+                    ID = mCust.DiscountGroup.ID,
+                    Name = mCust.DiscountGroup.Name,
+                    Discount = mCust.DiscountGroup.Discount
                 };
-                return cust;
+                cust.ID = mCust.ID;
+                cust.FName = mCust.FName;
+                cust.LName = mCust.LName;
+                cust.Address = mCust.Address;
+                cust.Country = mCust.Country;
+                cust.Phone = mCust.Phone;
+                cust.Email = mCust.Email;
+                cust.LogInfos = logInfos;
+                cust.PaymentStatus = mCust.PaymentStatus;
+                cust.DiscountGroup = discoGroup;
+
+
             }
-            throw new SystemException("No Customer model was returned.");
+            return cust;
+            //throw new SystemException("No Customer model was returned.");
         }
 
         public List<Customer> getAllCustomers()
@@ -312,7 +321,7 @@ namespace ElectricCarWCF
                     });
                 }
                 return logInfos;
-                
+
             }
             EmployeeCtr empCtr = new EmployeeCtr();
             MEmployee mEmp = empCtr.get(id, false);
@@ -400,7 +409,7 @@ namespace ElectricCarWCF
         public void updateDiscountGroup(DiscountGroup discountGroup)
         {
             DiscountGroupCtr discoCtr = new DiscountGroupCtr();
-            discoCtr.update(discountGroup.ID, discountGroup.Name, (decimal) discountGroup.Discount);
+            discoCtr.update(discountGroup.ID, discountGroup.Name, (decimal)discountGroup.Discount);
         }
 
         public void deleteDiscountGroup(int id)
@@ -453,8 +462,8 @@ namespace ElectricCarWCF
                     paths.Add(x);
                 }
             }
-            
-            
+
+
             return paths;
         }
 
@@ -525,7 +534,7 @@ namespace ElectricCarWCF
                     bt.Id = bl.BatteryType.id;
                     bt.name = bl.BatteryType.name;
                     l.BatteryType = bt;
-                    
+
                     Station s = new Station();
                     s.Id = bl.Station.Id;
                     s.Name = bl.Station.name;
@@ -550,7 +559,7 @@ namespace ElectricCarWCF
             List<MBookingLine> bkls = new List<MBookingLine>();
             List<BookingLine> bls = b.bookinglines.ToList<BookingLine>();
             for (int i = 0; i < bls.Count; i++)
-			{
+            {
                 MBookingLine bl = new MBookingLine();
                 bl.price = bls[i].price;
                 bl.quantity = bls[i].quantity;
@@ -558,7 +567,7 @@ namespace ElectricCarWCF
                 bl.time = bls[i].time;
                 bl.BatteryType.id = bls[i].BatteryType.Id;
                 bkls.Add(bl);
-			}
+            }
             bk.bookinglines = bkls;
             BookingCtr bCtr = new BookingCtr();
             bCtr.addBooking(bk);
@@ -593,7 +602,7 @@ namespace ElectricCarWCF
             List<BatteryTypeTest> bts = new List<BatteryTypeTest>();
             BatteryTypeCtr btCtr = new BatteryTypeCtr();
             List<MBatteryType> bt = btCtr.getAllRecord(false);
-            if (bt.Count !=0)
+            if (bt.Count != 0)
             {
                 foreach (MBatteryType b in bt)
                 {
@@ -630,7 +639,15 @@ namespace ElectricCarWCF
         public Station getStation(int id)
         {
             StationCtr sCtr = new StationCtr();
-            MStation s = sCtr.getStation(id, false);
+            MStation s = null;
+            try
+            {
+                s = sCtr.getStation(id, false);
+            }
+            catch (NullReferenceException)
+            {
+            }
+            
             Station ns = new Station();
             if (s != null)
             {
@@ -721,7 +738,7 @@ namespace ElectricCarWCF
             List<BookingLine> bls = new List<BookingLine>();
             BookingLineCtr blCtr = new BookingLineCtr();
             List<MBookingLine> mbls = blCtr.getBookingLinesForStation(sId, false);
-            
+
             foreach (MBookingLine bl in mbls)
             {
                 BookingLine b = new BookingLine();
@@ -966,6 +983,6 @@ namespace ElectricCarWCF
 
 
 
-       
+
     }
 }
