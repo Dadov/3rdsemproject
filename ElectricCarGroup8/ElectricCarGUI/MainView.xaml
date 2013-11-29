@@ -81,7 +81,7 @@
                                 </DataGrid>
                                 <Label Content="Insert:" HorizontalAlignment="Left" Margin="30,240,0,0" VerticalAlignment="Top"/>
                                 <TextBox x:Name="btAmount" HorizontalAlignment="Left" Height="23" Margin="77,240,0,0" TextWrapping="Wrap" Text="0" VerticalAlignment="Top" Width="53"/>
-                                <Label Content="Batteries to selected battery type" HorizontalAlignment="Left" Margin="135,240,0,0" VerticalAlignment="Top"/>
+                                <Label Content="Batteries to selected battery storage" HorizontalAlignment="Left" Margin="135,240,0,0" VerticalAlignment="Top"/>
                                 <Button x:Name="tbBtnInsert"  Content="Insert" HorizontalAlignment="Left" Margin="409,240,0,0" VerticalAlignment="Top" Width="75" Click="tbBtnInsert_Click"/>
                                 <Label Content="ID: " HorizontalAlignment="Left" Margin="571,48,0,0" VerticalAlignment="Top" Width="59"/>
                                 <Label Content="Type ID: " HorizontalAlignment="Left" Margin="571,79,0,0" VerticalAlignment="Top" Width="59"/>

@@ -89,7 +89,13 @@ namespace ElectricCarLib
                if (period.time == current.time)
                {
                    found = true;
-                   previous = periods[x - 2];
+                   try
+                   {
+                       previous = periods[x - 2];
+                   }
+                   catch (ArgumentOutOfRangeException)
+                   {
+                   }
                }
                x--;
            }
