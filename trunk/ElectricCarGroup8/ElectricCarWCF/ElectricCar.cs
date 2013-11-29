@@ -570,7 +570,14 @@ namespace ElectricCarWCF
             }
             bk.bookinglines = bkls;
             BookingCtr bCtr = new BookingCtr();
-            bCtr.addBooking(bk);
+            if (!bCtr.addBooking(bk))
+            {
+                FaultException f = new FaultException("Booking failed because one of the station is fully booked");
+                throw f;
+            }
+            
+            
+            
         }
 
         public void updateBooking(Booking b)

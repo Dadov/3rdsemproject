@@ -13,6 +13,9 @@ using System.Windows.Media.Imaging;
 using System.Windows.Navigation;
 using System.Windows.Shapes;
 using ElectricCarGUI.ElectricCarService;
+//using Microsoft.WCF.Documentation;
+using System.ServiceModel;
+using System.ServiceModel.Channels;
 
 namespace ElectricCarGUI
 {
@@ -106,7 +109,7 @@ namespace ElectricCarGUI
         private void setTimeToTxtBox()
         {
             txtTripStart.Text = DateTime.Now.ToString("MM/dd/yyyy HH:mm");
-            txtCreateDate.Text = DateTime.Now.ToString("MM/dd/yyyy HH:mm");
+            txtCreateDate.Text = DateTime.Now.ToString("MM/dd/yyyy");
         }
         
 
@@ -237,9 +240,18 @@ namespace ElectricCarGUI
                     bls.Add(bl);
                 }
                 bk.bookinglines = bls.ToArray<BookingLine>();
-                serviceObj.addBooking(bk);
-                showBookings();
-                clearTextBox();
+                try
+                {
+                    serviceObj.addBooking(bk);
+                    showBookings();
+                    clearTextBox();
+                }
+                catch (FaultException a)
+                {
+                    MessageBox.Show(a.Message);
+                }
+                
+                
             }
             else
             {

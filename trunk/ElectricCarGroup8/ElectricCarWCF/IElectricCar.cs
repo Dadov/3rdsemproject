@@ -129,6 +129,7 @@ namespace ElectricCarWCF
         decimal convertCapacityToDistance(decimal capacity);
         //add booking
         [OperationContract]
+        [FaultContract(typeof(Error))]
         void addBooking(Booking b);
         //update booking
         [OperationContract]

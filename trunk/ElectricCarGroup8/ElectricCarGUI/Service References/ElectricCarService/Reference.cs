@@ -1233,6 +1233,51 @@ namespace ElectricCarGUI.ElectricCarService {
     
     [System.Diagnostics.DebuggerStepThroughAttribute()]
     [System.CodeDom.Compiler.GeneratedCodeAttribute("System.Runtime.Serialization", "4.0.0.0")]
+    [System.Runtime.Serialization.DataContractAttribute(Name="Error", Namespace="http://schemas.datacontract.org/2004/07/ElectricCarWCF")]
+    [System.SerializableAttribute()]
+    public partial class Error : object, System.Runtime.Serialization.IExtensibleDataObject, System.ComponentModel.INotifyPropertyChanged {
+        
+        [System.NonSerializedAttribute()]
+        private System.Runtime.Serialization.ExtensionDataObject extensionDataField;
+        
+        [System.Runtime.Serialization.OptionalFieldAttribute()]
+        private string InfoField;
+        
+        [global::System.ComponentModel.BrowsableAttribute(false)]
+        public System.Runtime.Serialization.ExtensionDataObject ExtensionData {
+            get {
+                return this.extensionDataField;
+            }
+            set {
+                this.extensionDataField = value;
+            }
+        }
+        
+        [System.Runtime.Serialization.DataMemberAttribute()]
+        public string Info {
+            get {
+                return this.InfoField;
+            }
+            set {
+                if ((object.ReferenceEquals(this.InfoField, value) != true)) {
+                    this.InfoField = value;
+                    this.RaisePropertyChanged("Info");
+                }
+            }
+        }
+        
+        public event System.ComponentModel.PropertyChangedEventHandler PropertyChanged;
+        
+        protected void RaisePropertyChanged(string propertyName) {
+            System.ComponentModel.PropertyChangedEventHandler propertyChanged = this.PropertyChanged;
+            if ((propertyChanged != null)) {
+                propertyChanged(this, new System.ComponentModel.PropertyChangedEventArgs(propertyName));
+            }
+        }
+    }
+    
+    [System.Diagnostics.DebuggerStepThroughAttribute()]
+    [System.CodeDom.Compiler.GeneratedCodeAttribute("System.Runtime.Serialization", "4.0.0.0")]
     [System.Runtime.Serialization.DataContractAttribute(Name="NaborStation", Namespace="http://schemas.datacontract.org/2004/07/ElectricCarWCF")]
     [System.SerializableAttribute()]
     public partial class NaborStation : object, System.Runtime.Serialization.IExtensibleDataObject, System.ComponentModel.INotifyPropertyChanged {
@@ -1778,6 +1823,7 @@ namespace ElectricCarGUI.ElectricCarService {
         System.Threading.Tasks.Task<decimal> convertCapacityToDistanceAsync(decimal capacity);
         
         [System.ServiceModel.OperationContractAttribute(Action="http://tempuri.org/IElectricCar/addBooking", ReplyAction="http://tempuri.org/IElectricCar/addBookingResponse")]
+        [System.ServiceModel.FaultContractAttribute(typeof(ElectricCarGUI.ElectricCarService.Error), Action="http://tempuri.org/IElectricCar/addBookingErrorFault", Name="Error", Namespace="http://schemas.datacontract.org/2004/07/ElectricCarWCF")]
         void addBooking(ElectricCarGUI.ElectricCarService.Booking b);
         
         [System.ServiceModel.OperationContractAttribute(Action="http://tempuri.org/IElectricCar/addBooking", ReplyAction="http://tempuri.org/IElectricCar/addBookingResponse")]

@@ -14,31 +14,45 @@ namespace ElectricCarLib
         private DBooking dbBooking = new DBooking();
         private BookingLineCtr blCtr = new BookingLineCtr();
         private BatteryStorageCtr bsCtr = new BatteryStorageCtr();
-        public void addBooking(MBooking booking) 
+        public bool addBooking(MBooking booking) 
         {
-            using (TransactionScope scope = new TransactionScope())
+            bool success = true;
+            try
             {
-                //validate period for specific battery type
-                foreach (MBookingLine item in booking.bookinglines)
+                using (TransactionScope scope = new TransactionScope())
                 {
-                    if (!bsCtr.validateBookingForStation(item.Station.Id, item.BatteryType.id, item.quantity.Value, item.time.Value))
+                    //validate period for specific battery type
+
+                    foreach (MBookingLine item in booking.bookinglines)
                     {
-                        throw new SystemException("Booking fail because one of the stations is fully booked");
+                        if (!bsCtr.validateBookingForStation(item.Station.Id, item.BatteryType.id, item.quantity.Value, item.time.Value))
+                        {
+                            throw new SystemException("Booking fail because one of the stations is fully booked");
+                        }
                     }
+
+
+
+                    int bId = addBookingRecord(booking.cId.Value, booking.totalPrice.Value, booking.createDate.Value, booking.tripStart.Value, booking.creaditCard);
+                    //decrease the number in Period
+                    foreach (MBookingLine item in booking.bookinglines)
+                    {
+                        bsCtr.addBookingForStation(item.Station.Id, item.BatteryType.id, item.quantity.Value, item.time.Value);
+                    }
+
+                    blCtr.insertAllBLForBooking(bId, booking.bookinglines);
+
+                    scope.Complete();
+                    return success;
                 }
-
-                int bId = addBookingRecord(booking.cId.Value, booking.totalPrice.Value, booking.createDate.Value, booking.tripStart.Value, booking.creaditCard);
-                //decrease the number in Period
-                foreach (MBookingLine item in booking.bookinglines)
-                {
-                    bsCtr.addBookingForStation(item.Station.Id, item.BatteryType.id, item.quantity.Value, item.time.Value);
-                }
-                
-                blCtr.insertAllBLForBooking(bId, booking.bookinglines);
-
-                scope.Complete();
-
             }
+            catch (SystemException)
+            {
+                success = false;
+                return success;
+            }
+           
+            
         }
 
         public List<MBooking> getAllBooking()
