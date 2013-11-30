@@ -13,7 +13,6 @@ using System.Windows.Media.Imaging;
 using System.Windows.Navigation;
 using System.Windows.Shapes;
 using ElectricCarGUI.ElectricCarService;
-//using Microsoft.WCF.Documentation;
 using System.ServiceModel;
 using System.ServiceModel.Channels;
 
