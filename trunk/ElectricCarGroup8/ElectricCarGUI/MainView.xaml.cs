@@ -24,6 +24,7 @@ namespace ElectricCarGUI
     {
         static ElectricCarService.IElectricCar serviceObj = new ElectricCarService.ElectricCarClient();
         private List<string> states;
+        private RegexChecker regCheck = new RegexChecker();
 
         public MainView(string name, string position)
         {
@@ -321,6 +322,7 @@ namespace ElectricCarGUI
         {
             try
             {
+                if (regCheck.checkNumber(btCap.Text)) MessageBox.Show("Success", "Warning", MessageBoxButton.OK, MessageBoxImage.Warning);
                 int id = serviceObj.addBatteryType(btName.Text, btProd.Text, Decimal.Parse(btCap.Text), Decimal.Parse(btExc.Text));
                 typeIDs.Add(id);
                 fillTypeTable();
@@ -495,6 +497,27 @@ namespace ElectricCarGUI
             catch (Exception) { }
         }
 
+        private void ComboBox_SelectionChanged_1(object sender, SelectionChangedEventArgs e)
+        {
+            if (cbPeriod.SelectedItem == cbi1)
+            {
+                dgStorage.SelectedItem = null;
+                calendar.SelectedDate = null;
+                fillPeriodTable();
+            }
+            if (cbPeriod.SelectedItem == cbi3)
+            {
+                dgStorage.SelectedItem = null;
+                fillPeriodTable();
+            }
+            if (cbPeriod.SelectedItem == cbi2)
+            {
+                calendar.SelectedDate = null;
+                fillPeriodTable();
+            }
+               
+        }
+
         private void sbtnCreate_Click(object sender, RoutedEventArgs e)
         {
             try
@@ -611,6 +634,8 @@ namespace ElectricCarGUI
         }
 
         
+
+      
 
         
 
