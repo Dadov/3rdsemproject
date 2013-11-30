@@ -633,13 +633,48 @@ namespace ElectricCarGUI
             tabStationBooking.Content = sbCtr;
         }
 
-        
-
-      
-
-        
 
 
 
+
+
+
+
+
+        #region People
+
+        private void fillCustTable()
+        {
+            List<Customer> custs = serviceObj.getAllCustomers().ToList();
+            custTable.Items.Clear();
+            foreach (Customer cust in custs)
+            {
+                custTable.Items.Add(cust);
+            }
+        }
+
+        private void refreshCusts(object sender, RoutedEventArgs e)
+        {
+            fillCustTable();
+        }
+
+        private void deleteCust(object sender, RoutedEventArgs e)
+        {
+            if (delCustField.Text != "")
+            {
+                serviceObj.deleteCustomer(Convert.ToInt32(txtId.Text));
+                clearTextBoxes();
+                fillCustTable();
+            }
+            else
+            {
+                MessageBox.Show("Please insert customer ID");
+            }
+        }
+
+
+
+
+        #endregion People
     }
 }
