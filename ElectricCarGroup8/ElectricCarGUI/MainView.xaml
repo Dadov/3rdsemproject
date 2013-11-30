@@ -104,7 +104,12 @@
                                         <DataGridTextColumn Binding="{Binding bookedNumber}" Header="Booked Batteries" Width="0.2*" IsReadOnly="True"/>
                                     </DataGrid.Columns>
                                 </DataGrid>
-                                <Label Content="Select storage from the table above or pick a date to filter this table." HorizontalAlignment="Left" Margin="30,270,0,0" VerticalAlignment="Top"/>
+                                <Label Content="Show periods for:" HorizontalAlignment="Left" Margin="30,270,0,0" VerticalAlignment="Top"/>
+                                <ComboBox x:Name="cbPeriod" HorizontalAlignment="Left" Margin="138,270,0,0" VerticalAlignment="Top" Width="177" SelectionChanged="ComboBox_SelectionChanged_1">
+                                    <ComboBoxItem Name="cbi1">All Storages and All Dates</ComboBoxItem>
+                                    <ComboBoxItem Name="cbi2">Selected Storage and All Dates</ComboBoxItem>
+                                    <ComboBoxItem Name="cbi3">All Storages and Selected Dates</ComboBoxItem>
+                                </ComboBox>
                             </Grid>
                         </TabItem>
                         <TabItem Header="BatteryType">

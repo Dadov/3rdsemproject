@@ -55,14 +55,14 @@ namespace ElectricCarLib
         {
             List<MPeriod> periods = dbPeriod.getStoragePeriods(storage.id,true);
             MPeriod lastPeriod = periods[periods.Count - 1];
-            if (time.CompareTo(lastPeriod.time) > 0)//if time of booking is earlier or in the same time then time of last period
+            if (time.CompareTo(lastPeriod.time) > 0)//if time of booking is later then time of last period
             {
                 while (time.CompareTo(lastPeriod.time) > 0) //while time of booking is earlier or in the same time then time of last period
                 {
                     lastPeriod = createPeriod(storage);//create new period
                 }
             }
-            else //if time of booking is later as time of last period
+            else //if time of booking is before time of last period
             {
                 for (int x = periods.Count - 1; x >= 1; x--) //for periods from last to first
                 {
