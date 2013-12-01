@@ -643,8 +643,10 @@ namespace ElectricCarGUI
 
         #region People
 
+        // customer
         private void fillCustTable()
         {
+            // TODO: check bindings
             List<Customer> custs = serviceObj.getAllCustomers().ToList();
             custTable.Items.Clear();
             foreach (Customer cust in custs)
@@ -662,8 +664,7 @@ namespace ElectricCarGUI
         {
             if (delCustField.Text != "")
             {
-                serviceObj.deleteCustomer(Convert.ToInt32(txtId.Text));
-                clearTextBoxes();
+                serviceObj.deleteCustomer(Convert.ToInt32(delCustField.Text));
                 fillCustTable();
             }
             else
@@ -672,8 +673,129 @@ namespace ElectricCarGUI
             }
         }
 
+        private void searchCust(object sender, RoutedEventArgs e)
+        {
+            if (searchCustField.Text != "")
+            {
+                Customer cust = serviceObj.getCustomer(Convert.ToInt32(searchCustField.Text));
+                custFName.Text = cust.FName;
+                custLName.Text = cust.LName;
+                custAddress.Text = cust.Address;
+                custCountry.Text = cust.Country;
+                custPhone.Text = cust.Phone;
+                custEmail.Text = cust.Email;
+                // don't want to show password anyway, otherwise fetch it from LogInfo
+                custPass.Text = "";
+                custPayStat.Text = cust.PaymentStatus;
+                // TODO: discout group
+            }
+            else
+            {
+                MessageBox.Show("Please insert customer ID");
+            }
+        }
 
+        private void addCust(object sender, RoutedEventArgs e)
+        {
+            /*
+            serviceObj.addCustomer(
+                custFName.Text,
+                custLName.Text,
+                custAddress.Text,
+                custCountry.Text,
+                custPhone.Text,
+                custEmail.Text,
+                custPass.Text,
+                custPayStat.Text,
+                custDiscoGroup
+                );
+             */
+        }
 
+        private void updateCust(object sender, RoutedEventArgs e)
+        {
+            Customer cust = new Customer()
+            {
+            };
+            serviceObj.updateCustomer(cust);
+        }
+
+        // employee
+        private void fillEmpTable()
+        {
+            // TODO: check bindings
+            List<Employee> emps = serviceObj.getAllEmployees().ToList();
+            empTable.Items.Clear();
+            foreach (Employee emp in emps)
+            {
+                custTable.Items.Add(emp);
+            }
+        }
+
+        private void refreshEmps(object sender, RoutedEventArgs e)
+        {
+            fillEmpTable();
+        }
+
+        private void deleteEmp(object sender, RoutedEventArgs e)
+        {
+            if (delEmpField.Text != "")
+            {
+                serviceObj.deleteEmployee(Convert.ToInt32(delEmpField.Text));
+                fillEmpTable();
+            }
+            else
+            {
+                MessageBox.Show("Please insert customer ID");
+            }
+        }
+
+        private void searchEmp(object sender, RoutedEventArgs e)
+        {
+            if (searchCustField.Text != "")
+            {
+                Employee emp = serviceObj.getEmployee(Convert.ToInt32(searchCustField.Text));
+                empFName.Text = emp.FName;
+                empLName.Text = emp.LName;
+                empAddress.Text = emp.Address;
+                empCountry.Text = emp.Country;
+                empPhone.Text = emp.Phone;
+                empEmail.Text = emp.Email;
+                // don't want to show password anyway, otherwise fetch it from LogInfo
+                custPass.Text = "";
+                empStationID.Text = Convert.ToString(emp.StationID);
+                // TODO: employee position
+            }
+            else
+            {
+                MessageBox.Show("Please insert customer ID");
+            }
+        }
+
+        private void addEmp(object sender, RoutedEventArgs e)
+        {
+            /*
+            serviceObj.addEmployee(
+                empFName.Text,
+                empLName.Text,
+                empAddress.Text,
+                empCountry.Text,
+                empPhone.Text,
+                empEmail.Text,
+                empPass.Text,
+                empStationID.Text,
+                empPosition
+                );
+             */
+        }
+
+        private void updateEmp(object sender, RoutedEventArgs e)
+        {
+            Employee emp = new Employee()
+            {
+            };
+            serviceObj.updateEmployee(emp);
+        }
 
         #endregion People
     }
