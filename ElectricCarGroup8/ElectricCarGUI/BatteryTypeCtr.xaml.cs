@@ -29,9 +29,7 @@ namespace ElectricCarGUI
        
         public BatteryTypeCtr()
         {
-            
-            InitializeComponent();
-            
+            InitializeComponent();   
         }
 
         public void fillData()
