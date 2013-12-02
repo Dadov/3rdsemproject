@@ -8,7 +8,7 @@
                 <Grid Background="#FFE5E5E5">
                 </Grid>
             </TabItem>
-            <TabItem x:Name="tabStations" Header="Stations">
+            <TabItem x:Name="tabStations" Header="Stations" Loaded="showStations" >
                 <Grid Background="#FFE5E5E5">
                     <TextBox x:Name="txtSearch" HorizontalAlignment="Left" Height="23" Margin="30,37,0,0" TextWrapping="Wrap" VerticalAlignment="Top" Width="454" KeyUp="smartSearch" />
 

@@ -30,8 +30,6 @@ namespace ElectricCarGUI
         {
             InitializeComponent();
             lblName.Content = name;
-            addStateStringToCbb();
-            showStations();
         }
 
         private void addStateStringToCbb()
@@ -48,7 +46,12 @@ namespace ElectricCarGUI
             Close();
         }
 
-        private void showStations()
+        private void showStations(object sender, RoutedEventArgs e)
+        {
+            addStateStringToCbb();
+            showStation();
+        }
+        private void showStation()
         {
             string searchTerm = txtSearch.Text;
             List<Station> stations = serviceObj.getAllStations().ToList();
@@ -125,7 +128,7 @@ namespace ElectricCarGUI
                 serviceObj.deleteStation(Convert.ToInt32(txtId.Text));
                 dgStations.SelectedItem = null;
                 clearTextBoxes();
-                showStations();
+                showStation();
             }
             else
             {
@@ -141,7 +144,7 @@ namespace ElectricCarGUI
                 {
                     serviceObj.addStation(txtName.Text, txtAddress.Text, txtCountry.Text, (string)cbbState.SelectedValue);
                     clearTextBoxes();
-                    showStations();
+                    showStation();
                 }
                 else
                 {
@@ -163,7 +166,7 @@ namespace ElectricCarGUI
                 {
                     serviceObj.updateStation(Convert.ToInt32(txtId.Text), txtName.Text, txtAddress.Text, txtCountry.Text, (string)cbbState.SelectedValue);
                     clearTextBoxes();
-                    showStations();
+                    showStation();
                 }
                 else
                 {
@@ -178,7 +181,7 @@ namespace ElectricCarGUI
 
         private void smartSearch(object sender, KeyEventArgs e)
         {
-            showStations();
+            showStation();
         }
 
         private void btnNsClear_Click(object sender, RoutedEventArgs e)
@@ -798,5 +801,7 @@ namespace ElectricCarGUI
         }
 
         #endregion People
+
+        
     }
 }
