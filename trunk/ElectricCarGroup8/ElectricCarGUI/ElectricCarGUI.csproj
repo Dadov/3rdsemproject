@@ -61,6 +61,9 @@
     <Compile Include="AddRouteWindow.xaml.cs">
       <DependentUpon>AddRouteWindow.xaml</DependentUpon>
     </Compile>
+    <Compile Include="BatteryTypeCtr.xaml.cs">
+      <DependentUpon>BatteryTypeCtr.xaml</DependentUpon>
+    </Compile>
     <Compile Include="BookingCtr.xaml.cs">
       <DependentUpon>BookingCtr.xaml</DependentUpon>
     </Compile>
@@ -80,11 +83,18 @@
     <Compile Include="StationInfoCtr.xaml.cs">
       <DependentUpon>StationInfoCtr.xaml</DependentUpon>
     </Compile>
+    <Compile Include="BatteryStorageCtr.xaml.cs">
+      <DependentUpon>BatteryStorageCtr.xaml</DependentUpon>
+    </Compile>
     <Page Include="AddBatteryTypeWindow.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>
     <Page Include="AddRouteWindow.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="BatteryTypeCtr.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>
@@ -113,6 +123,10 @@
       <Generator>MSBuild:Compile</Generator>
     </Page>
     <Page Include="StationInfoCtr.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="BatteryStorageCtr.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>

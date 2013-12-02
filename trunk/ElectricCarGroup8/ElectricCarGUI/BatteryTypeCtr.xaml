@@ -1,0 +1,36 @@
+﻿<UserControl x:Class="ElectricCarGUI.BatteryTypeCtr"
+             xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+             xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+             xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" 
+             xmlns:d="http://schemas.microsoft.com/expression/blend/2008" 
+             mc:Ignorable="d" 
+             d:DesignHeight="600" d:DesignWidth="970">
+    <Grid Background="#FFE5E5E5">
+        <TextBox x:Name="btSearch" HorizontalAlignment="Left" Height="23" Margin="30,37,0,0" TextWrapping="Wrap" VerticalAlignment="Top" Width="454" KeyUp="btSearch_KeyUp"/>
+        <DataGrid x:Name="dgType" HorizontalAlignment="Left" VerticalAlignment="Top" Height="172" Width="454" Margin="30,60,0,0" SelectionChanged="dgType_SelectionChanged">
+            <DataGrid.Columns>
+                <DataGridTextColumn Binding="{Binding ID}" Header="ID" Width="0.2*" IsReadOnly="True" SortDirection="Ascending"/>
+                <DataGridTextColumn Binding="{Binding name}" Header="Name" Width="0.2*" IsReadOnly="True"/>
+                <DataGridTextColumn Binding="{Binding producer}" Header="Producer" Width="0.2*" IsReadOnly="True"/>
+                <DataGridTextColumn Binding="{Binding capacity}" Header="Capacity" Width="0.2*" IsReadOnly="True"/>
+                <DataGridTextColumn Binding="{Binding exchangeCost}" Header="Cost" Width="0.2*" IsReadOnly="True"/>
+            </DataGrid.Columns>
+        </DataGrid>
+        <Label Content="ID: " HorizontalAlignment="Left" Margin="571,48,0,0" VerticalAlignment="Top" Width="59"/>
+        <Label Content="Name: " HorizontalAlignment="Left" Margin="571,79,0,0" VerticalAlignment="Top" Width="59"/>
+        <Label Content="Producer: " HorizontalAlignment="Left" Margin="571,110,0,0" VerticalAlignment="Top" Width="59"/>
+        <Label Content="Capacity: " HorizontalAlignment="Left" Margin="571,141,0,0" VerticalAlignment="Top" Width="59"/>
+        <Label Content="Exchange Cost: " HorizontalAlignment="Left" Margin="571,172,0,0" VerticalAlignment="Top" Width="89"/>
+        <TextBox x:Name="btID" HorizontalAlignment="Left" Height="23" Margin="669,48,0,0" TextWrapping="Wrap" Text="" VerticalAlignment="Top" Width="189" IsReadOnly="True" />
+        <TextBox x:Name="btName" HorizontalAlignment="Left" Height="23" Margin="669,79,0,0" TextWrapping="Wrap" Text="" VerticalAlignment="Top" Width="189"/>
+        <TextBox x:Name="btProd" HorizontalAlignment="Left" Height="23" Margin="669,110,0,0" TextWrapping="Wrap" Text="" VerticalAlignment="Top" Width="189"/>
+        <TextBox x:Name="btCap" HorizontalAlignment="Left" Height="23" Margin="669,141,0,0" TextWrapping="Wrap" Text="" VerticalAlignment="Top" Width="189"  />
+        <TextBox x:Name="btExc" HorizontalAlignment="Left" Height="23" Margin="669,172,0,0" TextWrapping="Wrap" Text="" VerticalAlignment="Top" Width="189"  />
+
+
+        <Button x:Name="tbtnCreate" Content="Add" HorizontalAlignment="Left" Margin="571,229,0,0" VerticalAlignment="Top" Width="75" Click="tbtnCreate_Click"/>
+        <Button x:Name="tbtnUpdate" Content="Update" HorizontalAlignment="Left" Margin="651,229,0,0" VerticalAlignment="Top" Width="75" Click="tbtnUpdate_Click"/>
+        <Button x:Name="tbtnDelete" Content="Delete" HorizontalAlignment="Left" Margin="731,229,0,0" VerticalAlignment="Top" Width="75" Click="tbtnDelete_Click"/>
+        <Button x:Name="tbtnCancel" Content="Clear" HorizontalAlignment="Left" Margin="811,229,0,0" VerticalAlignment="Top" Width="75" Click="tbtnCancel_Click"/>
+    </Grid>
+</UserControl>

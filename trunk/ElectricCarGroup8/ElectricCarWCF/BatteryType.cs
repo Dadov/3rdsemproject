@@ -20,10 +20,10 @@ namespace ElectricCarWCF
         public String producer;
 
         [DataMember]
-        public int capacity;
+        public decimal capacity;
 
         [DataMember]
-        public int exchangeCost;
+        public decimal exchangeCost;
 
 
     }
