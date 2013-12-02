@@ -84,7 +84,12 @@ namespace ElectricCarLib
             dbStorage.updateRecord(id, btid, sID, storageNumber);
             IDPeriod dbPeriod = new DBPeriod();
             PeriodCalculator pCalc = new PeriodCalculator();
-            dbPeriod.updateRecord(id, pCalc.getBookingPeriod(getRecord(id,true),DateTime.Now).time,pCalc.getInitNumber(getRecord(id,true)));
+            MPeriod period = pCalc.getBookingPeriod(getRecord(id,true),DateTime.Now);
+            List<MPeriod> periods = pCalc.getAllPeriodsAfter(getRecord(id, true), period);
+            foreach (MPeriod p in periods)
+            {
+                dbPeriod.updateRecord(id, p.time, pCalc.getInitNumber(getRecord(id, true)));
+            }
         }
 
         public List<MBatteryStorage> getStationStorages(int sID)

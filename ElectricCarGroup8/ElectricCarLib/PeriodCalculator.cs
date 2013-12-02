@@ -128,5 +128,25 @@ namespace ElectricCarLib
             return next;
         }
 
+        public List<MPeriod> getAllPeriodsAfter(MBatteryStorage storage, MPeriod period)
+        {
+            List<MPeriod> periods = dbPeriod.getStoragePeriods(storage.id, true);
+            bool found = false;
+            List<MPeriod> periodsAfter = new List<MPeriod>();
+            foreach (MPeriod p in periods)
+            {
+                if (p.time == period.time)
+                {
+                    found = true;
+                }
+                if (found)
+                {
+                    periodsAfter.Add(p);
+                }
+            }
+            return periodsAfter;
+
+        }
+
     }
 }

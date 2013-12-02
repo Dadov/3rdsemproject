@@ -1,0 +1,50 @@
+﻿<UserControl x:Class="ElectricCarGUI.BatteryStorageCtr"
+             xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+             xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+             xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" 
+             xmlns:d="http://schemas.microsoft.com/expression/blend/2008" 
+             mc:Ignorable="d" 
+             d:DesignHeight="600" d:DesignWidth="970">
+    <Grid Background="#FFE5E5E5">
+        <TextBox x:Name="bsSearch" HorizontalAlignment="Left" Height="23" Margin="30,37,0,0" TextWrapping="Wrap" VerticalAlignment="Top" Width="454" KeyUp="bsSearch_KeyUp"/>
+        <DataGrid x:Name="dgStorage" HorizontalAlignment="Left" VerticalAlignment="Top" Height="172" Width="454" Margin="30,60,0,0" SelectionChanged="dgStorage_SelectionChanged">
+            <DataGrid.Columns>
+                <DataGridTextColumn Binding="{Binding ID}" Header="ID" Width="0.2*" IsReadOnly="True" SortDirection="Ascending"/>
+                <DataGridTextColumn Binding="{Binding typeID}" Header="Type ID" Width="0.2*" IsReadOnly="True"/>
+                <DataGridTextColumn Binding="{Binding storageNumber}" Header="Amount" Width="0.2*" IsReadOnly="True"/>
+            </DataGrid.Columns>
+        </DataGrid>
+        <Label Content="Insert:" HorizontalAlignment="Left" Margin="30,240,0,0" VerticalAlignment="Top"/>
+        <TextBox x:Name="btAmount" HorizontalAlignment="Left" Height="23" Margin="77,240,0,0" TextWrapping="Wrap" Text="0" VerticalAlignment="Top" Width="53"/>
+        <Label Content="Batteries to selected battery storage" HorizontalAlignment="Left" Margin="135,240,0,0" VerticalAlignment="Top"/>
+        <Button x:Name="tbBtnInsert"  Content="Insert" HorizontalAlignment="Left" Margin="409,240,0,0" VerticalAlignment="Top" Width="75" Click="tbBtnInsert_Click"/>
+        <Label Content="ID: " HorizontalAlignment="Left" Margin="571,48,0,0" VerticalAlignment="Top" Width="59"/>
+        <Label Content="Type ID: " HorizontalAlignment="Left" Margin="571,79,0,0" VerticalAlignment="Top" Width="59"/>
+        <Label Content="Station: " HorizontalAlignment="Left" Margin="571,110,0,0" VerticalAlignment="Top" Width="59"/>
+        <Label Content="Storage Number: " HorizontalAlignment="Left" Margin="571,141,0,0" VerticalAlignment="Top" Width="auto"/>
+        <TextBox x:Name="bsID" HorizontalAlignment="Left" Height="23" Margin="669,48,0,0" TextWrapping="Wrap" Text="" VerticalAlignment="Top" Width="189" IsReadOnly="True" />
+        <TextBox x:Name="bsType" HorizontalAlignment="Left" Height="23" Margin="669,79,0,0" TextWrapping="Wrap" Text="" VerticalAlignment="Top" Width="189"/>
+        <TextBox x:Name="bsStation" HorizontalAlignment="Left" Height="23" Margin="669,110,0,0" TextWrapping="Wrap" Text="" VerticalAlignment="Top" Width="189" IsReadOnly="True"/>
+        <TextBox x:Name="btStor" HorizontalAlignment="Left" Height="23" Margin="669,141,0,0" TextWrapping="Wrap" Text="" VerticalAlignment="Top" Width="189" />
+        <Button x:Name="sbtnCreate" Content="Add" HorizontalAlignment="Left" Margin="571,211,0,0" VerticalAlignment="Top" Width="75" Click="sbtnCreate_Click"/>
+        <Button x:Name="sbtnUpdate" Content="Update" HorizontalAlignment="Left" Margin="651,211,0,0" VerticalAlignment="Top" Width="75" Click="sbtnUpdate_Click"/>
+        <Button x:Name="sbtnDelete" Content="Delete" HorizontalAlignment="Left" Margin="731,211,0,0" VerticalAlignment="Top" Width="75" Click="sbtnDelete_Click"/>
+        <Button x:Name="sbtnCancel" Content="Clear" HorizontalAlignment="Left" Margin="811,211,0,0" VerticalAlignment="Top" Width="75" Click="sbtnCancel_Click"/>
+        <Calendar x:Name="calendar" HorizontalAlignment="Left" Margin="571,300,0,0" VerticalAlignment="Top" Height="167" Width="315" SelectedDatesChanged="calendar_SelectedDatesChanged"/>
+        <DataGrid x:Name="dgPeriods" HorizontalAlignment="Left" VerticalAlignment="Top" Height="167" Width="454" RenderTransformOrigin="0.517,0.521" Margin="30,300,0,0">
+            <DataGrid.Columns>
+                <DataGridTextColumn Binding="{Binding bsID}" Header="Storage ID" Width="0.11*" IsReadOnly="True"/>
+                <DataGridTextColumn Binding="{Binding time}" Header="Time" Width="0.24*" IsReadOnly="True"/>
+                <DataGridTextColumn Binding="{Binding availNumber}" Header="Available Batteries" Width="0.2*" IsReadOnly="True"/>
+                <DataGridTextColumn Binding="{Binding bookedNumber}" Header="Booked Batteries" Width="0.2*" IsReadOnly="True"/>
+            </DataGrid.Columns>
+        </DataGrid>
+        <Label Content="Show periods for:" HorizontalAlignment="Left" Margin="30,270,0,0" VerticalAlignment="Top"/>
+        <ComboBox x:Name="cbPeriod" HorizontalAlignment="Left" Margin="138,270,0,0" VerticalAlignment="Top" Width="346" SelectionChanged="ComboBox_SelectionChanged_1">
+            <ComboBoxItem Name="cbi1">All Storages and All Dates</ComboBoxItem>
+            <ComboBoxItem Name="cbi2">Selected Storage and All Dates</ComboBoxItem>
+            <ComboBoxItem Name="cbi3">All Storages and Selected Date</ComboBoxItem>
+            <ComboBoxItem Name="cbi4">Selected Storage and Selected Date</ComboBoxItem>
+        </ComboBox>
+    </Grid>
+</UserControl>
