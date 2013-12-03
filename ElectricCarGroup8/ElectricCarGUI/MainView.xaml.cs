@@ -328,10 +328,15 @@ namespace ElectricCarGUI
         }
 
         public BatteryStorageCtr bCtr;
+        private bool isTabStorageLoaded = false;
         private void tabStorage_Loaded_1(object sender, RoutedEventArgs e)
         {
-            bCtr = new BatteryStorageCtr();
-            tabStorage.Content = bCtr;
+            if (!isTabTypeLoaded)
+            {
+                bCtr = new BatteryStorageCtr();
+                tabStorage.Content = bCtr;
+                isTabStorageLoaded = true;
+            }
 
         }
 
