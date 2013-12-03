@@ -6,8 +6,8 @@
              mc:Ignorable="d" 
              d:DesignHeight="600" d:DesignWidth="970">
     <Grid Background="#FFE5E5E5">
-        <TextBox x:Name="btSearch" HorizontalAlignment="Left" Height="23" Margin="30,37,0,0" TextWrapping="Wrap" VerticalAlignment="Top" Width="454" KeyUp="btSearch_KeyUp"/>
-        <DataGrid x:Name="dgType" HorizontalAlignment="Left" VerticalAlignment="Top" Height="172" Width="454" Margin="30,60,0,0" SelectionChanged="dgType_SelectionChanged">
+        <TextBox x:Name="btSearch" HorizontalAlignment="Left" Height="23" Margin="30,37,0,0" TextWrapping="Wrap" VerticalAlignment="Top" Width="515" KeyUp="btSearch_KeyUp"/>
+        <DataGrid x:Name="dgType" HorizontalAlignment="Left" VerticalAlignment="Top" Height="490" Width="515" Margin="30,60,0,0" SelectionChanged="dgType_SelectionChanged">
             <DataGrid.Columns>
                 <DataGridTextColumn Binding="{Binding ID}" Header="ID" Width="0.2*" IsReadOnly="True" SortDirection="Ascending"/>
                 <DataGridTextColumn Binding="{Binding name}" Header="Name" Width="0.2*" IsReadOnly="True"/>

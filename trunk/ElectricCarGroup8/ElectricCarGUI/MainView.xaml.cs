@@ -365,6 +365,17 @@ namespace ElectricCarGUI
         }
 
         #endregion People
+
+        private bool isTabTypeLoaded = false;
+        private void TabControl_SelectionChanged_1(object sender, SelectionChangedEventArgs e)
+        {
+            if (tabControl.SelectedItem == tabType&&!isTabTypeLoaded)
+            {
+                btCtr.fillData();
+                isTabTypeLoaded = true;
+            }
+        }
+
         
     }
 }
