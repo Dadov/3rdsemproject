@@ -26,6 +26,7 @@ namespace ElectricCarGUI
     {
         static ElectricCarService.IElectricCar serviceObj = new ElectricCarService.ElectricCarClient();
         string[] payStates = { "UnPayed", "Payed" };
+        RegexChecker regCheck = new RegexChecker();
         public BookingCtr()
         {
             InitializeComponent();
@@ -107,8 +108,8 @@ namespace ElectricCarGUI
 
         private void setTimeToTxtBox()
         {
-            txtTripStart.Text = DateTime.Now.ToString("MM/dd/yyyy HH:mm");
-            txtCreateDate.Text = DateTime.Now.ToString("MM/dd/yyyy");
+            txtTripStart.Text = DateTime.Now.ToString("dd/MM/yyyy HH:mm");
+            txtCreateDate.Text = DateTime.Now.ToString("dd/MM/yyyy");
         }
         
 
@@ -154,31 +155,40 @@ namespace ElectricCarGUI
         {
             if (txtBId.Text=="")
             {
-                Station sStation = serviceObj.getStation(Convert.ToInt32(txtSId.Text));
-                Station eStation = serviceObj.getStation(Convert.ToInt32(txtEId.Text));
-                if (sStation.Id != 0)
+                if (regCheck.checkNumber(txtSId.Text) && regCheck.checkNumber(txtEId.Text))
                 {
-                    if (eStation.Id != 0)
+                    Station sStation = serviceObj.getStation(Convert.ToInt32(txtSId.Text));
+                    Station eStation = serviceObj.getStation(Convert.ToInt32(txtEId.Text));
+                    if (sStation.Id != 0)
                     {
-                        if (dgBookingLine.Items.Count != 0 && txtTripStart.Text != "")
+                        if (eStation.Id != 0)
                         {
-                            AddRouoteWindow routeWin = new AddRouoteWindow(this);
-                            routeWin.Visibility = Visibility.Visible;
+                            if (dgBookingLine.Items.Count != 0 && txtTripStart.Text != "")
+                            {
+                                AddRouoteWindow routeWin = new AddRouoteWindow(this);
+                                routeWin.Visibility = Visibility.Visible;
+                            }
+                            else
+                            {
+                                MessageBox.Show("Please add valid trip start time and battery type");
+                            }
                         }
                         else
                         {
-                            MessageBox.Show("Please add valid trip start time and battery type");
+                            MessageBox.Show("End station is not found, please input a valid end station Id.");
                         }
                     }
                     else
                     {
-                        MessageBox.Show("Please input a valid end station Id.");
+                        MessageBox.Show("Start station is not found, please input a valid start station Id.");
                     }
                 }
                 else
                 {
-                    MessageBox.Show("Please input a valid start station Id.");
+                    MessageBox.Show("Please input number in start station Id or end station Id field.");
                 }
+                
+                
                 
                 
             }
@@ -206,56 +216,99 @@ namespace ElectricCarGUI
 
         private void btnBAdd_Click(object sender, RoutedEventArgs e)
         {
-            Customer Customer = serviceObj.getCustomer(Convert.ToInt32(txtCId.Text));
-
-            if (Customer.ID != 0)
+            if (regCheck.checkNumber(txtCId.Text))
             {
-                Booking bk = new Booking();
-                bk.cId = Convert.ToInt32(txtCId.Text);
-                bk.createDate = txtCreateDate.Text;
-                bk.tripStart = txtTripStart.Text;
-                bk.payStatus = (string)cbbPayStatus.SelectedValue;
-                bk.totalPrice = Convert.ToDecimal(txtTotalPrice.Text);
-                bk.startStationId = Convert.ToInt32(txtSId.Text);
+                Customer Customer = serviceObj.getCustomer(Convert.ToInt32(txtCId.Text));
+                if (Customer.ID != 0)
+                {
+                    try
+                    {
+                        Booking bk = new Booking();
+                        bk.cId = Convert.ToInt32(txtCId.Text);
+                        if (regCheck.checkDate(txtCreateDate.Text))
+                        {
+                            bk.createDate = txtCreateDate.Text;
+                        }
+                        else
+                        {
+                            MessageBox.Show("Please input correct form of trip start field mm/dd/yyyy");
+                            throw new Exception();
+                        }
 
-                List<RouteStop> rs = dgRoute.Items.OfType<RouteStop>().ToList<RouteStop>();
-                List<BookingLine> bls = new List<BookingLine>();
-                BookingLine blForBatteryType = (BookingLine)dgBookingLine.Items.GetItemAt(0);
-                decimal price = blForBatteryType.price;
-                int quantity = blForBatteryType.quantity;
-                int btId = blForBatteryType.BatteryType.Id;
-                for (int i = 0; i < rs.Count; i++)
-                {
-                    BookingLine bl = new BookingLine();
-                    Station s = new Station();
-                    BatteryTypeTest bt = new BatteryTypeTest();
-                    bl.station = s;
-                    bl.BatteryType = bt;
-                    bl.station.Id = rs[i].station.Id;
-                    bl.time = rs[i].time;
-                    bl.quantity = quantity;
-                    bl.price = price;
-                    bl.BatteryType.Id = btId;
-                    bls.Add(bl);
+                        if (regCheck.checkTime(txtTripStart.Text))
+                        {
+                            bk.tripStart = txtTripStart.Text;
+                        }
+                        else
+                        {
+                            MessageBox.Show("Please input correct form of trip start field dd/mm/yyyy hh:mm");
+                            throw new Exception();
+                        }
+
+                        bk.payStatus = (string)cbbPayStatus.SelectedValue;
+                        if (regCheck.checkDecimal(txtTotalPrice.Text))
+                        {
+                            bk.totalPrice = Convert.ToDecimal(txtTotalPrice.Text);
+                        }
+                        else
+                        {
+                            MessageBox.Show("Please input numer in total price field");
+                            throw new Exception();
+                        }
+
+                        bk.startStationId = Convert.ToInt32(txtSId.Text);
+
+                        List<RouteStop> rs = dgRoute.Items.OfType<RouteStop>().ToList<RouteStop>();
+                        List<BookingLine> bls = new List<BookingLine>();
+                        BookingLine blForBatteryType = (BookingLine)dgBookingLine.Items.GetItemAt(0);
+                        decimal price = blForBatteryType.price;
+                        int quantity = blForBatteryType.quantity;
+                        int btId = blForBatteryType.BatteryType.Id;
+                        for (int i = 0; i < rs.Count; i++)
+                        {
+                            BookingLine bl = new BookingLine();
+                            Station s = new Station();
+                            BatteryTypeTest bt = new BatteryTypeTest();
+                            bl.station = s;
+                            bl.BatteryType = bt;
+                            bl.station.Id = rs[i].station.Id;
+                            bl.time = rs[i].time;
+                            bl.quantity = quantity;
+                            bl.price = price;
+                            bl.BatteryType.Id = btId;
+                            bls.Add(bl);
+                        }
+                        bk.bookinglines = bls.ToArray<BookingLine>();
+                        try
+                        {
+                            serviceObj.addBooking(bk);
+                            showBookings();
+                            clearTextBox();
+                        }
+                        catch (FaultException a)
+                        {
+                            MessageBox.Show(a.Message);
+                        }
+                    }
+                    catch (Exception)
+                    {
+                    }
+
+
+
                 }
-                bk.bookinglines = bls.ToArray<BookingLine>();
-                try
+                else
                 {
-                    serviceObj.addBooking(bk);
-                    showBookings();
-                    clearTextBox();
+                    MessageBox.Show("Can not find customer. Please add a valid customer Id.");
                 }
-                catch (FaultException a)
-                {
-                    MessageBox.Show(a.Message);
-                }
-                
-                
             }
             else
             {
-                MessageBox.Show("Can not find customer. Please add a valid customer Id.");
+                MessageBox.Show("Please input number in customer Id field.");
             }
+            
+
+            
             
         }
 

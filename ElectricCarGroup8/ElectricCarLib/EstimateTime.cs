@@ -9,7 +9,14 @@ namespace ElectricCarLib
 {
     public class EstimateTime
     {
-        private static decimal carAveSpeed = 70; //km/h
+
+        public static decimal carAveSpeed = 70;//km/h
+
+        public decimal getCarAveSpeed()
+        {
+            return carAveSpeed;
+        }
+        
         private ConnectionCtr cCtr = new ConnectionCtr();
 
         public static double driveHourForDistance(decimal distance) 
@@ -18,7 +25,7 @@ namespace ElectricCarLib
             return Convert.ToDouble(driveHour);
         }
 
-        //TODO test and can take other argument as parameters
+
         public Dictionary<MStation, DateTime> estimateArriveTimeForPath(LinkedList<MStation> path, DateTime start)
         {
             Dictionary<MStation, DateTime> estimateArriveTimeForPath = new Dictionary<MStation, DateTime>();

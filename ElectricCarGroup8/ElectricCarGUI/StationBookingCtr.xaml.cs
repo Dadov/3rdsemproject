@@ -23,6 +23,7 @@ namespace ElectricCarGUI
     {
         public int sId { get; set; }
         static ElectricCarService.IElectricCar serviceObj = new ElectricCarService.ElectricCarClient();
+
         public StationBookingCtr()
         {
             InitializeComponent();

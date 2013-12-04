@@ -23,6 +23,7 @@ namespace ElectricCarGUI
     {
         private List<string> states;
         static ElectricCarService.IElectricCar serviceObj = new ElectricCarService.ElectricCarClient();
+        private RegexChecker regCheck = new RegexChecker();
         public StationsCtr()
         {
             InitializeComponent();
@@ -214,7 +215,7 @@ namespace ElectricCarGUI
             {
                 if (txtNsId.Text != "")
                 {
-                    if (txtNsDistance.Text != "" && txtNsDriveHour.Text != "")
+                    if (regCheck.checkDecimal(txtNsDistance.Text) && regCheck.checkDecimal(txtNsDriveHour.Text))
                     {
                         serviceObj.addNaborStation(Convert.ToInt32(txtId.Text), Convert.ToInt32(txtNsId.Text), Convert.ToDecimal(txtNsDistance.Text), Convert.ToDecimal(txtNsDriveHour.Text));
                         clearNaborStationTextBox();
@@ -222,7 +223,7 @@ namespace ElectricCarGUI
                     }
                     else
                     {
-                        MessageBox.Show("Please fill all nabor station information in the text box.");
+                        MessageBox.Show("Please fill all nabor station distance or drive hour in decimal numbers.");
                     }
                 }
                 else

@@ -1398,10 +1398,10 @@ namespace ElectricCarGUI.ElectricCarService {
         private int IDField;
         
         [System.Runtime.Serialization.OptionalFieldAttribute()]
-        private int capacityField;
+        private decimal capacityField;
         
         [System.Runtime.Serialization.OptionalFieldAttribute()]
-        private int exchangeCostField;
+        private decimal exchangeCostField;
         
         [System.Runtime.Serialization.OptionalFieldAttribute()]
         private string nameField;
@@ -1433,7 +1433,7 @@ namespace ElectricCarGUI.ElectricCarService {
         }
         
         [System.Runtime.Serialization.DataMemberAttribute()]
-        public int capacity {
+        public decimal capacity {
             get {
                 return this.capacityField;
             }
@@ -1446,7 +1446,7 @@ namespace ElectricCarGUI.ElectricCarService {
         }
         
         [System.Runtime.Serialization.DataMemberAttribute()]
-        public int exchangeCost {
+        public decimal exchangeCost {
             get {
                 return this.exchangeCostField;
             }
@@ -1817,10 +1817,10 @@ namespace ElectricCarGUI.ElectricCarService {
         System.Threading.Tasks.Task<ElectricCarGUI.ElectricCarService.RouteStop[][]> getRoutesAsync(int startSId, int endSIdint, System.DateTime tripStart, decimal batteryLimit);
         
         [System.ServiceModel.OperationContractAttribute(Action="http://tempuri.org/IElectricCar/convertCapacityToDistance", ReplyAction="http://tempuri.org/IElectricCar/convertCapacityToDistanceResponse")]
-        decimal convertCapacityToDistance(decimal capacity);
+        decimal convertCapacityToDistance(int btId);
         
         [System.ServiceModel.OperationContractAttribute(Action="http://tempuri.org/IElectricCar/convertCapacityToDistance", ReplyAction="http://tempuri.org/IElectricCar/convertCapacityToDistanceResponse")]
-        System.Threading.Tasks.Task<decimal> convertCapacityToDistanceAsync(decimal capacity);
+        System.Threading.Tasks.Task<decimal> convertCapacityToDistanceAsync(int btId);
         
         [System.ServiceModel.OperationContractAttribute(Action="http://tempuri.org/IElectricCar/addBooking", ReplyAction="http://tempuri.org/IElectricCar/addBookingResponse")]
         [System.ServiceModel.FaultContractAttribute(typeof(ElectricCarGUI.ElectricCarService.Error), Action="http://tempuri.org/IElectricCar/addBookingErrorFault", Name="Error", Namespace="http://schemas.datacontract.org/2004/07/ElectricCarWCF")]
@@ -2225,12 +2225,12 @@ namespace ElectricCarGUI.ElectricCarService {
             return base.Channel.getRoutesAsync(startSId, endSIdint, tripStart, batteryLimit);
         }
         
-        public decimal convertCapacityToDistance(decimal capacity) {
-            return base.Channel.convertCapacityToDistance(capacity);
+        public decimal convertCapacityToDistance(int btId) {
+            return base.Channel.convertCapacityToDistance(btId);
         }
         
-        public System.Threading.Tasks.Task<decimal> convertCapacityToDistanceAsync(decimal capacity) {
-            return base.Channel.convertCapacityToDistanceAsync(capacity);
+        public System.Threading.Tasks.Task<decimal> convertCapacityToDistanceAsync(int btId) {
+            return base.Channel.convertCapacityToDistanceAsync(btId);
         }
         
         public void addBooking(ElectricCarGUI.ElectricCarService.Booking b) {
