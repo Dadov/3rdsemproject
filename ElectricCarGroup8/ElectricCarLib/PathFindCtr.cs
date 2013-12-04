@@ -16,8 +16,16 @@ namespace ElectricCarLib
         {
             List<List<PathStop>> paths = new List<List<PathStop>>();
             Dictionary<int, Dictionary<int, decimal>> adjListInLimit = sCtr.getAdjListWithBatteryLimitForDistance(batteryLimit);
+            if (RouteCache.Instance.queue.Contains(sId1+ "," + sId2))
+            {
+                paths = RouteCache.Instance.getRoute(sId1, sId2);
+            }
+            else
+            {
+                paths = PathFind.getKShortestPath(adjListInLimit, sId1, sId2, numberOfPaths);
+                RouteCache.Instance.insertRoute(sId1, sId2, paths);
+            }
 
-            paths = PathFind.getKShortestPath(adjListInLimit, sId1, sId2, numberOfPaths);
             if (paths.Count!=0)
             {
                 foreach (List <PathStop> p in paths)

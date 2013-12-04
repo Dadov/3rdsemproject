@@ -65,14 +65,18 @@ namespace ElectricCarLibTest
         private IDStation dbStation = new DStation();
         private IDBatteryType dbBT = new DBatteryType();
         private IDBBatteryStorage dbBS = new DBBatteryStorage();
-
+        private DCustomer dbCust = new DCustomer();
+        private DDiscountGroup dbDG = new DDiscountGroup();
         [TestMethod]
         public void AddGetDeleteBooking()
         {
             DateTime createTime = DateTime.Now;
             DateTime trip = createTime.AddDays(60);
-            //refactor the code when customer and person class is created
-            int bookingId = dbBooking.addRecord(1, 100, createTime, trip, "Payed");
+            int dgId = dbDG.addNewRecord("Regular", 0);
+            MDiscountGroup dg = dbDG.getRecord(dgId, false);
+            int cId = dbCust.addNewRecord("May", "Smith", "Denmark", "Denmark", "12345678", "h@hotmail.com", dg, "Payed");
+
+            int bookingId = dbBooking.addRecord(cId, 100, createTime, trip, "Payed");
             try
             {
                 MBooking booking = dbBooking.getRecord(bookingId, false);
@@ -90,7 +94,9 @@ namespace ElectricCarLibTest
             }
             finally
             {
-                dbBooking.deleteRecord(bookingId); 
+                dbBooking.deleteRecord(bookingId);
+                dbCust.deleteRecord(cId);
+                dbDG.deleteRecord(dgId);
             }  
 
         }
