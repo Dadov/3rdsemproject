@@ -126,7 +126,7 @@ namespace ElectricCarWCF
         List<List<RouteStop>> getRoutes(int startSId, int endSIdint, DateTime tripStart, decimal batteryLimit);
 
         [OperationContract]
-        decimal convertCapacityToDistance(decimal capacity);
+        decimal convertCapacityToDistance(int btId);
         //add booking
         [OperationContract]
         [FaultContract(typeof(Error))]

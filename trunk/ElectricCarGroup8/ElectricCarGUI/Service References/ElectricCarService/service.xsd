@@ -303,7 +303,7 @@
   <xs:element name="convertCapacityToDistance">
     <xs:complexType>
       <xs:sequence>
-        <xs:element minOccurs="0" name="capacity" type="xs:decimal" />
+        <xs:element minOccurs="0" name="btId" type="xs:int" />
       </xs:sequence>
     </xs:complexType>
   </xs:element>

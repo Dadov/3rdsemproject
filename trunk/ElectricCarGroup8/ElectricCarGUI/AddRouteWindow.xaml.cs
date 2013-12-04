@@ -43,8 +43,9 @@ namespace ElectricCarGUI
         {
             //get batteryLimit
             BookingLine bl = (BookingLine)bCtr.dgBookingLine.Items.GetItemAt(0);
-            decimal batteryLimit = serviceObj.convertCapacityToDistance(bl.BatteryType.capacity);
-            routes = serviceObj.getRoutes(Convert.ToInt32(bCtr.txtSId.Text), Convert.ToInt32(bCtr.txtEId.Text), Convert.ToDateTime(bCtr.txtTripStart.Text), batteryLimit);
+            decimal batteryLimit = serviceObj.convertCapacityToDistance(bl.BatteryType.Id);
+            DateTime start = DateTime.ParseExact(bCtr.txtTripStart.Text, "dd/MM/yyyy HH:mm", System.Globalization.CultureInfo.CurrentCulture);
+            routes = serviceObj.getRoutes(Convert.ToInt32(bCtr.txtSId.Text), Convert.ToInt32(bCtr.txtEId.Text), start, batteryLimit);
             
             if (routes.Count() >= 1) //TODO need to change
             {
@@ -59,7 +60,7 @@ namespace ElectricCarGUI
                     for (int j = 0; j < routes[i].Length; j++)
                     {
                         n.Add(routes[i][j]);
-                        info += routes[i][j].station.Name + " " + routes[i][j].time.ToString("MM/dd/yyyy HH:mm") + " | ";
+                        info += routes[i][j].station.Name + " " + routes[i][j].time.ToString("dd/MM/yyyy HH:mm") + " | ";
                         if (j == routes[i].Length-1)
                         {
                             totalDistance = routes[i][j].distance;

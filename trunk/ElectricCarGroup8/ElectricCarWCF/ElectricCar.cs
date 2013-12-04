@@ -478,13 +478,13 @@ namespace ElectricCarWCF
                 {
                     Booking bk = new Booking();
                     bk.Id = b.Id;
-                    bk.createDate = b.createDate.Value.ToString("MM/dd/yyyy HH:mm");
+                    bk.createDate = b.createDate.Value.ToString("dd/MM/yyyy HH:mm");
                     CustomerTest cust = new CustomerTest() { Id = b.customer.ID, name = b.customer.FName + " " + b.customer.LName };
                     bk.customer = cust;
                     bk.cId = b.customer.ID;
                     bk.payStatus = b.creaditCard;
                     bk.totalPrice = b.totalPrice.Value;
-                    bk.tripStart = b.tripStart.Value.ToString("MM/dd/yyyy HH:mm");
+                    bk.tripStart = b.tripStart.Value.ToString("dd/MM/yyyy HH:mm");
                     if (b.bookinglines.Count != 0)
                     {
                         foreach (MBookingLine bl in b.bookinglines)
@@ -552,9 +552,9 @@ namespace ElectricCarWCF
         {
             MBooking bk = new MBooking();
             bk.cId = b.cId;
-            bk.createDate = Convert.ToDateTime(b.createDate);
+            bk.createDate = DateTime.ParseExact(b.createDate, "dd/MM/yyyy", System.Globalization.CultureInfo.CurrentCulture);
             bk.creaditCard = b.payStatus;
-            bk.tripStart = Convert.ToDateTime(b.tripStart);
+            bk.tripStart = DateTime.ParseExact(b.tripStart, "dd/MM/yyyy HH:mm", System.Globalization.CultureInfo.CurrentCulture);
             bk.totalPrice = b.totalPrice;
             List<MBookingLine> bkls = new List<MBookingLine>();
             List<BookingLine> bls = b.bookinglines.ToList<BookingLine>();
@@ -599,9 +599,11 @@ namespace ElectricCarWCF
             bCtr.deleteBooking(bId);
         }
 
-        public decimal convertCapacityToDistance(decimal capacity)
+        public decimal convertCapacityToDistance(int btId)
         {
-            return 350; //TODO convert capacity to distance with a formular
+            EstimateTime et = new EstimateTime();
+            BatteryType bt = getBatteryType(btId);
+            return bt.capacity * et.getCarAveSpeed();
         }
 
         public List<BatteryTypeTest> getAllBatteryType()
