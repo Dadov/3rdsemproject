@@ -43,6 +43,7 @@
     <Compile Include="DoubleLinkedList.cs" />
     <Compile Include="FibonacciHeap.cs" />
     <Compile Include="FibonacciNode.cs" />
+    <Compile Include="FindPath.cs" />
     <Compile Include="MBattery.cs" />
     <Compile Include="MBatteryStorage.cs" />
     <Compile Include="MBatteryType.cs" />
@@ -59,6 +60,7 @@
     <Compile Include="MStation.cs" />
     <Compile Include="PathStop.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
+    <Compile Include="RouteCache.cs" />
     <Compile Include="State.cs" />
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />

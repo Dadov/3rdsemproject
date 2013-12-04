@@ -92,6 +92,9 @@
     <Compile Include="BatteryStorageCtr.xaml.cs">
       <DependentUpon>BatteryStorageCtr.xaml</DependentUpon>
     </Compile>
+    <Compile Include="StationsCtr.xaml.cs">
+      <DependentUpon>StationsCtr.xaml</DependentUpon>
+    </Compile>
     <Page Include="AddBatteryTypeWindow.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
@@ -141,6 +144,10 @@
       <Generator>MSBuild:Compile</Generator>
     </Page>
     <Page Include="BatteryStorageCtr.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="StationsCtr.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>

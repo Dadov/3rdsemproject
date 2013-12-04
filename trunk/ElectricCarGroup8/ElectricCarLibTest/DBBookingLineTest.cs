@@ -14,13 +14,18 @@ namespace ElectricCarLibTest
         private DBookingLine dbBL = new DBookingLine();
         private DBatteryType dbBT = new DBatteryType();
         private DStation dbStation = new DStation();
+        private DCustomer dbCust = new DCustomer();
+        private DDiscountGroup dbDG = new DDiscountGroup();
         [TestMethod]
         public void addGetDeleteBookingLine()
         {
             DateTime createTime = DateTime.Now;
             DateTime trip = createTime.AddDays(60);
             DateTime sTime = createTime.AddDays(60);
-            int bId = dbBooking.addRecord(3, 100, createTime, trip, "Payed");
+            int dgId = dbDG.addNewRecord("Regular", 0);
+            MDiscountGroup dg = dbDG.getRecord(dgId, false);
+            int cId = dbCust.addNewRecord("May", "Smith", "Denmark", "Denmark", "12345678", "h@hotmail.com", dg, "Payed");
+            int bId = dbBooking.addRecord(cId, 100, createTime, trip, "Payed");
             int btId = dbBT.addNewRecord("AAA", "BBB", 12, 100);
             int sId = dbStation.addNewRecord("AStation", "Aalborg", "Denmark", "Open");
             try
@@ -52,6 +57,8 @@ namespace ElectricCarLibTest
                 dbBooking.deleteRecord(bId);
                 dbBT.deleteRecord(btId);
                 dbStation.deleteRecord(sId);
+                dbCust.deleteRecord(cId);
+                dbDG.deleteRecord(dgId);
             }
         }
 
