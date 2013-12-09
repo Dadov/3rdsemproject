@@ -10,7 +10,7 @@
         <DataGrid x:Name="dgStorage" HorizontalAlignment="Left" VerticalAlignment="Top" Height="172" Width="454" Margin="30,60,0,0" SelectionChanged="dgStorage_SelectionChanged">
             <DataGrid.Columns>
                 <DataGridTextColumn Binding="{Binding ID}" Header="ID" Width="0.2*" IsReadOnly="True" SortDirection="Ascending"/>
-                <DataGridTextColumn Binding="{Binding typeID}" Header="Type ID" Width="0.2*" IsReadOnly="True"/>
+                <DataGridTextColumn Binding="{Binding type}" Header="Type" Width="0.2*" IsReadOnly="True"/>
                 <DataGridTextColumn Binding="{Binding storageNumber}" Header="Amount" Width="0.2*" IsReadOnly="True"/>
             </DataGrid.Columns>
         </DataGrid>
@@ -19,11 +19,10 @@
         <Label Content="Batteries to selected battery storage" HorizontalAlignment="Left" Margin="135,240,0,0" VerticalAlignment="Top"/>
         <Button x:Name="tbBtnInsert"  Content="Insert" HorizontalAlignment="Left" Margin="409,240,0,0" VerticalAlignment="Top" Width="75" Click="tbBtnInsert_Click"/>
         <Label Content="ID: " HorizontalAlignment="Left" Margin="571,48,0,0" VerticalAlignment="Top" Width="59"/>
-        <Label Content="Type ID: " HorizontalAlignment="Left" Margin="571,79,0,0" VerticalAlignment="Top" Width="59"/>
+        <Label Content="Type: " HorizontalAlignment="Left" Margin="571,79,0,0" VerticalAlignment="Top" Width="59"/>
         <Label Content="Station: " HorizontalAlignment="Left" Margin="571,110,0,0" VerticalAlignment="Top" Width="59"/>
         <Label Content="Storage Number: " HorizontalAlignment="Left" Margin="571,141,0,0" VerticalAlignment="Top" Width="auto"/>
         <TextBox x:Name="bsID" HorizontalAlignment="Left" Height="23" Margin="669,48,0,0" TextWrapping="Wrap" Text="" VerticalAlignment="Top" Width="189" IsReadOnly="True" />
-        <TextBox x:Name="bsType" HorizontalAlignment="Left" Height="23" Margin="669,79,0,0" TextWrapping="Wrap" Text="" VerticalAlignment="Top" Width="189"/>
         <TextBox x:Name="bsStation" HorizontalAlignment="Left" Height="23" Margin="669,110,0,0" TextWrapping="Wrap" Text="" VerticalAlignment="Top" Width="189" IsReadOnly="True"/>
         <TextBox x:Name="btStor" HorizontalAlignment="Left" Height="23" Margin="669,141,0,0" TextWrapping="Wrap" Text="" VerticalAlignment="Top" Width="189" />
         <Button x:Name="sbtnCreate" Content="Add" HorizontalAlignment="Left" Margin="571,211,0,0" VerticalAlignment="Top" Width="75" Click="sbtnCreate_Click"/>
@@ -46,5 +45,6 @@
             <ComboBoxItem Name="cbi3">All Storages and Selected Date</ComboBoxItem>
             <ComboBoxItem Name="cbi4">Selected Storage and Selected Date</ComboBoxItem>
         </ComboBox>
+        <ComboBox x:Name="cbType" HorizontalAlignment="Left" VerticalAlignment="Top" Width="189" Margin="669,79,0,0"/>
     </Grid>
 </UserControl>

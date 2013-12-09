@@ -28,6 +28,8 @@ namespace ElectricCarGUI
         public int StationId { get; set; }
         static ElectricCarService.IElectricCar serviceObj = new ElectricCarService.ElectricCarClient();
         public BatteryTypeCtr bctr { get; set; }
+        private List<string> btNames = new List<string>();
+        private Dictionary<string, int> name_Id = new Dictionary<string, int>();
         public BatteryStorageCtr()
         {
            
@@ -40,7 +42,7 @@ namespace ElectricCarGUI
             cbPeriod.SelectedIndex = 0;
             fillPeriodTable();
             bsStation.Text = StationId.ToString();
-            
+            addBTToCbbBT();
         }
 
         private void bsSearch_KeyUp(object sender, KeyEventArgs e)
@@ -48,13 +50,20 @@ namespace ElectricCarGUI
             fillStorageTable(StationId);
         }
 
+        private BatteryStorage toStorage(tableType tt)
+        {
+            BatteryStorage bs = serviceObj.getStorage(tt.ID);
+            return bs;
+        }
+
         private void dgStorage_SelectionChanged(object sender, SelectionChangedEventArgs e)
         {
-            BatteryStorage storage = (BatteryStorage)dgStorage.SelectedItem;
+            tableType tt = (tableType)dgStorage.SelectedItem;
+            BatteryStorage storage = toStorage((tableType)dgStorage.SelectedItem);
             try
             {
                 bsID.Text = storage.ID.ToString();
-                bsType.Text = storage.typeID.ToString();
+                cbType.SelectedItem = tt.type;
                 btStor.Text = storage.storageNumber.ToString();
                 if (calendar.SelectedDate == null)
                 {
@@ -93,7 +102,7 @@ namespace ElectricCarGUI
             try
             {
                 dgPeriods.Items.Clear();
-                BatteryStorage storage = (BatteryStorage)dgStorage.SelectedItem;
+                BatteryStorage storage = toStorage((tableType)dgStorage.SelectedItem);
                 List<Period> periods = new List<Period>();
                 if (storage != null)
                 {
@@ -169,20 +178,38 @@ namespace ElectricCarGUI
 
         private bool checkBS()
         {
-            if (regCheck.checkNumber(bsType.Text) && (regCheck.checkNumber(btStor.Text)))
+            if (regCheck.checkNumber(btStor.Text))
             {
                 return true;
             }
             else return false;
         }
 
+        private void addBTToCbbBT()
+        {
+            List<BatteryType> bts = new List<BatteryType>();
+            bts = serviceObj.getAllBatteryTypes().ToList();
+            if (bts != null)
+            {
+                foreach (BatteryType b in bts)
+                {
+                    btNames.Add(b.name);
+                    name_Id.Add(b.name, b.ID);
+                }
+                cbType.ItemsSource = btNames;
+                cbType.SelectedIndex = 0;
+            }
+
+        }
+
         private void sbtnCreate_Click(object sender, RoutedEventArgs e)
         {
             try
             {
+                int Id = name_Id[(string)cbType.SelectedValue];
                 if (checkBS())
                 {
-                    serviceObj.addNewStorage(Int32.Parse(bsType.Text), Int32.Parse(bsStation.Text), Int32.Parse(btStor.Text));
+                    serviceObj.addNewStorage(Id, Int32.Parse(bsStation.Text), Int32.Parse(btStor.Text));
                     fillStorageTable(StationId);
                     fillPeriodTable();
                     clearBS();
@@ -198,9 +225,10 @@ namespace ElectricCarGUI
         {
             try
             {
+                int Id = name_Id[(string)cbType.SelectedValue];
                 if (checkBS())
                 {
-                    serviceObj.updateStorage(Int32.Parse(bsID.Text), Int32.Parse(bsType.Text), Int32.Parse(bsStation.Text), Int32.Parse(btStor.Text));
+                    serviceObj.updateStorage(Int32.Parse(bsID.Text), Id, Int32.Parse(bsStation.Text), Int32.Parse(btStor.Text));
                     fillStorageTable(StationId);
                     fillPeriodTable();
                     clearBS();
@@ -237,7 +265,14 @@ namespace ElectricCarGUI
 
         private void clearBS()
         {
-            bsID.Text = bsType.Text = btStor.Text = "";
+            bsID.Text = btStor.Text = "";
+        }
+
+        public class tableType
+        {
+            public int ID {get; set;}
+            public string type { get; set; }
+            public int storageNumber { get; set; }
         }
 
         public void fillStorageTable(int StationID)
@@ -247,14 +282,14 @@ namespace ElectricCarGUI
             List<BatteryStorage> storages = serviceObj.getStationStorages(StationID).ToList();
             foreach (BatteryStorage storage in storages)
             {
-                dgStorage.Items.Add(storage);
+                dgStorage.Items.Add(new tableType() { ID = storage.ID, type = serviceObj.getBatteryType(storage.typeID).name, storageNumber = storage.storageNumber });
             }
             if (searchTerm != null)
             {
                 var filter = new Predicate<object>(
-                bs => ((BatteryStorage)bs).ID.ToString().ToLower().Contains(searchTerm)
-                || ((BatteryStorage)bs).typeID.ToString().ToLower().Contains(searchTerm)
-                || ((BatteryStorage)bs).storageNumber.ToString().ToLower().Contains(searchTerm));
+                bs => ((tableType)bs).ID.ToString().ToLower().Contains(searchTerm)
+                || ((tableType)bs).type.ToLower().Contains(searchTerm)
+                || ((tableType)bs).storageNumber.ToString().ToLower().Contains(searchTerm));
                 dgStorage.Items.Filter = filter;
             }
 
