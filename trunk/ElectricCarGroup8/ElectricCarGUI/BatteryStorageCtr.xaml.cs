@@ -59,19 +59,24 @@ namespace ElectricCarGUI
         private void dgStorage_SelectionChanged(object sender, SelectionChangedEventArgs e)
         {
             tableType tt = (tableType)dgStorage.SelectedItem;
-            BatteryStorage storage = toStorage((tableType)dgStorage.SelectedItem);
+            BatteryStorage storage = new BatteryStorage();
+           if(tt!=null) storage = toStorage((tableType)dgStorage.SelectedItem);
             try
             {
                 bsID.Text = storage.ID.ToString();
-                cbType.SelectedItem = tt.type;
+                if (tt != null) cbType.SelectedItem = tt.type;
+                else cbType.SelectedIndex = 0;
                 btStor.Text = storage.storageNumber.ToString();
-                if (calendar.SelectedDate == null)
+                if (tt != null)
                 {
-                    cbPeriod.SelectedItem = cbi2;
-                }
-                else
-                {
-                    cbPeriod.SelectedItem = cbi4;
+                    if (calendar.SelectedDate == null)
+                    {
+                        cbPeriod.SelectedItem = cbi2;
+                    }
+                    else
+                    {
+                        cbPeriod.SelectedItem = cbi4;
+                    }
                 }
                 changePeriodsView();
             }
@@ -102,7 +107,8 @@ namespace ElectricCarGUI
             try
             {
                 dgPeriods.Items.Clear();
-                BatteryStorage storage = toStorage((tableType)dgStorage.SelectedItem);
+                BatteryStorage storage = null;
+                if((tableType)dgStorage.SelectedItem!=null) storage = toStorage((tableType)dgStorage.SelectedItem);
                 List<Period> periods = new List<Period>();
                 if (storage != null)
                 {
