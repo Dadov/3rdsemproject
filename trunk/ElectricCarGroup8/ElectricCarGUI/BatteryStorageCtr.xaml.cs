@@ -42,6 +42,8 @@ namespace ElectricCarGUI
             cbPeriod.SelectedIndex = 0;
             fillPeriodTable();
             bsStation.Text = StationId.ToString();
+            btNames = new List<string>();
+            name_Id = new Dictionary<string, int>();
             addBTToCbbBT();
         }
 
