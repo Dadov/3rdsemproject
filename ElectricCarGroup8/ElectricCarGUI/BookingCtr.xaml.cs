@@ -49,9 +49,8 @@ namespace ElectricCarGUI
             {
                 var filter = new Predicate<object>(
                 s => ((Booking)s).Id.ToString().ToLower().Contains(searchTerm)
-                || ((Booking)s).createDate.ToLower().Contains(searchTerm)
-                || ((Booking)s).customer.Id.ToString().ToLower().Contains(searchTerm)
-                || ((Booking)s).tripStart.ToLower().Contains(searchTerm));
+                //|| ((Booking)s).createDate.ToLower().Contains(searchTerm)
+                || ((Booking)s).customer.ID.ToString().ToLower().Contains(searchTerm));
                 dgBookings.Items.Filter = filter;
             }
             setTimeToTxtBox();
@@ -113,7 +112,7 @@ namespace ElectricCarGUI
         }
         
 
-        private BatteryTypeTest bt = new BatteryTypeTest();
+        private BatteryType bt = new BatteryType();
         private void btnAddBT_Click(object sender, RoutedEventArgs e)
         {
             if (txtBId.Text == "")
@@ -139,7 +138,7 @@ namespace ElectricCarGUI
         {
             if (txtBId.Text=="")
             {
-                bt = new BatteryTypeTest();
+                bt = new BatteryType();
                 dgBookingLine.ItemsSource = null;
                 dgRoute.ItemsSource = null;
                 txtTotalPrice.Text = "";
@@ -218,6 +217,7 @@ namespace ElectricCarGUI
         {
             if (regCheck.checkNumber(txtCId.Text))
             {
+                Mouse.OverrideCursor = System.Windows.Input.Cursors.Wait;
                 Customer Customer = serviceObj.getCustomer(Convert.ToInt32(txtCId.Text));
                 if (Customer.ID != 0)
                 {
@@ -263,19 +263,19 @@ namespace ElectricCarGUI
                         BookingLine blForBatteryType = (BookingLine)dgBookingLine.Items.GetItemAt(0);
                         decimal price = blForBatteryType.price;
                         int quantity = blForBatteryType.quantity;
-                        int btId = blForBatteryType.BatteryType.Id;
+                        int btId = blForBatteryType.BatteryType.ID;
                         for (int i = 0; i < rs.Count; i++)
                         {
                             BookingLine bl = new BookingLine();
                             Station s = new Station();
-                            BatteryTypeTest bt = new BatteryTypeTest();
+                            BatteryType bt = new BatteryType();
                             bl.station = s;
                             bl.BatteryType = bt;
                             bl.station.Id = rs[i].station.Id;
                             bl.time = rs[i].time;
                             bl.quantity = quantity;
                             bl.price = price;
-                            bl.BatteryType.Id = btId;
+                            bl.BatteryType.ID = btId;
                             bls.Add(bl);
                         }
                         bk.bookinglines = bls.ToArray<BookingLine>();
@@ -284,14 +284,17 @@ namespace ElectricCarGUI
                             serviceObj.addBooking(bk);
                             showBookings();
                             clearTextBox();
+                            Mouse.OverrideCursor = System.Windows.Input.Cursors.Arrow;
                         }
                         catch (FaultException a)
                         {
                             MessageBox.Show(a.Message);
+                            Mouse.OverrideCursor = System.Windows.Input.Cursors.Arrow;
                         }
                     }
                     catch (Exception)
                     {
+                        Mouse.OverrideCursor = System.Windows.Input.Cursors.Arrow;
                     }
 
 

@@ -55,6 +55,7 @@
       <xs:element minOccurs="0" name="LogInfos" nillable="true" type="tns:ArrayOfLogInfo" />
       <xs:element minOccurs="0" name="PaymentStatus" nillable="true" type="xs:string" />
       <xs:element minOccurs="0" name="Phone" nillable="true" type="xs:string" />
+      <xs:element minOccurs="0" name="name" nillable="true" type="xs:string" />
     </xs:sequence>
   </xs:complexType>
   <xs:element name="Customer" nillable="true" type="tns:Customer" />
@@ -82,7 +83,7 @@
       <xs:element minOccurs="0" name="bookinglines" nillable="true" type="tns:ArrayOfBookingLine" />
       <xs:element minOccurs="0" name="cId" type="xs:int" />
       <xs:element minOccurs="0" name="createDate" nillable="true" type="xs:string" />
-      <xs:element minOccurs="0" name="customer" nillable="true" type="tns:CustomerTest" />
+      <xs:element minOccurs="0" name="customer" nillable="true" type="tns:Customer" />
       <xs:element minOccurs="0" name="payStatus" nillable="true" type="xs:string" />
       <xs:element minOccurs="0" name="startStationId" type="xs:int" />
       <xs:element minOccurs="0" name="totalPrice" type="xs:decimal" />
@@ -98,7 +99,7 @@
   <xs:element name="ArrayOfBookingLine" nillable="true" type="tns:ArrayOfBookingLine" />
   <xs:complexType name="BookingLine">
     <xs:sequence>
-      <xs:element minOccurs="0" name="BatteryType" nillable="true" type="tns:BatteryTypeTest" />
+      <xs:element minOccurs="0" name="BatteryType" nillable="true" type="tns:BatteryType" />
       <xs:element minOccurs="0" name="bId" type="xs:int" />
       <xs:element minOccurs="0" name="price" type="xs:decimal" />
       <xs:element minOccurs="0" name="quantity" type="xs:int" />
@@ -107,16 +108,18 @@
     </xs:sequence>
   </xs:complexType>
   <xs:element name="BookingLine" nillable="true" type="tns:BookingLine" />
-  <xs:complexType name="BatteryTypeTest">
+  <xs:complexType name="BatteryType">
     <xs:sequence>
-      <xs:element minOccurs="0" name="Id" type="xs:int" />
+      <xs:element minOccurs="0" name="ID" type="xs:int" />
       <xs:element minOccurs="0" name="capacity" type="xs:decimal" />
+      <xs:element minOccurs="0" name="exchangeCost" type="xs:decimal" />
       <xs:element minOccurs="0" name="name" nillable="true" type="xs:string" />
       <xs:element minOccurs="0" name="price" type="xs:double" />
+      <xs:element minOccurs="0" name="producer" nillable="true" type="xs:string" />
       <xs:element minOccurs="0" name="quantity" type="xs:int" />
     </xs:sequence>
   </xs:complexType>
-  <xs:element name="BatteryTypeTest" nillable="true" type="tns:BatteryTypeTest" />
+  <xs:element name="BatteryType" nillable="true" type="tns:BatteryType" />
   <xs:complexType name="Station">
     <xs:sequence>
       <xs:element minOccurs="0" name="Address" nillable="true" type="xs:string" />
@@ -127,13 +130,6 @@
     </xs:sequence>
   </xs:complexType>
   <xs:element name="Station" nillable="true" type="tns:Station" />
-  <xs:complexType name="CustomerTest">
-    <xs:sequence>
-      <xs:element minOccurs="0" name="Id" type="xs:int" />
-      <xs:element minOccurs="0" name="name" nillable="true" type="xs:string" />
-    </xs:sequence>
-  </xs:complexType>
-  <xs:element name="CustomerTest" nillable="true" type="tns:CustomerTest" />
   <xs:complexType name="ArrayOfArrayOfRouteStop">
     <xs:sequence>
       <xs:element minOccurs="0" maxOccurs="unbounded" name="ArrayOfRouteStop" nillable="true" type="tns:ArrayOfRouteStop" />
@@ -156,18 +152,12 @@
     </xs:sequence>
   </xs:complexType>
   <xs:element name="RouteStop" nillable="true" type="tns:RouteStop" />
-  <xs:complexType name="Error">
+  <xs:complexType name="ArrayOfBatteryType">
     <xs:sequence>
-      <xs:element minOccurs="0" name="Info" nillable="true" type="xs:string" />
+      <xs:element minOccurs="0" maxOccurs="unbounded" name="BatteryType" nillable="true" type="tns:BatteryType" />
     </xs:sequence>
   </xs:complexType>
-  <xs:element name="Error" nillable="true" type="tns:Error" />
-  <xs:complexType name="ArrayOfBatteryTypeTest">
-    <xs:sequence>
-      <xs:element minOccurs="0" maxOccurs="unbounded" name="BatteryTypeTest" nillable="true" type="tns:BatteryTypeTest" />
-    </xs:sequence>
-  </xs:complexType>
-  <xs:element name="ArrayOfBatteryTypeTest" nillable="true" type="tns:ArrayOfBatteryTypeTest" />
+  <xs:element name="ArrayOfBatteryType" nillable="true" type="tns:ArrayOfBatteryType" />
   <xs:complexType name="ArrayOfStation">
     <xs:sequence>
       <xs:element minOccurs="0" maxOccurs="unbounded" name="Station" nillable="true" type="tns:Station" />
@@ -190,22 +180,6 @@
     </xs:sequence>
   </xs:complexType>
   <xs:element name="NaborStation" nillable="true" type="tns:NaborStation" />
-  <xs:complexType name="BatteryType">
-    <xs:sequence>
-      <xs:element minOccurs="0" name="ID" type="xs:int" />
-      <xs:element minOccurs="0" name="capacity" type="xs:decimal" />
-      <xs:element minOccurs="0" name="exchangeCost" type="xs:decimal" />
-      <xs:element minOccurs="0" name="name" nillable="true" type="xs:string" />
-      <xs:element minOccurs="0" name="producer" nillable="true" type="xs:string" />
-    </xs:sequence>
-  </xs:complexType>
-  <xs:element name="BatteryType" nillable="true" type="tns:BatteryType" />
-  <xs:complexType name="ArrayOfBatteryType">
-    <xs:sequence>
-      <xs:element minOccurs="0" maxOccurs="unbounded" name="BatteryType" nillable="true" type="tns:BatteryType" />
-    </xs:sequence>
-  </xs:complexType>
-  <xs:element name="ArrayOfBatteryType" nillable="true" type="tns:ArrayOfBatteryType" />
   <xs:complexType name="BatteryStorage">
     <xs:sequence>
       <xs:element minOccurs="0" name="ID" type="xs:int" />

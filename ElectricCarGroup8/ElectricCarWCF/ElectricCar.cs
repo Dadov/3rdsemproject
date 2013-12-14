@@ -479,7 +479,7 @@ namespace ElectricCarWCF
                     Booking bk = new Booking();
                     bk.Id = b.Id;
                     bk.createDate = b.createDate.Value.ToString("dd/MM/yyyy");
-                    CustomerTest cust = new CustomerTest() { Id = b.customer.ID, name = b.customer.FName + " " + b.customer.LName };
+                    Customer cust = new Customer() { ID = b.customer.ID, name = b.customer.FName + " " + b.customer.LName };
                     bk.customer = cust;
                     bk.cId = b.customer.ID;
                     bk.payStatus = b.creaditCard;
@@ -494,8 +494,8 @@ namespace ElectricCarWCF
                             l.quantity = bl.quantity.Value;
                             l.time = bl.time.Value;
                             bk.bookinglines.Add(l);
-                            BatteryTypeTest bt = new BatteryTypeTest();
-                            bt.Id = bl.BatteryType.id;
+                            BatteryType bt = new BatteryType();
+                            bt.ID = bl.BatteryType.id;
                             bt.name = bl.BatteryType.name;
                             l.BatteryType = bt;
                             Station s = new Station();
@@ -530,8 +530,8 @@ namespace ElectricCarWCF
                     l.time = bl.time.Value;
                     bk.bookinglines.Add(l);
 
-                    BatteryTypeTest bt = new BatteryTypeTest();
-                    bt.Id = bl.BatteryType.id;
+                    BatteryType bt = new BatteryType();
+                    bt.ID = bl.BatteryType.id;
                     bt.name = bl.BatteryType.name;
                     l.BatteryType = bt;
 
@@ -565,7 +565,7 @@ namespace ElectricCarWCF
                 bl.quantity = bls[i].quantity;
                 bl.Station.Id = bls[i].station.Id;
                 bl.time = bls[i].time;
-                bl.BatteryType.id = bls[i].BatteryType.Id;
+                bl.BatteryType.id = bls[i].BatteryType.ID;
                 bkls.Add(bl);
             }
             bk.bookinglines = bkls;
@@ -607,17 +607,17 @@ namespace ElectricCarWCF
             return bt.capacity * et.getCarAveSpeed();
         }
 
-        public List<BatteryTypeTest> getAllBatteryType()
+        public List<BatteryType> getAllBatteryType()
         {
-            List<BatteryTypeTest> bts = new List<BatteryTypeTest>();
+            List<BatteryType> bts = new List<BatteryType>();
             BatteryTypeCtr btCtr = new BatteryTypeCtr();
             List<MBatteryType> bt = btCtr.getAllRecord(false);
             if (bt.Count != 0)
             {
                 foreach (MBatteryType b in bt)
                 {
-                    BatteryTypeTest btt = new BatteryTypeTest();
-                    btt.Id = b.id;
+                    BatteryType btt = new BatteryType();
+                    btt.ID = b.id;
                     btt.name = b.name;
                     btt.price = Convert.ToDouble(b.exchangeCost);
                     bts.Add(btt);
@@ -747,14 +747,15 @@ namespace ElectricCarWCF
         {
             List<BookingLine> bls = new List<BookingLine>();
             BookingLineCtr blCtr = new BookingLineCtr();
-            List<MBookingLine> mbls = blCtr.getBookingLinesForStation(sId, false);
+            List<MBookingLine> mbls = blCtr.getBookingLinesForStation(sId, true);
 
             foreach (MBookingLine bl in mbls)
             {
                 BookingLine b = new BookingLine();
-                BatteryTypeTest bt = new BatteryTypeTest();
+                BatteryType bt = new BatteryType();
                 b.BatteryType = bt;
-                b.BatteryType.Id = bl.BatteryType.id;
+                b.BatteryType.ID = bl.BatteryType.id;
+                b.BatteryType.name = bl.BatteryType.name;
                 b.quantity = bl.quantity.Value;
                 b.time = bl.time.Value;
                 b.price = bl.price.Value;
@@ -773,9 +774,9 @@ namespace ElectricCarWCF
             foreach (MBookingLine bl in mbls)
             {
                 BookingLine b = new BookingLine();
-                BatteryTypeTest bt = new BatteryTypeTest();
+                BatteryType bt = new BatteryType();
                 b.BatteryType = bt;
-                b.BatteryType.Id = bl.BatteryType.id;
+                b.BatteryType.ID = bl.BatteryType.id;
                 b.quantity = bl.quantity.Value;
                 b.time = bl.time.Value;
                 b.price = bl.price.Value;

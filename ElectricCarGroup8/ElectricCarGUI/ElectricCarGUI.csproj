@@ -187,9 +187,6 @@
     <None Include="Service References\ElectricCarService\ElectricCarGUI.ElectricCarService.BatteryType.datasource">
       <DependentUpon>Reference.svcmap</DependentUpon>
     </None>
-    <None Include="Service References\ElectricCarService\ElectricCarGUI.ElectricCarService.BatteryTypeTest.datasource">
-      <DependentUpon>Reference.svcmap</DependentUpon>
-    </None>
     <None Include="Service References\ElectricCarService\ElectricCarGUI.ElectricCarService.Booking.datasource">
       <DependentUpon>Reference.svcmap</DependentUpon>
     </None>

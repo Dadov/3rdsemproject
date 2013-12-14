@@ -31,7 +31,7 @@ namespace ElectricCarWCF
         [DataMember]
         public List<BookingLine> bookinglines { get; set; }
         [DataMember]
-        public CustomerTest customer { get; set; }
+        public Customer customer { get; set; }
         [DataMember]
         public int startStationId { get; set; }
     }

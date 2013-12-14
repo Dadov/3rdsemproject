@@ -52,11 +52,9 @@
   <ItemGroup>
     <Compile Include="BatteryStorage.cs" />
     <Compile Include="BatteryType.cs" />
-    <Compile Include="BatteryTypeTest.cs" />
     <Compile Include="Booking.cs" />
     <Compile Include="BookingLine.cs" />
     <Compile Include="Customer.cs" />
-    <Compile Include="CustomerTest.cs" />
     <Compile Include="DiscountGroup.cs" />
     <Compile Include="ElectricCar.cs" />
     <Compile Include="ElectricCarPeople.cs" />

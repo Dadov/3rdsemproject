@@ -13,7 +13,7 @@ namespace ElectricCarWCF
         public BookingLine()
         {
             station = new Station();
-            BatteryType = new BatteryTypeTest();
+            BatteryType = new BatteryType();
         }
         [DataMember]
         public Station station { get; set; }
@@ -24,7 +24,7 @@ namespace ElectricCarWCF
         [DataMember]
         public DateTime time { get; set; }
         [DataMember]
-        public BatteryTypeTest BatteryType { get; set; }
+        public BatteryType BatteryType { get; set; }
         [DataMember]
         public int bId { get; set; }
 

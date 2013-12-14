@@ -395,6 +395,9 @@ namespace ElectricCarGUI.ElectricCarService {
         [System.Runtime.Serialization.OptionalFieldAttribute()]
         private string PhoneField;
         
+        [System.Runtime.Serialization.OptionalFieldAttribute()]
+        private string nameField;
+        
         [global::System.ComponentModel.BrowsableAttribute(false)]
         public System.Runtime.Serialization.ExtensionDataObject ExtensionData {
             get {
@@ -535,6 +538,19 @@ namespace ElectricCarGUI.ElectricCarService {
             }
         }
         
+        [System.Runtime.Serialization.DataMemberAttribute()]
+        public string name {
+            get {
+                return this.nameField;
+            }
+            set {
+                if ((object.ReferenceEquals(this.nameField, value) != true)) {
+                    this.nameField = value;
+                    this.RaisePropertyChanged("name");
+                }
+            }
+        }
+        
         public event System.ComponentModel.PropertyChangedEventHandler PropertyChanged;
         
         protected void RaisePropertyChanged(string propertyName) {
@@ -567,7 +583,7 @@ namespace ElectricCarGUI.ElectricCarService {
         private string createDateField;
         
         [System.Runtime.Serialization.OptionalFieldAttribute()]
-        private ElectricCarGUI.ElectricCarService.CustomerTest customerField;
+        private ElectricCarGUI.ElectricCarService.Customer customerField;
         
         [System.Runtime.Serialization.OptionalFieldAttribute()]
         private string payStatusField;
@@ -644,7 +660,7 @@ namespace ElectricCarGUI.ElectricCarService {
         }
         
         [System.Runtime.Serialization.DataMemberAttribute()]
-        public ElectricCarGUI.ElectricCarService.CustomerTest customer {
+        public ElectricCarGUI.ElectricCarService.Customer customer {
             get {
                 return this.customerField;
             }
@@ -720,67 +736,6 @@ namespace ElectricCarGUI.ElectricCarService {
     
     [System.Diagnostics.DebuggerStepThroughAttribute()]
     [System.CodeDom.Compiler.GeneratedCodeAttribute("System.Runtime.Serialization", "4.0.0.0")]
-    [System.Runtime.Serialization.DataContractAttribute(Name="CustomerTest", Namespace="http://schemas.datacontract.org/2004/07/ElectricCarWCF")]
-    [System.SerializableAttribute()]
-    public partial class CustomerTest : object, System.Runtime.Serialization.IExtensibleDataObject, System.ComponentModel.INotifyPropertyChanged {
-        
-        [System.NonSerializedAttribute()]
-        private System.Runtime.Serialization.ExtensionDataObject extensionDataField;
-        
-        [System.Runtime.Serialization.OptionalFieldAttribute()]
-        private int IdField;
-        
-        [System.Runtime.Serialization.OptionalFieldAttribute()]
-        private string nameField;
-        
-        [global::System.ComponentModel.BrowsableAttribute(false)]
-        public System.Runtime.Serialization.ExtensionDataObject ExtensionData {
-            get {
-                return this.extensionDataField;
-            }
-            set {
-                this.extensionDataField = value;
-            }
-        }
-        
-        [System.Runtime.Serialization.DataMemberAttribute()]
-        public int Id {
-            get {
-                return this.IdField;
-            }
-            set {
-                if ((this.IdField.Equals(value) != true)) {
-                    this.IdField = value;
-                    this.RaisePropertyChanged("Id");
-                }
-            }
-        }
-        
-        [System.Runtime.Serialization.DataMemberAttribute()]
-        public string name {
-            get {
-                return this.nameField;
-            }
-            set {
-                if ((object.ReferenceEquals(this.nameField, value) != true)) {
-                    this.nameField = value;
-                    this.RaisePropertyChanged("name");
-                }
-            }
-        }
-        
-        public event System.ComponentModel.PropertyChangedEventHandler PropertyChanged;
-        
-        protected void RaisePropertyChanged(string propertyName) {
-            System.ComponentModel.PropertyChangedEventHandler propertyChanged = this.PropertyChanged;
-            if ((propertyChanged != null)) {
-                propertyChanged(this, new System.ComponentModel.PropertyChangedEventArgs(propertyName));
-            }
-        }
-    }
-    
-    [System.Diagnostics.DebuggerStepThroughAttribute()]
-    [System.CodeDom.Compiler.GeneratedCodeAttribute("System.Runtime.Serialization", "4.0.0.0")]
     [System.Runtime.Serialization.DataContractAttribute(Name="BookingLine", Namespace="http://schemas.datacontract.org/2004/07/ElectricCarWCF")]
     [System.SerializableAttribute()]
     public partial class BookingLine : object, System.Runtime.Serialization.IExtensibleDataObject, System.ComponentModel.INotifyPropertyChanged {
@@ -789,7 +744,7 @@ namespace ElectricCarGUI.ElectricCarService {
         private System.Runtime.Serialization.ExtensionDataObject extensionDataField;
         
         [System.Runtime.Serialization.OptionalFieldAttribute()]
-        private ElectricCarGUI.ElectricCarService.BatteryTypeTest BatteryTypeField;
+        private ElectricCarGUI.ElectricCarService.BatteryType BatteryTypeField;
         
         [System.Runtime.Serialization.OptionalFieldAttribute()]
         private int bIdField;
@@ -817,7 +772,7 @@ namespace ElectricCarGUI.ElectricCarService {
         }
         
         [System.Runtime.Serialization.DataMemberAttribute()]
-        public ElectricCarGUI.ElectricCarService.BatteryTypeTest BatteryType {
+        public ElectricCarGUI.ElectricCarService.BatteryType BatteryType {
             get {
                 return this.BatteryTypeField;
             }
@@ -906,24 +861,30 @@ namespace ElectricCarGUI.ElectricCarService {
     
     [System.Diagnostics.DebuggerStepThroughAttribute()]
     [System.CodeDom.Compiler.GeneratedCodeAttribute("System.Runtime.Serialization", "4.0.0.0")]
-    [System.Runtime.Serialization.DataContractAttribute(Name="BatteryTypeTest", Namespace="http://schemas.datacontract.org/2004/07/ElectricCarWCF")]
+    [System.Runtime.Serialization.DataContractAttribute(Name="BatteryType", Namespace="http://schemas.datacontract.org/2004/07/ElectricCarWCF")]
     [System.SerializableAttribute()]
-    public partial class BatteryTypeTest : object, System.Runtime.Serialization.IExtensibleDataObject, System.ComponentModel.INotifyPropertyChanged {
+    public partial class BatteryType : object, System.Runtime.Serialization.IExtensibleDataObject, System.ComponentModel.INotifyPropertyChanged {
         
         [System.NonSerializedAttribute()]
         private System.Runtime.Serialization.ExtensionDataObject extensionDataField;
         
         [System.Runtime.Serialization.OptionalFieldAttribute()]
-        private int IdField;
+        private int IDField;
         
         [System.Runtime.Serialization.OptionalFieldAttribute()]
         private decimal capacityField;
+        
+        [System.Runtime.Serialization.OptionalFieldAttribute()]
+        private decimal exchangeCostField;
         
         [System.Runtime.Serialization.OptionalFieldAttribute()]
         private string nameField;
         
         [System.Runtime.Serialization.OptionalFieldAttribute()]
         private double priceField;
+        
+        [System.Runtime.Serialization.OptionalFieldAttribute()]
+        private string producerField;
         
         [System.Runtime.Serialization.OptionalFieldAttribute()]
         private int quantityField;
@@ -939,14 +900,14 @@ namespace ElectricCarGUI.ElectricCarService {
         }
         
         [System.Runtime.Serialization.DataMemberAttribute()]
-        public int Id {
+        public int ID {
             get {
-                return this.IdField;
+                return this.IDField;
             }
             set {
-                if ((this.IdField.Equals(value) != true)) {
-                    this.IdField = value;
-                    this.RaisePropertyChanged("Id");
+                if ((this.IDField.Equals(value) != true)) {
+                    this.IDField = value;
+                    this.RaisePropertyChanged("ID");
                 }
             }
         }
@@ -960,6 +921,19 @@ namespace ElectricCarGUI.ElectricCarService {
                 if ((this.capacityField.Equals(value) != true)) {
                     this.capacityField = value;
                     this.RaisePropertyChanged("capacity");
+                }
+            }
+        }
+        
+        [System.Runtime.Serialization.DataMemberAttribute()]
+        public decimal exchangeCost {
+            get {
+                return this.exchangeCostField;
+            }
+            set {
+                if ((this.exchangeCostField.Equals(value) != true)) {
+                    this.exchangeCostField = value;
+                    this.RaisePropertyChanged("exchangeCost");
                 }
             }
         }
@@ -986,6 +960,19 @@ namespace ElectricCarGUI.ElectricCarService {
                 if ((this.priceField.Equals(value) != true)) {
                     this.priceField = value;
                     this.RaisePropertyChanged("price");
+                }
+            }
+        }
+        
+        [System.Runtime.Serialization.DataMemberAttribute()]
+        public string producer {
+            get {
+                return this.producerField;
+            }
+            set {
+                if ((object.ReferenceEquals(this.producerField, value) != true)) {
+                    this.producerField = value;
+                    this.RaisePropertyChanged("producer");
                 }
             }
         }
@@ -1233,51 +1220,6 @@ namespace ElectricCarGUI.ElectricCarService {
     
     [System.Diagnostics.DebuggerStepThroughAttribute()]
     [System.CodeDom.Compiler.GeneratedCodeAttribute("System.Runtime.Serialization", "4.0.0.0")]
-    [System.Runtime.Serialization.DataContractAttribute(Name="Error", Namespace="http://schemas.datacontract.org/2004/07/ElectricCarWCF")]
-    [System.SerializableAttribute()]
-    public partial class Error : object, System.Runtime.Serialization.IExtensibleDataObject, System.ComponentModel.INotifyPropertyChanged {
-        
-        [System.NonSerializedAttribute()]
-        private System.Runtime.Serialization.ExtensionDataObject extensionDataField;
-        
-        [System.Runtime.Serialization.OptionalFieldAttribute()]
-        private string InfoField;
-        
-        [global::System.ComponentModel.BrowsableAttribute(false)]
-        public System.Runtime.Serialization.ExtensionDataObject ExtensionData {
-            get {
-                return this.extensionDataField;
-            }
-            set {
-                this.extensionDataField = value;
-            }
-        }
-        
-        [System.Runtime.Serialization.DataMemberAttribute()]
-        public string Info {
-            get {
-                return this.InfoField;
-            }
-            set {
-                if ((object.ReferenceEquals(this.InfoField, value) != true)) {
-                    this.InfoField = value;
-                    this.RaisePropertyChanged("Info");
-                }
-            }
-        }
-        
-        public event System.ComponentModel.PropertyChangedEventHandler PropertyChanged;
-        
-        protected void RaisePropertyChanged(string propertyName) {
-            System.ComponentModel.PropertyChangedEventHandler propertyChanged = this.PropertyChanged;
-            if ((propertyChanged != null)) {
-                propertyChanged(this, new System.ComponentModel.PropertyChangedEventArgs(propertyName));
-            }
-        }
-    }
-    
-    [System.Diagnostics.DebuggerStepThroughAttribute()]
-    [System.CodeDom.Compiler.GeneratedCodeAttribute("System.Runtime.Serialization", "4.0.0.0")]
     [System.Runtime.Serialization.DataContractAttribute(Name="NaborStation", Namespace="http://schemas.datacontract.org/2004/07/ElectricCarWCF")]
     [System.SerializableAttribute()]
     public partial class NaborStation : object, System.Runtime.Serialization.IExtensibleDataObject, System.ComponentModel.INotifyPropertyChanged {
@@ -1371,115 +1313,6 @@ namespace ElectricCarGUI.ElectricCarService {
                 if ((object.ReferenceEquals(this.NameField, value) != true)) {
                     this.NameField = value;
                     this.RaisePropertyChanged("Name");
-                }
-            }
-        }
-        
-        public event System.ComponentModel.PropertyChangedEventHandler PropertyChanged;
-        
-        protected void RaisePropertyChanged(string propertyName) {
-            System.ComponentModel.PropertyChangedEventHandler propertyChanged = this.PropertyChanged;
-            if ((propertyChanged != null)) {
-                propertyChanged(this, new System.ComponentModel.PropertyChangedEventArgs(propertyName));
-            }
-        }
-    }
-    
-    [System.Diagnostics.DebuggerStepThroughAttribute()]
-    [System.CodeDom.Compiler.GeneratedCodeAttribute("System.Runtime.Serialization", "4.0.0.0")]
-    [System.Runtime.Serialization.DataContractAttribute(Name="BatteryType", Namespace="http://schemas.datacontract.org/2004/07/ElectricCarWCF")]
-    [System.SerializableAttribute()]
-    public partial class BatteryType : object, System.Runtime.Serialization.IExtensibleDataObject, System.ComponentModel.INotifyPropertyChanged {
-        
-        [System.NonSerializedAttribute()]
-        private System.Runtime.Serialization.ExtensionDataObject extensionDataField;
-        
-        [System.Runtime.Serialization.OptionalFieldAttribute()]
-        private int IDField;
-        
-        [System.Runtime.Serialization.OptionalFieldAttribute()]
-        private decimal capacityField;
-        
-        [System.Runtime.Serialization.OptionalFieldAttribute()]
-        private decimal exchangeCostField;
-        
-        [System.Runtime.Serialization.OptionalFieldAttribute()]
-        private string nameField;
-        
-        [System.Runtime.Serialization.OptionalFieldAttribute()]
-        private string producerField;
-        
-        [global::System.ComponentModel.BrowsableAttribute(false)]
-        public System.Runtime.Serialization.ExtensionDataObject ExtensionData {
-            get {
-                return this.extensionDataField;
-            }
-            set {
-                this.extensionDataField = value;
-            }
-        }
-        
-        [System.Runtime.Serialization.DataMemberAttribute()]
-        public int ID {
-            get {
-                return this.IDField;
-            }
-            set {
-                if ((this.IDField.Equals(value) != true)) {
-                    this.IDField = value;
-                    this.RaisePropertyChanged("ID");
-                }
-            }
-        }
-        
-        [System.Runtime.Serialization.DataMemberAttribute()]
-        public decimal capacity {
-            get {
-                return this.capacityField;
-            }
-            set {
-                if ((this.capacityField.Equals(value) != true)) {
-                    this.capacityField = value;
-                    this.RaisePropertyChanged("capacity");
-                }
-            }
-        }
-        
-        [System.Runtime.Serialization.DataMemberAttribute()]
-        public decimal exchangeCost {
-            get {
-                return this.exchangeCostField;
-            }
-            set {
-                if ((this.exchangeCostField.Equals(value) != true)) {
-                    this.exchangeCostField = value;
-                    this.RaisePropertyChanged("exchangeCost");
-                }
-            }
-        }
-        
-        [System.Runtime.Serialization.DataMemberAttribute()]
-        public string name {
-            get {
-                return this.nameField;
-            }
-            set {
-                if ((object.ReferenceEquals(this.nameField, value) != true)) {
-                    this.nameField = value;
-                    this.RaisePropertyChanged("name");
-                }
-            }
-        }
-        
-        [System.Runtime.Serialization.DataMemberAttribute()]
-        public string producer {
-            get {
-                return this.producerField;
-            }
-            set {
-                if ((object.ReferenceEquals(this.producerField, value) != true)) {
-                    this.producerField = value;
-                    this.RaisePropertyChanged("producer");
                 }
             }
         }
@@ -1823,7 +1656,6 @@ namespace ElectricCarGUI.ElectricCarService {
         System.Threading.Tasks.Task<decimal> convertCapacityToDistanceAsync(int btId);
         
         [System.ServiceModel.OperationContractAttribute(Action="http://tempuri.org/IElectricCar/addBooking", ReplyAction="http://tempuri.org/IElectricCar/addBookingResponse")]
-        [System.ServiceModel.FaultContractAttribute(typeof(ElectricCarGUI.ElectricCarService.Error), Action="http://tempuri.org/IElectricCar/addBookingErrorFault", Name="Error", Namespace="http://schemas.datacontract.org/2004/07/ElectricCarWCF")]
         void addBooking(ElectricCarGUI.ElectricCarService.Booking b);
         
         [System.ServiceModel.OperationContractAttribute(Action="http://tempuri.org/IElectricCar/addBooking", ReplyAction="http://tempuri.org/IElectricCar/addBookingResponse")]
@@ -1842,10 +1674,10 @@ namespace ElectricCarGUI.ElectricCarService {
         System.Threading.Tasks.Task deleteBookingAsync(int bId);
         
         [System.ServiceModel.OperationContractAttribute(Action="http://tempuri.org/IElectricCar/getAllBatteryType", ReplyAction="http://tempuri.org/IElectricCar/getAllBatteryTypeResponse")]
-        ElectricCarGUI.ElectricCarService.BatteryTypeTest[] getAllBatteryType();
+        ElectricCarGUI.ElectricCarService.BatteryType[] getAllBatteryType();
         
         [System.ServiceModel.OperationContractAttribute(Action="http://tempuri.org/IElectricCar/getAllBatteryType", ReplyAction="http://tempuri.org/IElectricCar/getAllBatteryTypeResponse")]
-        System.Threading.Tasks.Task<ElectricCarGUI.ElectricCarService.BatteryTypeTest[]> getAllBatteryTypeAsync();
+        System.Threading.Tasks.Task<ElectricCarGUI.ElectricCarService.BatteryType[]> getAllBatteryTypeAsync();
         
         [System.ServiceModel.OperationContractAttribute(Action="http://tempuri.org/IElectricCar/getAllStations", ReplyAction="http://tempuri.org/IElectricCar/getAllStationsResponse")]
         ElectricCarGUI.ElectricCarService.Station[] getAllStations();
@@ -2257,11 +2089,11 @@ namespace ElectricCarGUI.ElectricCarService {
             return base.Channel.deleteBookingAsync(bId);
         }
         
-        public ElectricCarGUI.ElectricCarService.BatteryTypeTest[] getAllBatteryType() {
+        public ElectricCarGUI.ElectricCarService.BatteryType[] getAllBatteryType() {
             return base.Channel.getAllBatteryType();
         }
         
-        public System.Threading.Tasks.Task<ElectricCarGUI.ElectricCarService.BatteryTypeTest[]> getAllBatteryTypeAsync() {
+        public System.Threading.Tasks.Task<ElectricCarGUI.ElectricCarService.BatteryType[]> getAllBatteryTypeAsync() {
             return base.Channel.getAllBatteryTypeAsync();
         }
         

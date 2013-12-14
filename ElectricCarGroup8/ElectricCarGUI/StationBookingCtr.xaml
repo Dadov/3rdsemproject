@@ -11,7 +11,7 @@
             <DataGrid.Columns>
                 <DataGridTextColumn Binding="{Binding bId}" Header="BookingId" Width="0.15*" IsReadOnly="True" SortDirection="Ascending"/>
                 
-                <DataGridTextColumn Binding="{Binding BatteryType.Id}" Header="BatteryTypeId" Width="0.15*" IsReadOnly="True"/>
+                <DataGridTextColumn Binding="{Binding BatteryType.name}" Header="BatteryType" Width="0.15*" IsReadOnly="True"/>
                 <DataGridTextColumn Binding="{Binding quantity}"  Header="Quantity" Width="0.15*" IsReadOnly="True"/>
                 <DataGridTextColumn Binding="{Binding time}" Header="Time" Width="0.2*" IsReadOnly="True"/>
 

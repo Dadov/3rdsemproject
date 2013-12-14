@@ -43,7 +43,7 @@ namespace ElectricCarGUI
         {
             //get batteryLimit
             BookingLine bl = (BookingLine)bCtr.dgBookingLine.Items.GetItemAt(0);
-            decimal batteryLimit = serviceObj.convertCapacityToDistance(bl.BatteryType.Id);
+            decimal batteryLimit = serviceObj.convertCapacityToDistance(bl.BatteryType.ID);
             DateTime start = DateTime.ParseExact(bCtr.txtTripStart.Text, "dd/MM/yyyy HH:mm", System.Globalization.CultureInfo.CurrentCulture);
             routes = serviceObj.getRoutes(Convert.ToInt32(bCtr.txtSId.Text), Convert.ToInt32(bCtr.txtEId.Text), start, batteryLimit);
             

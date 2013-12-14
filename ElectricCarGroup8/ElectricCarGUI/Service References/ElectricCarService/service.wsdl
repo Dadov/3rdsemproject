@@ -1008,25 +1008,6 @@
       </wsp:All>
     </wsp:ExactlyOne>
   </wsp:Policy>
-  <wsp:Policy wsu:Id="WSHttpBinding_IElectricCar_addBooking_ErrorFault_Fault">
-    <wsp:ExactlyOne>
-      <wsp:All>
-        <sp:SignedParts xmlns:sp="http://schemas.xmlsoap.org/ws/2005/07/securitypolicy">
-          <sp:Body />
-          <sp:Header Name="To" Namespace="http://www.w3.org/2005/08/addressing" />
-          <sp:Header Name="From" Namespace="http://www.w3.org/2005/08/addressing" />
-          <sp:Header Name="FaultTo" Namespace="http://www.w3.org/2005/08/addressing" />
-          <sp:Header Name="ReplyTo" Namespace="http://www.w3.org/2005/08/addressing" />
-          <sp:Header Name="MessageID" Namespace="http://www.w3.org/2005/08/addressing" />
-          <sp:Header Name="RelatesTo" Namespace="http://www.w3.org/2005/08/addressing" />
-          <sp:Header Name="Action" Namespace="http://www.w3.org/2005/08/addressing" />
-        </sp:SignedParts>
-        <sp:EncryptedParts xmlns:sp="http://schemas.xmlsoap.org/ws/2005/07/securitypolicy">
-          <sp:Body />
-        </sp:EncryptedParts>
-      </wsp:All>
-    </wsp:ExactlyOne>
-  </wsp:Policy>
   <wsp:Policy wsu:Id="WSHttpBinding_IElectricCar_updateBooking_Input_policy">
     <wsp:ExactlyOne>
       <wsp:All>
@@ -2395,9 +2376,6 @@
   <wsdl:message name="IElectricCar_addBooking_OutputMessage">
     <wsdl:part name="parameters" element="tns:addBookingResponse" />
   </wsdl:message>
-  <wsdl:message name="IElectricCar_addBooking_ErrorFault_FaultMessage">
-    <wsdl:part xmlns:q1="http://schemas.datacontract.org/2004/07/ElectricCarWCF" name="detail" element="q1:Error" />
-  </wsdl:message>
   <wsdl:message name="IElectricCar_updateBooking_InputMessage">
     <wsdl:part name="parameters" element="tns:updateBooking" />
   </wsdl:message>
@@ -2686,7 +2664,6 @@
     <wsdl:operation name="addBooking">
       <wsdl:input wsaw:Action="http://tempuri.org/IElectricCar/addBooking" message="tns:IElectricCar_addBooking_InputMessage" />
       <wsdl:output wsaw:Action="http://tempuri.org/IElectricCar/addBookingResponse" message="tns:IElectricCar_addBooking_OutputMessage" />
-      <wsdl:fault wsaw:Action="http://tempuri.org/IElectricCar/addBookingErrorFault" name="ErrorFault" message="tns:IElectricCar_addBooking_ErrorFault_FaultMessage" />
     </wsdl:operation>
     <wsdl:operation name="updateBooking">
       <wsdl:input wsaw:Action="http://tempuri.org/IElectricCar/updateBooking" message="tns:IElectricCar_updateBooking_InputMessage" />
@@ -3083,10 +3060,6 @@
         <wsp:PolicyReference URI="#WSHttpBinding_IElectricCar_addBooking_output_policy" />
         <soap12:body use="literal" />
       </wsdl:output>
-      <wsdl:fault name="ErrorFault">
-        <wsp:PolicyReference URI="#WSHttpBinding_IElectricCar_addBooking_ErrorFault_Fault" />
-        <soap12:fault use="literal" name="ErrorFault" namespace="" />
-      </wsdl:fault>
     </wsdl:operation>
     <wsdl:operation name="updateBooking">
       <soap12:operation soapAction="http://tempuri.org/IElectricCar/updateBooking" style="document" />
