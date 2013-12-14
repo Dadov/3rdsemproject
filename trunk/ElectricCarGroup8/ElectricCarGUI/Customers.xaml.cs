@@ -22,15 +22,18 @@ namespace ElectricCarGUI
     public partial class Customers : UserControl
     {
         static ElectricCarService.IElectricCar serviceObj;
-        private Array discoGroups;
-        
+        private List<DiscountGroup> discoGroups { get; set; }
+        private RegexChecker regCheck;
 
         public Customers()
         {
+            InitializeComponent();
+            regCheck = new RegexChecker();
             serviceObj = new ElectricCarService.ElectricCarClient();
             // have to fetch it in advance for adding
-            discoGroups = serviceObj.getAllDiscountGroups();
-            InitializeComponent();
+            discoGroups = serviceObj.getAllDiscountGroups().ToList();
+            custDiscoGroup.ItemsSource = discoGroups;
+            custDiscoGroup.SelectedIndex = 0;
         }
 
         private void fillCustTable()
@@ -48,87 +51,102 @@ namespace ElectricCarGUI
             fillCustTable();
         }
 
-        private void deleteCust(object sender, RoutedEventArgs e)
+        private void rowSelected(object sender, RoutedEventArgs e)
         {
-            if (delCustField.Text != "")
+            if (custTable.SelectedItem != null)
             {
-                serviceObj.deleteCustomer(Convert.ToInt32(delCustField.Text));
-                fillCustTable();
-            }
-            else
-            {
-                MessageBox.Show("Please insert customer ID");
-            }
-        }
-
-        private void delCustField_PreviewMouseDown(object sender, MouseButtonEventArgs e)
-        {
-            delCustField.Text = "";
-        }
-
-        private void searchCust(object sender, RoutedEventArgs e)
-        {
-            if (searchCustField.Text != "")
-            {
-                Customer cust = serviceObj.getCustomer(Convert.ToInt32(searchCustField.Text));
+                Customer cust = (Customer) custTable.SelectedItem;
                 custFName.Text = cust.FName;
                 custLName.Text = cust.LName;
                 custAddress.Text = cust.Address;
                 custCountry.Text = cust.Country;
                 custPhone.Text = cust.Phone;
                 custEmail.Text = cust.Email;
-                // don't want to show password anyway, otherwise fetch it from LogInfo
-                custPass.Text = "";
+                custPass.Text = cust.LogInfos
+                    .Where(li => li.LoginName == cust.Email)
+                    .FirstOrDefault().Password;
                 custPayStat.Text = cust.PaymentStatus;
-                // TODO: discount group fill and selection for add and update
-                custDiscoGroup.Items.Clear();
-                discoGroups = serviceObj.getAllDiscountGroups();
-                /*
-                foreach (DiscountGroup discoGroup in discoGroups) 
-                {
-                    custDiscoGroup.Items.Add(discoGroup);
-                }
-                custDiscoGroup.SelectedItem = cust.DiscountGroup;
-                custDiscoGroup.SelectedValue = cust.DiscountGroup.Name;
-                */
-                custDiscoGroup.DataContext = discoGroups;
-                custDiscoGroup.DisplayMemberPath = cust.DiscountGroup.Name;
-            }
-            else
-            {
-                MessageBox.Show("Please insert customer ID");
+                custDiscoGroup.SelectedIndex = discoGroups
+                    .IndexOf((DiscountGroup)discoGroups
+                    .Where(dg => dg.ID == cust.DiscountGroup.ID)
+                    .FirstOrDefault());
             }
         }
 
-        private void searchCustField_PreviewMouseDown(object sender, RoutedEventArgs e)
+        private void clearFields(object sender, RoutedEventArgs e)
         {
-            searchCustField.Text = "";
+            custFName.Text = "";
+            custLName.Text = "";
+            custAddress.Text = "";
+            custCountry.Text = "";
+            custPhone.Text = "";
+            custEmail.Text = "";
+            custPass.Text = "";
+            custPayStat.Text = "";
+            custDiscoGroup.SelectedIndex = 0;
         }
 
         private void addCust(object sender, RoutedEventArgs e)
-        {   
-            serviceObj.addCustomer(
-                custFName.Text,
-                custLName.Text,
-                custAddress.Text,
-                custCountry.Text,
-                custPhone.Text,
-                custEmail.Text,
-                custPass.Text,
-                custPayStat.Text,
-                (DiscountGroup) custDiscoGroup.Items.CurrentItem
-                );
-            Console.WriteLine("kokot jedna");
+        {
+            if (regCheck.checkEmail(custEmail.Text) && regCheck.checkPassword(custPass.Text))
+            {
+                serviceObj.addCustomer(
+                    custFName.Text,
+                    custLName.Text,
+                    custAddress.Text,
+                    custCountry.Text,
+                    custPhone.Text,
+                    custEmail.Text,
+                    custPass.Text,
+                    custPayStat.Text,
+                    (DiscountGroup)custDiscoGroup.Items.CurrentItem
+                    );
+            }
+            else
+            {
+                MessageBox.Show("Please enter valid Email and Password.");
+            }
         }
 
         private void updateCust(object sender, RoutedEventArgs e)
         {
-            Customer cust = new Customer()
+            if (regCheck.checkEmail(custEmail.Text) && regCheck.checkPassword(custPass.Text))
             {
-            };
-            serviceObj.updateCustomer(cust);
+                Customer cust = (Customer)custTable.SelectedItem;
+                // Customer cust = serviceObj.getCustomer(Convert.ToInt32(searchCustField.Text));
+                LogInfo logInfo = cust.LogInfos
+                    .Where(li => li.LoginName == cust.Email)
+                    .FirstOrDefault();
+                cust.FName = custFName.Text;
+                cust.LName = custLName.Text;
+                cust.Address = custAddress.Text;
+                cust.Country = custCountry.Text;
+                cust.Phone = custPhone.Text;
+                cust.Email = custEmail.Text;
+                // not adding login info on update, just updating current
+                if (logInfo.LoginName == cust.Email)
+                {
+                    cust.LogInfos.Where(li => li.LoginName == cust.Email)
+                        .FirstOrDefault().Password = custPass.Text;
+                }
+                custDiscoGroup.SelectedIndex = discoGroups
+                        .IndexOf((DiscountGroup)discoGroups
+                        .Where(dg => dg.ID == cust.DiscountGroup.ID)
+                        .FirstOrDefault());
+                cust.PaymentStatus = custPayStat.Text;
+                serviceObj.updateCustomer(cust);
+            } 
+            else 
+            {
+                MessageBox.Show("Please enter valid Email and Password.");
+            }
         }
 
-
+        private void deleteCust(object sender, RoutedEventArgs e)
+        {
+            Customer cust = (Customer)custTable.SelectedItem;
+            serviceObj.deleteCustomer(cust.ID);
+            fillCustTable();
+        }
     }
 }

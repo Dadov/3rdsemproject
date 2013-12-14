@@ -145,7 +145,12 @@ namespace ElectricCarDB
                             emp.phone = phone;
                             emp.email = email;
                             // to be or not to be, cos LoginInfoes is 'virtual' in Customer EF model
-                            emp.LoginInfoes = DLogInfo.buildLogInfos(logInfos);
+                            emp.LoginInfoes = DLogInfo.buildLogInfos(logInfos, emp.LoginInfoes);
+                            foreach (LoginInfo logInfo in emp.LoginInfoes)
+                            {
+                                logInfo.pId = emp.Id;
+                                logInfo.Person = emp;
+                            }
                             emp.position = position.ToString();
                             emp.sId = sId;
                             context.SaveChanges();

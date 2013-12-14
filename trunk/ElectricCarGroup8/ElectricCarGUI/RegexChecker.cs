@@ -23,13 +23,13 @@ namespace ElectricCarGUI
 
         public bool checkPassword(String s)
         {
-            Regex regex = new Regex(@"((?=.*\)(?=.*[a-z]).{6,20})"); //must contain 1 number and 1 letter and be between 6-20 characters
+            Regex regex = new Regex(@"[a-z].*\d|\d.*[a-z]"); //must contain 1 number and 1 letter
             return regex.IsMatch(s);
         }
 
         public bool checkEmail(String s)
         {
-            Regex regex = new Regex(@"/^([a-z0-9_\.-]+)@([\da-z\.-]+)\.([a-z\.]{2,6})$/");
+            Regex regex = new Regex(@"\A(?:[a-z0-9!#$%&'*+/=?^_`{|}~-]+(?:\.[a-z0-9!#$%&'*+/=?^_`{|}~-]+)*@(?:[a-z0-9](?:[a-z0-9-]*[a-z0-9])?\.)+[a-z0-9](?:[a-z0-9-]*[a-z0-9])?)\Z");
             return regex.IsMatch(s);
         }
 

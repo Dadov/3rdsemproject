@@ -6,12 +6,9 @@
              mc:Ignorable="d" 
              d:DesignHeight="600" d:DesignWidth="970">
     <Grid Background="#FFE5E5E5" RenderTransformOrigin="0.51,0.5">
-        <Button Click="searchCust" Content="Search" HorizontalAlignment="Left" Margin="887,11,0,0" VerticalAlignment="Top" Width="75"/>
-        <Button Click="addCust" Content="Add" HorizontalAlignment="Left" Margin="733,317,0,0" VerticalAlignment="Top" Width="75"/>
-        <TextBox x:Name="delCustField" PreviewMouseDown="delCustField_PreviewMouseDown" HorizontalAlignment="Left" Height="23" Margin="10,559,0,0" TextWrapping="Wrap" Text="Customer ID" VerticalAlignment="Top" Width="120"/>
-        <Button Click="deleteCust" Content="Delete" HorizontalAlignment="Left" Margin="135,559,0,0" VerticalAlignment="Top" Width="75"/>
-        <TextBox x:Name="searchCustField"  PreviewMouseDown="searchCustField_PreviewMouseDown" HorizontalAlignment="Left" Height="23" Margin="733,10,0,0" TextWrapping="Wrap" Text="Customer ID" VerticalAlignment="Top" Width="120"/>
-        <DataGrid x:Name="custTable" HorizontalAlignment="Left" Margin="10,11,0,0" VerticalAlignment="Top" Height="543" Width="718">
+        <Button Click="addCust" Content="Add" HorizontalAlignment="Left" Margin="733,290,0,0" VerticalAlignment="Top" Width="75"/>
+        <Button Click="deleteCust" Content="Delete" HorizontalAlignment="Left" Margin="733,317,0,0" VerticalAlignment="Top" Width="75"/>
+        <DataGrid x:Name="custTable" HorizontalAlignment="Left" Margin="10,11,0,0" VerticalAlignment="Top" Height="539" Width="718" SelectionChanged="rowSelected">
             <DataGrid.Columns>
                 <DataGridTextColumn Binding="{Binding ID}" Header="ID" Width="0.2*" IsReadOnly="True" SortDirection="Ascending"/>
                 <DataGridTextColumn Binding="{Binding FName}" Header="First Name" Width="0.2*" IsReadOnly="True"/>
@@ -24,25 +21,26 @@
                 <DataGridTextColumn Binding="{Binding DiscountGroup}" Header="Discount Group" Width="0.2*" IsReadOnly="True"/>
             </DataGrid.Columns>
         </DataGrid>
-        <Button Click="refreshCusts" Content="Refresh" HorizontalAlignment="Left" Margin="653,560,0,0" VerticalAlignment="Top" Width="75"/>
-        <Label Content="Discount Group:" HorizontalAlignment="Left" Margin="733,286,0,0" VerticalAlignment="Top" RenderTransformOrigin="3.022,-1.493"/>
-        <Button Click="updateCust" Content="Save Changes" HorizontalAlignment="Left" Margin="874,317,0,0" VerticalAlignment="Top" Width="88"/>
-        <ComboBox x:Name="custDiscoGroup" HorizontalAlignment="Left" Margin="842,290,0,0" VerticalAlignment="Top" Width="120" RenderTransformOrigin="1.658,5.5"/>
-        <Label Content="Country:" HorizontalAlignment="Left" Margin="733,131,0,0" VerticalAlignment="Top" RenderTransformOrigin="1.167,-13.603"/>
-        <Label Content="Address:" HorizontalAlignment="Left" Margin="733,100,0,0" VerticalAlignment="Top" RenderTransformOrigin="0.412,1.718"/>
-        <Label Content="Last Name:" HorizontalAlignment="Left" Margin="733,69,0,0" VerticalAlignment="Top"/>
-        <Label Content="First Name:" HorizontalAlignment="Left" Margin="733,41,0,0" VerticalAlignment="Top" RenderTransformOrigin="-1.096,0.577"/>
-        <Label Content="Phone:" HorizontalAlignment="Left" Margin="733,162,0,0" VerticalAlignment="Top" RenderTransformOrigin="-0.096,0.397"/>
-        <Label Content="Email:" HorizontalAlignment="Left" Margin="733,193,0,0" VerticalAlignment="Top" RenderTransformOrigin="-0.237,0.462"/>
-        <Label Content="Password:" HorizontalAlignment="Left" Margin="733,224,0,0" VerticalAlignment="Top"/>
-        <Label Content="Payment Status:" HorizontalAlignment="Left" Margin="733,256,0,0" VerticalAlignment="Top" RenderTransformOrigin="0.879,0.615"/>
-        <TextBox x:Name="custFName" HorizontalAlignment="Left" Height="23" Margin="842,41,0,0" TextWrapping="Wrap" Text="" VerticalAlignment="Top" Width="120"/>
-        <TextBox x:Name="custLName" HorizontalAlignment="Left" Height="23" Margin="842,72,0,0" TextWrapping="Wrap" Text="" VerticalAlignment="Top" Width="120"/>
-        <TextBox x:Name="custAddress" HorizontalAlignment="Left" Height="23" Margin="842,103,0,0" TextWrapping="Wrap" Text="" VerticalAlignment="Top" Width="120"/>
-        <TextBox x:Name="custCountry" HorizontalAlignment="Left" Height="23" Margin="842,134,0,0" TextWrapping="Wrap" Text="" VerticalAlignment="Top" Width="120"/>
-        <TextBox x:Name="custPhone"  HorizontalAlignment="Left" Height="23" Margin="842,165,0,0" TextWrapping="Wrap" Text="" VerticalAlignment="Top" Width="120"/>
-        <TextBox x:Name="custEmail" HorizontalAlignment="Left" Height="23" Margin="842,196,0,0" TextWrapping="Wrap" Text="" VerticalAlignment="Top" Width="120"/>
-        <TextBox x:Name="custPass" HorizontalAlignment="Left" Height="23" Margin="842,227,0,0" TextWrapping="Wrap" Text="" VerticalAlignment="Top" Width="120"/>
-        <TextBox x:Name="custPayStat" HorizontalAlignment="Left" Height="23" Margin="842,258,0,0" TextWrapping="Wrap" Text="" VerticalAlignment="Top" Width="120"/>
+        <Button Click="refreshCusts" Content="Refresh" HorizontalAlignment="Left" Margin="653,555,0,0" VerticalAlignment="Top" Width="75"/>
+        <Label Content="Discount Group:" HorizontalAlignment="Left" Margin="733,259,0,0" VerticalAlignment="Top" RenderTransformOrigin="3.022,-1.493"/>
+        <Button Click="updateCust" Content="Save Changes" HorizontalAlignment="Left" Margin="874,290,0,0" VerticalAlignment="Top" Width="88"/>
+        <ComboBox x:Name="custDiscoGroup" HorizontalAlignment="Left" Margin="842,263,0,0" VerticalAlignment="Top" Width="120" RenderTransformOrigin="1.658,5.5"/>
+        <Label Content="Country:" HorizontalAlignment="Left" Margin="733,104,0,0" VerticalAlignment="Top" RenderTransformOrigin="1.167,-13.603"/>
+        <Label Content="Address:" HorizontalAlignment="Left" Margin="733,73,0,0" VerticalAlignment="Top" RenderTransformOrigin="0.412,1.718"/>
+        <Label Content="Last Name:" HorizontalAlignment="Left" Margin="733,42,0,0" VerticalAlignment="Top"/>
+        <Label Content="First Name:" HorizontalAlignment="Left" Margin="733,11,0,0" VerticalAlignment="Top" RenderTransformOrigin="-1.096,0.577"/>
+        <Label Content="Phone:" HorizontalAlignment="Left" Margin="733,135,0,0" VerticalAlignment="Top" RenderTransformOrigin="-0.096,0.397"/>
+        <Label Content="Email:" HorizontalAlignment="Left" Margin="733,166,0,0" VerticalAlignment="Top" RenderTransformOrigin="-0.237,0.462"/>
+        <Label Content="Password:" HorizontalAlignment="Left" Margin="733,197,0,0" VerticalAlignment="Top"/>
+        <Label Content="Payment Status:" HorizontalAlignment="Left" Margin="733,228,0,0" VerticalAlignment="Top" RenderTransformOrigin="0.879,0.615"/>
+        <TextBox x:Name="custFName" HorizontalAlignment="Left" Height="23" Margin="842,14,0,0" TextWrapping="Wrap" Text="" VerticalAlignment="Top" Width="120"/>
+        <TextBox x:Name="custLName" HorizontalAlignment="Left" Height="23" Margin="842,45,0,0" TextWrapping="Wrap" Text="" VerticalAlignment="Top" Width="120"/>
+        <TextBox x:Name="custAddress" HorizontalAlignment="Left" Height="23" Margin="842,76,0,0" TextWrapping="Wrap" Text="" VerticalAlignment="Top" Width="120"/>
+        <TextBox x:Name="custCountry" HorizontalAlignment="Left" Height="23" Margin="842,107,0,0" TextWrapping="Wrap" Text="" VerticalAlignment="Top" Width="120"/>
+        <TextBox x:Name="custPhone"  HorizontalAlignment="Left" Height="23" Margin="842,138,0,0" TextWrapping="Wrap" Text="" VerticalAlignment="Top" Width="120"/>
+        <TextBox x:Name="custEmail" HorizontalAlignment="Left" Height="23" Margin="842,169,0,0" TextWrapping="Wrap" Text="" VerticalAlignment="Top" Width="120"/>
+        <TextBox x:Name="custPass" HorizontalAlignment="Left" Height="23" Margin="842,200,0,0" TextWrapping="Wrap" Text="" VerticalAlignment="Top" Width="120"/>
+        <TextBox x:Name="custPayStat" HorizontalAlignment="Left" Height="23" Margin="842,231,0,0" TextWrapping="Wrap" Text="" VerticalAlignment="Top" Width="120"/>
+        <Button Click="clearFields" Content="Clear" HorizontalAlignment="Left" Margin="874,317,0,0" VerticalAlignment="Top" Width="86"/>
     </Grid>
 </UserControl>

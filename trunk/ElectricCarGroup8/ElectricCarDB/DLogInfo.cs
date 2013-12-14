@@ -244,13 +244,14 @@ namespace ElectricCarDB
             };
         }
 
-        public static ICollection<LoginInfo> buildLogInfos(ICollection<MLogInfo> mLogInfos)
+        public static ICollection<LoginInfo> buildLogInfos(ICollection<MLogInfo> mLogInfos, ICollection<LoginInfo> logInfos)
         {
             // TODO: fixed HashSet definition taken from Person entity
-            ICollection<LoginInfo> logInfos = new HashSet<LoginInfo>();
-            foreach (MLogInfo mli in mLogInfos)
+            foreach (LoginInfo li in logInfos)
             {
-                logInfos.Add(buildLogInfo(mli));
+                // only password and login name can be changed
+                li.password =  mLogInfos.Where(mli => mli.ID == li.Id).FirstOrDefault().Password;
+                li.name = mLogInfos.Where(mli => mli.ID == li.Id).FirstOrDefault().LoginName;
             }
             return logInfos;
         }

@@ -22,11 +22,13 @@ namespace ElectricCarGUI
     public partial class Employees : UserControl
     {
         static ElectricCarService.IElectricCar serviceObj;
+        private RegexChecker regCheck;
 
         public Employees()
         {
-            serviceObj = new ElectricCarService.ElectricCarClient();
             InitializeComponent();
+            regCheck = new RegexChecker();
+            serviceObj = new ElectricCarService.ElectricCarClient();
         }
 
         private void fillEmpTable()
@@ -44,77 +46,97 @@ namespace ElectricCarGUI
             fillEmpTable();
         }
 
-        private void deleteEmp(object sender, RoutedEventArgs e)
+        private void rowSelected(object sender, RoutedEventArgs e)
         {
-            if (delEmpField.Text != "")
+            if (empTable.SelectedItem != null)
             {
-                serviceObj.deleteEmployee(Convert.ToInt32(delEmpField.Text));
-                fillEmpTable();
-            }
-            else
-            {
-                MessageBox.Show("Please insert customer ID");
-            }
-        }
-
-        private void delEmpField_PreviewMouseDown(object sender, RoutedEventArgs e)
-        {
-            delEmpField.Text = "";
-        }
-
-        private void searchEmp(object sender, RoutedEventArgs e)
-        {
-            if (searchEmpField.Text != "")
-            {
-                Employee emp = serviceObj.getEmployee(Convert.ToInt32(searchEmpField.Text));
+                Employee emp = (Employee)empTable.SelectedItem;
                 empFName.Text = emp.FName;
                 empLName.Text = emp.LName;
                 empAddress.Text = emp.Address;
                 empCountry.Text = emp.Country;
                 empPhone.Text = emp.Phone;
                 empEmail.Text = emp.Email;
-                // don't want to show password anyway, otherwise fetch it from LogInfo
-                empPass.Text = "";
+                empPass.Text = emp.LogInfos
+                    .Where(li => li.LoginName == emp.Email)
+                    .FirstOrDefault().Password;
                 empStationID.Text = Convert.ToString(emp.StationID);
-                // TODO: employee position
-                empPosition.DataContext = emp.Position;
-            }
-            else
-            {
-                MessageBox.Show("Please insert customer ID");
+                empPosition.Text = emp.Position;
             }
         }
 
-        private void searchEmpField_PreviewMouseDown(object sender, MouseButtonEventArgs e)
+        private void clearFields(object sender, RoutedEventArgs e)
         {
-            searchEmpField.Text = "";
+            empFName.Text = "";
+            empLName.Text = "";
+            empAddress.Text = "";
+            empCountry.Text = "";
+            empPhone.Text = "";
+            empEmail.Text = "";
+            empPass.Text = "";
+            empStationID.Text = "";
+            empPosition.Text = "";
         }
 
         private void addEmp(object sender, RoutedEventArgs e)
         {
-            /*
-            serviceObj.addEmployee(
-                empFName.Text,
-                empLName.Text,
-                empAddress.Text,
-                empCountry.Text,
-                empPhone.Text,
-                empEmail.Text,
-                empPass.Text,
-                empStationID.Text,
-                empPosition
-                );
-             */
+            bool email = regCheck.checkEmail(empEmail.Text);
+            bool pass = regCheck.checkPassword(empPass.Text);
+            if (regCheck.checkEmail(empEmail.Text) && regCheck.checkPassword(empPass.Text))
+            {
+                serviceObj.addEmployee(
+                    empFName.Text,
+                    empLName.Text,
+                    empAddress.Text,
+                    empCountry.Text,
+                    empPhone.Text,
+                    empEmail.Text,
+                    empPass.Text,
+                    Convert.ToInt32(empStationID.Text),
+                    empPosition.Text
+                    );
+            }
+            else
+            {
+                MessageBox.Show("Please enter valid Email and Password.");
+            };
         }
 
         private void updateEmp(object sender, RoutedEventArgs e)
         {
-            Employee emp = new Employee()
+            if (regCheck.checkEmail(empEmail.Text) && regCheck.checkPassword(empPass.Text))
             {
-            };
-            serviceObj.updateEmployee(emp);
+                Employee emp = (Employee)empTable.SelectedItem;
+                LogInfo logInfo = emp.LogInfos
+                   .Where(li => li.LoginName == emp.Email)
+                   .FirstOrDefault();
+                emp.FName = empFName.Text;
+                emp.LName = empLName.Text;
+                emp.Address = empAddress.Text;
+                emp.Country = empCountry.Text;
+                emp.Phone = empPhone.Text;
+                emp.Email = empEmail.Text;
+                // not adding login info on update, just updating current
+                if (logInfo.LoginName == emp.Email)
+                {
+                    emp.LogInfos.Where(li => li.LoginName == emp.Email)
+                        .FirstOrDefault().Password = empPass.Text;
+                }
+                emp.StationID = Convert.ToInt32(empStationID.Text);
+                emp.Position = empPosition.Text;
+                serviceObj.updateEmployee(emp);
+            }
+            else
+            {
+                MessageBox.Show("Please enter valid Email and Password.");
+            }
         }
 
-
+        private void deleteEmp(object sender, RoutedEventArgs e)
+        {
+            Employee emp = (Employee)empTable.SelectedItem;
+            serviceObj.deleteEmployee(emp.ID);
+            fillEmpTable();
+        }
     }
 }
