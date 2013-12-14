@@ -22,7 +22,7 @@ namespace ElectricCarLib
             }
             else
             {
-                paths = PathFind.getKShortestPath(adjListInLimit, sId1, sId2, numberOfPaths);
+                paths = FindPath.getKShortestPath(adjListInLimit, sId1, sId2, numberOfPaths);
                 RouteCache.Instance.insertRoute(sId1, sId2, paths);
             }
 
@@ -63,7 +63,7 @@ namespace ElectricCarLib
             
             int stops = 0;
             //return path with least stops
-            List<MStation> path = PathFind.leastStopsPath(adjListWithoutWeight, startStation, endStation, out stops);
+            List<MStation> path = FindPath.leastStopsPath(adjListWithoutWeight, startStation, endStation, out stops);
             Dictionary<MStation, DateTime> leastStopPath = new Dictionary<MStation, DateTime>();
             leastStopPath.Add(path[0], startTime);
             DateTime time = startTime;

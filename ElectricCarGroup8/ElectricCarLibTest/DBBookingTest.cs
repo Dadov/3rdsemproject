@@ -107,7 +107,11 @@ namespace ElectricCarLibTest
             DateTime trip = createTime.AddDays(60);
             DateTime updateCreateTime = createTime.AddDays(10);
             DateTime updateTrip = createTime.AddDays(40);
-            int bookingId = dbBooking.addRecord(1, 100, createTime, trip, "1234456");
+            int dgId = dbDG.addNewRecord("Regular", 0);
+            MDiscountGroup dg = dbDG.getRecord(dgId, false);
+            int cId = dbCust.addNewRecord("May", "Smith", "Denmark", "Denmark", "12345678", "h@hotmail.com", dg, "Payed");
+
+            int bookingId = dbBooking.addRecord(cId, 100, createTime, trip, "1234456");
             try
             {
                 dbBooking.updateRecord(bookingId, 2, 200, updateCreateTime, updateTrip, "654321");
@@ -125,6 +129,8 @@ namespace ElectricCarLibTest
             finally
             {
                 dbBooking.deleteRecord(bookingId);
+                dbCust.deleteRecord(cId);
+                dbDG.deleteRecord(dgId);
             }  
 
         }

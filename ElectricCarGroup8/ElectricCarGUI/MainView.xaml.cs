@@ -78,6 +78,7 @@ namespace ElectricCarGUI
         {
             StationsCtr sCtr = new StationsCtr();
             tabStations.Content = sCtr;
+            
         }
 
         private StationInfoControl sInfoCtr;
@@ -167,6 +168,8 @@ namespace ElectricCarGUI
                 isTabTypeLoaded = true;
             }
         }
+
+        
 
 
         

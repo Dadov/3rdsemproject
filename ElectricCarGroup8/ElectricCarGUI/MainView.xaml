@@ -12,7 +12,7 @@
                 <Grid Background="#FFE5E5E5">
                     </Grid>
             </TabItem>
-            <TabItem Header="Station">
+            <TabItem Header="Station" >
                 <Grid Background="#FFE5E5E5">
                     <TabControl HorizontalAlignment="Left" Height="555" Margin="0,42,-4,-5" VerticalAlignment="Top" Width="976">
                         <TabItem x:Name="tabStationiInfo" Header="Information" Loaded="addInfoControl">
