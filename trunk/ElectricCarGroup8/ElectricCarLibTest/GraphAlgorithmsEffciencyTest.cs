@@ -3,6 +3,7 @@ using Microsoft.VisualStudio.TestTools.UnitTesting;
 using System.Collections.Generic;
 using System.IO;
 using ElectricCarLib;
+using ElectricCarModelLayer;
 
 namespace ElectricCarLibTest
 {
@@ -62,17 +63,17 @@ namespace ElectricCarLibTest
                 if (j== 0)
 	            {
 		            start = DateTime.Now;
-                    PathFind.shortestPathWithFibonacci(list, 9, 8);
+                    FindPath.shortestPathWithFibonacci(list, 9, 8);
                     timeItTook = DateTime.Now - start;
 	            } else if (j== 1)
 	            {
 		            start = DateTime.Now;
-                    PathFind.shortestPathWithFibonacci(list, 100, 37);
+                    FindPath.shortestPathWithFibonacci(list, 100, 37);
                     timeItTook = DateTime.Now - start;
 	            } else 
 	            {
 		            start = DateTime.Now;
-                    PathFind.shortestPathWithFibonacci(list, 910, 325);
+                    FindPath.shortestPathWithFibonacci(list, 910, 325);
                     timeItTook = DateTime.Now - start;
 	            }
                 
@@ -106,19 +107,19 @@ namespace ElectricCarLibTest
                 if (j == 0)
                 {
                     start = DateTime.Now;
-                    PathFind.shortestPathWithoutFibonacci(list, 9, 8);
+                    FindPath.shortestPathWithoutFibonacci(list, 9, 8);
                     timeItTook = DateTime.Now - start;
                 }
                 else if (j == 1)
                 {
                     start = DateTime.Now;
-                    PathFind.shortestPathWithoutFibonacci(list, 100, 37);
+                    FindPath.shortestPathWithoutFibonacci(list, 100, 37);
                     timeItTook = DateTime.Now - start;
                 }
                 else
                 {
                     start = DateTime.Now;
-                    PathFind.shortestPathWithoutFibonacci(list, 910, 325);
+                    FindPath.shortestPathWithoutFibonacci(list, 910, 325);
                     timeItTook = DateTime.Now - start;
                 }
 
@@ -152,19 +153,19 @@ namespace ElectricCarLibTest
                 if (j == 0)
                 {
                     start = DateTime.Now;
-                    PathFind.leastStopsPathWithIds(list, 9, 8);
+                    FindPath.leastStopsPathWithIds(list, 9, 8);
                     timeItTook = DateTime.Now - start;
                 }
                 else if (j == 1)
                 {
                     start = DateTime.Now;
-                    PathFind.leastStopsPathWithIds(list, 100, 37);
+                    FindPath.leastStopsPathWithIds(list, 100, 37);
                     timeItTook = DateTime.Now - start;
                 }
                 else
                 {
                     start = DateTime.Now;
-                    PathFind.leastStopsPathWithIds(list, 910, 325);
+                    FindPath.leastStopsPathWithIds(list, 910, 325);
                     timeItTook = DateTime.Now - start;
                 }
 
@@ -198,19 +199,19 @@ namespace ElectricCarLibTest
                 if (j == 0)
                 {
                     start = DateTime.Now;
-                    PathFind.breathFirstSearchWithIds(list, 9, 8);
+                    FindPath.breathFirstSearchWithIds(list, 9, 8);
                     timeItTook = DateTime.Now - start;
                 }
                 else if (j == 1)
                 {
                     start = DateTime.Now;
-                    PathFind.breathFirstSearchWithIds(list, 100, 37);
+                    FindPath.breathFirstSearchWithIds(list, 100, 37);
                     timeItTook = DateTime.Now - start;
                 }
                 else
                 {
                     start = DateTime.Now;
-                    PathFind.breathFirstSearchWithIds(list, 910, 325);
+                    FindPath.breathFirstSearchWithIds(list, 910, 325);
                     timeItTook = DateTime.Now - start;
                 }
 

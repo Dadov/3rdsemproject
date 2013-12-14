@@ -58,7 +58,6 @@
     <Compile Include="DiscountGroupCtr.cs" />
     <Compile Include="EmployeeCtr.cs" />
     <Compile Include="LogInfoCtr.cs" />
-    <Compile Include="PathFind.cs" />
     <Compile Include="PathFindCtr.cs" />
     <Compile Include="PeriodCalculator.cs" />
     <Compile Include="PeriodCtr.cs" />

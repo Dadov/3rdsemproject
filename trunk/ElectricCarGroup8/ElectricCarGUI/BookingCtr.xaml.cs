@@ -231,7 +231,7 @@ namespace ElectricCarGUI
                         }
                         else
                         {
-                            MessageBox.Show("Please input correct form of trip start field mm/dd/yyyy");
+                            MessageBox.Show("Please input correct form of create date field mm/dd/yyyy");
                             throw new Exception();
                         }
 
@@ -314,16 +314,51 @@ namespace ElectricCarGUI
 
         private void btnBUpdate_Click(object sender, RoutedEventArgs e)
         {
-            Booking bk = new Booking();
-            bk.Id = Convert.ToInt32(txtBId.Text);
-            bk.cId = Convert.ToInt32(txtCId.Text);
-            bk.createDate = txtCreateDate.Text;
-            bk.tripStart = txtTripStart.Text;
-            bk.payStatus = (string)cbbPayStatus.SelectedValue;
-            bk.totalPrice = Convert.ToDecimal(txtTotalPrice.Text);
-            serviceObj.updateBooking(bk);
-            showBookings();
-            clearTextBox();
+            try
+            {
+                Booking bk = new Booking();
+                bk.Id = Convert.ToInt32(txtBId.Text);
+                bk.cId = Convert.ToInt32(txtCId.Text);
+                if (regCheck.checkDate(txtCreateDate.Text))
+                {
+                    bk.createDate = txtCreateDate.Text;
+                }
+                else
+                {
+                    MessageBox.Show("Please input correct form of create date field mm/dd/yyyy");
+                    throw new Exception();
+                }
+
+                if (regCheck.checkTime(txtTripStart.Text))
+                {
+                    bk.tripStart = txtTripStart.Text;
+                }
+                else
+                {
+                    MessageBox.Show("Please input correct form of trip start field dd/mm/yyyy hh:mm");
+                    throw new Exception();
+                }
+
+                bk.payStatus = (string)cbbPayStatus.SelectedValue;
+                if (regCheck.checkDecimal(txtTotalPrice.Text))
+                {
+                    bk.totalPrice = Convert.ToDecimal(txtTotalPrice.Text);
+                }
+                else
+                {
+                    MessageBox.Show("Please input numer in total price field");
+                    throw new Exception();
+                }
+                
+                serviceObj.updateBooking(bk);
+                showBookings();
+                clearTextBox();
+            }
+            catch (Exception)
+            {
+              
+            }
+            
         }
 
         private void btnBDelete_Click(object sender, RoutedEventArgs e)

@@ -18,9 +18,9 @@ namespace ElectricCarLibTest
             int startId = 1;
             int endId = 6;
 
-            List<List<PathStop>> allPaths = PathFind.getAllPossiblePathsBetweenTwoPoints(list, startId, endId);
+            List<List<PathStop>> allPaths = FindPath.getAllPossiblePathsBetweenTwoPoints(list, startId, endId);
             int numberOfPath = allPaths.Count;
-            List<List<PathStop>> kPaths = PathFind.getKShortestPath(list, startId, endId, numberOfPath);
+            List<List<PathStop>> kPaths = FindPath.getKShortestPath(list, startId, endId, numberOfPath);
 
             if (startId == endId)
             {
@@ -49,7 +49,7 @@ namespace ElectricCarLibTest
         //    double density = 0.1; //density of random graph can be adjusted
         //    RandomGraphGenerator graph = new RandomGraphGenerator(size, density, 1, 300);
         //    adjList = graph.getAdjList();
-        //    List<List<PathStop>> allPaths = PathFind.getAllPossiblePathsBetweenTwoPoints(adjList, startId, endId);
+        //    List<List<PathStop>> allPaths = FindPath.getAllPossiblePathsBetweenTwoPoints(adjList, startId, endId);
         //    System.Diagnostics.Debug.WriteLine("1");
         //    Assert.AreEqual(1, 1);
 
@@ -73,9 +73,9 @@ namespace ElectricCarLibTest
 
                 //try
                 //{
-                    //List<List<PathStop>> allPaths = PathFind.getAllPossiblePathsBetweenTwoPoints(adjList, startId, endId);
+                //List<List<PathStop>> allPaths = FindPath.getAllPossiblePathsBetweenTwoPoints(adjList, startId, endId);
                     int numberOfPath = 50;
-                    List<List<PathStop>> kPaths = PathFind.getKShortestPath(adjList, startId, endId, numberOfPath);
+                    List<List<PathStop>> kPaths = FindPath.getKShortestPath(adjList, startId, endId, numberOfPath);
 
                     if (startId == endId)
                     {
@@ -175,8 +175,8 @@ namespace ElectricCarLibTest
 
             int numberOfPath = 14;
 
-            List<List<PathStop>> kPaths = PathFind.getKShortestPath(adjListWithWeight, startId, endId, numberOfPath);
-            List<List<PathStop>> allPaths = PathFind.getAllPossiblePathsBetweenTwoPoints(adjListWithWeight, startId, endId);
+            List<List<PathStop>> kPaths = FindPath.getKShortestPath(adjListWithWeight, startId, endId, numberOfPath);
+            List<List<PathStop>> allPaths = FindPath.getAllPossiblePathsBetweenTwoPoints(adjListWithWeight, startId, endId);
 
             Assert.AreEqual(1, kPaths[0][0].stationID);
             Assert.AreEqual(2, kPaths[0][1].stationID);
@@ -295,7 +295,7 @@ namespace ElectricCarLibTest
             adjList.Add(3, node3List);
             adjList.Add(4, node4List);
 
-            List<List<PathStop>> paths = PathFind.getAllPossiblePathsBetweenTwoPoints(adjList, 1, 4);
+            List<List<PathStop>> paths = FindPath.getAllPossiblePathsBetweenTwoPoints(adjList, 1, 4);
 
             Assert.AreEqual(1, paths[0][0].stationID);
             Assert.AreEqual(2, paths[0][1].stationID);
@@ -344,16 +344,16 @@ namespace ElectricCarLibTest
 
             List<PathStop> route = new List<PathStop>();
 
-            route = PathFind.shortestPathWithFibonacci(adjListWithWeight, 3, 5);
+            route = FindPath.shortestPathWithFibonacci(adjListWithWeight, 3, 5);
             Assert.AreEqual(17, route[route.Count-1].driveHour);
 
-            route = PathFind.shortestPathWithFibonacci(adjListWithWeight, 1, 2);
+            route = FindPath.shortestPathWithFibonacci(adjListWithWeight, 1, 2);
             Assert.AreEqual(1, route[0].stationID);
             Assert.AreEqual(0, Convert.ToInt32(route[0].driveHour));
             Assert.AreEqual(2, route[1].stationID);
             Assert.AreEqual(5, Convert.ToInt32(route[1].driveHour));
 
-            route = PathFind.shortestPathWithFibonacci(adjListWithWeight, 1, 3);
+            route = FindPath.shortestPathWithFibonacci(adjListWithWeight, 1, 3);
             Assert.AreEqual(1, route[0].stationID);
             Assert.AreEqual(0, Convert.ToInt32(route[0].driveHour));
             Assert.AreEqual(2, route[1].stationID);
@@ -361,13 +361,13 @@ namespace ElectricCarLibTest
             Assert.AreEqual(3, route[2].stationID);
             Assert.AreEqual(11, Convert.ToInt32(route[2].driveHour));
 
-            route = PathFind.shortestPathWithFibonacci(adjListWithWeight, 1, 4);
+            route = FindPath.shortestPathWithFibonacci(adjListWithWeight, 1, 4);
             Assert.AreEqual(1, route[0].stationID);
             Assert.AreEqual(0, Convert.ToInt32(route[0].driveHour));
             Assert.AreEqual(4, route[1].stationID);
             Assert.AreEqual(4, Convert.ToInt32(route[1].driveHour));
 
-            route = PathFind.shortestPathWithFibonacci(adjListWithWeight, 1, 5);
+            route = FindPath.shortestPathWithFibonacci(adjListWithWeight, 1, 5);
             Assert.AreEqual(1, route[0].stationID);
             Assert.AreEqual(0, Convert.ToInt32(route[0].driveHour));
             Assert.AreEqual(4, route[1].stationID);
@@ -375,7 +375,7 @@ namespace ElectricCarLibTest
             Assert.AreEqual(5, route[2].stationID);
             Assert.AreEqual(6, Convert.ToInt32(route[2].driveHour));
 
-            route = PathFind.shortestPathWithFibonacci(adjListWithWeight, 2, 3);
+            route = FindPath.shortestPathWithFibonacci(adjListWithWeight, 2, 3);
             Assert.AreEqual(2, route[0].stationID);
             Assert.AreEqual(0, Convert.ToInt32(route[0].driveHour));
             Assert.AreEqual(3, route[1].stationID);
@@ -408,7 +408,7 @@ namespace ElectricCarLibTest
 
             List<PathStop> route = new List<PathStop>();
 
-            route = PathFind.shortestPathWithFibonacci(adjListWithWeight, 1, 4);
+            route = FindPath.shortestPathWithFibonacci(adjListWithWeight, 1, 4);
             Assert.AreEqual(1, route[0].stationID);
             Assert.AreEqual(0, Convert.ToInt32(route[0].driveHour));
             Assert.AreEqual(3, route[1].stationID);
@@ -418,7 +418,7 @@ namespace ElectricCarLibTest
             Assert.AreEqual(4, route[3].stationID);
             Assert.AreEqual(9, Convert.ToInt32(route[3].driveHour));
 
-            route = PathFind.shortestPathWithFibonacci(adjListWithWeight, 1, 5);
+            route = FindPath.shortestPathWithFibonacci(adjListWithWeight, 1, 5);
             Assert.AreEqual(1, route[0].stationID);
             Assert.AreEqual(0, Convert.ToInt32(route[0].driveHour));
             Assert.AreEqual(3, route[1].stationID);
@@ -442,11 +442,11 @@ namespace ElectricCarLibTest
             S.Add(z);
 
             List<PathStop> route = new List<PathStop>();
-            route = PathFind.buildRoute(S, 1);
+            route = FindPath.buildRoute(S, 1);
             Assert.AreEqual(1, route[0].stationID);
             Assert.AreEqual(0, Convert.ToInt32(route[0].driveHour));
 
-            route = PathFind.buildRoute(S, 2);
+            route = FindPath.buildRoute(S, 2);
             Assert.AreEqual(1, route[0].stationID);
             Assert.AreEqual(0, Convert.ToInt32(route[0].driveHour));
             Assert.AreEqual(3, route[1].stationID);
@@ -454,7 +454,7 @@ namespace ElectricCarLibTest
             Assert.AreEqual(2, route[2].stationID);
             Assert.AreEqual(8, Convert.ToInt32(route[2].driveHour));
 
-            route = PathFind.buildRoute(S, 4);
+            route = FindPath.buildRoute(S, 4);
             Assert.AreEqual(1, route[0].stationID);
             Assert.AreEqual(0, Convert.ToInt32(route[0].driveHour));
             Assert.AreEqual(3, route[1].stationID);
@@ -464,13 +464,13 @@ namespace ElectricCarLibTest
             Assert.AreEqual(4, route[3].stationID);
             Assert.AreEqual(9, Convert.ToInt32(route[3].driveHour));
 
-            route = PathFind.buildRoute(S, 3);
+            route = FindPath.buildRoute(S, 3);
             Assert.AreEqual(1, route[0].stationID);
             Assert.AreEqual(0, Convert.ToInt32(route[0].driveHour));
             Assert.AreEqual(3, route[1].stationID);
             Assert.AreEqual(5, Convert.ToInt32(route[1].driveHour));
 
-            route = PathFind.buildRoute(S, 5);
+            route = FindPath.buildRoute(S, 5);
             Assert.AreEqual(1, route[0].stationID);
             Assert.AreEqual(0, Convert.ToInt32(route[0].driveHour));
             Assert.AreEqual(3, route[1].stationID);
@@ -492,13 +492,13 @@ namespace ElectricCarLibTest
             QCopy.Add(2, v);
             decimal w = 3;
 
-            PathFind.relax(u, v, w, Q, QCopy);
+            FindPath.relax(u, v, w, Q, QCopy);
             Assert.AreEqual(6, Convert.ToInt32(v.MinPathValue));
             Assert.AreEqual(null, v.lastStop);
             Assert.AreEqual(6, Convert.ToInt32(QCopy[2].MinPathValue));
 
             v.MinPathValue = 10;
-            PathFind.relax(u, v, w, Q, QCopy);
+            FindPath.relax(u, v, w, Q, QCopy);
 
             Assert.AreEqual(8, Convert.ToInt32(v.MinPathValue));
             Assert.AreEqual(u, v.lastStop);
@@ -557,23 +557,23 @@ namespace ElectricCarLibTest
             int stops7 = 0;
             int stops8 = 0;
 
-            List<MStation> path1 = PathFind.leastStopsPath(adjList, s, r, out stops1);
-            List<MStation> path2 = PathFind.leastStopsPath(adjList, s, v, out stops2);
-            List<MStation> path3 = PathFind.leastStopsPath(adjList, s, w, out stops3);
-            List<MStation> path4 = PathFind.leastStopsPath(adjList, s, t, out stops4);
-            List<MStation> path5 = PathFind.leastStopsPath(adjList, s, x, out stops5);
-            List<MStation> path6 = PathFind.leastStopsPath(adjList, s, y, out stops6);
-            List<MStation> path7 = PathFind.leastStopsPath(adjList, s, u, out stops7);
-            List<MStation> path8 = PathFind.leastStopsPath(adjList, w, y, out stops8);
+            List<MStation> path1 = FindPath.leastStopsPath(adjList, s, r, out stops1);
+            List<MStation> path2 = FindPath.leastStopsPath(adjList, s, v, out stops2);
+            List<MStation> path3 = FindPath.leastStopsPath(adjList, s, w, out stops3);
+            List<MStation> path4 = FindPath.leastStopsPath(adjList, s, t, out stops4);
+            List<MStation> path5 = FindPath.leastStopsPath(adjList, s, x, out stops5);
+            List<MStation> path6 = FindPath.leastStopsPath(adjList, s, y, out stops6);
+            List<MStation> path7 = FindPath.leastStopsPath(adjList, s, u, out stops7);
+            List<MStation> path8 = FindPath.leastStopsPath(adjList, w, y, out stops8);
 
-            Assert.AreEqual(PathFind.breathFirstSearch(adjList, s, r), stops1 - 1);
-            Assert.AreEqual(PathFind.breathFirstSearch(adjList, s, v), stops2 - 1);
-            Assert.AreEqual(PathFind.breathFirstSearch(adjList, s, w), stops3 - 1);
-            Assert.AreEqual(PathFind.breathFirstSearch(adjList, s, t), stops4 - 1);
-            Assert.AreEqual(PathFind.breathFirstSearch(adjList, s, x), stops5 - 1);
-            Assert.AreEqual(PathFind.breathFirstSearch(adjList, s, y), stops6 - 1);
-            Assert.AreEqual(PathFind.breathFirstSearch(adjList, s, u), stops7 - 1);
-            Assert.AreEqual(PathFind.breathFirstSearch(adjList, w, y), stops8 - 1);
+            Assert.AreEqual(FindPath.breathFirstSearch(adjList, s, r), stops1 - 1);
+            Assert.AreEqual(FindPath.breathFirstSearch(adjList, s, v), stops2 - 1);
+            Assert.AreEqual(FindPath.breathFirstSearch(adjList, s, w), stops3 - 1);
+            Assert.AreEqual(FindPath.breathFirstSearch(adjList, s, t), stops4 - 1);
+            Assert.AreEqual(FindPath.breathFirstSearch(adjList, s, x), stops5 - 1);
+            Assert.AreEqual(FindPath.breathFirstSearch(adjList, s, y), stops6 - 1);
+            Assert.AreEqual(FindPath.breathFirstSearch(adjList, s, u), stops7 - 1);
+            Assert.AreEqual(FindPath.breathFirstSearch(adjList, w, y), stops8 - 1);
 
             Assert.AreEqual(1, path1[0].Id);
             Assert.AreEqual(2, path1[1].Id);
@@ -676,37 +676,37 @@ namespace ElectricCarLibTest
             int stops5 = 0;
             int stops6 = 0;
 
-            List<MStation> path1 = PathFind.leastStopsPath(adjList, s, r, out stops1);
-            List<MStation> path2 = PathFind.leastStopsPath(adjList, s, w, out stops2);
-            List<MStation> path3 = PathFind.leastStopsPath(adjList, s, u, out stops3);
-            List<MStation> path4 = PathFind.leastStopsPath(adjList, s, x, out stops4);
-            List<MStation> path5 = PathFind.leastStopsPath(adjList, x, y, out stops5);
-            List<MStation> path6 = PathFind.leastStopsPath(adjList, y, s, out stops6);
+            List<MStation> path1 = FindPath.leastStopsPath(adjList, s, r, out stops1);
+            List<MStation> path2 = FindPath.leastStopsPath(adjList, s, w, out stops2);
+            List<MStation> path3 = FindPath.leastStopsPath(adjList, s, u, out stops3);
+            List<MStation> path4 = FindPath.leastStopsPath(adjList, s, x, out stops4);
+            List<MStation> path5 = FindPath.leastStopsPath(adjList, x, y, out stops5);
+            List<MStation> path6 = FindPath.leastStopsPath(adjList, y, s, out stops6);
 
-            Assert.AreEqual(stops1 - 1, PathFind.breathFirstSearch(adjList, s, r));
+            Assert.AreEqual(stops1 - 1, FindPath.breathFirstSearch(adjList, s, r));
             Assert.AreEqual(1, path1[0].Id);
             Assert.AreEqual(2, path1[1].Id);
 
-            Assert.AreEqual(stops2 - 1, PathFind.breathFirstSearch(adjList, s, w));
+            Assert.AreEqual(stops2 - 1, FindPath.breathFirstSearch(adjList, s, w));
             Assert.AreEqual(1, path2[0].Id);
             Assert.AreEqual(2, path2[1].Id);
             Assert.AreEqual(4, path2[2].Id);
 
-            Assert.AreEqual(stops3 - 1, PathFind.breathFirstSearch(adjList, s, u));
+            Assert.AreEqual(stops3 - 1, FindPath.breathFirstSearch(adjList, s, u));
             Assert.AreEqual(1, path3[0].Id);
             Assert.AreEqual(2, path3[1].Id);
             Assert.AreEqual(5, path3[2].Id);
             Assert.AreEqual(8, path3[3].Id);
 
-            Assert.AreEqual(stops4 - 1, PathFind.breathFirstSearch(adjList, s, x));
+            Assert.AreEqual(stops4 - 1, FindPath.breathFirstSearch(adjList, s, x));
             Assert.AreEqual(1, path4[0].Id);
             Assert.AreEqual(3, path4[1].Id);
             Assert.AreEqual(6, path4[2].Id);
 
-            Assert.AreEqual(stops5, PathFind.breathFirstSearch(adjList, x, y));
+            Assert.AreEqual(stops5, FindPath.breathFirstSearch(adjList, x, y));
             Assert.AreEqual(0, path5.Count);
 
-            Assert.AreEqual(stops6 - 1, PathFind.breathFirstSearch(adjList, y, s));
+            Assert.AreEqual(stops6 - 1, FindPath.breathFirstSearch(adjList, y, s));
             Assert.AreEqual(7, path6[0].Id);
             Assert.AreEqual(3, path6[1].Id);
             Assert.AreEqual(1, path6[2].Id);
@@ -781,52 +781,52 @@ namespace ElectricCarLibTest
             int stops8 = 0;
             int stops9 = 0;
 
-            List<MStation> path1 = PathFind.leastStopsPath(adjList, s, r, out stops1);
-            List<MStation> path2 = PathFind.leastStopsPath(adjList, s, v, out stops2);
-            List<MStation> path3 = PathFind.leastStopsPath(adjList, s, w, out stops3);
-            List<MStation> path4 = PathFind.leastStopsPath(adjList, s, t, out stops4);
-            List<MStation> path5 = PathFind.leastStopsPath(adjList, s, x, out stops5);
-            List<MStation> path6 = PathFind.leastStopsPath(adjList, s, u, out stops6);
-            List<MStation> path7 = PathFind.leastStopsPath(adjList, s, y, out stops7);
-            List<MStation> path8 = PathFind.leastStopsPath(adjList, u, v, out stops8);
-            List<MStation> path9 = PathFind.leastStopsPath(adjList, w, y, out stops9);
+            List<MStation> path1 = FindPath.leastStopsPath(adjList, s, r, out stops1);
+            List<MStation> path2 = FindPath.leastStopsPath(adjList, s, v, out stops2);
+            List<MStation> path3 = FindPath.leastStopsPath(adjList, s, w, out stops3);
+            List<MStation> path4 = FindPath.leastStopsPath(adjList, s, t, out stops4);
+            List<MStation> path5 = FindPath.leastStopsPath(adjList, s, x, out stops5);
+            List<MStation> path6 = FindPath.leastStopsPath(adjList, s, u, out stops6);
+            List<MStation> path7 = FindPath.leastStopsPath(adjList, s, y, out stops7);
+            List<MStation> path8 = FindPath.leastStopsPath(adjList, u, v, out stops8);
+            List<MStation> path9 = FindPath.leastStopsPath(adjList, w, y, out stops9);
 
-            Assert.AreEqual(1, PathFind.breathFirstSearch(adjList, s, r));
+            Assert.AreEqual(1, FindPath.breathFirstSearch(adjList, s, r));
             Assert.AreEqual(1, path1[0].Id);
             Assert.AreEqual(2, path1[1].Id);
 
-            Assert.AreEqual(2, PathFind.breathFirstSearch(adjList, s, v));
+            Assert.AreEqual(2, FindPath.breathFirstSearch(adjList, s, v));
             Assert.AreEqual(1, path2[0].Id);
             Assert.AreEqual(2, path2[1].Id);
             Assert.AreEqual(3, path2[2].Id);
 
-            Assert.AreEqual(1, PathFind.breathFirstSearch(adjList, s, w));
+            Assert.AreEqual(1, FindPath.breathFirstSearch(adjList, s, w));
             Assert.AreEqual(1, path3[0].Id);
             Assert.AreEqual(4, path3[1].Id);
 
-            Assert.AreEqual(2, PathFind.breathFirstSearch(adjList, s, t));
+            Assert.AreEqual(2, FindPath.breathFirstSearch(adjList, s, t));
             Assert.AreEqual(1, path4[0].Id);
             Assert.AreEqual(4, path4[1].Id);
             Assert.AreEqual(5, path4[2].Id);
 
-            Assert.AreEqual(2, PathFind.breathFirstSearch(adjList, s, x));
+            Assert.AreEqual(2, FindPath.breathFirstSearch(adjList, s, x));
             Assert.AreEqual(1, path5[0].Id);
             Assert.AreEqual(4, path5[1].Id);
             Assert.AreEqual(6, path5[2].Id);
 
-            Assert.AreEqual(3, PathFind.breathFirstSearch(adjList, s, u));
+            Assert.AreEqual(3, FindPath.breathFirstSearch(adjList, s, u));
             Assert.AreEqual(1, path6[0].Id);
             Assert.AreEqual(4, path6[1].Id);
             Assert.AreEqual(5, path6[2].Id);
             Assert.AreEqual(8, path6[3].Id);
 
-            Assert.AreEqual(3, PathFind.breathFirstSearch(adjList, s, y));
+            Assert.AreEqual(3, FindPath.breathFirstSearch(adjList, s, y));
             Assert.AreEqual(1, path7[0].Id);
             Assert.AreEqual(4, path7[1].Id);
             Assert.AreEqual(6, path7[2].Id);
             Assert.AreEqual(7, path7[3].Id);
 
-            Assert.AreEqual(5, PathFind.breathFirstSearch(adjList, u, v));
+            Assert.AreEqual(5, FindPath.breathFirstSearch(adjList, u, v));
             Assert.AreEqual(8, path8[0].Id);
             Assert.AreEqual(5, path8[1].Id);
             Assert.AreEqual(4, path8[2].Id);
@@ -834,7 +834,7 @@ namespace ElectricCarLibTest
             Assert.AreEqual(2, path8[4].Id);
             Assert.AreEqual(3, path8[5].Id);
 
-            Assert.AreEqual(2, PathFind.breathFirstSearch(adjList, w, y));
+            Assert.AreEqual(2, FindPath.breathFirstSearch(adjList, w, y));
             Assert.AreEqual(4, path9[0].Id);
             Assert.AreEqual(6, path9[1].Id);
             Assert.AreEqual(7, path9[2].Id);
@@ -879,14 +879,14 @@ namespace ElectricCarLibTest
             adjX.AddFirst(y);
             adjY.AddFirst(u);
 
-            Assert.AreEqual(1, PathFind.breathFirstSearch(adjList, s, r));
-            Assert.AreEqual(2, PathFind.breathFirstSearch(adjList, s, v));
-            Assert.AreEqual(3, PathFind.breathFirstSearch(adjList, s, w));
-            Assert.AreEqual(4, PathFind.breathFirstSearch(adjList, s, t));
-            Assert.AreEqual(5, PathFind.breathFirstSearch(adjList, s, x));
-            Assert.AreEqual(6, PathFind.breathFirstSearch(adjList, s, y));
-            Assert.AreEqual(7, PathFind.breathFirstSearch(adjList, s, u));
-            Assert.AreEqual(3, PathFind.breathFirstSearch(adjList, w, y));
+            Assert.AreEqual(1, FindPath.breathFirstSearch(adjList, s, r));
+            Assert.AreEqual(2, FindPath.breathFirstSearch(adjList, s, v));
+            Assert.AreEqual(3, FindPath.breathFirstSearch(adjList, s, w));
+            Assert.AreEqual(4, FindPath.breathFirstSearch(adjList, s, t));
+            Assert.AreEqual(5, FindPath.breathFirstSearch(adjList, s, x));
+            Assert.AreEqual(6, FindPath.breathFirstSearch(adjList, s, y));
+            Assert.AreEqual(7, FindPath.breathFirstSearch(adjList, s, u));
+            Assert.AreEqual(3, FindPath.breathFirstSearch(adjList, w, y));
 
         }
 
@@ -934,12 +934,12 @@ namespace ElectricCarLibTest
 
             adjY.AddFirst(v);
             adjV.AddLast(s);
-            Assert.AreEqual(1, PathFind.breathFirstSearch(adjList, s, r));
-            Assert.AreEqual(2, PathFind.breathFirstSearch(adjList, s, w));
-            Assert.AreEqual(3, PathFind.breathFirstSearch(adjList, s, u));
-            Assert.AreEqual(2, PathFind.breathFirstSearch(adjList, s, x));
-            Assert.AreEqual(0, PathFind.breathFirstSearch(adjList, x, y));
-            Assert.AreEqual(2, PathFind.breathFirstSearch(adjList, y, s));
+            Assert.AreEqual(1, FindPath.breathFirstSearch(adjList, s, r));
+            Assert.AreEqual(2, FindPath.breathFirstSearch(adjList, s, w));
+            Assert.AreEqual(3, FindPath.breathFirstSearch(adjList, s, u));
+            Assert.AreEqual(2, FindPath.breathFirstSearch(adjList, s, x));
+            Assert.AreEqual(0, FindPath.breathFirstSearch(adjList, x, y));
+            Assert.AreEqual(2, FindPath.breathFirstSearch(adjList, y, s));
         }
 
         [TestMethod]
@@ -1000,15 +1000,15 @@ namespace ElectricCarLibTest
             adjList.Add(u, adjU);
             adjList.Add(w, adjW);
 
-            Assert.AreEqual(1, PathFind.breathFirstSearch(adjList, s, r));
-            Assert.AreEqual(2, PathFind.breathFirstSearch(adjList, s, v));
-            Assert.AreEqual(1, PathFind.breathFirstSearch(adjList, s, w));
-            Assert.AreEqual(2, PathFind.breathFirstSearch(adjList, s, t));
-            Assert.AreEqual(2, PathFind.breathFirstSearch(adjList, s, x));
-            Assert.AreEqual(3, PathFind.breathFirstSearch(adjList, s, u));
-            Assert.AreEqual(3, PathFind.breathFirstSearch(adjList, s, y));
-            Assert.AreEqual(5, PathFind.breathFirstSearch(adjList, u, v));
-            Assert.AreEqual(2, PathFind.breathFirstSearch(adjList, w, y));
+            Assert.AreEqual(1, FindPath.breathFirstSearch(adjList, s, r));
+            Assert.AreEqual(2, FindPath.breathFirstSearch(adjList, s, v));
+            Assert.AreEqual(1, FindPath.breathFirstSearch(adjList, s, w));
+            Assert.AreEqual(2, FindPath.breathFirstSearch(adjList, s, t));
+            Assert.AreEqual(2, FindPath.breathFirstSearch(adjList, s, x));
+            Assert.AreEqual(3, FindPath.breathFirstSearch(adjList, s, u));
+            Assert.AreEqual(3, FindPath.breathFirstSearch(adjList, s, y));
+            Assert.AreEqual(5, FindPath.breathFirstSearch(adjList, u, v));
+            Assert.AreEqual(2, FindPath.breathFirstSearch(adjList, w, y));
         }
 
         [TestMethod]
@@ -1022,7 +1022,7 @@ namespace ElectricCarLibTest
             q.Add(5, 1);
             q.Add(6, 7);
 
-            Assert.AreEqual(5, PathFind.getIdWithMinValue(q));
+            Assert.AreEqual(5, FindPath.getIdWithMinValue(q));
 
 
         }
@@ -1050,16 +1050,16 @@ namespace ElectricCarLibTest
 
             List<PathStop> route = new List<PathStop>();
 
-            route = PathFind.leastStopsPathWithIds(adjListWithWeight, 3, 5);
+            route = FindPath.leastStopsPathWithIds(adjListWithWeight, 3, 5);
             Assert.AreEqual(4, route[route.Count-1].driveHour);
 
-            route = PathFind.leastStopsPathWithIds(adjListWithWeight, 1, 2);
+            route = FindPath.leastStopsPathWithIds(adjListWithWeight, 1, 2);
             Assert.AreEqual(1, route[0].stationID);
             Assert.AreEqual(0, Convert.ToInt32(route[0].driveHour));
             Assert.AreEqual(2, route[1].stationID);
             Assert.AreEqual(1, Convert.ToInt32(route[1].driveHour));
 
-            route = PathFind.leastStopsPathWithIds(adjListWithWeight, 1, 3);
+            route = FindPath.leastStopsPathWithIds(adjListWithWeight, 1, 3);
             Assert.AreEqual(1, route[0].stationID);
             Assert.AreEqual(0, Convert.ToInt32(route[0].driveHour));
             Assert.AreEqual(2, route[1].stationID);
@@ -1067,13 +1067,13 @@ namespace ElectricCarLibTest
             Assert.AreEqual(3, route[2].stationID);
             Assert.AreEqual(2, Convert.ToInt32(route[2].driveHour));
 
-            route = PathFind.leastStopsPathWithIds(adjListWithWeight, 1, 4);
+            route = FindPath.leastStopsPathWithIds(adjListWithWeight, 1, 4);
             Assert.AreEqual(1, route[0].stationID);
             Assert.AreEqual(0, Convert.ToInt32(route[0].driveHour));
             Assert.AreEqual(4, route[1].stationID);
             Assert.AreEqual(1, Convert.ToInt32(route[1].driveHour));
 
-            route = PathFind.leastStopsPathWithIds(adjListWithWeight, 1, 5);
+            route = FindPath.leastStopsPathWithIds(adjListWithWeight, 1, 5);
             Assert.AreEqual(1, route[0].stationID);
             Assert.AreEqual(0, Convert.ToInt32(route[0].driveHour));
             Assert.AreEqual(4, route[1].stationID);
@@ -1081,7 +1081,7 @@ namespace ElectricCarLibTest
             Assert.AreEqual(5, route[2].stationID);
             Assert.AreEqual(2, Convert.ToInt32(route[2].driveHour));
 
-            route = PathFind.leastStopsPathWithIds(adjListWithWeight, 2, 3);
+            route = FindPath.leastStopsPathWithIds(adjListWithWeight, 2, 3);
             Assert.AreEqual(2, route[0].stationID);
             Assert.AreEqual(0, Convert.ToInt32(route[0].driveHour));
             Assert.AreEqual(3, route[1].stationID);
@@ -1111,7 +1111,7 @@ namespace ElectricCarLibTest
 
             List<PathStop> route = new List<PathStop>();
 
-            route = PathFind.leastStopsPathWithIds(adjListWithWeight, 1, 4);
+            route = FindPath.leastStopsPathWithIds(adjListWithWeight, 1, 4);
             Assert.AreEqual(1, route[0].stationID);
             Assert.AreEqual(0, Convert.ToInt32(route[0].driveHour));
             Assert.AreEqual(2, route[1].stationID);
@@ -1119,7 +1119,7 @@ namespace ElectricCarLibTest
             Assert.AreEqual(4, route[2].stationID);
             Assert.AreEqual(2, Convert.ToInt32(route[2].driveHour));
 
-            route = PathFind.leastStopsPathWithIds(adjListWithWeight, 1, 5);
+            route = FindPath.leastStopsPathWithIds(adjListWithWeight, 1, 5);
             Assert.AreEqual(1, route[0].stationID);
             Assert.AreEqual(0, Convert.ToInt32(route[0].driveHour));
             Assert.AreEqual(3, route[1].stationID);
@@ -1151,16 +1151,16 @@ namespace ElectricCarLibTest
 
             List<PathStop> route = new List<PathStop>();
 
-            route = PathFind.shortestPathWithoutFibonacci(adjListWithWeight, 3, 5);
+            route = FindPath.shortestPathWithoutFibonacci(adjListWithWeight, 3, 5);
             Assert.AreEqual(17, route[route.Count-1].driveHour);
 
-            route = PathFind.shortestPathWithoutFibonacci(adjListWithWeight, 1, 2);
+            route = FindPath.shortestPathWithoutFibonacci(adjListWithWeight, 1, 2);
             Assert.AreEqual(1, route[0].stationID);
             Assert.AreEqual(0, Convert.ToInt32(route[0].driveHour));
             Assert.AreEqual(2, route[1].stationID);
             Assert.AreEqual(5, Convert.ToInt32(route[1].driveHour));
 
-            route = PathFind.shortestPathWithoutFibonacci(adjListWithWeight, 1, 3);
+            route = FindPath.shortestPathWithoutFibonacci(adjListWithWeight, 1, 3);
             Assert.AreEqual(1, route[0].stationID);
             Assert.AreEqual(0, Convert.ToInt32(route[0].driveHour));
             Assert.AreEqual(2, route[1].stationID);
@@ -1168,13 +1168,13 @@ namespace ElectricCarLibTest
             Assert.AreEqual(3, route[2].stationID);
             Assert.AreEqual(11, Convert.ToInt32(route[2].driveHour));
 
-            route = PathFind.shortestPathWithoutFibonacci(adjListWithWeight, 1, 4);
+            route = FindPath.shortestPathWithoutFibonacci(adjListWithWeight, 1, 4);
             Assert.AreEqual(1, route[0].stationID);
             Assert.AreEqual(0, Convert.ToInt32(route[0].driveHour));
             Assert.AreEqual(4, route[1].stationID);
             Assert.AreEqual(4, Convert.ToInt32(route[1].driveHour));
 
-            route = PathFind.shortestPathWithoutFibonacci(adjListWithWeight, 1, 5);
+            route = FindPath.shortestPathWithoutFibonacci(adjListWithWeight, 1, 5);
             Assert.AreEqual(1, route[0].stationID);
             Assert.AreEqual(0, Convert.ToInt32(route[0].driveHour));
             Assert.AreEqual(4, route[1].stationID);
@@ -1182,7 +1182,7 @@ namespace ElectricCarLibTest
             Assert.AreEqual(5, route[2].stationID);
             Assert.AreEqual(6, Convert.ToInt32(route[2].driveHour));
 
-            route = PathFind.shortestPathWithoutFibonacci(adjListWithWeight, 2, 3);
+            route = FindPath.shortestPathWithoutFibonacci(adjListWithWeight, 2, 3);
             Assert.AreEqual(2, route[0].stationID);
             Assert.AreEqual(0, Convert.ToInt32(route[0].driveHour));
             Assert.AreEqual(3, route[1].stationID);
@@ -1213,7 +1213,7 @@ namespace ElectricCarLibTest
 
             List<PathStop> route = new List<PathStop>();
 
-            route = PathFind.shortestPathWithoutFibonacci(adjListWithWeight, 1, 4);
+            route = FindPath.shortestPathWithoutFibonacci(adjListWithWeight, 1, 4);
             Assert.AreEqual(1, route[0].stationID);
             Assert.AreEqual(0, Convert.ToInt32(route[0].driveHour));
             Assert.AreEqual(3, route[1].stationID);
@@ -1223,7 +1223,7 @@ namespace ElectricCarLibTest
             Assert.AreEqual(4, route[3].stationID);
             Assert.AreEqual(9, Convert.ToInt32(route[3].driveHour));
 
-            route = PathFind.shortestPathWithoutFibonacci(adjListWithWeight, 1, 5);
+            route = FindPath.shortestPathWithoutFibonacci(adjListWithWeight, 1, 5);
             Assert.AreEqual(1, route[0].stationID);
             Assert.AreEqual(0, Convert.ToInt32(route[0].driveHour));
             Assert.AreEqual(3, route[1].stationID);
@@ -1253,8 +1253,8 @@ namespace ElectricCarLibTest
             adjListWithWeight.Add(4, x);
             adjListWithWeight.Add(5, u);
 
-            Assert.AreEqual(2, PathFind.breathFirstSearchWithIds(adjListWithWeight, 1, 4));
-            Assert.AreEqual(2, PathFind.breathFirstSearchWithIds(adjListWithWeight, 1, 5));
+            Assert.AreEqual(2, FindPath.breathFirstSearchWithIds(adjListWithWeight, 1, 4));
+            Assert.AreEqual(2, FindPath.breathFirstSearchWithIds(adjListWithWeight, 1, 5));
         }
 
         [TestMethod]
@@ -1278,12 +1278,12 @@ namespace ElectricCarLibTest
             adjListWithWeight.Add(4, y);
             adjListWithWeight.Add(5, u);
 
-            Assert.AreEqual(4, PathFind.breathFirstSearchWithIds(adjListWithWeight, 3, 5));
-            Assert.AreEqual(1, PathFind.breathFirstSearchWithIds(adjListWithWeight, 1, 2));
-            Assert.AreEqual(2, PathFind.breathFirstSearchWithIds(adjListWithWeight, 1, 3));
-            Assert.AreEqual(1, PathFind.breathFirstSearchWithIds(adjListWithWeight, 1, 4));
-            Assert.AreEqual(2, PathFind.breathFirstSearchWithIds(adjListWithWeight, 1, 5));
-            Assert.AreEqual(1, PathFind.breathFirstSearchWithIds(adjListWithWeight, 2, 3));
+            Assert.AreEqual(4, FindPath.breathFirstSearchWithIds(adjListWithWeight, 3, 5));
+            Assert.AreEqual(1, FindPath.breathFirstSearchWithIds(adjListWithWeight, 1, 2));
+            Assert.AreEqual(2, FindPath.breathFirstSearchWithIds(adjListWithWeight, 1, 3));
+            Assert.AreEqual(1, FindPath.breathFirstSearchWithIds(adjListWithWeight, 1, 4));
+            Assert.AreEqual(2, FindPath.breathFirstSearchWithIds(adjListWithWeight, 1, 5));
+            Assert.AreEqual(1, FindPath.breathFirstSearchWithIds(adjListWithWeight, 2, 3));
         }
 
         
@@ -1292,8 +1292,8 @@ namespace ElectricCarLibTest
         public void runUnpassedStressTestWithRandomWeight()
         {
             Dictionary<int, Dictionary<int, decimal>> list = readDataFromFile();
-            List<PathStop> routeWoutF = PathFind.shortestPathWithoutFibonacci(list, 5, 15);
-            List<PathStop> routeWF = PathFind.shortestPathWithFibonacci(list, 5, 15);
+            List<PathStop> routeWoutF = FindPath.shortestPathWithoutFibonacci(list, 5, 15);
+            List<PathStop> routeWF = FindPath.shortestPathWithFibonacci(list, 5, 15);
             
 
             decimal lastStopDistanceWF = 0;
@@ -1316,8 +1316,8 @@ namespace ElectricCarLibTest
         public void runUnpassedStressTestWithWeightOf1()
         {
             Dictionary<int, Dictionary<int, decimal>> list = readDataFromFile();
-            int BFS = PathFind.breathFirstSearchWithIds(list, 7, 5);
-            int leastS = PathFind.leastStopsPathWithIds(list, 7, 5).Count -1;
+            int BFS = FindPath.breathFirstSearchWithIds(list, 7, 5);
+            int leastS = FindPath.leastStopsPathWithIds(list, 7, 5).Count - 1;
             Assert.AreEqual(1, leastS);
             Assert.AreEqual(1, BFS);
         }
@@ -1339,15 +1339,15 @@ namespace ElectricCarLibTest
                     double density = 0.1; //density of random graph can be adjusted
                     RandomGraphGenerator graph = new RandomGraphGenerator(size, density, 1, 300);
                     adjList = graph.getAdjList();
-                    List<PathStop> routeWF = PathFind.shortestPathWithFibonacci(adjList, startId, endId);
+                    List<PathStop> routeWF = FindPath.shortestPathWithFibonacci(adjList, startId, endId);
                     decimal lastStopDistanceWF = 0;
                     if (routeWF.Count != 0)
                     {
                         lastStopDistanceWF = routeWF[routeWF.Count-1].driveHour;
                     }
 
-                    List<PathStop> routeWoutF = PathFind.shortestPathWithoutFibonacci(adjList, startId, endId);
-                    int withoutF = PathFind.shortestPathWithoutFibonacci(adjList, startId, endId).Count;
+                    List<PathStop> routeWoutF = FindPath.shortestPathWithoutFibonacci(adjList, startId, endId);
+                    int withoutF = FindPath.shortestPathWithoutFibonacci(adjList, startId, endId).Count;
                     decimal lastStopDistanceWoutF = 0;
                     if (routeWoutF.Count != 0)
                     {
@@ -1465,25 +1465,25 @@ namespace ElectricCarLibTest
                     double density = 0.2;
                     RandomGraphGenerator graph = new RandomGraphGenerator(size, density, 1, 1);
                     adjList = graph.getAdjList();
-                    int withF = PathFind.shortestPathWithFibonacci(adjList, startId, endId).Count;
+                    int withF = FindPath.shortestPathWithFibonacci(adjList, startId, endId).Count;
                     if (withF != 0)
                     {
                         withF = withF - 1;
                     }
-                    
-                    int withoutF = PathFind.shortestPathWithoutFibonacci(adjList, startId, endId).Count;
+
+                    int withoutF = FindPath.shortestPathWithoutFibonacci(adjList, startId, endId).Count;
                     if (withoutF != 0)
                     {
                         withoutF = withoutF - 1;
                     }
-                    
-                    int leastS = PathFind.leastStopsPathWithIds(adjList, startId, endId).Count;
+
+                    int leastS = FindPath.leastStopsPathWithIds(adjList, startId, endId).Count;
                     if (leastS != 0)
                     {
                         leastS = leastS-1;
                     }
-                    
-                    int BFS = PathFind.breathFirstSearchWithIds(adjList, startId, endId);
+
+                    int BFS = FindPath.breathFirstSearchWithIds(adjList, startId, endId);
 
                     Assert.AreEqual(withF, leastS);
                     Assert.AreEqual(withF, withoutF);

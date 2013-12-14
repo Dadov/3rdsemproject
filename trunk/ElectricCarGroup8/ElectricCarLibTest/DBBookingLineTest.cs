@@ -69,7 +69,10 @@ namespace ElectricCarLibTest
             DateTime trip = createTime.AddDays(60);
             DateTime sTime = createTime.AddDays(60);
             DateTime sTime2 = createTime.AddDays(70);
-            int bId = dbBooking.addRecord(1, 100, createTime, trip, "1234456");
+            int dgId = dbDG.addNewRecord("Regular", 0);
+            MDiscountGroup dg = dbDG.getRecord(dgId, false);
+            int cId = dbCust.addNewRecord("May", "Smith", "Denmark", "Denmark", "12345678", "h@hotmail.com", dg, "Payed");
+            int bId = dbBooking.addRecord(cId, 100, createTime, trip, "1234456");
             int btId = dbBT.addNewRecord("AAA", "BBB", 12, 100);
             int sId = dbStation.addNewRecord("BStation", "Aalborg", "Denmark", "Open");
             try
@@ -94,6 +97,8 @@ namespace ElectricCarLibTest
                 dbBooking.deleteRecord(bId);
                 dbBT.deleteRecord(btId);
                 dbStation.deleteRecord(sId);
+                dbCust.deleteRecord(cId);
+                dbDG.deleteRecord(dgId);
             }
         }
 
@@ -103,7 +108,10 @@ namespace ElectricCarLibTest
             DateTime createTime = DateTime.Now;
             DateTime trip = createTime.AddDays(60);
             DateTime sTime = createTime.AddDays(60);
-            int bId = dbBooking.addRecord(1, 100, createTime, trip, "1234456");
+            int dgId = dbDG.addNewRecord("Regular", 0);
+            MDiscountGroup dg = dbDG.getRecord(dgId, false);
+            int cId = dbCust.addNewRecord("May", "Smith", "Denmark", "Denmark", "12345678", "h@hotmail.com", dg, "Payed");
+            int bId = dbBooking.addRecord(cId, 100, createTime, trip, "1234456");
             int btId = dbBT.addNewRecord("AAA", "BBB", 12, 100);
             int sId = dbStation.addNewRecord("CStation", "Aalborg", "Denmark", "Open");
             try
@@ -134,6 +142,8 @@ namespace ElectricCarLibTest
                 dbBooking.deleteRecord(bId);
                 dbBT.deleteRecord(btId);
                 dbStation.deleteRecord(sId);
+                dbCust.deleteRecord(cId);
+                dbDG.deleteRecord(dgId);
             }
         }
 
@@ -143,7 +153,10 @@ namespace ElectricCarLibTest
             DateTime createTime = DateTime.Now;
             DateTime trip = createTime.AddDays(60);
             DateTime sTime = createTime.AddDays(60);
-            int bId = dbBooking.addRecord(1, 100, createTime, trip, "1234456");
+            int dgId = dbDG.addNewRecord("Regular", 0);
+            MDiscountGroup dg = dbDG.getRecord(dgId, false);
+            int cId = dbCust.addNewRecord("May", "Smith", "Denmark", "Denmark", "12345678", "h@hotmail.com", dg, "Payed");
+            int bId = dbBooking.addRecord(cId, 100, createTime, trip, "1234456");
             int btId = dbBT.addNewRecord("AAA", "BBB", 12, 100);
             int sId = dbStation.addNewRecord("DStation", "Aalborg", "Denmark", "Open");
             try
@@ -163,6 +176,8 @@ namespace ElectricCarLibTest
                 dbBooking.deleteRecord(bId);
                 dbBT.deleteRecord(btId);
                 dbStation.deleteRecord(sId);
+                dbCust.deleteRecord(cId);
+                dbDG.deleteRecord(dgId);
             }
         }
 
@@ -172,7 +187,10 @@ namespace ElectricCarLibTest
             DateTime createTime = DateTime.Now;
             DateTime trip = createTime.AddDays(60);
             DateTime sTime = createTime.AddDays(60);
-            int bId = dbBooking.addRecord(1, 100, createTime, trip, "1234456");
+            int dgId = dbDG.addNewRecord("Regular", 0);
+            MDiscountGroup dg = dbDG.getRecord(dgId, false);
+            int cId = dbCust.addNewRecord("May", "Smith", "Denmark", "Denmark", "12345678", "h@hotmail.com", dg, "Payed");
+            int bId = dbBooking.addRecord(cId, 100, createTime, trip, "1234456");
             int btId = dbBT.addNewRecord("AAA", "BBB", 12, 100);
             int sId = dbStation.addNewRecord("AalborgStation", "Aalborg", "Denmark", "Open");
             try
@@ -206,6 +224,8 @@ namespace ElectricCarLibTest
                 dbBooking.deleteRecord(bId);
                 dbBT.deleteRecord(btId);
                 dbStation.deleteRecord(sId);
+                dbCust.deleteRecord(cId);
+                dbDG.deleteRecord(dgId);
             }
         }
     }

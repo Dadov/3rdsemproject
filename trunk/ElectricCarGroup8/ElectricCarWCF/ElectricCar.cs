@@ -9,7 +9,7 @@ using ElectricCarModelLayer;
 
 namespace ElectricCarWCF
 {
-    [ServiceBehavior(InstanceContextMode = InstanceContextMode.Single)]
+    [ServiceBehavior(InstanceContextMode = InstanceContextMode.Single, ConcurrencyMode = ConcurrencyMode.Multiple)]
     class ElectricCar : IElectricCar
     {
         #region People
@@ -478,7 +478,7 @@ namespace ElectricCarWCF
                 {
                     Booking bk = new Booking();
                     bk.Id = b.Id;
-                    bk.createDate = b.createDate.Value.ToString("dd/MM/yyyy HH:mm");
+                    bk.createDate = b.createDate.Value.ToString("dd/MM/yyyy");
                     CustomerTest cust = new CustomerTest() { Id = b.customer.ID, name = b.customer.FName + " " + b.customer.LName };
                     bk.customer = cust;
                     bk.cId = b.customer.ID;
@@ -588,7 +588,8 @@ namespace ElectricCarWCF
             bk.createDate = Convert.ToDateTime(b.createDate);
             bk.creaditCard = b.payStatus;
             bk.totalPrice = b.totalPrice;
-            bk.tripStart = Convert.ToDateTime(b.tripStart);
+            bk.tripStart = DateTime.ParseExact(b.createDate, "dd/MM/yyyy", System.Globalization.CultureInfo.CurrentCulture);
+            bk.tripStart = DateTime.ParseExact(b.tripStart, "dd/MM/yyyy HH:mm", System.Globalization.CultureInfo.CurrentCulture);
             BookingCtr bCtr = new BookingCtr();
             bCtr.updateBooking(bk);
         }
