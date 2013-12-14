@@ -21,12 +21,12 @@ namespace ElectricCarGUI
     public partial class AddBatteryTypeWindow : Window
     {
         static ElectricCarService.IElectricCar serviceObj = new ElectricCarService.ElectricCarClient();
-        private BatteryTypeTest bt = new BatteryTypeTest();
+        private BatteryType bt = new BatteryType();
         private string[] quantity = { "1", "2", "3", "4", "5" };
         private List<string> btNames = new List<string>();
         private Dictionary<string, int> name_Id = new Dictionary<string, int>();
         private BookingCtr bCtr;
-        private List<BatteryTypeTest> bts = new List<BatteryTypeTest>();
+        private List<BatteryType> bts = new List<BatteryType>();
         public AddBatteryTypeWindow(BookingCtr bookingCtr)
         {
             InitializeComponent();
@@ -51,10 +51,10 @@ namespace ElectricCarGUI
             bts = serviceObj.getAllBatteryType().ToList();
             if (bts != null)
             {
-                foreach (BatteryTypeTest b in bts)
+                foreach (BatteryType b in bts)
                 {
                     btNames.Add(b.name);
-                    name_Id.Add(b.name, b.Id);
+                    name_Id.Add(b.name, b.ID);
                 }
                 cbbBT.ItemsSource = btNames;
                 cbbBT.SelectedIndex = 0;
@@ -65,7 +65,7 @@ namespace ElectricCarGUI
         private void btnOK_Click(object sender, RoutedEventArgs e)
         {
             BookingLine bl = new BookingLine();
-            bt.Id = name_Id[(string)cbbBT.SelectedValue];
+            bt.ID = name_Id[(string)cbbBT.SelectedValue];
             bt.name = (string)cbbBT.SelectedValue;
             bl.quantity = Convert.ToInt32(cbbQuantity.SelectedValue);
             
@@ -86,8 +86,8 @@ namespace ElectricCarGUI
             source.Add(bl);
             bCtr.dgBookingLine.ItemsSource = source;
 
-            bts = new List<BatteryTypeTest>();
-            bt = new BatteryTypeTest();
+            bts = new List<BatteryType>();
+            bt = new BatteryType();
             Close();
         }
     }

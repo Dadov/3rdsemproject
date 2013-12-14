@@ -39,5 +39,8 @@ namespace ElectricCarWCF
 
         [DataMember]
         public DiscountGroup DiscountGroup { get; set; }
+
+        [DataMember]
+        public string name { get; set; }
     }
 }

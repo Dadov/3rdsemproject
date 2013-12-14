@@ -138,7 +138,7 @@ namespace ElectricCarWCF
         void deleteBooking(int bId);
 
         [OperationContract]
-        List<BatteryTypeTest> getAllBatteryType();
+        List<BatteryType> getAllBatteryType();
 
 
         #endregion

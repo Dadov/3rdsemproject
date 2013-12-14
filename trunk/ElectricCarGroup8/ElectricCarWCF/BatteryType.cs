@@ -25,6 +25,11 @@ namespace ElectricCarWCF
         [DataMember]
         public decimal exchangeCost;
 
+        [DataMember]
+        public int quantity { get; set; }
+        [DataMember]
+        public double price { get; set; }
+
 
     }
 }
