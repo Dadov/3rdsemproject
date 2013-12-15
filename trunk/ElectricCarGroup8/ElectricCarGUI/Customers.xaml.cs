@@ -34,6 +34,7 @@ namespace ElectricCarGUI
             discoGroups = serviceObj.getAllDiscountGroups().ToList();
             custDiscoGroup.ItemsSource = discoGroups;
             custDiscoGroup.SelectedIndex = 0;
+            fillCustTable();
         }
 
         private void fillCustTable()
@@ -104,7 +105,7 @@ namespace ElectricCarGUI
             }
             else
             {
-                MessageBox.Show("Please enter valid Email and Password.");
+                MessageBox.Show("Please enter valid Email address and Password have to cointain letters and numbers.");
             }
         }
 
@@ -138,7 +139,7 @@ namespace ElectricCarGUI
             } 
             else 
             {
-                MessageBox.Show("Please enter valid Email and Password.");
+                MessageBox.Show("Please enter valid Email address and Password have to cointain letters and numbers.");
             }
         }
 
