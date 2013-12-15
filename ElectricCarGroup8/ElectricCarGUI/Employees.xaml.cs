@@ -29,6 +29,7 @@ namespace ElectricCarGUI
             InitializeComponent();
             regCheck = new RegexChecker();
             serviceObj = new ElectricCarService.ElectricCarClient();
+            fillEmpTable();
         }
 
         private void fillEmpTable()
@@ -98,7 +99,7 @@ namespace ElectricCarGUI
             }
             else
             {
-                MessageBox.Show("Please enter valid Email and Password.");
+                MessageBox.Show("Please enter valid Email address and Password have to cointain letters and numbers.");
             };
         }
 
@@ -128,7 +129,7 @@ namespace ElectricCarGUI
             }
             else
             {
-                MessageBox.Show("Please enter valid Email and Password.");
+                MessageBox.Show("Please enter valid Email address and Password have to cointain letters and numbers.");
             }
         }
 
