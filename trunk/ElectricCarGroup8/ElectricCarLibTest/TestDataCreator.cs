@@ -24,7 +24,7 @@ namespace ElectricCarLibTest
             int sId1 = 0;
             int i = 1;
             Thread.CurrentThread.CurrentCulture = new CultureInfo("en-US");
-            string[] lines = System.IO.File.ReadAllLines(@"\TestNodeSize50.txt");
+            string[] lines = System.IO.File.ReadAllLines(@"TestNodeSize50.txt");
             lines[0] = "";
             foreach (string line in lines)
             {
@@ -44,7 +44,7 @@ namespace ElectricCarLibTest
                     stations.Add(station);
                     sId1 = x;
                 }
-                else if(line != "" && x<neighbor)
+                else if(line != "" && sId1<neighbor)
                 {
                     Connection conn = new Connection();
                     conn.sId1 = sId1;
