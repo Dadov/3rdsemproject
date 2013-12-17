@@ -15,7 +15,7 @@ namespace ElectricCarLibTest
     [TestClass]
     public class TestDataCreator
     {
-        [TestMethod]
+        //[TestMethod]
         public void Main()
         {
             List<Station> stations = new List<Station>();
