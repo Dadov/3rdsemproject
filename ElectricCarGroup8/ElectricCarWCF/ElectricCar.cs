@@ -715,11 +715,18 @@ namespace ElectricCarWCF
             }
             return nbs;
         }
-
+     
         public void addNaborStation(int id1, int id2, decimal distance, decimal drivehour)
         {
             StationCtr sCtr = new StationCtr();
             sCtr.addConnection(id1, id2, distance, drivehour);
+        }
+
+        public bool isConnectionExist(int id1, int id2)
+        {
+            StationCtr sCtr = new StationCtr();
+            bool isExist = sCtr.isConnectionExist(id1, id2);
+            return isExist;
         }
 
         public void updateNaborStation(int id1, int id2, decimal distance, decimal driveHour)

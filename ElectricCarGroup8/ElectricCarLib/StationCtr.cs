@@ -57,6 +57,11 @@ namespace ElectricCarLib
             dbConnection.addNewRecord(sId1, sId2, distance, driveHour);
         }
 
+        public bool isConnectionExist(int id1, int id2)
+        {
+            return dbConnection.isConnectionExist(id1, id2);
+        }
+
         public void updateConnection(int sId1, int sId2, decimal distance, decimal driveHour)
         {
             dbConnection.updateRecord(sId1, sId2, distance, driveHour);

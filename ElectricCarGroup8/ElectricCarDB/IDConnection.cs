@@ -14,5 +14,6 @@ namespace ElectricCarDB
         void updateRecord(int id1, int id2, decimal dist, decimal time);
         List<MConnection> getAllRecord(Boolean getAssociation);
         List<string> getAllInfo();
+        bool isConnectionExist(int id1, int id2);
     }
 }

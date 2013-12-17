@@ -1733,6 +1733,12 @@ namespace ElectricCarGUI.ElectricCarService {
         [System.ServiceModel.OperationContractAttribute(Action="http://tempuri.org/IElectricCar/deleteNaborStation", ReplyAction="http://tempuri.org/IElectricCar/deleteNaborStationResponse")]
         System.Threading.Tasks.Task deleteNaborStationAsync(int id1, int id2);
         
+        [System.ServiceModel.OperationContractAttribute(Action="http://tempuri.org/IElectricCar/isConnectionExist", ReplyAction="http://tempuri.org/IElectricCar/isConnectionExistResponse")]
+        bool isConnectionExist(int id1, int id2);
+        
+        [System.ServiceModel.OperationContractAttribute(Action="http://tempuri.org/IElectricCar/isConnectionExist", ReplyAction="http://tempuri.org/IElectricCar/isConnectionExistResponse")]
+        System.Threading.Tasks.Task<bool> isConnectionExistAsync(int id1, int id2);
+        
         [System.ServiceModel.OperationContractAttribute(Action="http://tempuri.org/IElectricCar/getStates", ReplyAction="http://tempuri.org/IElectricCar/getStatesResponse")]
         string[] getStates();
         
@@ -2167,6 +2173,14 @@ namespace ElectricCarGUI.ElectricCarService {
         
         public System.Threading.Tasks.Task deleteNaborStationAsync(int id1, int id2) {
             return base.Channel.deleteNaborStationAsync(id1, id2);
+        }
+        
+        public bool isConnectionExist(int id1, int id2) {
+            return base.Channel.isConnectionExist(id1, id2);
+        }
+        
+        public System.Threading.Tasks.Task<bool> isConnectionExistAsync(int id1, int id2) {
+            return base.Channel.isConnectionExistAsync(id1, id2);
         }
         
         public string[] getStates() {
