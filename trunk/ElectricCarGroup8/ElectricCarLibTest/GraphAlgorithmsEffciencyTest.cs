@@ -10,7 +10,7 @@ namespace ElectricCarLibTest
     [TestClass]
     public class GraphAlgorithmsEffciencyTest
     {
-        //[TestMethod]
+        [TestMethod]
         public void GenerateTestDataSet()
         {
 
@@ -19,11 +19,11 @@ namespace ElectricCarLibTest
             char[] trailingChars = suffix.ToCharArray();
             path = path.TrimEnd(trailingChars) + @"\Unpassed data\TestNodeSize";
 
-            for (int i = 0; i < 7; i++)
-            {
+            //for (int i = 0; i < 7; i++)
+            //{
 
                 Dictionary<int, Dictionary<int, decimal>> adjList = new Dictionary<int, Dictionary<int, decimal>>();
-                int size = (int)Math.Pow(10, i + 1); //size of random graph can be ajusted, when size>1000 it will generate OutOfMemoryException
+                int size = 50;//(int)Math.Pow(10, i + 1); //size of random graph can be ajusted, when size>1000 it will generate OutOfMemoryException
                 string pathToTxt = path + size + ".txt";
                 string pathToGexf = path + size + ".gexf";
                 Random r = new Random();
@@ -35,7 +35,7 @@ namespace ElectricCarLibTest
 
                 IOhelper.writeDataToFile(pathToTxt, "StartId: " + startId + "  EndId: " + endId, adjList);
                 IOhelper.outPutGraphData(pathToGexf, adjList, startId, endId);
-            }
+            //}
 
 
         }

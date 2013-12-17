@@ -37,6 +37,23 @@ namespace ElectricCarDB
             }
         }
 
+        public bool isConnectionExist(int id1, int id2)
+        {
+            using (ElectricCarEntities context = new ElectricCarEntities())
+            {
+                try 
+	            {	        
+		            getRecord(id1, id2, false);
+	            }
+	            catch (NullReferenceException)
+	            {
+                    return false;
+	            }
+
+                return true;
+            }
+        }
+
         public MConnection getRecord(int id1, int id2, bool getAssociation)
         {
             using (ElectricCarEntities context = new ElectricCarEntities())

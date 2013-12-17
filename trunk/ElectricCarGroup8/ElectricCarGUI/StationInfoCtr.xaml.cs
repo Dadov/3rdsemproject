@@ -76,9 +76,17 @@ namespace ElectricCarGUI
                 {
                     if (txtDistance.Text != "" && txtDriveHour.Text != "")
                     {
-                        serviceObj.addNaborStation(sId, Convert.ToInt32(txtId.Text), Convert.ToDecimal(txtDistance.Text), Convert.ToDecimal(txtDriveHour.Text));
-                        clear();
-                        showNbStations(sId);
+                        if (!serviceObj.isConnectionExist(Convert.ToInt32(sId), Convert.ToInt32(txtId.Text)))
+                        {
+                            serviceObj.addNaborStation(sId, Convert.ToInt32(txtId.Text), Convert.ToDecimal(txtDistance.Text), Convert.ToDecimal(txtDriveHour.Text));
+                            clear();
+                            showNbStations(sId);
+                        }
+                        else
+                        {
+                            MessageBox.Show("The connection already exists.");
+                            clear();
+                        }
                     }
                     else
                     {

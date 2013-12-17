@@ -45,33 +45,43 @@ namespace ElectricCarGUI
 
         
 
-        public int StationId { get; set; }       
-
+        public int StationId { get; set; }
+        
         private void btnEnter_Click(object sender, RoutedEventArgs e)
         {
-            Station station = serviceObj.getStation(Convert.ToInt32(txtStationId.Text)) ;
-            if (station != null)
+            if (regCheck.checkNumber(txtStationId.Text))
             {
-                StationId = Convert.ToInt32(txtStationId.Text);
-                bCtr.fillStorageTable(StationId);
-                bCtr.StationId = StationId;
-                bCtr.mv = this;
-                btCtr.fillData();
-                bCtr.fillData();
-                sInfoCtr.station = station;
-                sInfoCtr.sId = StationId;
-                sInfoCtr.mv = this;
-                sInfoCtr.fillInfo(StationId);
+                Station station = serviceObj.getStation(Convert.ToInt32(txtStationId.Text));
+                if (station != null)
+                {
+                    Mouse.OverrideCursor = System.Windows.Input.Cursors.Wait;
+                    StationId = Convert.ToInt32(txtStationId.Text);
+                    bCtr.fillStorageTable(StationId);
+                    bCtr.StationId = StationId;
+                    bCtr.mv = this;
+                    btCtr.fillData();
+                    bCtr.fillData();
+                    sInfoCtr.station = station;
+                    sInfoCtr.sId = StationId;
+                    sInfoCtr.mv = this;
+                    sInfoCtr.fillInfo(StationId);
 
-                sbCtr.sId = StationId;
-                sbCtr.showAllBookingLinesForStation(StationId);
+                    sbCtr.sId = StationId;
+                    sbCtr.showAllBookingLinesForStation(StationId);
+                    Mouse.OverrideCursor = System.Windows.Input.Cursors.Arrow;
 
-                
+                }
+                else
+                {
+                    MessageBox.Show("Station does not exist, please input another one.");
+                }
             }
             else
             {
-                MessageBox.Show("Station does not exist, please input another one.");
+                MessageBox.Show("Please input number in station id field.");
+                txtStationId.Text = "";
             }
+            
         }
 
         private void addStationsCtr(object sender, RoutedEventArgs e)

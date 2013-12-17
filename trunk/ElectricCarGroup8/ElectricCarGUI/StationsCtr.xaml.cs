@@ -13,6 +13,8 @@ using System.Windows.Media.Imaging;
 using System.Windows.Navigation;
 using System.Windows.Shapes;
 using ElectricCarGUI.ElectricCarService;
+using System.ServiceModel;
+using System.ServiceModel.Channels;
 
 namespace ElectricCarGUI
 {
@@ -217,9 +219,18 @@ namespace ElectricCarGUI
                 {
                     if (regCheck.checkDecimal(txtNsDistance.Text) && regCheck.checkDecimal(txtNsDriveHour.Text))
                     {
-                        serviceObj.addNaborStation(Convert.ToInt32(txtId.Text), Convert.ToInt32(txtNsId.Text), Convert.ToDecimal(txtNsDistance.Text), Convert.ToDecimal(txtNsDriveHour.Text));
-                        clearNaborStationTextBox();
-                        showNbStations(Convert.ToInt32(txtId.Text));
+                        if (!serviceObj.isConnectionExist(Convert.ToInt32(txtId.Text), Convert.ToInt32(txtNsId.Text)))
+                        {
+                            serviceObj.addNaborStation(Convert.ToInt32(txtId.Text), Convert.ToInt32(txtNsId.Text), Convert.ToDecimal(txtNsDistance.Text), Convert.ToDecimal(txtNsDriveHour.Text));
+                            clearNaborStationTextBox();
+                            showNbStations(Convert.ToInt32(txtId.Text));
+                        }
+                        else 
+                        {
+                            MessageBox.Show("The connection already exists.");
+                            clearNaborStationTextBox();
+                        }
+                        
                     }
                     else
                     {

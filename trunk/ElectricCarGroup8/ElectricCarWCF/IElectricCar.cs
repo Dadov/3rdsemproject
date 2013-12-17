@@ -172,6 +172,9 @@ namespace ElectricCarWCF
         void deleteNaborStation(int id1, int id2);
 
         [OperationContract]
+        bool isConnectionExist(int id1, int id2);
+
+        [OperationContract]
         List<string> getStates();
 
         [OperationContract]
