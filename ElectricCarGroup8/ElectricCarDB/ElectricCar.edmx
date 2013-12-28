@@ -206,6 +206,8 @@
           <Property Name="address" Type="varchar" MaxLength="50" />
           <Property Name="country" Type="varchar" MaxLength="50" />
           <Property Name="state" Type="varchar" MaxLength="50" />
+          <Property Name="longitude" Type="float" />
+          <Property Name="latitude" Type="float" />
         </EntityType>
         <Association Name="FK_Battery_ToTable">
           <End Role="BatteryType" Type="ElectricCarModel.Store.BatteryType" Multiplicity="0..1" />
@@ -600,6 +602,8 @@
           <NavigationProperty Name="Connections" Relationship="ElectricCarModel.FK_Connection_ToTable" FromRole="Station" ToRole="Connection" />
           <NavigationProperty Name="Connections1" Relationship="ElectricCarModel.FK_Connection_ToTable_1" FromRole="Station" ToRole="Connection" />
           <NavigationProperty Name="Employees" Relationship="ElectricCarModel.FK_Employee_ToTable" FromRole="Station" ToRole="Employee" />
+          <Property Type="Double" Name="longitude" />
+          <Property Type="Double" Name="latitude" />
         </EntityType>
         <Association Name="FK_Battery_ToTable">
           <End Role="BatteryType" Type="ElectricCarModel.BatteryType" Multiplicity="0..1" />
@@ -887,6 +891,8 @@
           <EntitySetMapping Name="Stations">
             <EntityTypeMapping TypeName="ElectricCarModel.Station">
               <MappingFragment StoreEntitySet="Station">
+                <ScalarProperty Name="latitude" ColumnName="latitude" />
+                <ScalarProperty Name="longitude" ColumnName="longitude" />
                 <ScalarProperty Name="Id" ColumnName="Id" />
                 <ScalarProperty Name="name" ColumnName="name" />
                 <ScalarProperty Name="address" ColumnName="address" />
