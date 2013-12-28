@@ -1,0 +1,178 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Project ToolsVersion="4.0" DefaultTargets="Build" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
+  <Import Project="$(MSBuildExtensionsPath)\$(MSBuildToolsVersion)\Microsoft.Common.props" Condition="Exists('$(MSBuildExtensionsPath)\$(MSBuildToolsVersion)\Microsoft.Common.props')" />
+  <PropertyGroup>
+    <Configuration Condition=" '$(Configuration)' == '' ">Debug</Configuration>
+    <Platform Condition=" '$(Platform)' == '' ">AnyCPU</Platform>
+    <ProjectGuid>{78A6F705-91A1-4D6E-AE99-AD8AF0FD60CF}</ProjectGuid>
+    <OutputType>Library</OutputType>
+    <AppDesignerFolder>Properties</AppDesignerFolder>
+    <RootNamespace>ElectricCarDB</RootNamespace>
+    <AssemblyName>ElectricCarDB</AssemblyName>
+    <TargetFrameworkVersion>v4.5</TargetFrameworkVersion>
+    <FileAlignment>512</FileAlignment>
+  </PropertyGroup>
+  <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Debug|AnyCPU' ">
+    <DebugSymbols>true</DebugSymbols>
+    <DebugType>full</DebugType>
+    <Optimize>false</Optimize>
+    <OutputPath>bin\Debug\</OutputPath>
+    <DefineConstants>DEBUG;TRACE</DefineConstants>
+    <ErrorReport>prompt</ErrorReport>
+    <WarningLevel>4</WarningLevel>
+  </PropertyGroup>
+  <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Release|AnyCPU' ">
+    <DebugType>pdbonly</DebugType>
+    <Optimize>true</Optimize>
+    <OutputPath>bin\Release\</OutputPath>
+    <DefineConstants>TRACE</DefineConstants>
+    <ErrorReport>prompt</ErrorReport>
+    <WarningLevel>4</WarningLevel>
+  </PropertyGroup>
+  <ItemGroup>
+    <Reference Include="EntityFramework">
+      <HintPath>..\packages\EntityFramework.5.0.0\lib\net45\EntityFramework.dll</HintPath>
+    </Reference>
+    <Reference Include="System" />
+    <Reference Include="System.ComponentModel.DataAnnotations" />
+    <Reference Include="System.Core" />
+    <Reference Include="System.Data.Entity" />
+    <Reference Include="System.Runtime.Serialization" />
+    <Reference Include="System.Security" />
+    <Reference Include="System.Transactions" />
+    <Reference Include="System.Xml.Linq" />
+    <Reference Include="System.Data.DataSetExtensions" />
+    <Reference Include="Microsoft.CSharp" />
+    <Reference Include="System.Data" />
+    <Reference Include="System.Xml" />
+  </ItemGroup>
+  <ItemGroup>
+    <Compile Include="Battery.cs">
+      <DependentUpon>ElectricCar.tt</DependentUpon>
+    </Compile>
+    <Compile Include="BatteryStorage.cs">
+      <DependentUpon>ElectricCar.tt</DependentUpon>
+    </Compile>
+    <Compile Include="BatteryType.cs">
+      <DependentUpon>ElectricCar.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Booking.cs">
+      <DependentUpon>ElectricCar.tt</DependentUpon>
+    </Compile>
+    <Compile Include="BookingLine.cs">
+      <DependentUpon>ElectricCar.tt</DependentUpon>
+    </Compile>
+    <Compile Include="BookingModel.cs" />
+    <Compile Include="ConncectionModel.cs" />
+    <Compile Include="Connection.cs">
+      <DependentUpon>ElectricCar.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Customer.cs">
+      <DependentUpon>ElectricCar.tt</DependentUpon>
+    </Compile>
+    <Compile Include="DBattery.cs" />
+    <Compile Include="DBatteryStorage.cs" />
+    <Compile Include="DBatteryType.cs" />
+    <Compile Include="DBooking.cs" />
+    <Compile Include="DBookingLine.cs" />
+    <Compile Include="DCustomer.cs" />
+    <Compile Include="DDiscountGroup.cs" />
+    <Compile Include="DEmployee.cs" />
+    <Compile Include="DiscoutGroup.cs">
+      <DependentUpon>ElectricCar.tt</DependentUpon>
+    </Compile>
+    <Compile Include="DLogInfo.cs" />
+    <Compile Include="DPeriod.cs" />
+    <Compile Include="DConnection.cs" />
+    <Compile Include="DStation.cs" />
+    <Compile Include="ElectricCar.Context.cs">
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+      <DependentUpon>ElectricCar.Context.tt</DependentUpon>
+    </Compile>
+    <Compile Include="ElectricCar.cs">
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+      <DependentUpon>ElectricCar.tt</DependentUpon>
+    </Compile>
+    <Compile Include="ElectricCar.Designer.cs">
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+      <DependentUpon>ElectricCar.edmx</DependentUpon>
+    </Compile>
+    <Compile Include="Employee.cs">
+      <DependentUpon>ElectricCar.tt</DependentUpon>
+    </Compile>
+    <Compile Include="IDBattery.cs" />
+    <Compile Include="IDBatteryStorage.cs" />
+    <Compile Include="IDBatteryType.cs" />
+    <Compile Include="IDBooking.cs" />
+    <Compile Include="IDBookingLine.cs" />
+    <Compile Include="IDCustomer.cs" />
+    <Compile Include="IDDiscountGroup.cs" />
+    <Compile Include="IDEmployee.cs" />
+    <Compile Include="IDLogInfo.cs" />
+    <Compile Include="IDPeriod.cs" />
+    <Compile Include="IDConnection.cs" />
+    <Compile Include="IDStation.cs" />
+    <Compile Include="BatteryModel.cs" />
+    <Compile Include="BatteryStorageModel.cs" />
+    <Compile Include="BatteryTypeModel.cs" />
+    <Compile Include="LoginInfo.cs">
+      <DependentUpon>ElectricCar.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Period.cs">
+      <DependentUpon>ElectricCar.tt</DependentUpon>
+    </Compile>
+    <Compile Include="PeriodModel.cs" />
+    <Compile Include="Person.cs">
+      <DependentUpon>ElectricCar.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Properties\AssemblyInfo.cs" />
+    <Compile Include="Station.cs">
+      <DependentUpon>ElectricCar.tt</DependentUpon>
+    </Compile>
+    <Compile Include="StationModel.cs" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="App.Config">
+      <SubType>Designer</SubType>
+    </None>
+    <EntityDeploy Include="ElectricCar.edmx">
+      <Generator>EntityModelCodeGenerator</Generator>
+      <LastGenOutput>ElectricCar.Designer.cs</LastGenOutput>
+    </EntityDeploy>
+    <None Include="ClassDiagram1.cd" />
+    <None Include="ElectricCar.Context.tt">
+      <Generator>TextTemplatingFileGenerator</Generator>
+      <DependentUpon>ElectricCar.edmx</DependentUpon>
+      <LastGenOutput>ElectricCar.Context.cs</LastGenOutput>
+    </None>
+    <None Include="ElectricCar.edmx.diagram">
+      <DependentUpon>ElectricCar.edmx</DependentUpon>
+    </None>
+    <None Include="ElectricCar.tt">
+      <Generator>TextTemplatingFileGenerator</Generator>
+      <DependentUpon>ElectricCar.edmx</DependentUpon>
+      <LastGenOutput>ElectricCar.cs</LastGenOutput>
+    </None>
+    <None Include="packages.config" />
+  </ItemGroup>
+  <ItemGroup>
+    <Service Include="{508349B6-6B84-4DF5-91F0-309BEEBAD82D}" />
+  </ItemGroup>
+  <ItemGroup>
+    <ProjectReference Include="..\ElectricCarModelLayer\ElectricCarModelLayer.csproj">
+      <Project>{00cbf9d5-e24a-4172-a982-2a4f8b2d4620}</Project>
+      <Name>ElectricCarModelLayer</Name>
+    </ProjectReference>
+  </ItemGroup>
+  <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
+  <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 
+       Other similar extension points exist, see Microsoft.Common.targets.
+  <Target Name="BeforeBuild">
+  </Target>
+  <Target Name="AfterBuild">
+  </Target>
+  -->
+</Project>

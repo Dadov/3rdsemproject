@@ -1,0 +1,213 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<xs:schema xmlns:tns="http://schemas.datacontract.org/2004/07/ElectricCarWCF" elementFormDefault="qualified" targetNamespace="http://schemas.datacontract.org/2004/07/ElectricCarWCF" xmlns:xs="http://www.w3.org/2001/XMLSchema">
+  <xs:complexType name="Employee">
+    <xs:sequence>
+      <xs:element minOccurs="0" name="Address" nillable="true" type="xs:string" />
+      <xs:element minOccurs="0" name="Country" nillable="true" type="xs:string" />
+      <xs:element minOccurs="0" name="Email" nillable="true" type="xs:string" />
+      <xs:element minOccurs="0" name="FName" nillable="true" type="xs:string" />
+      <xs:element minOccurs="0" name="ID" type="xs:int" />
+      <xs:element minOccurs="0" name="LName" nillable="true" type="xs:string" />
+      <xs:element minOccurs="0" name="LogInfos" nillable="true" type="tns:ArrayOfLogInfo" />
+      <xs:element minOccurs="0" name="Phone" nillable="true" type="xs:string" />
+      <xs:element minOccurs="0" name="Position" nillable="true" type="xs:string" />
+      <xs:element minOccurs="0" name="StationID" type="xs:int" />
+    </xs:sequence>
+  </xs:complexType>
+  <xs:element name="Employee" nillable="true" type="tns:Employee" />
+  <xs:complexType name="ArrayOfLogInfo">
+    <xs:sequence>
+      <xs:element minOccurs="0" maxOccurs="unbounded" name="LogInfo" nillable="true" type="tns:LogInfo" />
+    </xs:sequence>
+  </xs:complexType>
+  <xs:element name="ArrayOfLogInfo" nillable="true" type="tns:ArrayOfLogInfo" />
+  <xs:complexType name="LogInfo">
+    <xs:sequence>
+      <xs:element minOccurs="0" name="ID" type="xs:int" />
+      <xs:element minOccurs="0" name="LoginName" nillable="true" type="xs:string" />
+      <xs:element minOccurs="0" name="Password" nillable="true" type="xs:string" />
+    </xs:sequence>
+  </xs:complexType>
+  <xs:element name="LogInfo" nillable="true" type="tns:LogInfo" />
+  <xs:complexType name="ArrayOfEmployee">
+    <xs:sequence>
+      <xs:element minOccurs="0" maxOccurs="unbounded" name="Employee" nillable="true" type="tns:Employee" />
+    </xs:sequence>
+  </xs:complexType>
+  <xs:element name="ArrayOfEmployee" nillable="true" type="tns:ArrayOfEmployee" />
+  <xs:complexType name="DiscountGroup">
+    <xs:sequence>
+      <xs:element minOccurs="0" name="Discount" nillable="true" type="xs:decimal" />
+      <xs:element minOccurs="0" name="ID" type="xs:int" />
+      <xs:element minOccurs="0" name="Name" nillable="true" type="xs:string" />
+    </xs:sequence>
+  </xs:complexType>
+  <xs:element name="DiscountGroup" nillable="true" type="tns:DiscountGroup" />
+  <xs:complexType name="Customer">
+    <xs:sequence>
+      <xs:element minOccurs="0" name="Address" nillable="true" type="xs:string" />
+      <xs:element minOccurs="0" name="Country" nillable="true" type="xs:string" />
+      <xs:element minOccurs="0" name="DiscountGroup" nillable="true" type="tns:DiscountGroup" />
+      <xs:element minOccurs="0" name="Email" nillable="true" type="xs:string" />
+      <xs:element minOccurs="0" name="FName" nillable="true" type="xs:string" />
+      <xs:element minOccurs="0" name="ID" type="xs:int" />
+      <xs:element minOccurs="0" name="LName" nillable="true" type="xs:string" />
+      <xs:element minOccurs="0" name="LogInfos" nillable="true" type="tns:ArrayOfLogInfo" />
+      <xs:element minOccurs="0" name="PaymentStatus" nillable="true" type="xs:string" />
+      <xs:element minOccurs="0" name="Phone" nillable="true" type="xs:string" />
+      <xs:element minOccurs="0" name="name" nillable="true" type="xs:string" />
+    </xs:sequence>
+  </xs:complexType>
+  <xs:element name="Customer" nillable="true" type="tns:Customer" />
+  <xs:complexType name="ArrayOfCustomer">
+    <xs:sequence>
+      <xs:element minOccurs="0" maxOccurs="unbounded" name="Customer" nillable="true" type="tns:Customer" />
+    </xs:sequence>
+  </xs:complexType>
+  <xs:element name="ArrayOfCustomer" nillable="true" type="tns:ArrayOfCustomer" />
+  <xs:complexType name="ArrayOfDiscountGroup">
+    <xs:sequence>
+      <xs:element minOccurs="0" maxOccurs="unbounded" name="DiscountGroup" nillable="true" type="tns:DiscountGroup" />
+    </xs:sequence>
+  </xs:complexType>
+  <xs:element name="ArrayOfDiscountGroup" nillable="true" type="tns:ArrayOfDiscountGroup" />
+  <xs:complexType name="ArrayOfBooking">
+    <xs:sequence>
+      <xs:element minOccurs="0" maxOccurs="unbounded" name="Booking" nillable="true" type="tns:Booking" />
+    </xs:sequence>
+  </xs:complexType>
+  <xs:element name="ArrayOfBooking" nillable="true" type="tns:ArrayOfBooking" />
+  <xs:complexType name="Booking">
+    <xs:sequence>
+      <xs:element minOccurs="0" name="Id" type="xs:int" />
+      <xs:element minOccurs="0" name="bookinglines" nillable="true" type="tns:ArrayOfBookingLine" />
+      <xs:element minOccurs="0" name="cId" type="xs:int" />
+      <xs:element minOccurs="0" name="createDate" nillable="true" type="xs:string" />
+      <xs:element minOccurs="0" name="customer" nillable="true" type="tns:Customer" />
+      <xs:element minOccurs="0" name="payStatus" nillable="true" type="xs:string" />
+      <xs:element minOccurs="0" name="startStationId" type="xs:int" />
+      <xs:element minOccurs="0" name="totalPrice" type="xs:decimal" />
+      <xs:element minOccurs="0" name="tripStart" nillable="true" type="xs:string" />
+    </xs:sequence>
+  </xs:complexType>
+  <xs:element name="Booking" nillable="true" type="tns:Booking" />
+  <xs:complexType name="ArrayOfBookingLine">
+    <xs:sequence>
+      <xs:element minOccurs="0" maxOccurs="unbounded" name="BookingLine" nillable="true" type="tns:BookingLine" />
+    </xs:sequence>
+  </xs:complexType>
+  <xs:element name="ArrayOfBookingLine" nillable="true" type="tns:ArrayOfBookingLine" />
+  <xs:complexType name="BookingLine">
+    <xs:sequence>
+      <xs:element minOccurs="0" name="BatteryType" nillable="true" type="tns:BatteryType" />
+      <xs:element minOccurs="0" name="bId" type="xs:int" />
+      <xs:element minOccurs="0" name="price" type="xs:decimal" />
+      <xs:element minOccurs="0" name="quantity" type="xs:int" />
+      <xs:element minOccurs="0" name="station" nillable="true" type="tns:Station" />
+      <xs:element minOccurs="0" name="time" type="xs:dateTime" />
+    </xs:sequence>
+  </xs:complexType>
+  <xs:element name="BookingLine" nillable="true" type="tns:BookingLine" />
+  <xs:complexType name="BatteryType">
+    <xs:sequence>
+      <xs:element minOccurs="0" name="ID" type="xs:int" />
+      <xs:element minOccurs="0" name="capacity" type="xs:decimal" />
+      <xs:element minOccurs="0" name="exchangeCost" type="xs:decimal" />
+      <xs:element minOccurs="0" name="name" nillable="true" type="xs:string" />
+      <xs:element minOccurs="0" name="price" type="xs:double" />
+      <xs:element minOccurs="0" name="producer" nillable="true" type="xs:string" />
+      <xs:element minOccurs="0" name="quantity" type="xs:int" />
+    </xs:sequence>
+  </xs:complexType>
+  <xs:element name="BatteryType" nillable="true" type="tns:BatteryType" />
+  <xs:complexType name="Station">
+    <xs:sequence>
+      <xs:element minOccurs="0" name="Address" nillable="true" type="xs:string" />
+      <xs:element minOccurs="0" name="Country" nillable="true" type="xs:string" />
+      <xs:element minOccurs="0" name="Id" type="xs:int" />
+      <xs:element minOccurs="0" name="Name" nillable="true" type="xs:string" />
+      <xs:element minOccurs="0" name="State" nillable="true" type="xs:string" />
+    </xs:sequence>
+  </xs:complexType>
+  <xs:element name="Station" nillable="true" type="tns:Station" />
+  <xs:complexType name="ArrayOfArrayOfRouteStop">
+    <xs:sequence>
+      <xs:element minOccurs="0" maxOccurs="unbounded" name="ArrayOfRouteStop" nillable="true" type="tns:ArrayOfRouteStop" />
+    </xs:sequence>
+  </xs:complexType>
+  <xs:element name="ArrayOfArrayOfRouteStop" nillable="true" type="tns:ArrayOfArrayOfRouteStop" />
+  <xs:complexType name="ArrayOfRouteStop">
+    <xs:sequence>
+      <xs:element minOccurs="0" maxOccurs="unbounded" name="RouteStop" nillable="true" type="tns:RouteStop" />
+    </xs:sequence>
+  </xs:complexType>
+  <xs:element name="ArrayOfRouteStop" nillable="true" type="tns:ArrayOfRouteStop" />
+  <xs:complexType name="RouteStop">
+    <xs:sequence>
+      <xs:element minOccurs="0" name="distance" type="xs:decimal" />
+      <xs:element minOccurs="0" name="driveHour" type="xs:decimal" />
+      <xs:element minOccurs="0" name="station" nillable="true" type="tns:Station" />
+      <xs:element minOccurs="0" name="stationID" type="xs:int" />
+      <xs:element minOccurs="0" name="time" type="xs:dateTime" />
+    </xs:sequence>
+  </xs:complexType>
+  <xs:element name="RouteStop" nillable="true" type="tns:RouteStop" />
+  <xs:complexType name="ArrayOfBatteryType">
+    <xs:sequence>
+      <xs:element minOccurs="0" maxOccurs="unbounded" name="BatteryType" nillable="true" type="tns:BatteryType" />
+    </xs:sequence>
+  </xs:complexType>
+  <xs:element name="ArrayOfBatteryType" nillable="true" type="tns:ArrayOfBatteryType" />
+  <xs:complexType name="ArrayOfStation">
+    <xs:sequence>
+      <xs:element minOccurs="0" maxOccurs="unbounded" name="Station" nillable="true" type="tns:Station" />
+    </xs:sequence>
+  </xs:complexType>
+  <xs:element name="ArrayOfStation" nillable="true" type="tns:ArrayOfStation" />
+  <xs:complexType name="ArrayOfNaborStation">
+    <xs:sequence>
+      <xs:element minOccurs="0" maxOccurs="unbounded" name="NaborStation" nillable="true" type="tns:NaborStation" />
+    </xs:sequence>
+  </xs:complexType>
+  <xs:element name="ArrayOfNaborStation" nillable="true" type="tns:ArrayOfNaborStation" />
+  <xs:complexType name="NaborStation">
+    <xs:sequence>
+      <xs:element minOccurs="0" name="Address" nillable="true" type="xs:string" />
+      <xs:element minOccurs="0" name="Distance" type="xs:double" />
+      <xs:element minOccurs="0" name="DriveHour" type="xs:double" />
+      <xs:element minOccurs="0" name="Id" type="xs:int" />
+      <xs:element minOccurs="0" name="Name" nillable="true" type="xs:string" />
+    </xs:sequence>
+  </xs:complexType>
+  <xs:element name="NaborStation" nillable="true" type="tns:NaborStation" />
+  <xs:complexType name="BatteryStorage">
+    <xs:sequence>
+      <xs:element minOccurs="0" name="ID" type="xs:int" />
+      <xs:element minOccurs="0" name="periods" nillable="true" type="tns:ArrayOfPeriod" />
+      <xs:element minOccurs="0" name="storageNumber" type="xs:int" />
+      <xs:element minOccurs="0" name="typeID" type="xs:int" />
+    </xs:sequence>
+  </xs:complexType>
+  <xs:element name="BatteryStorage" nillable="true" type="tns:BatteryStorage" />
+  <xs:complexType name="ArrayOfPeriod">
+    <xs:sequence>
+      <xs:element minOccurs="0" maxOccurs="unbounded" name="Period" nillable="true" type="tns:Period" />
+    </xs:sequence>
+  </xs:complexType>
+  <xs:element name="ArrayOfPeriod" nillable="true" type="tns:ArrayOfPeriod" />
+  <xs:complexType name="Period">
+    <xs:sequence>
+      <xs:element minOccurs="0" name="availNumber" type="xs:int" />
+      <xs:element minOccurs="0" name="bookedNumber" type="xs:int" />
+      <xs:element minOccurs="0" name="bsID" type="xs:int" />
+      <xs:element minOccurs="0" name="time" type="xs:dateTime" />
+    </xs:sequence>
+  </xs:complexType>
+  <xs:element name="Period" nillable="true" type="tns:Period" />
+  <xs:complexType name="ArrayOfBatteryStorage">
+    <xs:sequence>
+      <xs:element minOccurs="0" maxOccurs="unbounded" name="BatteryStorage" nillable="true" type="tns:BatteryStorage" />
+    </xs:sequence>
+  </xs:complexType>
+  <xs:element name="ArrayOfBatteryStorage" nillable="true" type="tns:ArrayOfBatteryStorage" />
+</xs:schema>
