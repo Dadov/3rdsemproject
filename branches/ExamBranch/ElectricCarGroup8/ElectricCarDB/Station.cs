@@ -28,6 +28,8 @@ namespace ElectricCarDB
         public string address { get; set; }
         public string country { get; set; }
         public string state { get; set; }
+        public Nullable<double> longitude { get; set; }
+        public Nullable<double> latitude { get; set; }
     
         public virtual ICollection<BatteryStorage> BatteryStorages { get; set; }
         public virtual ICollection<BookingLine> BookingLines { get; set; }
